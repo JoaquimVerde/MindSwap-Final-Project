@@ -65,7 +65,7 @@ export default function RegisterForm() {
         <div>
         <h1 className={" mb-3 text-2xl"}> Create your account</h1>
     <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="firstName"
