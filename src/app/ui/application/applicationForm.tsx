@@ -101,7 +101,18 @@ export function ApplicationForm() {
                 <FormItem>
                   <FormLabel>Phone Number</FormLabel>
                   <FormControl>
-                    <PhoneInput {...field} />
+                    <PhoneInput
+                      defaultCountry="PT"
+                      defaultProps={{
+                        country: "PT",
+                        enableSearch: true,
+                        enableAreaCodes: true,
+                        enableDropdown: true,
+                        preferredCountries: ["PT"],
+                      }}
+                      placeholder="enter your phone number"
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />
