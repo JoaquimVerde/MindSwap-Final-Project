@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
 	return (
@@ -7,13 +8,14 @@ export default function Home() {
 			<Link href={"/pages/login"}>
 				<button>Login</button>
 			</Link>
-			<Link href={"/pages/register"}>
-				<button>Register</button>
-			</Link>
 
-      {/* grid w/ cards of courses goes here */}
+			<Button asChild>
+				<Link href={"/pages/register"}>
+					<button>Register</button>
+				</Link>
+			</Button>
 
-
+			{/* grid w/ cards of courses goes here */}
 		</main>
 	);
 }
