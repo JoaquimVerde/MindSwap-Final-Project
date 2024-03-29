@@ -17,6 +17,9 @@ import {
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 import { PhoneInput } from "./phoneNumber";
+import FileUploader from "./fileUpload";
+
+const url = ""; // TODO add url
 
 const formSchema = z.object({
   firstname: z
@@ -27,6 +30,7 @@ const formSchema = z.object({
     .min(2, { message: "Lastname must be at least 2 characters." }),
   email: z.string().email({ message: "Invalid email address." }),
   phoneNumber: z.string(),
+  uploadResume: z.string(),
 });
 
 export function ApplicationForm() {
@@ -112,6 +116,26 @@ export function ApplicationForm() {
                       }}
                       placeholder="enter your phone number"
                       {...field}
+                    />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="uploadResume"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Resume</FormLabel>
+                  <FormControl>
+                    <FileUploader
+                      url={url}
+                      acceptedFileTypes={["image/png", "image/jpeg"]}
+                      maxFileSize={100}
+                      // label="Max File Size: 1MB;"
+                      // labelAlt=" Accepted File Types: pdf, png, jpeg"
                     />
                   </FormControl>
 
