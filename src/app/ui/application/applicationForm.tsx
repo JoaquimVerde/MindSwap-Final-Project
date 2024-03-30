@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 import { PhoneInput } from "./phoneNumber";
-import FileUploader from "./fileUpload";
+import { Label } from "@/components/ui/label";
 
 const url = ""; // TODO add url
 
@@ -30,11 +30,10 @@ const formSchema = z.object({
     .min(2, { message: "Lastname must be at least 2 characters." }),
   email: z.string().email({ message: "Invalid email address." }),
   phoneNumber: z.string(),
-  uploadResume: z.string(),
+  uploadResume: z.string().optional(),
 });
 
 export function ApplicationForm() {
-  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,16 +41,13 @@ export function ApplicationForm() {
     },
   });
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    console.log("submited", values);
   }
 
   return (
-    <main className="flex items-center justify-center md:h-screen">
-      <div className="relative mx-auto flex w-full max-w-[450px] flex-col space-y-2.5 p-4 md:-mt-15">
+    <main>
+      <div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -63,6 +59,7 @@ export function ApplicationForm() {
                   <FormControl>
                     <Input placeholder="name" {...field} />
                   </FormControl>
+
                   <FormDescription>
                     This is your public display name.
                   </FormDescription>
@@ -113,6 +110,9 @@ export function ApplicationForm() {
                         enableAreaCodes: true,
                         enableDropdown: true,
                         preferredCountries: ["PT"],
+                        onlyCountries: ["PT"],
+                        enableCountryCode: true,
+                        enableFlag: true,
                       }}
                       placeholder="enter your phone number"
                       {...field}
@@ -130,13 +130,9 @@ export function ApplicationForm() {
                 <FormItem>
                   <FormLabel>Resume</FormLabel>
                   <FormControl>
-                    <FileUploader
-                      url={url}
-                      acceptedFileTypes={["image/png", "image/jpeg"]}
-                      maxFileSize={100}
-                      // label="Max File Size: 1MB;"
-                      // labelAlt=" Accepted File Types: pdf, png, jpeg"
-                    />
+                    <div className="grid w-full max-w-sm items-center gap-1.5">
+                      <Input id="resume" type="file" />
+                    </div>
                   </FormControl>
 
                   <FormMessage />
