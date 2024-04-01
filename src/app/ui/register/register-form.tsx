@@ -57,8 +57,27 @@ export default function RegisterForm() {
         },
       })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+        const response = await fetch('https://api', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        });
+    
+        if (!response.ok) {
+          throw new Error('Registration failed');
+        }
+    
+        const data = await response.json();
+        console.log('Registration successful:', data);
+        window.location.href = '/pages/dashboard';
+   
+      } catch (error) {
+        console.error('Registration failed:', error);
+      }
     }
 
     return (
