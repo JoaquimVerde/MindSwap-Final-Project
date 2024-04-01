@@ -2,7 +2,8 @@
 export type LinkType = {
     name: string;
     href: string;
-    sublinks?: { name: string; href: string }[];
+    icon?: any;
+    sublinks?: { name: string; href: string; icon?: any }[];
 };
 
 export type NavLinksProps = {
