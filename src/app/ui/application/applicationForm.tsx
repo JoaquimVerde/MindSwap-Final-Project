@@ -17,8 +17,9 @@ import {
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 import { PhoneInput } from "./phoneNumber";
+import { Upload, Phone, Mail } from "lucide-react";
 
-const url = ""; // TODO add url
+const url = ""; // TODO add url to env.ts
 
 const formSchema = z.object({
   firstname: z
@@ -43,6 +44,7 @@ export function ApplicationForm() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submited", values);
+    // TODO add api POSt
   }
 
   return (
@@ -104,7 +106,11 @@ export function ApplicationForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>
+                    <p className="flex items-center">
+                      <Mail className="mr-2 h-4 w-4" /> Email
+                    </p>
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="example@email.com" {...field} />
                   </FormControl>
@@ -118,7 +124,12 @@ export function ApplicationForm() {
               name="phoneNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Phone Number</FormLabel>
+                  <FormLabel>
+                    <p className="flex items-center">
+                      <Phone className="mr-2 h-4 w-4" />
+                      Phone Number
+                    </p>
+                  </FormLabel>
                   <FormControl>
                     <PhoneInput
                       defaultCountry="PT"
@@ -146,10 +157,15 @@ export function ApplicationForm() {
               name="uploadResume"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Import Resume</FormLabel>
+                  <FormLabel>
+                    <p className="flex items-center">
+                      <Upload className="mr-2 h-4 w-4" />
+                      Import Resume
+                    </p>
+                  </FormLabel>
                   <FormControl>
                     <div className="grid w-full max-w-sm items-center gap-1.5">
-                      <Input id="resume" type="file" className="" />
+                      <Input id="resume" type="file" className=""></Input>
                     </div>
                   </FormControl>
 
