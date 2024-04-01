@@ -17,7 +17,6 @@ import {
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 import { PhoneInput } from "./phoneNumber";
-import { Label } from "@/components/ui/label";
 
 const url = ""; // TODO add url
 
@@ -31,6 +30,7 @@ const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
   phoneNumber: z.string(),
   uploadResume: z.string().optional(),
+  aboutyou: z.string(),
 });
 
 export function ApplicationForm() {
@@ -75,6 +75,24 @@ export function ApplicationForm() {
                   <FormLabel>Last name</FormLabel>
                   <FormControl>
                     <Input placeholder="last name" {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="aboutyou"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Something about you</FormLabel>
+                  <FormControl>
+                    <textarea
+                      className="textarea w-full rows-20"
+                      placeholder="... what's your interest, what do you like to do, ..."
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />
@@ -128,10 +146,10 @@ export function ApplicationForm() {
               name="uploadResume"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Resume</FormLabel>
+                  <FormLabel>Import Resume</FormLabel>
                   <FormControl>
                     <div className="grid w-full max-w-sm items-center gap-1.5">
-                      <Input id="resume" type="file" />
+                      <Input id="resume" type="file" className="" />
                     </div>
                   </FormControl>
 
@@ -140,7 +158,9 @@ export function ApplicationForm() {
               )}
             />
 
-            <Button type="submit">Submit</Button>
+            <Button type="submit" className="w-full">
+              Submit
+            </Button>
           </form>
         </Form>
       </div>
