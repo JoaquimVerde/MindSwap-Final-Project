@@ -2,7 +2,8 @@
 export type LinkType = {
     name: string;
     href: string;
-    icon?: any;
+    icon: any;
+    role?: string[];
     sublinks?: { name: string; href: string; icon?: any }[];
 };
 
