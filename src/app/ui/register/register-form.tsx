@@ -39,6 +39,16 @@ import {
         password: z.string().min(2, {
             message: "Write a password to continue",
         }),
+        confirmPassword: z.string()
+            .min(2, {
+            message: "Write a password to continue",
+            })
+            .refine((value, data) => {
+                return value === data.password;
+              }, {
+            message: "Passwords do not match",
+            path: ["confirmPassword"],
+            }),
         address: z.string().min(2, {
             message: "Write a valid address to continue",
         }),
@@ -46,7 +56,7 @@ import {
             message: "Choose a country to continue",
         }),
 
-      })
+      });
 
 
 export default function RegisterForm() {
@@ -145,6 +155,19 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
               <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input type="password" placeholder="Enter your password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        /> 
+         <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirm Password</FormLabel>
+              <FormControl>
+                <Input type="password" placeholder="Confirm your password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
