@@ -58,7 +58,6 @@ export default function NavLinks() {
       setOpenSublinks(openSublinks === linkName ? null : linkName);
       event.preventDefault();
     }
-
   };
 
   return (

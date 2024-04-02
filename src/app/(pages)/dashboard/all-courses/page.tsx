@@ -1,3 +1,4 @@
+
 import {
     Card,
     CardContent,
@@ -108,6 +109,5 @@ export default async function Page() {
             ))}</div>*/}
             
         </div >
-    )
-
+    );
 }
