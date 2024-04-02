@@ -92,9 +92,9 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
 
     return (
         <div>
-        <h1 className={" mb-3 text-2xl"}> Create your account</h1>
+           <h1 className="text-3xl font-bold mb-5"> Create your account</h1>
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
           name="firstName"
@@ -130,6 +130,9 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
               <FormControl>
                 <Input placeholder="Enter your username" {...field} />
               </FormControl>
+              <FormDescription>
+                  This is your public display name
+                </FormDescription>
               <FormMessage />
             </FormItem>
           )}
