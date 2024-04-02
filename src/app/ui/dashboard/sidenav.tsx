@@ -27,7 +27,8 @@ export default function Sidenav() {
           {/* Sidebar content here */}
           <li>
             <NavLinks />
-            <div className="mt-80 flex items-end justify-start">
+          </li>
+            <li className="mt-auto">
               <form
                 action={async () => {
                   "use server";
@@ -43,8 +44,7 @@ export default function Sidenav() {
                 </Link>
               </form>
               {/* <NavLinks links={filteredLinks}/> */}
-            </div>
-          </li>
+            </li>
         </ul>
       </div>
     </div>

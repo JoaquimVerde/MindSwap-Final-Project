@@ -3,12 +3,7 @@
 import Link from "next/link";
 import { LinkType, NavLinksProps } from "@/app/lib/types";
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { UserRound } from "lucide-react";
-import { GraduationCap } from "lucide-react";
-import { BookCheck } from "lucide-react";
-import { BookOpenText } from "lucide-react";
-import { LibraryBig } from "lucide-react";
+import { ChevronDown, ChevronUp, UserRound, GraduationCap, BookCheck, BookOpenText, LibraryBig } from "lucide-react";
 
 export const links: LinkType[] = [
   {
@@ -35,19 +30,19 @@ export const links: LinkType[] = [
     icon: BookOpenText,
     role: ["teacher", "admin"],
   },
-  { name: "All Courses", href: "/dashboard/all-courses", icon: LibraryBig },
-  { name: "All Courses", href: "/dashboard/all-courses-teacher", icon: LibraryBig },
-  { name: "Profile", href: "/dashboard/profile", icon: UserRound },
+  { name: "All Courses", href: "/dashboard/all-courses", icon: LibraryBig, role: ["student", "admin"], },
+  { name: "All Courses", href: "/dashboard/all-courses-teacher", icon: LibraryBig, role: ["teacher", "admin"], },
+  { name: "Profile", href: "/dashboard/profile", icon: UserRound, role: ["student", "admin", "teacher"], },
 ];
 
 // filter links based on role
+// function filterLinksByRole(links: LinkType[], role: string) {
+//   return links.filter(link => link.role.includes(role));
+// }
 
-// const role = "teacher";
-//   export const filteredLinks = links.filter((link) => {
-//     return link.href.includes(role) && link.name === 'Profile';
-//   })
 
 export default function NavLinks() {
+//export default function NavLinks ({ links }: NavLinksProps) { 
   const [openSublinks, setOpenSublinks] = useState<string | null>(null);
 
   const handleClick = (
