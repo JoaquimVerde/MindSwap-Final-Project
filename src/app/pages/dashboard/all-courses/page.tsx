@@ -1,1 +1,0 @@
-// display all available courses
