@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import CalendarComp from "./ui/components/ui/calendar";
 
 export default function Home() {
 	return (
@@ -14,6 +15,8 @@ export default function Home() {
 					<button>Register</button>
 				</Link>
 			</Button>
+
+			<CalendarComp />
 
 			{/* grid w/ cards of courses goes here */}
 		</main>
