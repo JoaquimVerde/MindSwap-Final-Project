@@ -1,4 +1,3 @@
-
 import {
     Card,
     CardContent,
@@ -23,7 +22,6 @@ export default async function Page() {
     //const courses = await fetchCourses(query, currentPage);
 
    
-
     return (
         <div className="mx-2 my-2">
 

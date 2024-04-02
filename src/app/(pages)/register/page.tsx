@@ -1,4 +1,3 @@
-
 import RegisterForm from "@/app/ui/register/register-form";
 
 export default function RegisterPage() {
