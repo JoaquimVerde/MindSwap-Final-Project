@@ -48,10 +48,13 @@ export function ApplicationForm() {
 
   return (
     <main>
-      <div>
+      <div className="flex flex-col items-center justify-center">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col space-y-20 p-20 pt-0"
+          >
+            {/* <FormField
               control={form.control}
               name="firstname"
               render={({ field }) => (
@@ -81,26 +84,9 @@ export function ApplicationForm() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
-            <FormField
-              control={form.control}
-              name="aboutyou"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Something about you</FormLabel>
-                  <FormControl>
-                    <textarea
-                      className="textarea w-full rows-20"
-                      placeholder="... what's your interest, what do you like to do, ..."
-                      {...field}
-                    />
-                  </FormControl>
+            /> */}
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
@@ -117,61 +103,81 @@ export function ApplicationForm() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
-            <FormField
-              control={form.control}
-              name="phoneNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    <p className="flex items-center">
-                      <Phone className="mr-2 h-4 w-4" />
-                      Phone Number
-                    </p>
-                  </FormLabel>
-                  <FormControl>
-                    <PhoneInput
-                      defaultCountry="PT"
-                      defaultProps={{
-                        country: "PT",
-                        enableSearch: true,
-                        enableAreaCodes: true,
-                        enableDropdown: true,
-                        preferredCountries: ["PT"],
-                        onlyCountries: ["PT"],
-                        enableCountryCode: true,
-                        enableFlag: true,
-                      }}
-                      placeholder="enter your phone number"
-                      {...field}
-                    />
-                  </FormControl>
+            /> */}
+            <div className="grid w-full max-w-sm items-center gap-3">
+              <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <p className="flex items-center">
+                        <Phone className="mr-2 h-4 w-4" />
+                        Phone Number
+                      </p>
+                    </FormLabel>
+                    <FormControl>
+                      <PhoneInput
+                        defaultCountry="PT"
+                        defaultProps={{
+                          country: "PT",
+                          enableSearch: true,
+                          enableAreaCodes: true,
+                          enableDropdown: true,
+                          preferredCountries: ["PT"],
+                          onlyCountries: ["PT"],
+                          enableCountryCode: true,
+                          enableFlag: true,
+                        }}
+                        placeholder="enter your phone number"
+                        {...field}
+                      />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="uploadResume"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    <p className="flex items-center">
-                      <Upload className="mr-2 h-4 w-4" />
-                      Import Resume
-                    </p>
-                  </FormLabel>
-                  <FormControl>
-                    <div className="grid w-full max-w-sm items-center gap-1.5">
-                      <Input id="resume" type="file" className=""></Input>
-                    </div>
-                  </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="uploadResume"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      <p className="flex items-center">
+                        <Upload className="mr-2 h-4 w-4" />
+                        Import Resume
+                      </p>
+                    </FormLabel>
+                    <FormControl>
+                      <div className="grid w-full max-w-sm items-center gap-1.5">
+                        <Input id="resume" type="file" className=""></Input>
+                      </div>
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="aboutyou"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Something about you</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="textarea w-full h-40 wrap"
+                        placeholder="... what's your interest, what do you like to do, ..."
+                        {...field}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <Button type="submit" className="w-full">
               Submit
