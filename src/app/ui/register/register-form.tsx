@@ -83,7 +83,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
     
         const data = await response.json();
         console.log('Registration successful:', data);
-        window.location.href = '/pages/dashboard';
+        window.location.href = '/dashboard';
    
       } catch (error) {
         console.error('Registration failed:', error);
@@ -419,7 +419,7 @@ export function ResgisterButton(){
 
 export function AlreadyHaveAnAccountLink(){
     return (
-        <a href="/pages/login">
+        <a href="/login">
             <Button className="mt-4 w-full" variant="link"> 
                  Already have an account? Log In </Button>
         </a>

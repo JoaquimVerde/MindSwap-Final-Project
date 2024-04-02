@@ -6,17 +6,17 @@ export default function Home() {
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
 			<h1>Landing page</h1>
-			<Link href={"/pages/login"}>
+			<Link href={"/login"}>
 				<button>Login</button>
 			</Link>
 
 			<Button asChild>
-				<Link href={"/pages/register"}>
+				<Link href={"/register"}>
 					<button>Register</button>
 				</Link>
 			</Button>
 
-			<CalendarComp />
+			{/* <CalendarComp /> */}
 
 			{/* grid w/ cards of courses goes here */}
 		</main>
