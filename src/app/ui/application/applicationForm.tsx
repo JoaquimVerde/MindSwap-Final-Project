@@ -41,7 +41,6 @@ export function ApplicationForm() {
       firstname: "",
     },
   });
-
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submited", values);
     // TODO add api POSt
