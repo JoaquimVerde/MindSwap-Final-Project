@@ -1,14 +1,12 @@
-import Link from "next/link";
 
-export default function Register() {
+import RegisterForm from "@/app/ui/register/register-form";
+
+export default function RegisterPage() {
 	return (
-		<>
-			<p>Register page here</p>
-			<Link href={"/pages/login"}>
-				<button>Register</button>
-			</Link>
-		</>
-	);
-	// from here (successful register), direct to Login page
-	//
-}
+		<main className="flex items-center justify-center md:h-screen">
+		  <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
+			<RegisterForm />
+		  </div>
+		</main>
+	  );
+	}
