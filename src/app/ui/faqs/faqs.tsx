@@ -14,7 +14,7 @@ export default function Questions(){
     return(
     <main>
     <div className="grid grid-cols-2 gap-10" > 
-        <div className="em-[1em] max-w-[30em]"> 
+        <div className="em-[2em] max-w-[30em]"> 
             <Accordion type="single" collapsible>
                 <AccordionItem value="item-1">
                     <AccordionTrigger>What do Mindera courses include?</AccordionTrigger>
@@ -74,7 +74,7 @@ export default function Questions(){
                 </AccordionItem>
             </Accordion>
         </div>
-        <div className="em-[1em] max-w-[30em]">
+        <div className="em-[2em] max-w-[30em]">
             <Accordion type="single" collapsible>
                 <AccordionItem value="item-9">
                     <AccordionTrigger>How do I create or log in to my account?</AccordionTrigger>
