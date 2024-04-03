@@ -4,9 +4,20 @@ export type LinkType = {
     href: string;
     icon: any;
     role: string[];
+};
+
+export type LinkTypeSub = {
+    name: string;
+    href: string;
+    icon: any;
+    role: string[];
     sublinks?: { name: string; href: string; icon?: any }[];
 };
 
 export type NavLinksProps = {
     links: LinkType[];
+}
+
+export type CustomComponentsArr = {
+    content: React.FC[];
 }

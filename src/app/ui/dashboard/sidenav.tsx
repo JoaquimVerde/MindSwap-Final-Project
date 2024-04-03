@@ -3,12 +3,16 @@ import NavLinks from "@/app/ui/dashboard/nav-links";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
+import { linksContentPages } from "@/app/lib/utils";
+import Dashboard from "@/app/(pages)/dashboard/page";
 
 export default function Sidenav() {
+  
   return (
-    <div className="drawer lg:drawer-open">
+    // added z-index due tothe bullet points of the page all courses
+    <div className="drawer lg:drawer-open z-10"> 
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-row items-start justify-start ml-5 mt-5">
+      <div className="drawer-content flex flex-row items-start justify-start ml-5 mt-5 ">
         {/* Page content here */}
         <label
           htmlFor="my-drawer-2"
