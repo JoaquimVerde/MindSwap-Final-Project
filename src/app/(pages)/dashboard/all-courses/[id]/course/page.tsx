@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { CircuitBoard, Smile } from "lucide-react";
 
 
-export default async function Page() {
+export default async function Course() {
 
 
     // fazer fetchCourseById (data.ts)

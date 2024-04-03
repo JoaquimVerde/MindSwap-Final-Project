@@ -15,7 +15,7 @@ import { GetCourseInfo } from "@/app/ui/courses/buttons";
 
 
 
-export default async function Page() {
+export default async function AllCourses() {
 
     // fazer fetchCourses(data.ts)
 

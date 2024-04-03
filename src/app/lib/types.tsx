@@ -10,3 +10,7 @@ export type LinkType = {
 export type NavLinksProps = {
     links: LinkType[];
 }
+
+export type CustomComponentsArr = {
+    content: React.FC[];
+}
