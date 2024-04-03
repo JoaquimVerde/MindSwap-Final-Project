@@ -19,3 +19,20 @@
   position: absolute;
 }
 
+
+html{
+  scroll-behavior: smooth
+}
+
+
+@layer base {
+  body {
+    @apply bg-black tracking-wide;
+  }
+  h1 {
+    @apply text-4xl sm:text-5xl md:text-6xl;
+  }
+  h2 {
+    @apply text-3xl sm:text-4xl;
+  } 
+}
