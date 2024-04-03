@@ -54,7 +54,7 @@ import {
         confirmPassword: z
           .string()
           .min(5, {
-            message: "Write a password to continue",
+            message: "Confirm your password to continue",
           }),
         address: z
           .string()
@@ -62,12 +62,15 @@ import {
               message: "Write a valid address to continue",
           }),
         country: z
-          .string()
-          .min(2, {
-              message: "Choose a country to continue",
+        .string()
+        .refine(value => value !== "", {
+            message: "Choose a country to continue",
           }),
-
-      });
+      })
+      .refine((data) => data.password === data.confirmPassword, {
+        message: "Passwords don't match",
+        path: ["confirmPassword"],
+      })
 
 
 export default function RegisterForm() {
@@ -81,12 +84,11 @@ export default function RegisterForm() {
           password:"",
           confirmPassword:"",
           address:"",
-          country:"",
 
         },
       })
 
-async function onSubmit(values: z.infer<typeof formSchema>) {
+function onSubmit(values: z.infer<typeof formSchema>) {
   console.log("registrarion successful", values);
     // try {
     //     const response = await fetch('https://api', {
@@ -230,7 +232,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                 <SelectItem value="AD">Andorra</SelectItem>
                 <SelectItem value="AG">Angola</SelectItem>
                 <SelectItem value="AI">Anguilla</SelectItem>
-                <SelectItem value="AG">Antigua & Barbuda</SelectItem>
+                <SelectItem value="AB">Antigua & Barbuda</SelectItem>
                 <SelectItem value="AR">Argentina</SelectItem>
                 <SelectItem value="AA">Armenia</SelectItem>
                 <SelectItem value="AW">Aruba</SelectItem>
@@ -398,7 +400,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                 <SelectItem value="PT">Portugal</SelectItem>
                 <SelectItem value="PR">Puerto Rico</SelectItem>
                 <SelectItem value="QA">Qatar</SelectItem>
-                <SelectItem value="ME">Republic of Montenegro</SelectItem>
+                <SelectItem value="REM">Republic of Montenegro</SelectItem>
                 <SelectItem value="RS">Republic of Serbia</SelectItem>
                 <SelectItem value="RE">Reunion</SelectItem>
                 <SelectItem value="RO">Romania</SelectItem>
@@ -414,7 +416,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                 <SelectItem value="VC">St Vincent and Grenadines</SelectItem>
                 <SelectItem value="SP">Saipan</SelectItem>
                 <SelectItem value="SO">Samoa</SelectItem>
-                <SelectItem value="AS">Samoa American</SelectItem>
+                <SelectItem value="SAS">Samoa American</SelectItem>
             </SelectContent>
             </Select>
               <FormMessage />
@@ -426,7 +428,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
           </Button>
             </form>
             <AlreadyHaveAnAccountLink />
-    </Form>
+      </Form>
     </div>
   </main>
          );
