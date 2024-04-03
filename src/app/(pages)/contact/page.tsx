@@ -1,11 +1,10 @@
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import SocialNetworks from "@/app/ui/components/ui/social-networks";
 import Link from "next/link";
 import React from "react";
 
 const Contact = () => {
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Contact Us</h1>
 
       <div className="">
         <section className="mb-8">
@@ -33,44 +32,13 @@ const Contact = () => {
 
       </div>
 
-      <section className="mb-8">
-        {/* <h2 className="text-xl font-semibold mb-4">Contact Form</h2> */}
-        {/* Make contact form?? */}
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Connect With Us</h2>
-        <ul className="flex space-x-4">
-          <li className="mb-2">
-            <Link href="https://www.facebook.com/minderasoftwarecraft">
-              <Facebook size={40} />
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="https://twitter.com/minderaswcraft">
-              <Twitter size={40} />
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="https://www.linkedin.com/company/mindera-world">
-              <Linkedin size={40} />
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="https://www.instagram.com/minderascraft/">
-              <Instagram size={40} />
-            </Link>
-          </li>
-        </ul>
-      </section>
+      <SocialNetworks />
 
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Contact Hours</h2>
         <p>Monday - Friday: 9am - 5pm</p>
         <p>Saturday - Sunday: Closed</p>
       </section>
-
-      <section className="mb-8">{/* Show FAQs?? */}</section>
 
       <section>
         <h2 className="text-xl font-semibold mb-4">Privacy Policy</h2>
