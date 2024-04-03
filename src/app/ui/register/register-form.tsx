@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -24,73 +25,95 @@ import {
 
 
  const formSchema = z.object({
-        username: z.string().min(2, {
-          message: "Username must be at least 2 characters.",
-        }),
-        firstName: z.string().min(2, {
-            message: "Write a valid name to continue",
-        }),
-        lastName: z.string().min(2, {
-            message: "Write a valid name to continue",
-        }),
-        email: z.string().min(2, {
-            message: "Write a valid email to continue",
-        }),
-        password: z.string().min(2, {
-            message: "Write a password to continue",
-        }),
-        confirmPassword: z.string()
-            .min(2, {
-            message: "Write a password to continue",
-            })
-            .refine((value, data) => {
-                return value === data.password;
-              }, {
-            message: "Passwords do not match",
-            path: ["confirmPassword"],
-            }),
-        address: z.string().min(2, {
-            message: "Write a valid address to continue",
-        }),
-        country: z.string().min(2, {
+       
+        firstName: z
+          .string()
+          .min(2, {
+              message: "Write a valid name to continue",
+          }),
+        lastName: z
+          .string()
+          .min(2, {
+              message: "Write a valid name to continue",
+          }), 
+        username: z
+          .string()
+          .min(2, {
+            message: "Username must be at least 2 characters.",
+          }),
+        email: z
+          .string()
+          .min(6, {
+              message: "Write a valid email to continue",
+          }),
+        password: z
+          .string()
+          .min(5, {
+              message: "Write a password to continue",
+          }),
+        confirmPassword: z
+          .string()
+          .min(5, {
+            message: "Confirm your password to continue",
+          }),
+        address: z
+          .string()
+          .min(6, {
+              message: "Write a valid address to continue",
+          }),
+        country: z
+        .string()
+        .refine(value => value !== "", {
             message: "Choose a country to continue",
-        }),
-
-      });
+          }),
+      })
+      .refine((data) => data.password === data.confirmPassword, {
+        message: "Passwords don't match",
+        path: ["confirmPassword"],
+      })
 
 
 export default function RegisterForm() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-          username: "",
+          firstName: "",
+          lastName:"",
+          username:"",
+          email:"",
+          password:"",
+          confirmPassword:"",
+          address:"",
+
         },
       })
 
-async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-        const response = await fetch('https://api', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(values),
-        });
+function onSubmit(values: z.infer<typeof formSchema>) {
+  console.log("registrarion successful", values);
+    // try {
+    //     const response = await fetch('https://api', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify(values),
+    //     });
     
-        if (!response.ok) {
-          throw new Error('Registration failed');
-        }
+    //     if (!response.ok) {
+    //       throw new Error('Registration failed');
+    //     }
     
-        const data = await response.json();
-        console.log('Registration successful:', data);
-        window.location.href = '/dashboard';
+    //     const data = await response.json();
+    //     console.log('Registration successful:', data);
+    //     window.location.href = '/dashboard';
    
-      } catch (error) {
-        console.error('Registration failed:', error);
-      }
+    //   } catch (error) {
+    //     console.error('Registration failed:', error);
+    //   }
     }
 
     return (
+      <main>
         <div>
            <h1 className="text-3xl font-bold mb-5"> Create your account</h1>
     <Form {...form}>
@@ -209,7 +232,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                 <SelectItem value="AD">Andorra</SelectItem>
                 <SelectItem value="AG">Angola</SelectItem>
                 <SelectItem value="AI">Anguilla</SelectItem>
-                <SelectItem value="AG">Antigua & Barbuda</SelectItem>
+                <SelectItem value="AB">Antigua & Barbuda</SelectItem>
                 <SelectItem value="AR">Argentina</SelectItem>
                 <SelectItem value="AA">Armenia</SelectItem>
                 <SelectItem value="AW">Aruba</SelectItem>
@@ -377,7 +400,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                 <SelectItem value="PT">Portugal</SelectItem>
                 <SelectItem value="PR">Puerto Rico</SelectItem>
                 <SelectItem value="QA">Qatar</SelectItem>
-                <SelectItem value="ME">Republic of Montenegro</SelectItem>
+                <SelectItem value="REM">Republic of Montenegro</SelectItem>
                 <SelectItem value="RS">Republic of Serbia</SelectItem>
                 <SelectItem value="RE">Reunion</SelectItem>
                 <SelectItem value="RO">Romania</SelectItem>
@@ -393,35 +416,31 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                 <SelectItem value="VC">St Vincent and Grenadines</SelectItem>
                 <SelectItem value="SP">Saipan</SelectItem>
                 <SelectItem value="SO">Samoa</SelectItem>
-                <SelectItem value="AS">Samoa American</SelectItem>
+                <SelectItem value="SAS">Samoa American</SelectItem>
             </SelectContent>
             </Select>
               <FormMessage />
             </FormItem>
           )}
         /> 
+          <Button type="submit" className="w-full">
+          Register
+          </Button>
             </form>
-            <ResgisterButton />
             <AlreadyHaveAnAccountLink />
-    </Form>
+      </Form>
     </div>
+  </main>
          );
     
 }
 
 
-export function ResgisterButton(){
-    return (
-        <Button type="submit" className="mt-4 w-full">
-            Register</Button>
-    )
-}
-
 export function AlreadyHaveAnAccountLink(){
     return (
-        <a href="/login">
+        <Link href="/login">
             <Button className="mt-4 w-full" variant="link"> 
                  Already have an account? Log In </Button>
-        </a>
+        </Link>
     )
 }
