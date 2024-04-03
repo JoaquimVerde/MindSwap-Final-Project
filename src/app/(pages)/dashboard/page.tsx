@@ -16,30 +16,6 @@ export default async function Dashboard() {
 	<main>
 		<h1>Dashboard page here</h1>
 		{/* {add Suspense & Skeletons around components} */}
-		<div>
-			<MyCourses />
-		</div>
-		<div>
-			<MyAppliedCourses />
-		</div>
-		<div>
-			<MyEnrolledCourses />
-		</div>
-		<div>
-			<MyCoursesTeacher />
-		</div>
-		<div>
-			<AllCourses />
-		</div>
-		<div>
-			<Course />
-		</div>
-		<div>
-			<AllCoursesTeacher />
-		</div>
-		<div>
-			<Profile />
-		</div>
 	</main>
 	);
 }
