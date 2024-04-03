@@ -1,4 +1,4 @@
-// using partial reloading here (nav bar wont change when navigating to other pages)
+
 import { Calendar } from "@/components/ui/calendar"
 
 export default function Dashboard() {
@@ -9,5 +9,6 @@ export default function Dashboard() {
 		<Calendar />
 	</main>
 	)
-	
+
 }
+

@@ -1,11 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { LinkType, NavLinksProps } from "@/app/lib/types";
+import { LinkType, LinkTypeSub, NavLinksProps } from "@/app/lib/types";
 import { useState } from "react";
-import { ChevronDown, ChevronUp, UserRound, GraduationCap, BookCheck, BookOpenText, LibraryBig } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  UserRound,
+  GraduationCap,
+  BookCheck,
+  BookOpenText,
+  LibraryBig,
+} from "lucide-react";
 
-export const links: LinkType[] = [
+export const linksub: LinkTypeSub[] = [
   {
     name: "My-Courses",
     href: "/dashboard/my-courses",
@@ -24,15 +32,33 @@ export const links: LinkType[] = [
       },
     ],
   },
+];
+
+export const links: LinkType[] = [
   {
     name: "My Courses",
     href: "/dashboard/my-courses-teacher",
     icon: BookOpenText,
     role: ["teacher", "admin"],
   },
-  { name: "All Courses", href: "/dashboard/all-courses", icon: LibraryBig, role: ["student", "admin"], },
-  { name: "All Courses", href: "/dashboard/all-courses-teacher", icon: LibraryBig, role: ["teacher", "admin"], },
-  { name: "Profile", href: "/dashboard/profile", icon: UserRound, role: ["student", "admin", "teacher"], },
+  {
+    name: "All Courses",
+    href: "/dashboard/all-courses",
+    icon: LibraryBig,
+    role: ["student", "admin"],
+  },
+  {
+    name: "All Courses",
+    href: "/dashboard/all-courses-teacher",
+    icon: LibraryBig,
+    role: ["teacher", "admin"],
+  },
+  {
+    name: "Profile",
+    href: "/dashboard/profile",
+    icon: UserRound,
+    role: ["student", "admin", "teacher"],
+  },
 ];
 
 // filter links based on role
@@ -40,15 +66,14 @@ export const links: LinkType[] = [
 //   return links.filter(link => link.role.includes(role));
 // }
 
-
 export default function NavLinks() {
-//export default function NavLinks ({ links }: NavLinksProps) { 
+  //export default function NavLinks ({ links }: NavLinksProps) {
   const [openSublinks, setOpenSublinks] = useState<string | null>(null);
 
   const handleClick = (
     linkName: string,
     linkHref: string,
-    sublinks: { name: string; href: string, icon?: any }[] | undefined,
+    sublinks: { name: string; href: string; icon?: any }[] | undefined,
     event: any
   ) => {
     if (!sublinks || sublinks.length === 0) {
@@ -62,26 +87,51 @@ export default function NavLinks() {
 
   return (
     <>
-      {links.map((link) => (
-        // write the code to test the role    
-        <div className="flex justify-start items-start p-4"
-        key={link.href}
-        onClick={(event) =>
-            handleClick(link.name, link.href, link.sublinks, event)
-        }
-        >
-          {link.icon && <link.icon className="flex justify-start items-start"/>}  
-          <details open={openSublinks === link.name}>
-            <summary style={{ listStyleType: 'none', paddingLeft: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>{link.name} {link.sublinks && (openSublinks === link.name ? <ChevronUp style={{justifyContent: 'flex-end', marginLeft: '7rem'}}/> : <ChevronDown style={{justifyContent: 'flex-end', marginLeft: '7rem'}}/>)}</summary>
+      {linksub.map((link) => (
+        <div className="flex justify-start items-start">
+          <details open={openSublinks === link.name} className="pt-2 pb-2">
+            <summary className="list-none pl-0 flex justify-between items-center">
+              {link.icon && (
+                <link.icon className="flex justify-start items-start mr-2" />
+              )}{" "}
+              {link.name}{" "}
+              {link.sublinks &&
+                (openSublinks === link.name ? (
+                  <ChevronUp className="flex justify-end ml-28" />
+                ) : (
+                  <ChevronDown className="flex justify-end ml-28"/>
+                ))}
+            </summary>
             <ul>
               {link.sublinks &&
                 link.sublinks.map((sublink) => (
                   <li key={sublink.href}>
-                    <Link href={sublink.href}>{sublink.icon && <sublink.icon className="flex justify-start items-start m-2"/>} { sublink.name}</Link>
+                    <Link href={sublink.href}>
+                      {sublink.icon && (
+                        <sublink.icon className="flex justify-start items-start mr-2" />
+                      )}{" "}
+                      {sublink.name}
+                    </Link>
                   </li>
                 ))}
             </ul>
           </details>
+        </div>
+      ))}
+
+      {links.map((link) => (
+        // write the code to test the role
+        <div className="flex justify-start items-start">
+          <Link
+            className="flex justify-start items-start pt-2 pb-2"
+            key={link.href}
+            href={link.href}
+          >
+            {link.icon && (
+              <link.icon className="flex justify-start items-start mr-2" />
+            )}
+            <p className="hidden md:block">{link.name}</p>
+          </Link>
         </div>
       ))}
     </>
