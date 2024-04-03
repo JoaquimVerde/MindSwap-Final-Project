@@ -18,92 +18,45 @@ import { Input } from "@/components/ui/input";
 import React from "react";
 import { PhoneInput } from "./phoneNumber";
 import { Upload, Phone, Mail } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 
 const url = ""; // TODO add url to env.ts
 
 const formSchema = z.object({
-  firstname: z
-    .string()
-    .min(2, { message: "Firstname must be at least 2 characters." }),
-  lastname: z
-    .string()
-    .min(2, { message: "Lastname must be at least 2 characters." }),
-  email: z.string().email({ message: "Invalid email address." }),
   phoneNumber: z.string(),
   uploadResume: z.string().optional(),
   aboutyou: z.string(),
+  experience: z.enum(["no", "yes-less-year", "yes-more-year"], {
+    required_error: "You need to select a notification type.",
+  }),
 });
+
+// ==============================================================
+//      I HAVE TO SWITCH COMPONENT CHECKBOX TO RADIO GROUP
+// ============================================================
 
 export function ApplicationForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstname: "",
+      aboutyou: "",
     },
   });
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submited", values);
+
     // TODO add api POSt
   }
 
   return (
     <main>
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center p-40">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="flex flex-col space-y-20 p-20 pt-0"
           >
-            {/* <FormField
-              control={form.control}
-              name="firstname"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>First name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="name" {...field} />
-                  </FormControl>
-
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lastname"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="last name" {...field} />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
-
-            {/* <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    <p className="flex items-center">
-                      <Mail className="mr-2 h-4 w-4" /> Email
-                    </p>
-                  </FormLabel>
-                  <FormControl>
-                    <Input placeholder="example@email.com" {...field} />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
             <div className="grid w-full max-w-sm items-center gap-3">
               <FormField
                 control={form.control}
@@ -150,15 +103,14 @@ export function ApplicationForm() {
                       </p>
                     </FormLabel>
                     <FormControl>
-                      <div className="grid w-full max-w-sm items-center gap-1.5">
-                        <Input id="resume" type="file" className=""></Input>
-                      </div>
+                      <Input id="resume" type="file" className="file-input  " />
                     </FormControl>
 
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="aboutyou"
@@ -167,12 +119,39 @@ export function ApplicationForm() {
                     <FormLabel>Something about you</FormLabel>
                     <FormControl>
                       <Input
-                        className="textarea w-full h-40 wrap"
+                        className="textarea w-full h-40"
                         placeholder="... what's your interest, what do you like to do, ..."
                         {...field}
                       />
                     </FormControl>
 
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="experience"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <FormLabel>
+                      Do you have any experience in this field?
+                    </FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        value={field.value}
+                        onChange={field.onChange}
+                        className="flex flex-col space-y-1"
+                      >
+                        <RadioGroupItem value="no">No</RadioGroupItem>
+                        <RadioGroupItem value="yes-less-year">
+                          Yes, less than a year.
+                        </RadioGroupItem>
+                        <RadioGroupItem value="yes-more-year">
+                          Yes, more than a year.
+                        </RadioGroupItem>
+                      </RadioGroup>
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}

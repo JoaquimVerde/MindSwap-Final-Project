@@ -17,11 +17,11 @@ export default function Home() {
 				<button>Login</button>
 			</Link>
 
-			<Button asChild>
-				<Link href={"/register"}>
-					<button>Register</button>
-				</Link>
-			</Button>
+      <Button asChild>
+        <Link href={"/register"}>
+          <button>Register</button>
+        </Link>
+      </Button>
 
 			
 		</main> 
