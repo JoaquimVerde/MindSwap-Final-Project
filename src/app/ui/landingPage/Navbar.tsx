@@ -65,9 +65,12 @@ function Navbar() {
         {/* btn */}
 
         <div className="lg:block hidden py-3">
+          <Link href={"/dashboard"}>
           <button className=" px-4 py-1 border-slate-300 text-slate-300 bg-blue-950 hover:bg-blue-700 transition-all duration-300 rounded-md">
-            login
+            Login
           </button>
+          
+          </Link>
 
           <button className=" mx-4 px-1 py-1 border-slate-300 text-slate-300 bg-blue-900 hover:bg-blue-600 transition-all duration-300 rounded-md">
             Sign Up
