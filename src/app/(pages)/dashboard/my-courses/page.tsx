@@ -20,4 +20,5 @@
 
 export default function MyCourses() {
      return <p>My courses page</p>
+     
 }
