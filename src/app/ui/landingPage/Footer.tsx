@@ -18,7 +18,7 @@ function Footer() {
           Courses
         </Link>
 
-        <Link className="hover:text-gray-900" href="#contact">
+        <Link className="hover:text-gray-900" href="/contact">
           Contact
         </Link>
       </nav>

@@ -1,4 +1,3 @@
-
 function HeroSection() {
   return (
     <div id="home" className="relative w-full h-screen">
@@ -9,7 +8,7 @@ function HeroSection() {
         muted
         loop
       >
-        <source src="public/videos/video.mp4" type="video/mp4" />
+        <source src="/videos/video.mp4" type="video/mp4" />
       </video>
 
     
