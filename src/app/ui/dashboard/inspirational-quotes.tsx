@@ -13,7 +13,7 @@ const InspirationalQuotes = () => {
 			const auth = quoteList[randomIdx].author;
 			console.log(auth);
 
-			let finalAuthor;
+			let finalAuthor : string;
 			
 			if (!auth.includes(",")) {
 				finalAuthor = "Anonymous";
