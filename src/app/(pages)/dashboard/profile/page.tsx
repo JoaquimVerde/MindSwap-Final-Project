@@ -1,8 +1,17 @@
 // profile page w/ settings that you can change, depending on your role permissions
-     // display name
-     // change email - only if student?
-     // change photo
+// display name
+// change email - only if student?
+// change photo
 
-export default function Profile(){
-     return <p>profile page here</p>
-}
+import Profile from "@/app/ui/dashboard/profile";
+import React from "react";
+
+const ProfilePage = () => {
+  return (
+    <div>
+     <Profile />
+    </div>
+  );
+};
+
+export default ProfilePage;
