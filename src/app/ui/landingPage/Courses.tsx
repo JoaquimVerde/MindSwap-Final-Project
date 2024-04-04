@@ -4,12 +4,12 @@ import React from "react";
 
 function Courses() {
   return (
-    <div id="courses" className="flex items-center justify-center w-screen py-16">
+    <div id="courses" className="flex items-center justify-center w-screen py-10">
       <div className="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5 max-w-6xl py-16  ">
         <div className="flex flex-col bg-black hover:scale-105 ease-in duration-300  h-auto w-full shadow-xl shadow-gray-600 rounded-xl p-4 m-2">
           <Image
             className="rounded-xl group-hover-opacity-85 "
-            src="/card1.jpg"
+            src="/images/card1.jpg"
             width={400}
             height={400}
             alt="/"
@@ -31,7 +31,7 @@ function Courses() {
         <div className="flex flex-col bg-black hover:scale-105 ease-in duration-300  h-auto w-full shadow-xl shadow-gray-600 rounded-xl p-4 m-2">
           <Image
             className="rounded-xl group-hover-opacity-85 "
-            src="/card1.jpg"
+            src="/images/card1.jpg"
             width={400}
             height={400}
             alt="/"
@@ -53,7 +53,7 @@ function Courses() {
         <div className="flex flex-col bg-black hover:scale-105 ease-in duration-300  h-auto w-full shadow-xl shadow-gray-600 rounded-xl p-4 m-2">
           <Image
             className="rounded-xl group-hover-opacity-85 "
-            src="/card1.jpg"
+            src="/images/card1.jpg"
             width={400}
             height={400}
             alt="/"
@@ -75,7 +75,7 @@ function Courses() {
         <div className="flex flex-col bg-black hover:scale-105 ease-in duration-300  h-auto w-full shadow-xl shadow-gray-600 rounded-xl p-4 m-2">
           <Image
             className="rounded-xl group-hover-opacity-85 "
-            src="/card1.jpg"
+            src="/images/card1.jpg"
             width={400}
             height={400}
             alt="/"

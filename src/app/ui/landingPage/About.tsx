@@ -3,8 +3,8 @@ import React from "react";
 
 function About() {
   return (
-    <div id="about" className="container mx-auto text-white">
-      <div className="w-full md:h-screen p-2 flex flex-col md:flex-row items-center py-16">
+    <div id="about" className="container mx-auto text-white mb-7.5">
+      <div className="w-full md:h-200 p-2 flex flex-col md:flex-row items-center py-16">
         <div className="max-w-[1240px] mx-auto md:w-1/2 md:pr-8 text-slate-300">
           <h2 className="text-slate-300">
             <span className="text-blue-700">let</span> byteHub =
@@ -38,7 +38,7 @@ function About() {
 
         <div className="w-full h-auto  m-auto p-4 hover:scale-105 ease-in duration-300 shadow-lg shadow-gray-600 rounded-xl md:w-1/2 flex justify-center">
           <video className="rounded-lg " autoPlay muted loop>
-            <source src="/public/videos/code.mp4" type="video/mp4" />
+            <source src="/videos/code.mp4" type="video/mp4" />
           </video>
         </div>
       </div>

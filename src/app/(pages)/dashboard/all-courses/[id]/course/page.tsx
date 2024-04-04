@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { CircuitBoard, Smile } from "lucide-react";
+import { ApplyCourse } from "@/app/ui/courses/buttons";
 
 
 export default async function Course() {
@@ -57,7 +58,9 @@ export default async function Course() {
 
             <div className="flex flex-col space-y-5 max-w-fit">
                 <Button>View Syllabus <CircuitBoard className="ml-3" /></Button>
-                <Button>Apply Now <Smile className="ml-3" /></Button>
+                <Button>
+                    <ApplyCourse />
+                </Button>
             </div>
 
 
