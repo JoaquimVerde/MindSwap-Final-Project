@@ -9,7 +9,7 @@ function HeroSection() {
         muted
         loop
       >
-        <source src="/video.mp4" type="video/mp4" />
+        <source src="public/videos/video.mp4" type="video/mp4" />
       </video>
 
     
