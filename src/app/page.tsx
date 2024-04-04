@@ -10,8 +10,8 @@ import Parallax from './ui/landingPage/Paralax'
 import Skills from './ui/landingPage/Skills'
 
 export default function Home() {
-	return (
-		{/* <main className="flex min-h-screen flex-col items-center justify-between p-24">
+	{/*return (
+		 <main className="flex min-h-screen flex-col items-center justify-between p-24">
 			<h1>Landing page</h1>
 			<Link href={"/login"}>
 				<button>Login</button>
@@ -24,8 +24,9 @@ export default function Home() {
 			</Button>
 
 			
-		</main> */
-/* 
+		</main> 
+	)*/}
+ return (
 		<div>
 
 		<main className="w-[100%] h-[100vh]">
@@ -38,9 +39,8 @@ export default function Home() {
 		<Footer/>
 	  </main>
 		</div>
-		 */
-		
-
-		
 	
-})}
+)
+	
+}
+

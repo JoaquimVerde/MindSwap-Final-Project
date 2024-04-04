@@ -38,7 +38,7 @@ function About() {
 
         <div className="w-full h-auto  m-auto p-4 hover:scale-105 ease-in duration-300 shadow-lg shadow-gray-600 rounded-xl md:w-1/2 flex justify-center">
           <video className="rounded-lg " autoPlay muted loop>
-            <source src="/code.mp4" type="video/mp4" />
+            <source src="/public/videos/code.mp4" type="video/mp4" />
           </video>
         </div>
       </div>
