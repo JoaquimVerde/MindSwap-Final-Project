@@ -11,7 +11,17 @@ import {
   BookCheck,
   BookOpenText,
   LibraryBig,
+  Home
 } from "lucide-react";
+
+
+export const linkDashboard: LinkType =
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+    icon: Home,
+    role: ["student", "teacher", "admin"],
+  }
 
 export const linksub: LinkTypeSub[] = [
   {
@@ -70,23 +80,22 @@ export default function NavLinks() {
   //export default function NavLinks ({ links }: NavLinksProps) {
   const [openSublinks, setOpenSublinks] = useState<string | null>(null);
 
-  const handleClick = (
-    linkName: string,
-    linkHref: string,
-    sublinks: { name: string; href: string; icon?: any }[] | undefined,
-    event: any
-  ) => {
-    if (!sublinks || sublinks.length === 0) {
-      window.location.href = linkHref;
-    } else {
-      // if both sublinks are empty, return a message => whomever is responsible for My-Courses Page should implement it.
-      setOpenSublinks(openSublinks === linkName ? null : linkName);
-      event.preventDefault();
-    }
-  };
-
   return (
     <>
+  
+        <div className="flex justify-start items-start">
+          <Link
+            className="flex justify-start items-start pt-2 pb-2"
+            key={linkDashboard.href}
+            href={linkDashboard.href}
+          >
+            {linkDashboard.icon && (
+              <linkDashboard.icon className="flex justify-start items-start mr-2" />
+            )}
+            <p className="hidden md:block">{linkDashboard.name}</p>
+          </Link>
+        </div>
+
       {linksub.map((link) => (
         <div className="flex justify-start items-start">
           <details open={openSublinks === link.name} className="pt-2 pb-2">
