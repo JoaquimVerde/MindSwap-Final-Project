@@ -18,7 +18,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/v1/persons')
+        const response = await fetch('http://localhost:8080/api/v1/persons/PERSON%230ec49fd4-09be-4c72-bf2d-bac8e42498d3')
         if (response.ok) {
           const userData = await response.json();
           setFullName(`${userData.firstName} ${userData.lastName}`);
@@ -80,9 +80,9 @@ export default function Navbar() {
                  <Link
                   className="flex flex-row justify-center justify-between items-center px-10 py-3 text-sm text-700 hover:bg-gray-100"
                   href={"/" /* later => "/api/auth/signout" (?) */}
-                >
-                  <LogOut className="w-6" />
+                  >
                   <div className="md:block">Sign Out</div>
+                  <LogOut className="w-6" />
                 </Link>
             </div>
             )}
