@@ -17,7 +17,9 @@ function Footer() {
         <Link className="hover:text-gray-900" href="#courses">
           Courses
         </Link>
-
+        <Link className="hover:text-gray-900" href="/faqs">
+          FAQ
+        </Link>
         <Link className="hover:text-gray-900" href="/contact">
           Contact
         </Link>
