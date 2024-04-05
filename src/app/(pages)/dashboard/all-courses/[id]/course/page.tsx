@@ -74,7 +74,7 @@ export default function Page({ params }: { params: { id: string }}) {
             <div className="flex flex-col space-y-5 max-w-fit">
                 <Button>View Syllabus <CircuitBoard className="ml-3" /></Button>
                 <Button>
-                    <ApplyCourse />
+                    <ApplyCourse id={id}/>
                 </Button>
             </div>
 
