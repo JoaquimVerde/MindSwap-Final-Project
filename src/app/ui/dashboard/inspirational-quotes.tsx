@@ -10,11 +10,18 @@ const InspirationalQuotes = () => {
 			const quoteList = await response.json();
 			const randomIdx = Math.floor(Math.random() * quoteList.length);
 			const quoteText = quoteList[randomIdx].text;
-			const auth = quoteList[randomIdx].author || "Anonymous";
+			const auth = quoteList[randomIdx].author;
 			console.log(auth);
-			const finalAuthor = auth.split(",")[0];
-			console.log(finalAuthor);
+
+			let finalAuthor : string;
 			
+			if (!auth.includes(",")) {
+				finalAuthor = "Anonymous";
+			} else {
+				finalAuthor = auth.split(",")[0];
+			}
+
+			console.log(finalAuthor);
 
 			setQuote(quoteText);
 			setAuthor("~ " + finalAuthor);
