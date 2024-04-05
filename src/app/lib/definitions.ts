@@ -8,3 +8,26 @@
 //    };
 
 // 1,000,000
+
+
+export type Course = {
+    id: string;
+    name: string;
+    edition: string;
+    teacher: Teacher;
+    syllabus: string;
+    program: string;
+    schedule: number;
+    price: number;
+    duration: number;
+    location: string;
+};
+
+export type Teacher = {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    
+};
+
