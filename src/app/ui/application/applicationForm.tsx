@@ -19,46 +19,95 @@ import React from "react";
 import { PhoneInput } from "./phoneNumber";
 import { Upload, Phone, Mail } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
+import { Checkbox } from "@radix-ui/react-checkbox";
+import { postApplication } from "@/app/api/application/route";
 
 const url = ""; // TODO add url to env.ts
 
+const itemsCheckBox = [
+  {
+    id: "java",
+    label: "javascript",
+  },
+  {
+    id: "python",
+    label: "python",
+  },
+  {
+    id: "php",
+    label: "php",
+  },
+  {
+    id: "c++",
+    label: "c++",
+  },
+  {
+    id: "c#",
+    label: "c#",
+  },
+  {
+    id: "ruby",
+    label: "ruby",
+  },
+  {
+    id: "go",
+    label: "go",
+  },
+  {
+    id: "typescript",
+    label: "typescript",
+  },
+  {
+    id: "none",
+    label: "none",
+  },
+] as const;
+
 const formSchema = z.object({
-  phoneNumber: z.string(),
+  // phoneNumber: z.string(),
   uploadResume: z.string().optional(),
   aboutyou: z.string(),
-  experience: z.enum(["no", "yes-less-year", "yes-more-year"], {
+  experience: z.enum(["false", "true"], {
     required_error: "You need to select a notification type.",
   }),
+  experience2: z.enum(["false", "true"], {
+    required_error: "You need to select a notification type.",
+  }),
+  // itemsCheckBox: z
+  //   .array(z.string())
+  //   .refine((value) => value.some((item) => item), {
+  //     message: "You have to select at least one item.",
+  //   }),
 });
-
-// ==============================================================
-//      I HAVE TO SWITCH COMPONENT CHECKBOX TO RADIO GROUP
-// ============================================================
 
 export function ApplicationForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      aboutyou: "",
+      //aboutyou: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submited", values);
+    //const status = "applied";
+    const personId = "1";
+    const courseId = "1";
 
+    postApplication(values);
     // TODO add api POSt
   }
 
   return (
     <main>
-      <div className="flex flex-col items-center justify-center p-40">
+      <div className="flex flex-col items-center justify-center p-4">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="flex flex-col space-y-20 p-20 pt-0"
           >
             <div className="grid w-full max-w-sm items-center gap-3">
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="phoneNumber"
                 render={({ field }) => (
@@ -90,8 +139,8 @@ export function ApplicationForm() {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
-              <FormField
+              /> */}
+              {/* <FormField
                 control={form.control}
                 name="uploadResume"
                 render={({ field }) => (
@@ -109,7 +158,7 @@ export function ApplicationForm() {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
 
               <FormField
                 control={form.control}
@@ -135,7 +184,7 @@ export function ApplicationForm() {
                 render={({ field }) => (
                   <FormItem className="space-y-3">
                     <FormLabel>
-                      Do you have any experience in this field?
+                      Do you have more than one year experience in this field?
                     </FormLabel>
                     <FormControl>
                       <RadioGroup
@@ -143,12 +192,17 @@ export function ApplicationForm() {
                         onChange={field.onChange}
                         className="flex flex-col space-y-1"
                       >
-                        <RadioGroupItem value="no">No</RadioGroupItem>
-                        <RadioGroupItem value="yes-less-year">
-                          Yes, less than a year.
+                        <RadioGroupItem
+                          value="false"
+                          className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        >
+                          No
                         </RadioGroupItem>
-                        <RadioGroupItem value="yes-more-year">
-                          Yes, more than a year.
+                        <RadioGroupItem
+                          value="true"
+                          className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        >
+                          Yes
                         </RadioGroupItem>
                       </RadioGroup>
                     </FormControl>
@@ -156,6 +210,89 @@ export function ApplicationForm() {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="experience2"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <FormLabel>
+                      Do you have more than one year experience in this field 2?
+                    </FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        value={field.value}
+                        onChange={field.onChange}
+                        className="flex flex-col space-y-1"
+                      >
+                        <RadioGroupItem
+                          value="false"
+                          className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        >
+                          No
+                        </RadioGroupItem>
+                        <RadioGroupItem
+                          value="true"
+                          className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        >
+                          Yes
+                        </RadioGroupItem>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* <FormField
+                control={form.control}
+                name="itemsCheckBox"
+                render={() => (
+                  <FormItem>
+                    <div className="mb-4">
+                      <FormLabel className="text-base">Langueages:</FormLabel>
+                      <FormDescription>
+                        Select the languages that you already had experience.
+                      </FormDescription>
+                    </div>
+                    {itemsCheckBox.map((item) => (
+                      <FormField
+                        key={item.id}
+                        control={form.control}
+                        name="itemsCheckBox"
+                        render={({ field }) => {
+                          return (
+                            <FormItem
+                              key={item.id}
+                              className="flex flex-col-start items-start space-x-3 space-y-0"
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  checked={field.value?.includes(item.id)}
+                                  onCheckedChange={(checked) => {
+                                    return checked
+                                      ? field.onChange([
+                                          ...field.value,
+                                          item.id,
+                                        ])
+                                      : field.onChange(
+                                          field.value?.filter(
+                                            (value) => value !== item.id
+                                          )
+                                        );
+                                  }}
+                                />
+                              </FormControl>
+                              <FormLabel className="font-normal">
+                                {item.label}
+                              </FormLabel>
+                            </FormItem>
+                          );
+                        }}
+                      />
+                    ))}
+                    <FormMessage />
+                  </FormItem>
+                )}
+              /> */}
             </div>
 
             <Button type="submit" className="w-full">

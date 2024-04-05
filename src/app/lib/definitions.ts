@@ -40,3 +40,12 @@ export type Person = {
    
 };
 
+export type Application = {
+  personId: "string";
+  courseId: "string";
+  status: "string";
+  finalGrade: "string";
+  aboutYou: "string";
+  prevKnowledge: true;
+  prevExperience: [];
+};
