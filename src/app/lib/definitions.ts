@@ -31,3 +31,12 @@ export type Teacher = {
     
 };
 
+export type Person = {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    address: string;
+   
+};
+

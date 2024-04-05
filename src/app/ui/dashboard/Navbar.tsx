@@ -2,37 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { LogOut } from "lucide-react";
-import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CircleUserRound } from "lucide-react";
-
+import { fetchPersonById } from "@/app/lib/data";
+import { notFound } from "next/navigation";
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSticky, setIsSticky] = useState(false);
+    
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isSticky, setIsSticky] = useState(false);  
 
-  const [fullName, setFullName] = useState('');
 
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/api/v1/persons/PERSON%230ec49fd4-09be-4c72-bf2d-bac8e42498d3')
-        if (response.ok) {
-          const userData = await response.json();
-          setFullName(`${userData.firstName} ${userData.lastName}`);
-        } else {
-          console.error('Failed to fetch user data');
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
-
-    fetchUserData(); 
-  }, []);
-  
+ 
+    
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -49,6 +31,7 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
   }, []);
 
+  
   return (
     <nav
       className={` py-4 md:px-8 px-4 bg-black ${
@@ -60,16 +43,15 @@ export default function Navbar() {
           <Link href="/#home">Logo</Link>
         </div>
 
-        {/* for lg devices */}
 
       
         <div className="flex flex-col items-center justify-between">
             <div className="flex flex: row items-center justify-between">
-            <CircleUserRound className="size-12" color="#ffffff" onClick={toggleMenu} /> 
+            <CircleUserRound className="size-12 cursor-pointer" color="#ffffff" onClick={toggleMenu} /> 
             </div>
             {isMenuOpen && (
             <div className="flex flex-col  absolute right-8 mt-12 w-48 bg-white border rounded-lg shadow-lg z-50">
-                 <h2 className="px-15 py-5 text-sm text-gray-1000 flex justify-center">{fullName}</h2>
+                 <h2 className="px-15 py-5 text-sm text-gray-1000 flex justify-center">First and Last Name</h2>
 
                 <Link
                   className="px-10 py-3 text-sm text-700 hover:bg-gray-100"
