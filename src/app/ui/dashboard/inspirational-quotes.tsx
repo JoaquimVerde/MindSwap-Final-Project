@@ -28,7 +28,7 @@ const InspirationalQuotes = () => {
 	}, []);
 
 	return (
-		<div className="w-96">
+		<div className="w-96 h-60 p-4 relative">
 			<div>
 				<h1 className="text-center text-2xl font-bold mb-4">
 					{quote}
@@ -37,14 +37,14 @@ const InspirationalQuotes = () => {
 					{author}
 				</p>
 				<hr className="my-4" />
-				<div className="flex justify-between items-center">
-					<button
-						className="text-white font-bold py-2 px-4 rounded bg-green-500 hover:bg-green-600 transition duration-300"
-						onClick={generateQuote}
-					>
-						Next quote
-					</button>
-				</div>
+			</div>
+			<div className="absolute bottom-4 right-4">
+				<button 
+					className="text-white font-bold py-2 px-4 rounded bg-green-500 hover:bg-green-600 transition duration-300"
+					onClick={generateQuote}
+				>
+					Next quote
+				</button>
 			</div>
 		</div>
 	);
