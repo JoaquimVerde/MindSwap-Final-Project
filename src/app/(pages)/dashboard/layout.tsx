@@ -1,5 +1,5 @@
 import Sidenav from "@/app/ui/dashboard/sidenav";
-import Navbar from "@/app/ui/landingPage/Navbar";
+import Navbar from "@/app/ui/dashboard/Navbar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
