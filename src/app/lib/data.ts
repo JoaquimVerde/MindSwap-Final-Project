@@ -35,7 +35,7 @@ export async function fetchCourseById(id : string): Promise<Course> {
             throw new Error('Failed to fetch courses');
         }
         const course: Course = await response.json();
-        console.log(course);
+        //console.log(course);
 
         return course;
     } catch (error) {

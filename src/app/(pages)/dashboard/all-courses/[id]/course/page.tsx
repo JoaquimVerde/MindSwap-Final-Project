@@ -3,6 +3,7 @@ import { CircuitBoard, Smile } from "lucide-react";
 import { ApplyCourse } from "@/app/ui/courses/buttons";
 import { fetchCourseById } from "@/app/lib/data";
 import { notFound } from "next/navigation";
+import { EditCourse } from "@/app/ui/courses/buttons";
 
 
 export default async function Page({ params }: { params: { id: string }}) {
@@ -76,10 +77,14 @@ export default async function Page({ params }: { params: { id: string }}) {
                 <Button>
                     <ApplyCourse id={id}/>
                 </Button>
+                <Button>
+                    <EditCourse id={id} />
+
+                </Button>
             </div>
 
 
         </div>
-    )
+    );
 
 }
