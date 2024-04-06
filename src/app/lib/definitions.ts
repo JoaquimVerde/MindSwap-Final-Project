@@ -12,11 +12,11 @@
 export type Course = {
     id: string;
     name: string;
-    edition: string;
+    edition: number;
     syllabus: string;
     program: string;
-    schedule: number;
-    price: number;
+    schedule: string;
+    price: string;
     duration: number;
     location: string;
     teacher: Teacher;

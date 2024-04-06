@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import {
     Form,
@@ -16,42 +16,56 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Course } from "@/app/lib/definitions";
+import { updateCourse } from "@/app/lib/action";
+
 
 
 const url = ""; // TODO add url to env.ts
 
 const formSchema = z.object({
-    coursename: z
+    name: z
         .string()
         .min(2, { message: "Firstname must be at least 2 characters." }),
-    lastname: z
-        .string()
-        .min(2, { message: "Lastname must be at least 2 characters." }),
-    email: z.string().email({ message: "Invalid email address." }),
-    phoneNumber: z.string(),
-    uploadResume: z.string().optional(),
-    aboutyou: z.string(),
+    edition: z
+        .number(),
+    syllabus: z.string(),
+    program: z.string(),
+    schedule: z.string().optional(),
+    price: z.string(),
+    duration: z.number(),
+    location: z.string(),
+    teacherId: z.string(),
 });
+
+
 
 export function EditCourseForm({
     course
-  }: {
+}: {
     course: Course[];
-  }) {
+}) {
 
-    
 
     console.log(course)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            coursename: course[0].name,
+            name: course[0]?.name,
+            edition: course[0]?.edition,
+            syllabus: course[0]?.syllabus,
+            program: course[0]?.program,
+            schedule: course[0]?.schedule,
+            price: course[0]?.price,
+            duration: course[0]?.duration,
+            location: course[0]?.location,
+            teacherId: course[0]?.teacher.id,
+
         },
     });
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log("submited", values);
-        // TODO add api POSt
+        updateCourse(course);
     }
 
 
@@ -62,13 +76,13 @@ export function EditCourseForm({
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                         <FormField
                             control={form.control}
-                            name="coursename"
+                            name="name"
                             defaultValue={course[0]?.name}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Course Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder={course[0]?.name} {...field}/>
+                                        <Input placeholder={course[0]?.name} {...field} />
                                     </FormControl>
 
                                     <FormDescription>
@@ -80,7 +94,7 @@ export function EditCourseForm({
                         />
                         <FormField
                             control={form.control}
-                            name="lastname"
+                            name="edition"
                             defaultValue={course[0]?.edition}
                             render={({ field }) => (
                                 <FormItem>
@@ -117,7 +131,7 @@ export function EditCourseForm({
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
-                                       
+
                                     </FormLabel>
                                     <FormControl>
                                         <Input placeholder="example@email.com" {...field} />
@@ -133,10 +147,10 @@ export function EditCourseForm({
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
-                                        
+
                                     </FormLabel>
                                     <FormControl>
-                                        
+
                                     </FormControl>
 
                                     <FormMessage />

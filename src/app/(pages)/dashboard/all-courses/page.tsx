@@ -1,10 +1,25 @@
 import Cards from "@/app/ui/courses/cards";
-import { CardSkeleton, CardsSkeleton } from "@/app/ui/skeletons";
+import { CardsSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
 
 
+// import { Metadata } from "next";
 
-export default function AllCourses() {
+// export const metadata: Metadata = {
+//     title: 'Courses',
+//   };
+
+export default function AllCourses({
+    searchParams,
+}: {
+    searchParams?: {
+        query?: string;
+        page?: string;
+    };
+}
+) {
+
+    
 
 
     return (
