@@ -11,6 +11,8 @@ import { unstable_noStore as noStore } from 'next/cache';
 export async function fetchCourses(): Promise<Course[]> {
     noStore();
     try {
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+
         const response = await fetch(`http://localhost:8080/api/v1/courses`);
         if (!response.ok) {
             throw new Error('Failed to fetch courses');
