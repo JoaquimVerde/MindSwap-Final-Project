@@ -2,9 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.nostyle, ul, ol, li {
-    list-style-type: none !important;
-}    
+.nostyle,
+ul,
+ol,
+li {
+  list-style-type: none !important;
+}
 
 .google-map {
   padding-bottom: 50%;
@@ -19,11 +22,9 @@
   position: absolute;
 }
 
-
-html{
-  scroll-behavior: smooth
+html {
+  scroll-behavior: smooth;
 }
-
 
 @layer base {
   body {
@@ -34,5 +35,5 @@ html{
   }
   h2 {
     @apply text-3xl sm:text-4xl;
-  } 
+  }
 }

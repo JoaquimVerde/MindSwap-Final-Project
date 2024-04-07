@@ -20,9 +20,10 @@ import { PhoneInput } from "./phoneNumber";
 import { Upload, Phone, Mail } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import { Checkbox } from "@radix-ui/react-checkbox";
-import { postApplication } from "@/app/api/application/route";
+import { stringify } from "querystring";
+import { Courgette } from "next/font/google";
 
-const url = ""; // TODO add url to env.ts
+const url = "http://localhost:8080/api/v1/registration"; // TODO add url to env.ts
 
 const itemsCheckBox = [
   {
@@ -64,13 +65,15 @@ const itemsCheckBox = [
 ] as const;
 
 const formSchema = z.object({
+  // personId: z.string(),
+  courseId: z.string(),
   // phoneNumber: z.string(),
-  uploadResume: z.string().optional(),
+  //uploadResume: z.string().optional(),
   aboutyou: z.string(),
-  experience: z.enum(["false", "true"], {
+  prevKnowledge: z.enum(["false", "true"], {
     required_error: "You need to select a notification type.",
   }),
-  experience2: z.enum(["false", "true"], {
+  prevExperience: z.enum(["false", "true"], {
     required_error: "You need to select a notification type.",
   }),
   // itemsCheckBox: z
@@ -80,21 +83,38 @@ const formSchema = z.object({
   //   }),
 });
 
-export function ApplicationForm() {
+export function ApplicationForm({ params }: { params: { id: string } }) {
+  const courseIdparam = params.id;
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      //aboutyou: "",
+      courseId: "1",
+      aboutyou: "",
+      prevKnowledge: "false",
+      prevExperience: "false",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submited", values);
-    //const status = "applied";
-    const personId = "1";
-    const courseId = "1";
 
-    postApplication(values);
+    values = { ...values, courseId: courseIdparam };
+
+    const api_req_options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    };
+
+    const res = fetch(url, api_req_options);
+    console.log(res);
+
+    //const status = "applied";
+
+    // postApplication({ values });
     // TODO add api POSt
   }
 
@@ -180,7 +200,7 @@ export function ApplicationForm() {
               />
               <FormField
                 control={form.control}
-                name="experience"
+                name="prevKnowledge"
                 render={({ field }) => (
                   <FormItem className="space-y-3">
                     <FormLabel>
@@ -188,19 +208,19 @@ export function ApplicationForm() {
                     </FormLabel>
                     <FormControl>
                       <RadioGroup
-                        value={field.value}
-                        onChange={field.onChange}
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
                         className="flex flex-col space-y-1"
                       >
                         <RadioGroupItem
                           value="false"
-                          className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                          // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           No
                         </RadioGroupItem>
                         <RadioGroupItem
                           value="true"
-                          className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                          // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           Yes
                         </RadioGroupItem>
@@ -212,7 +232,7 @@ export function ApplicationForm() {
               />
               <FormField
                 control={form.control}
-                name="experience2"
+                name="prevExperience"
                 render={({ field }) => (
                   <FormItem className="space-y-3">
                     <FormLabel>
@@ -220,19 +240,19 @@ export function ApplicationForm() {
                     </FormLabel>
                     <FormControl>
                       <RadioGroup
-                        value={field.value}
-                        onChange={field.onChange}
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
                         className="flex flex-col space-y-1"
                       >
                         <RadioGroupItem
                           value="false"
-                          className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                          // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           No
                         </RadioGroupItem>
                         <RadioGroupItem
                           value="true"
-                          className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                          // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           Yes
                         </RadioGroupItem>
