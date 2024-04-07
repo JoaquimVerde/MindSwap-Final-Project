@@ -7,7 +7,7 @@ import { unstable_noStore as noStore } from 'next/cache';
 
 
 
-export async function fetchCourses(): Promise<Course[]> {
+export async function fetchCourses(currentPage : number): Promise<Course[]> {
     noStore();
     try {
         await new Promise((resolve) => setTimeout(resolve, 3000));

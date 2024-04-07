@@ -16,10 +16,16 @@ import NotFound from "@/app/(pages)/dashboard/all-courses/[id]/course/not-found"
 
 
 
-export default async function Cards() {
+export default async function Cards(
+    {
+        currentPage,
+      }: {
+        currentPage: number;
+      })
+ {
 
 
-    const courses = await fetchCourses();
+    const courses = await fetchCourses(currentPage);
 
     const totalPages = fetchCoursesPages(courses);
 

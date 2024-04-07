@@ -9,8 +9,19 @@ import { Suspense } from "react";
 //     title: 'Courses',
 //   };
 
-export default function AllCourses(){
+export default function AllCourses(
     
+    {
+        searchParams,
+    }: {
+        searchParams?: {
+            page?: string;
+        };
+    }
+) {
+
+    const currentPage = Number(searchParams?.page) || 1;
+
 
     return (
         <div className="mx-2 my-2">
@@ -18,7 +29,7 @@ export default function AllCourses(){
                 <h1 className='text-2xl mb-4'>All Courses</h1>
             </div>
             <Suspense fallback={<CardsSkeleton />}>
-                <Cards />
+                <Cards currentPage={currentPage} />
             </Suspense>
         </div >
     );
