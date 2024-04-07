@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Course } from "@/app/lib/definitions";
 import { updateCourse } from "@/app/lib/action";
+import Link from "next/link";
 
 
 
@@ -31,7 +32,7 @@ const formSchema = z.object({
     syllabus: z.string(),
     program: z.string(),
     schedule: z.string().optional(),
-    price: z.string(),
+    price: z.number(),
     duration: z.number(),
     location: z.string(),
     teacherId: z.string(),
@@ -71,7 +72,7 @@ export function EditCourseForm({
 
     return (
         <main>
-            <div>
+            <div className="w-[400px] mt-3">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                         <FormField
@@ -98,9 +99,9 @@ export function EditCourseForm({
                             defaultValue={course[0]?.edition}
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Last name</FormLabel>
+                                    <FormLabel>Edition</FormLabel>
                                     <FormControl>
-                                        <Input placeholder={course[0]?.edition} {...field} />
+                                        <Input placeholder={""+course[0]?.edition} {...field}/>
                                     </FormControl>
 
                                     <FormMessage />
@@ -109,16 +110,30 @@ export function EditCourseForm({
                         />
                         <FormField
                             control={form.control}
-                            name="aboutyou"
+                            name="teacherId"
+                            defaultValue={course[0]?.teacher.id}
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Something about you</FormLabel>
+                                    <FormLabel>Teacher ID</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder={course[0]?.teacher?.firstName + " " + course[0]?.teacher?.lastName}/>
+                                    </FormControl>
+
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="syllabus"
+                            defaultValue={course[0]?.syllabus}
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Syllabus</FormLabel>
                                     <FormControl>
                                         <textarea
-                                            className="textarea w-full rows-20"
-                                            placeholder="... what's your interest, what do you like to do, ..."
-                                            {...field}
-                                        />
+                                            className="textarea w-full rows-20 h-[100px]"
+                                            placeholder={course[0]?.syllabus}/>
                                     </FormControl>
 
                                     <FormMessage />
@@ -127,14 +142,15 @@ export function EditCourseForm({
                         />
                         <FormField
                             control={form.control}
-                            name="email"
+                            name="program"
+                            defaultValue={course[0]?.program}
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>
-
-                                    </FormLabel>
+                                    <FormLabel>Program</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="example@email.com" {...field} />
+                                        <textarea
+                                            className="textarea w-full rows-20 h-[400px]"
+                                            placeholder={course[0]?.program} />
                                     </FormControl>
 
                                     <FormMessage />
@@ -143,14 +159,15 @@ export function EditCourseForm({
                         />
                         <FormField
                             control={form.control}
-                            name="phoneNumber"
+                            name="schedule"
+                            defaultValue={course[0]?.schedule}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
-
+                                        Schedule
                                     </FormLabel>
                                     <FormControl>
-
+                                        <Input placeholder={course[0].schedule} />
                                     </FormControl>
 
                                     <FormMessage />
@@ -159,26 +176,64 @@ export function EditCourseForm({
                         />
                         <FormField
                             control={form.control}
-                            name="uploadResume"
+                            name="price"
+                            defaultValue={course[0]?.price}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
-
+                                        Price (€)
                                     </FormLabel>
                                     <FormControl>
-                                        <div className="grid w-full max-w-sm items-center gap-1.5">
-                                            <Input id="resume" type="file" className=""></Input>
-                                        </div>
+                                        <Input placeholder={""+course[0].price} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="duration"
+                            defaultValue={course[0]?.duration}
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>
+                                        Duration (weeks)
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input placeholder={""+course[0].duration} />
                                     </FormControl>
 
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
+                        <FormField
+                            control={form.control}
+                            name="location"
+                            defaultValue={course[0]?.location}
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>
+                                        Location
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input placeholder={course[0].location} />
+                                    </FormControl>
 
-                        <Button type="submit" className="w-full">
-                            Submit
-                        </Button>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                            <Button>
+                                <Link
+                                    href="/dashboard/all-courses">
+                                    Cancel
+                                </Link>
+                            </Button>
+
+                            <Button type="submit" className="ml-[230px]" >
+                                Submit
+                            </Button>                      
                     </form>
                 </Form>
             </div>

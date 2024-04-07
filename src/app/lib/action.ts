@@ -7,12 +7,12 @@ import { redirect } from 'next/navigation';
 
 export async function updateCourse(course: Course[]) {
 
-    fetch(`http://localhost:8080/api/v1/courses/${id}`, {
+    fetch(`http://localhost:8080/api/v1/courses/${course[0]?.id}`, {
         method: "PUT",
-        // headers: {
-        //     "Content-Type": "application/json",
-        //     "Authorization": sessionStorage.getItem("token"),
-        // },
+        headers: {
+            "Content-Type": "application/json",
+            //"Authorization": sessionStorage.getItem("token"),
+        },
         body: JSON.stringify({
             title: course[0]?.name,
             edition: course[0]?.edition,
@@ -36,6 +36,7 @@ export async function updateCourse(course: Course[]) {
             console.error("Error ", error);
 
         });
-    revalidatePath(`/dashboard/all-courses/${course[0].id}/course`);
-    redirect(`/dashboard/all-courses/${course[0].id}/course`);
+    console.log(course[0].id)
+    revalidatePath(`/dashboard/all-courses/${course[0].id.replace("#", "%23")}/course`);
+    redirect(`/dashboard/all-courses/${course[0].id.replace("#", "%23")}/course`);
 }

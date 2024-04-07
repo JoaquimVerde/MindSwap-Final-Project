@@ -16,7 +16,7 @@ export type Course = {
     syllabus: string;
     program: string;
     schedule: string;
-    price: string;
+    price: number;
     duration: number;
     location: string;
     teacher: Teacher;
