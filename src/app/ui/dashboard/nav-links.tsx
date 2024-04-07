@@ -6,12 +6,11 @@ import { useState } from "react";
 import {
   ChevronDown,
   ChevronUp,
-  UserRound,
   GraduationCap,
   BookCheck,
   BookOpenText,
   LibraryBig,
-  Home
+  Home,
 } from "lucide-react";
 
 
@@ -63,12 +62,6 @@ export const links: LinkType[] = [
     icon: LibraryBig,
     role: ["teacher", "admin"],
   },
-  {
-    name: "Profile",
-    href: "/dashboard/profile",
-    icon: UserRound,
-    role: ["student", "admin", "teacher"],
-  },
 ];
 
 // filter links based on role
@@ -81,8 +74,7 @@ export default function NavLinks() {
   const [openSublinks, setOpenSublinks] = useState<string | null>(null);
 
   return (
-    <>
-  
+    <> 
         <div className="flex justify-start items-start">
           <Link
             className="flex justify-start items-start pt-2 pb-2"
