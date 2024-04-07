@@ -9,18 +9,8 @@ import { Suspense } from "react";
 //     title: 'Courses',
 //   };
 
-export default function AllCourses({
-    searchParams,
-}: {
-    searchParams?: {
-        query?: string;
-        page?: string;
-    };
-}
-) {
-
+export default function AllCourses(){
     
-
 
     return (
         <div className="mx-2 my-2">

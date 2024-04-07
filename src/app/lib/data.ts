@@ -1,7 +1,6 @@
 // data fetching methods go here
 // e.g. get all courses; get all users
 
-import { notFound } from 'next/navigation';
 import { Course, Person } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
