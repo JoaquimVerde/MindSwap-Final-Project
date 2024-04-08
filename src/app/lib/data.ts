@@ -152,7 +152,6 @@ export async function fetchPerson(): Promise<Person> {
     }
 }
 
-
 export async function fetchPersonByRole(): Promise<string> {
   noStore();
 
