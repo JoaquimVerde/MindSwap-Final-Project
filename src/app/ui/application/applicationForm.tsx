@@ -84,8 +84,8 @@ const formSchema = z.object({
 });
 
 export function ApplicationForm({ params }: { params: { id: string } }) {
-  const courseIdparam = params.id;
-  const personIdparam = "PERSON#c9323e40-a84f-406c-9fe8-58c026fc61a8";
+  const courseIdparam = params.id.replace("%23", "#");
+  const personIdparam = "PERSON#0db76127-2906-4320-a67c-1446b3052f74";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
