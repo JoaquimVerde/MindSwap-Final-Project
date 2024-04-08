@@ -46,3 +46,14 @@ export type Application = {
   prevKnowledge: boolean;
   prevExperience: boolean;
 };
+
+export type Project = {
+  id: string;
+  courseId: string;
+  studentId: string[];
+  name: string;
+  gitHubRepo: string;
+  syllabus: string;
+  grade: number;
+  active: boolean;
+};

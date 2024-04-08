@@ -2,7 +2,7 @@
 // e.g. get all courses; get all users
 
 import { notFound } from 'next/navigation';
-import { Course, Person } from './definitions';
+import { Course, Person, Project } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
 
@@ -36,6 +36,23 @@ export async function fetchCourseById(id : string): Promise<Course> {
         console.log(course);
 
         return course;
+    } catch (error) {
+        console.error('Error fetching courses:', error);
+        notFound();    
+    }
+}
+
+export async function fetchProjectsByCourseId(id : string): Promise<Project> {
+    noStore();
+    try {
+        const response = await fetch(`http://localhost:8080/api/v1/projects/course/${courseId}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch courses');
+        }
+        const project: Project = await response.json();
+        console.log(project);
+
+        return project;
     } catch (error) {
         console.error('Error fetching courses:', error);
         notFound();    
