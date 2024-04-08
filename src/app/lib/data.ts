@@ -1,7 +1,9 @@
 // data fetching methods go here
 // e.g. get all courses; get all users
 
-import { Course, Person } from './definitions';
+
+import { notFound } from 'next/navigation';
+import { Course, Person, Project } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
 
@@ -40,6 +42,23 @@ export async function fetchCourseById(id: string): Promise<Course> {
     } catch (error) {
         console.error('Database error:', error);
         throw new Error('Failed to fetch course.');
+    }
+}
+
+export async function fetchProjectsByCourseId(id : string): Promise<Project[]> {
+    noStore();
+    try {
+        const response = await fetch(`http://localhost:8080/api/v1/projects/course/${id}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch projects!');
+        }
+        const projects: Project[] = await response.json();
+        console.log(projects);
+
+        return projects;
+    } catch (error) {
+        console.error('Error fetching projects:', error);
+        notFound();    
     }
 }
 
