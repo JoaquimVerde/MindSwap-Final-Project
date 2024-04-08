@@ -1,7 +1,7 @@
 import { fetchProjectsByCourseId } from "@/app/lib/data";
 import { notFound } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/app/ui/courses/card";
-import { Scroll } from "lucide-react";
+import { Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
@@ -38,17 +38,17 @@ export default async function ProjectsByCourse({params} : {params: { id: string}
                                     <CardTitle>{project.name}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="grid gap-4">
-                                    <div className=" flex items-center space-x-4 rounded-md border p-4">
-                                        <Scroll />
-                                        <div className="flex-1 space-y-1">
-                                            <p className="text-sm font-medium leading-none">
-                                               GitHub URL: {project.gitHubRepo}
+                                    <div className=" flex items-center space--4 rounded-md border p-4">
+                                        <div className=" flex flex-col flex-1 space-y-1 items-center justify-center">
+                                            <div className="flex flex row items-center justify-center">
+                                            <Github /> 
+                                            <p className="text-sm font-medium leading-none ml-2">
+                                            {project.gitHubRepo}
                                             </p>
-                                            <p className="text-sm text-muted-foreground">
-                                                Ative: {project.active}
-                                            </p>
+                                            </div>
                                         </div>
                                     </div>
+            
                                 </CardContent>
                                 <CardFooter>
                                     <Button className="w-full">

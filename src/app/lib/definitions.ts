@@ -55,5 +55,4 @@ export type Project = {
   gitHubRepo: string;
   syllabus: string;
   grade: number;
-  active: boolean;
 };
