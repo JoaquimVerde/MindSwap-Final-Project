@@ -1,6 +1,7 @@
 // data fetching methods go here
 // e.g. get all courses; get all users
 
+<<<<<<< HEAD
 
 import { notFound } from 'next/navigation';
 import { Course, Person, Project } from './definitions';
@@ -44,10 +45,31 @@ export async function fetchCoursesByPage(currentPage: number): Promise<Course[]>
     } catch (error) {
         console.error('Database error:', error);
         throw new Error('Failed to fetch all courses.');
+=======
+import { notFound } from "next/navigation";
+import { Application, Course, Person } from "./definitions";
+import { unstable_noStore as noStore } from "next/cache";
+
+export async function fetchCourses(): Promise<Course[]> {
+  noStore();
+  try {
+    const response = await fetch(`http://localhost:8080/api/v1/courses`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch courses");
+>>>>>>> 074519d (create page get all all apllication page, fetch applications, fetch application by id)
     }
+    const courses: Course[] = await response.json();
+    //console.log(courses);
+
+    return courses;
+  } catch (error) {
+    console.error("Error fetching courses:", error);
+    return [];
+  }
 }
 
 export async function fetchCourseById(id: string): Promise<Course> {
+<<<<<<< HEAD
     noStore();
     try {
         const response = await fetch(`http://localhost:8080/api/v1/courses/${id}`);
@@ -78,9 +100,25 @@ export async function fetchProjectsByCourseId(id : string): Promise<Project[]> {
     } catch (error) {
         console.error('Error fetching projects:', error);
         notFound();    
+=======
+  noStore();
+  try {
+    const response = await fetch(`http://localhost:8080/api/v1/courses/${id}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch courses");
+>>>>>>> 074519d (create page get all all apllication page, fetch applications, fetch application by id)
     }
+    const course: Course = await response.json();
+    console.log(course);
+
+    return course;
+  } catch (error) {
+    console.error("Error fetching courses:", error);
+    notFound();
+  }
 }
 
+<<<<<<< HEAD
 
 export async function fetchPersonById(id: string): Promise<Person> {
     noStore();
@@ -123,9 +161,57 @@ export async function fetchCoursesByLocation(
     } catch (error) {
         console.error('Database error:', error);
         throw new Error('Failed to fetch all courses.');
+=======
+export async function fetchPersonById(id: string): Promise<Person> {
+  noStore();
+  try {
+    const response = await fetch(`http://localhost:8080/api/v1/persons/${id}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch courses");
+>>>>>>> 074519d (create page get all all apllication page, fetch applications, fetch application by id)
     }
+    const person: Person = await response.json();
+    console.log(person);
+
+    return person;
+  } catch (error) {
+    console.error("Error fetching courses:", error);
+    notFound();
+  }
 }
 
+export async function fetchAppliations(): Promise<Application[]> {
+  noStore();
+  try {
+    const response = await fetch(`http://localhost:8080/api/v1/registration`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch applications");
+    }
+    const applications: Application[] = await response.json();
+    console.log(applications);
 
+    return applications;
+  } catch (error) {
+    console.error("Error fetching applications:", error);
+    return [];
+  }
+}
 
+export async function fetchApplicationById(id: string): Promise<Application> {
+  noStore();
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/registration/${id}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch application");
+    }
+    const application: Application = await response.json();
+    console.log(application);
 
+    return application;
+  } catch (error) {
+    console.error("Error fetching application:", error);
+    notFound();
+  }
+}

@@ -65,7 +65,7 @@ const itemsCheckBox = [
 ] as const;
 
 const formSchema = z.object({
-  // personId: z.string(),
+  personId: z.string(),
   courseId: z.string(),
   // phoneNumber: z.string(),
   //uploadResume: z.string().optional(),
@@ -83,17 +83,15 @@ const formSchema = z.object({
   //   }),
 });
 
-export function ApplicationForm({
-  id,
-}: {
-  id: string;
-}) {
-  
+export function ApplicationForm({ params }: { params: { id: string } }) {
+  const courseIdparam = params.id;
+  const personIdparam = "PERSON#7820a37d-ba59-4835-bf2b-1445d1e65417";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       courseId: "1",
+      personId: "1",
       aboutyou: "",
       prevKnowledge: "false",
       prevExperience: "false",
@@ -103,7 +101,8 @@ export function ApplicationForm({
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submited", values);
 
-    values = { ...values, courseId: id };
+    values = { ...values, courseId: courseIdparam };
+    values = { ...values, personId: personIdparam };
 
     const api_req_options = {
       method: "POST",
@@ -214,16 +213,18 @@ export function ApplicationForm({
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex flex-col space-y-1"
+                        className="flex flex-col space-y-1 opacity-100"
                       >
                         <RadioGroupItem
                           value="false"
+                          className="bg-white opacity-100"
                           // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           No
                         </RadioGroupItem>
                         <RadioGroupItem
                           value="true"
+                          className="bg-white opacity-100"
                           // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           Yes
@@ -246,16 +247,19 @@ export function ApplicationForm({
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex flex-col space-y-1"
+                        className="flex flex-col space-y-1 opacity-100"
                       >
                         <RadioGroupItem
                           value="false"
+                          className="bg-white opacity-100"
                           // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           No
                         </RadioGroupItem>
                         <RadioGroupItem
                           value="true"
+                          className="bg-white opacity-100"
+                          //style={{ opacity: 1 }}
                           // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           Yes

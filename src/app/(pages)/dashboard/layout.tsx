@@ -1,9 +1,8 @@
-
-'use client';
+"use client";
 // Layout.tsx
-import React, { useState } from 'react';
-import Sidenav from '@/app/ui/dashboard/sidenav';
-import { Menu } from 'lucide-react';
+import React, { useState } from "react";
+import Sidenav from "@/app/ui/dashboard/sidenav";
+import { Menu } from "lucide-react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isSidenavOpen, setIsSidenavOpen] = useState(true);
@@ -17,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen bg-black">
       {/* Sidebar */}
-      <div className={`flex-none md:w-64 ${isSidenavOpen ? '' : 'hidden'}`}>
+      <div className={`flex-none md:w-64 ${isSidenavOpen ? "" : "hidden"}`}>
         {/* Pass onHide as prop */}
         <Sidenav isHidden={!isSidenavOpen} onHide={toggleSidenav} />
       </div>
@@ -25,7 +24,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Main Content */}
       <div className="flex-grow p-6 md:overflow-y-auto md:p-12 z-20 ml-10">
         {/* Toggle button */}
-        {isHidden && <Menu onClick={toggleSidenav} size="24" className='bg-white relative mx-0 my-0 mb-6'/>}
+        {isHidden && (
+          <Menu
+            onClick={toggleSidenav}
+            size="24"
+            className="bg-white relative mx-0 my-0 mb-6"
+          />
+        )}
         {children}
       </div>
     </div>

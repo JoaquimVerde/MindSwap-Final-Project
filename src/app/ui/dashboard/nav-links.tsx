@@ -60,6 +60,18 @@ export const links: LinkType[] = [
     icon: LibraryBig,
     role: ["teacher", "admin"],
   },
+  {
+    name: "Profile",
+    href: "/dashboard/profile",
+    icon: UserRound,
+    role: ["student", "admin", "teacher"],
+  },
+  {
+    name: "All Applications",
+    href: "/dashboard/all-courses/all-applications",
+    icon: BookCheck,
+    role: ["admin", "teacher"],
+  },
 ];
 
 // filter links based on role
