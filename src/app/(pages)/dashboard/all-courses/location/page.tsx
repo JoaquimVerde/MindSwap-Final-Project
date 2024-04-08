@@ -1,7 +1,8 @@
-import SearchBar from "@/app/ui/components/ui/search-bar";
 import Cards from "@/app/ui/courses/cards";
+import LocationCards from "@/app/ui/courses/location-cards";
 import { CardsSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
+
 
 
 // import { Metadata } from "next";
@@ -10,13 +11,15 @@ import { Suspense } from "react";
 //     title: 'Courses',
 //   };
 
-export default function AllCourses(
-
+export default function AllCoursesInLocation(
+    
     {
         searchParams,
+        placeholder,
     }: {
         searchParams?: {
             page?: string;
+            placeholder: string;
         };
     }
 ) {
@@ -29,13 +32,8 @@ export default function AllCourses(
             <div>
                 <h1 className='text-2xl mb-4'>All Courses</h1>
             </div>
-
-            <div className="mt-5 ml-4 w-[500px]">
-                <SearchBar placeholder="search by location"/>
-            </div>
-
             <Suspense fallback={<CardsSkeleton />}>
-                <Cards currentPage={currentPage} />
+                <LocationCards currentPage={currentPage} placeholder={placeholder}/>
             </Suspense>
         </div >
     );
