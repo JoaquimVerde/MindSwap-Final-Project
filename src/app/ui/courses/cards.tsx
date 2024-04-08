@@ -10,25 +10,25 @@ import { Scroll } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { GetCourseInfo } from "@/app/ui/courses/buttons";
-import { fetchCourses, fetchCoursesPages } from "@/app/lib/data";
-import Pagination from "@/app/ui/courses/pagination";
+import { fetchCoursesByPage, fetchCoursesPages } from "@/app/lib/data";
 import NotFound from "@/app/(pages)/dashboard/all-courses/[id]/course/not-found";
-import SearchBar from "../components/ui/search-bar";
+
 
 
 
 export default async function Cards(
-    {
+    {   
         currentPage,
       }: {
+        
         currentPage: number;
       })
  {
 
+    const courses = await fetchCoursesByPage(currentPage);
 
-    const courses = await fetchCourses(currentPage);
 
-    const totalPages = fetchCoursesPages(courses);
+   
 
 
     if (!courses) {
@@ -39,9 +39,6 @@ export default async function Cards(
     return (
 
         <div>
-            <div className="mt-5 ml-4">
-                <Pagination totalPages={totalPages} />
-            </div>
 
             <div className="flex flex-wrap">
                 {courses?.map((course) => (

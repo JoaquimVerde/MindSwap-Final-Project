@@ -29,13 +29,22 @@ export function CardSkeleton() {
 export function CardsSkeleton() {
      return (
           <div>
-               <div className="mt-5 ml-4 rounded border p-5 w-[250px] bg-slate-900 animate-pulse" />
                <div className="flex flex-wrap">
                     <CardSkeleton />
                     <CardSkeleton />
                     <CardSkeleton />
                     <CardSkeleton />
                </div>
-          </div>
+          </div >
      );
 }
+
+export function PaginationSkeleton() {
+     return (
+          <div>
+               <div className="mt-5 ml-4 rounded border p-5 w-[250px] bg-slate-900 animate-pulse" />
+          </div >
+     );
+}
+
+
