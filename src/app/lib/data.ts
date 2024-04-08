@@ -135,6 +135,23 @@ export async function fetchAllCourses(): Promise<number> {
 
 }
 
+export async function fetchPerson(): Promise<Person> {
+    noStore();
+    try {
+        const response = await fetch(`http://localhost:8080/api/v1/persons/PERSON%23a94669c6-33aa-4d38-972f-0f72259c6856`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch person');
+        }
+        const person: Person = await response.json();
+        console.log(person);
+
+        return person;
+    } catch (error) {
+        console.error('Error fetching person:', error);
+        notFound();    
+    }
+}
+
 
 export async function fetchPersonByRole(): Promise<string> {
   noStore();

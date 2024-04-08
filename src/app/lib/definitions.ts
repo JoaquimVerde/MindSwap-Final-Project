@@ -30,6 +30,7 @@ export type Teacher = {
 };
 
 export type Person = {
+  username: string;
   id: string;
   email: string;
   firstName: string;
