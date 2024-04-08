@@ -3,7 +3,6 @@
 // Layout.tsx
 import React, { useState } from 'react';
 import Sidenav from '@/app/ui/dashboard/sidenav';
-import Navbar from "@/app/ui/dashboard/Navbar";
 import { Menu } from 'lucide-react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -16,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex h-screen bg-black">
       {/* Sidebar */}
       <div className={`flex-none md:w-64 ${isSidenavOpen ? '' : 'hidden'}`}>
         {/* Pass onHide as prop */}
