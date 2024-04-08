@@ -1,7 +1,10 @@
+import { fetchCoursesPages } from "@/app/lib/data";
 import SearchBar from "@/app/ui/components/ui/search-bar";
 import Cards from "@/app/ui/courses/cards";
-import { CardsSkeleton } from "@/app/ui/skeletons";
+import { CardsSkeleton, PaginationSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
+import { fetchAllCourses } from "@/app/lib/data";
+import Pagination from "@/app/ui/courses/pagination";
 
 
 // import { Metadata } from "next";
@@ -10,8 +13,7 @@ import { Suspense } from "react";
 //     title: 'Courses',
 //   };
 
-export default function AllCourses(
-
+export default async function AllCourses(
     {
         searchParams,
     }: {
@@ -22,6 +24,8 @@ export default function AllCourses(
 ) {
 
     const currentPage = Number(searchParams?.page) || 1;
+    const courses = await fetchAllCourses();
+    const totalPages = fetchCoursesPages(courses);
 
 
     return (
@@ -31,9 +35,15 @@ export default function AllCourses(
             </div>
 
             <div className="mt-5 ml-4 w-[500px]">
-                <SearchBar placeholder="search by location"/>
+                <SearchBar placeholder="search by location" />
             </div>
 
+            <Suspense fallback={<PaginationSkeleton />}>
+                <div className="mt-5 ml-4">
+                    <Pagination totalPages={totalPages} />
+                </div>
+            </Suspense>
+            
             <Suspense fallback={<CardsSkeleton />}>
                 <Cards currentPage={currentPage} />
             </Suspense>
