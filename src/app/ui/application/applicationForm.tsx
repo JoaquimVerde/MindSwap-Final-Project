@@ -23,7 +23,7 @@ import { Checkbox } from "@radix-ui/react-checkbox";
 import { stringify } from "querystring";
 import { Courgette } from "next/font/google";
 
-const url = "http://localhost:8080/api/v1/registration"; // TODO add url to env.ts
+const url = "http://localhost:3000/api/v1/registration"; // TODO add url to env.ts
 
 const itemsCheckBox = [
   {
@@ -85,7 +85,7 @@ const formSchema = z.object({
 
 export function ApplicationForm({ params }: { params: { id: string } }) {
   const courseIdparam = params.id;
-  const personIdparam = "PERSON#7820a37d-ba59-4835-bf2b-1445d1e65417";
+  const personIdparam = "PERSON#c9323e40-a84f-406c-9fe8-58c026fc61a8";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

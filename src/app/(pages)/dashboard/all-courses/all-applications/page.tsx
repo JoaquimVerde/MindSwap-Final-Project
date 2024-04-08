@@ -35,19 +35,16 @@ export default async function AllApplcations() {
         <TableBody>
           {applications.map((application) => (
             <TableRow key={application.id}>
-              <TableCell className="font-medium">Maria Alves</TableCell>
+              <TableCell className="font-medium">Person name</TableCell>
               <TableCell>{application.prevKnowledge ? "Yes" : "No"}</TableCell>
               <TableCell>{application.prevExperience ? "Yes" : "No"}</TableCell>
               <TableCell className="text-right">{application.status}</TableCell>
             </TableRow>
           ))}
         </TableBody>
-        {/* <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter> */}
+        <TableFooter>
+          <TableRow></TableRow>
+        </TableFooter>
       </Table>
     </div>
   );
