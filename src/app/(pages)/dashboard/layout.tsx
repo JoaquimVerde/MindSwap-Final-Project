@@ -8,9 +8,11 @@ import { Menu } from 'lucide-react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isSidenavOpen, setIsSidenavOpen] = useState(true);
+  const [isHidden, setIsHidden] = useState(false);
 
   const toggleSidenav = () => {
     setIsSidenavOpen(!isSidenavOpen);
+    setIsHidden(!isHidden);
   };
 
   return (
@@ -24,7 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Main Content */}
       <div className="flex-grow p-6 md:overflow-y-auto md:p-12 z-20 ml-10">
         {/* Toggle button */}
-        <Menu onClick={toggleSidenav} size="24" className='bg-white'/>
+        {isHidden && <Menu onClick={toggleSidenav} size="24" className='bg-white relative mx-0 my-0 mb-6'/>}
         {children}
       </div>
     </div>
