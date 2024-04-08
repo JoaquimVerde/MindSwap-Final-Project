@@ -148,7 +148,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
         </div>
         <div className="mt-5">
           <label htmlFor="avatarInput">
-            <Camera className="size-10 cursor-pointer" color="black" />
+            <Camera className="size-10 cursor-pointer" color="white" />
             <input
               id="avatarInput"
               type="file"
