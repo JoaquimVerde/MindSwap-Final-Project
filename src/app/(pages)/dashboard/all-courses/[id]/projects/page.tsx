@@ -1,13 +1,6 @@
 import { fetchProjectsByCourseId } from "@/app/lib/data";
 import { notFound } from "next/navigation";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/app/ui/courses/card";
 import { Scroll } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
