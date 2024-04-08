@@ -65,7 +65,7 @@ function Navbar() {
         {/* btn */}
 
         <div className="lg:block hidden py-3">
-        <a href="https://mindswaplogin.auth.eu-central-1.amazoncognito.com/login?client_id=3qn4vfitu65korf49pnrp1pt24&response_type=code&scope=email+openid+profile&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fcognito">
+        <a href="/login">
           <button className=" px-4 py-1 border-slate-300 text-slate-300 bg-blue-950 hover:bg-blue-700 transition-all duration-300 rounded-md">
             login
           </button>

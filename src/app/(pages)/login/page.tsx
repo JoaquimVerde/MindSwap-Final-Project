@@ -1,19 +1,85 @@
-import Link from "next/link";
+"use client"
+import { signIn, useSession, signOut } from "next-auth/react";
+import Image from "next/image";
+import { useState } from "react";
+import SessionWrapper from "../../../components/ui/session-wrapper";
 
-export default function Login() {
-	return (
-		<>
-			<p>Login page here w/ a form</p>
-			<Link href={"/dashboard"}>
-				<button>Login</button>
-			</Link>
-		</>
-	);
+function Home() {
+  const { data: session } = useSession();
+  const [loginwith, setLoginwith] = useState(false);
+
+  const loginWith = () => {
+    setLoginwith(true);
+  }
+
+  if (session) {
+    console.log(session.user);
+    return (
+      <div className="w-full h-screen flex flex-col justify-center items-center">
+        <div className="w-44 h-44 relative mb-4">
+         {/*  <Image
+            src={session.user?.image as string}
+            fill
+            alt=""
+            className="object-cover rounded-full"
+          /> */}
+        </div>
+        <p className="text-2xl mb-2">Welcome <span className="font-bold">{session.user?.name}</span> Barara</p>
+        <p className="font.bold mb-4">{session.user?.email}</p>
+        <button className="bg-red-600 py-2 px-6 rounded-md" onClick={() => signOut()}>Sign Out</button>
+      </div>
+    )
+  }
+  if (loginwith) {
+    return (
+      <div className="w-full h-screen flex flex-col justify-center items-center">
+        <p className="text-2xl mb-2">Sign In As</p>
+        <button className="bg-none border-gray-300 border py-2 px-6 rounded-md mb-2" onClick={() => signIn('cognito')}>Sign in with cognito</button>
+      </div>
+    )
+  }
+  return (
+    <>
+      <header className="bg-white">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+          <div className="flex lg:flex-1">
+            <a href="#" className="-m-1.5 p-1.5">
+              <span className="sr-only"></span>
+              <Image className="h-8 w-autp" src="/assets/technicalrajnilogo.png" width={400} height={400} alt="Logo" />
+            </a>
+          </div>
+          {session ?
+            (<div className="hidden log:flex lg:gap-x-12">
+              <div className="relative">
+                <button type="button" className="flex items-center gap-x-1 text-sm font-semibold leading-6 test-gray-900"
+                  aria-expanded="false">
+                  Product
+                </button>
+              </div>
+              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">Features</a>
+              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">Marketplace</a>
+              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">Company</a>
+            </div>)
+            :
+            (<div className="hidden lg:flex lg:flex-1 lg:justify-end">
+              <button className="text-sm font-semibold leading-6 text-gray-900" onClick={loginWith}>Log in <span aria-hidden="true">&rarr;</span></button>
+            </div>)
+          }
+        </nav>
+      </header>
+      <div className=" flex-col justify-center text-wrap border-spacing-4 text-center">
+        <h1 className="underline-offset-8 bg-slate-100 align-middle"> My App </h1>
+      </div>
+    </>
+  )
 }
 
-// teacher + staff = @mindera.com
-// should candidates that get accepted (becoming students) have a newly created student email?
+const HomeWithSession = () => {
+  return (
+    <SessionWrapper>
+      <Home />
+    </SessionWrapper>
+  )
+}
 
-// if normal login, direct to /dashboard
-// if teacher login, direct to /dashboard/teacher
-// if staff login, direct to /dashboard/staff
+export default HomeWithSession;
