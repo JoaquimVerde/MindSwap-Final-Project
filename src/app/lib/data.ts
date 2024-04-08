@@ -12,7 +12,6 @@ import { unstable_noStore as noStore } from 'next/cache';
 export async function fetchAllCourses(): Promise<number> {
     noStore();
     try {
-        await new Promise((resolve) => setTimeout(resolve, 3000));
 
         const response = await fetch(`http://localhost:8080/api/v1/courses`);
         if (!response.ok) {
@@ -31,7 +30,7 @@ export async function fetchAllCourses(): Promise<number> {
 export async function fetchCoursesByPage(currentPage: number): Promise<Course[]> {
     noStore();
     try {
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        //await new Promise((resolve) => setTimeout(resolve, 3000));
 
         const response = await fetch(`http://localhost:8080/api/v1/courses?page=${currentPage-1}&limit=4`);
         if (!response.ok) {
