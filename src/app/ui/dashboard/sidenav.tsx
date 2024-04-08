@@ -1,8 +1,8 @@
 'use client';
-// Sidenav.tsx
+
 import React, { useEffect } from 'react';
 import NavLinks from '@/app/ui/dashboard/nav-links';
-import { X } from 'lucide-react';
+import {X} from 'lucide-react';
 
 interface SidenavProps {
   isHidden: boolean;
@@ -10,30 +10,12 @@ interface SidenavProps {
 }
 
 const Sidenav: React.FC<SidenavProps> = ({ isHidden, onHide }) => {
-  useEffect(() => {
-    const menu = document.querySelector<HTMLLabelElement>('.drawer-button');
-    if (menu) {
-      if (isHidden) {
-        menu.classList.add('lg:hidden');
-      } else {
-        menu.classList.remove('lg:hidden');
-      }
-    }
-  }, [isHidden]);
+  
 
   return (
     <div className={`drawer ${isHidden ? 'hidden' : 'lg:drawer-open'}`}>
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-row items-start justify-start ml-5 mt-5">
-        {/* Render only if not hidden */}
-        {/* {!isHidden && (
-          <label
-            htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button lg:hidden"
-          > */}
-            {/* Content of the button */}
-          {/* </label>
-        )} */}
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay bg-white"></label>
