@@ -1,17 +1,19 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import students from "@/app/lib/placeholder-data";
+import { useEffect, useState } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import React from "react";
 import {Camera} from "lucide-react";
+import { Person } from "@/app/lib/definitions";
+import { fetchPerson } from "@/app/lib/data";
 
-const Profile = () => {
-  const [name, setName] = useState(students[0].name);
+const Profile: React.FC<Person> = () => {
+  const [person, setPerson] = useState<Person | null>(null);
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState(students[0].email);
-  const [password, setPassword] = useState(students[0].password);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [address, setAddress] = useState("");
   const [editingName, setEditingName] = useState(false);
@@ -21,6 +23,15 @@ const Profile = () => {
   const [editingPassword, setEditingPassword] = useState(false);
 
   const [avatarImage, setAvatarImage] = useState("/images/avatar.png");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const personData: Person = await fetchPerson();
+      setPerson(personData);
+    };
+    
+    fetchData();
+  }, []);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target?.files?.[0];
@@ -34,6 +45,9 @@ const Profile = () => {
       reader.readAsDataURL(file);
     }
   };
+
+  
+  
  
 
   return (
@@ -43,7 +57,7 @@ const Profile = () => {
       
       <div className="flex flex-col justify-evenly w-full">
         <div>
-          <p className="font-bold text-slate-400 mt-4">Name:</p>
+          <p className="font-bold text-slate-400 mt-4">Name: {person?.firstName}</p>
           <input
             type="text"
             value={name}
@@ -58,7 +72,7 @@ const Profile = () => {
             {editingName ? "Save" : "Edit"}
           </Button>
 
-          <p className="font-bold text-slate-400 mt-4">Username:</p>
+          <p className="font-bold text-slate-400 mt-4">Username: {person?.username} </p>
           <input
             type="text"
             value={username}
@@ -73,7 +87,7 @@ const Profile = () => {
             {editingUsername ? "Save" : "Edit"}
           </Button>
 
-          <p className="font-bold text-slate-400 mt-4">Email:</p>
+          <p className="font-bold text-slate-400 mt-4">Email: {person?.email} </p>
           <input
             type="text"
             value={email}
@@ -104,7 +118,7 @@ const Profile = () => {
             {editingPassword ? "Save" : "Edit"}
           </Button>
 
-          <p className="font-bold text-slate-400 mt-4">Address:</p>
+          <p className="font-bold text-slate-400 mt-4">Address: {person?.address} </p>
           <input
             type="text"
             value={address}
