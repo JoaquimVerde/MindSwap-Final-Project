@@ -4,32 +4,44 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import React from "react";
-import {Camera} from "lucide-react";
+import { Camera, Eye, EyeOff } from "lucide-react";
 import { Person } from "@/app/lib/definitions";
 import { fetchPerson } from "@/app/lib/data";
+import { useForm } from "react-hook-form";
 
-const Profile: React.FC<Person> = () => {
-  const [person, setPerson] = useState<Person | null>(null);
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+interface ProfileProps {
+  initialProfileData?: Person;
+}
 
-  const [address, setAddress] = useState("");
-  const [editingName, setEditingName] = useState(false);
-  const [editingUsername, setEditingUsername] = useState(false);
-  const [editingAddress, setEditingAddress] = useState(false);
-  const [editingEmail, setEditingEmail] = useState(false);
-  const [editingPassword, setEditingPassword] = useState(false);
-
+const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { isSubmitting },
+  } = useForm<Person>({ defaultValues: initialProfileData });
   const [avatarImage, setAvatarImage] = useState("/images/avatar.png");
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const personData: Person = await fetchPerson();
-      setPerson(personData);
+      try {
+        const personData = await fetchPerson();
+        setValue("firstName", personData.firstName);
+        setValue("username", personData.username);
+        setValue("email", personData.email);
+        setValue("password", personData.password);
+        setValue("address", personData.address);
+        // setAvatarImage(personData.avatarImage); Add avatar image??
+      } catch (error) {
+        console.error("Error fetching person:", error);
+      }
     };
-    
+
     fetchData();
   }, []);
 
@@ -39,120 +51,112 @@ const Profile: React.FC<Person> = () => {
       const reader = new FileReader();
       reader.onload = () => {
         if (reader.result) {
-        setAvatarImage(reader.result.toString());
+          setAvatarImage(reader.result.toString());
         }
       };
       reader.readAsDataURL(file);
     }
   };
 
-  
-  
- 
+  const onSubmit = async (data: Person) => {
+    console.log(data);
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/persons/PERSON%23a94669c6-33aa-4d38-972f-0f72259c6856`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update person');
+      }
+      console.log('Person updated successfully');
+    } catch (error) {
+      console.error('Error updating person:', error);
+    }
+  };
 
   return (
     <div className="flex flex-row justify-evenly">
       <div className="flex flex-col justify-start">
-      <h1 className="mb-10 text-slate-400">Profile</h1>
-      
-      <div className="flex flex-col justify-evenly w-full">
-        <div>
-          <p className="font-bold text-slate-400 mt-4">Name: {person?.firstName}</p>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="rounded w-80 h-10 px-2"
-            disabled={!editingName}
-          />
-          <Button
-            onClick={() => setEditingName(!editingName)}
-            className="w-26 ml-5 hover:bg-blue-700 mt-8"
-          >
-            {editingName ? "Save" : "Edit"}
-          </Button>
+        <h1 className="mb-10 text-slate-400">Profile</h1>
 
-          <p className="font-bold text-slate-400 mt-4">Username: {person?.username} </p>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="rounded w-80 h-10 px-2"
-            disabled={!editingUsername}
-          />
-          <Button
-            onClick={() => setEditingUsername(!editingUsername)}
-            className="w-26 ml-5 hover:bg-blue-700 mt-8"
-          >
-            {editingUsername ? "Save" : "Edit"}
-          </Button>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <p className="font-bold text-slate-400 mt-4">Name</p>
+            <input
+              type="text"
+              {...register("firstName")}
+              className="rounded w-80 h-10 px-2"
+              disabled={isSubmitting}
+            />
 
-          <p className="font-bold text-slate-400 mt-4">Email: {person?.email} </p>
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="rounded w-80 h-10 px-2 "
-            disabled={!editingEmail}
-          />
-          <Button
-            onClick={() => setEditingEmail(!editingEmail)}
-            className="w-26 ml-5 hover:bg-blue-700 mt-8"
-          >
-            {editingEmail ? "Save" : "Edit"}
-          </Button>
+            <p className="font-bold text-slate-400 mt-4">Email</p>
+            <input
+              type="text"
+              {...register("email")}
+              className="rounded w-80 h-10 px-2"
+              disabled={isSubmitting}
+            />
 
+            <p className="font-bold text-slate-400 mt-4">Username</p>
+            <input
+              type="text"
+              {...register("username")}
+              className="rounded w-80 h-10 px-2"
+              disabled={isSubmitting}
+            />
+            <p className="font-bold text-slate-400 mt-4">Password</p>
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"} // Toggle between text and password type
+                {...register("password")}
+                className="rounded w-80 h-10 px-2"
+                disabled={isSubmitting}
+              />
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute inset-y-0 right-0 px-3 py-1"
+              >
+                {showPassword ? <EyeOff /> : <Eye />}{" "}
+              </button>
+            </div>
 
-          <p className="font-bold text-slate-400 mt-4">Password:</p>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="rounded w-80 h-10 px-2 "
-            disabled={!editingPassword}
-          />
-          <Button
-            onClick={() => setEditingPassword(!editingPassword)}
-            className="w-26 ml-5 hover:bg-blue-700 mt-8"
-          >
-            {editingPassword ? "Save" : "Edit"}
-          </Button>
-
-          <p className="font-bold text-slate-400 mt-4">Address: {person?.address} </p>
-          <input
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className="rounded w-80 h-10 px-2"
-            disabled={!editingAddress}
-          />
-          <Button
-            onClick={() => setEditingAddress(!editingAddress)}
-            className="w-26 ml-5 hover:bg-blue-700 mt-8"
-          >
-            {editingAddress ? "Save" : "Edit"}
-          </Button>
+            <p className="font-bold text-slate-400 mt-4">Address</p>
+            <input
+              type="text"
+              {...register("address")}
+              className="rounded w-80 h-10 px-2"
+              disabled={isSubmitting}
+            />
           </div>
-        </div>
+
+          <Button type="submit" className="w-26 ml-5 hover:bg-blue-700 mt-8">
+            {isSubmitting ? "Submitting..." : "Update"}
+          </Button>
+        </form>
       </div>
+
       <div className="flex flex-col items-center justify-center">
         <div className=" flex flex-end mt-20 w-52 h-52 rounded-full overflow-hidden ">
-        <Avatar className="w-full h-full rounded-full bg-gray-300">
-          <AvatarImage src={avatarImage} />
-          <AvatarFallback></AvatarFallback>
-        </Avatar>
-       </div> 
+          <Avatar className="w-full h-full rounded-full bg-gray-300">
+            <AvatarImage src={avatarImage} />
+            <AvatarFallback></AvatarFallback>
+          </Avatar>
+        </div>
         <div className="mt-5">
-        <label htmlFor="avatarInput" >
-        <Camera className="size-10 cursor-pointer" color="#ffffff"/> 
-        <input 
-            id="avatarInput" 
-            type="file" 
-            accept="image/*" 
-            className="hidden" 
-            onChange={handleImageUpload} 
-          />
-        </label>
+          <label htmlFor="avatarInput">
+            <Camera className="size-10 cursor-pointer" color="black" />
+            <input
+              id="avatarInput"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageUpload}
+            />
+          </label>
         </div>
       </div>
     </div>
