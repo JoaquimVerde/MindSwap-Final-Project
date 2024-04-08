@@ -9,7 +9,7 @@ import { unstable_noStore as noStore } from 'next/cache';
 
 
 
-export async function fetchAllCourses(): Promise<Course[]> {
+export async function fetchAllCourses(): Promise<number> {
     noStore();
     try {
         await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -21,7 +21,7 @@ export async function fetchAllCourses(): Promise<Course[]> {
         const courses: Course[] = await response.json();
         //console.log(courses);
 
-        return courses;
+        return courses.length;
     } catch (error) {
         console.error('Database error:', error);
         throw new Error('Failed to fetch all courses.');
@@ -99,19 +99,7 @@ export async function fetchPersonById(id: string): Promise<Person> {
     }
 }
 
-const ITEMS_PER_PAGE = 4;
-export function fetchCoursesPages(courses: Course[]) {
-    noStore();
 
-    try {
-        const totalCourses = courses?.length;
-        const totalPages = Math.ceil(totalCourses / ITEMS_PER_PAGE);
-        return totalPages;
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch total number of courses.');
-    }
-}
 
 export async function fetchCoursesByLocation(
 

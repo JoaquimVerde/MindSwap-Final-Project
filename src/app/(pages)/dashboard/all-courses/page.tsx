@@ -1,4 +1,3 @@
-import { fetchCoursesPages } from "@/app/lib/data";
 import SearchBar from "@/app/ui/components/ui/search-bar";
 import Cards from "@/app/ui/courses/cards";
 import { CardsSkeleton, PaginationSkeleton } from "@/app/ui/skeletons";
@@ -24,8 +23,8 @@ export default async function AllCourses(
 ) {
 
     const currentPage = Number(searchParams?.page) || 1;
-    const courses = await fetchAllCourses();
-    const totalPages = fetchCoursesPages(courses);
+    const totalCourses = await fetchAllCourses();
+    const totalPages = Math.ceil(totalCourses/4);
 
 
     return (
