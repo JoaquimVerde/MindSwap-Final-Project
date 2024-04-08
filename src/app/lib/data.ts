@@ -176,7 +176,6 @@ export async function fetchPersonByRole(): Promise<string> {
     }
   }
 
-
   export async function fetchAppliations(): Promise<Application[]> {
     noStore();
     try {
