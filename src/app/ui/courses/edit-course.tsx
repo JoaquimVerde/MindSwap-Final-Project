@@ -41,7 +41,7 @@ const formSchema = z.object({
 
 
 export function EditCourseForm({
-    course
+    course,
 }: {
     course: Course[];
 }) {
