@@ -18,3 +18,10 @@ import { CustomComponentsArr } from "./types";
 export const linksContentPages: CustomComponentsArr = {
     content: [MyCourses, MyAppliedCourses, MyEnrolledCourses, MyCoursesTeacher, AllCourses, Course, AllCoursesTeacher, Profile] as React.FC[],
   }
+
+  
+  
+
+
+
+  
