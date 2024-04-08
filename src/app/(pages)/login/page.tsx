@@ -3,8 +3,14 @@ import { signIn, useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 import SessionWrapper from "../../../components/ui/session-wrapper";
+import { NextRouter } from "next/router";
 
-function Home() {
+
+interface Loginprops {
+	router: NextRouter;
+}
+
+function Login({router}: Loginprops) {
   const { data: session } = useSession();
   const [loginwith, setLoginwith] = useState(false);
 
@@ -14,21 +20,7 @@ function Home() {
 
   if (session) {
     console.log(session.user);
-    return (
-      <div className="w-full h-screen flex flex-col justify-center items-center">
-        <div className="w-44 h-44 relative mb-4">
-         {/*  <Image
-            src={session.user?.image as string}
-            fill
-            alt=""
-            className="object-cover rounded-full"
-          /> */}
-        </div>
-        <p className="text-2xl mb-2">Welcome <span className="font-bold">{session.user?.name}</span> Barara</p>
-        <p className="font.bold mb-4">{session.user?.email}</p>
-        <button className="bg-red-600 py-2 px-6 rounded-md" onClick={() => signOut()}>Sign Out</button>
-      </div>
-    )
+	router.push("/register");
   }
   if (loginwith) {
     return (
@@ -74,12 +66,13 @@ function Home() {
   )
 }
 
-const HomeWithSession = () => {
+const LoginWithSession = () => {
+	const router = useRouter();
   return (
     <SessionWrapper>
-      <Home />
+      <Login router= {router} />
     </SessionWrapper>
   )
 }
 
-export default HomeWithSession;
+export default LoginWithSession;
