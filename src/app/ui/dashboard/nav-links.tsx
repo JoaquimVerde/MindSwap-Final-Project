@@ -11,17 +11,15 @@ import {
   BookCheck,
   BookOpenText,
   LibraryBig,
-  Home
+  Home,
 } from "lucide-react";
 
-
-export const linkDashboard: LinkType =
-  {
-    name: "Dashboard",
-    href: "/dashboard",
-    icon: Home,
-    role: ["student", "teacher", "admin"],
-  }
+export const linkDashboard: LinkType = {
+  name: "Dashboard",
+  href: "/dashboard",
+  icon: Home,
+  role: ["student", "teacher", "admin"],
+};
 
 export const linksub: LinkTypeSub[] = [
   {
@@ -82,22 +80,21 @@ export default function NavLinks() {
 
   return (
     <>
-  
-        <div className="flex justify-start items-start">
-          <Link
-            className="flex justify-start items-start pt-2 pb-2"
-            key={linkDashboard.href}
-            href={linkDashboard.href}
-          >
-            {linkDashboard.icon && (
-              <linkDashboard.icon className="flex justify-start items-start mr-2" />
-            )}
-            <p className="hidden md:block">{linkDashboard.name}</p>
-          </Link>
-        </div>
+      <div className="flex justify-start items-start">
+        <Link
+          className="flex justify-start items-start pt-2 pb-2"
+          key={linkDashboard.href}
+          href={linkDashboard.href}
+        >
+          {linkDashboard.icon && (
+            <linkDashboard.icon className="flex justify-start items-start mr-2" />
+          )}
+          <p className="hidden md:block">{linkDashboard.name}</p>
+        </Link>
+      </div>
 
-      {linksub.map((link) => (
-        <div className="flex justify-start items-start">
+      {linksub.map((link, idx) => (
+        <div className="flex justify-start items-start" key={idx}>
           <details open={openSublinks === link.name} className="pt-2 pb-2">
             <summary className="list-none pl-0 flex justify-between items-center">
               {link.icon && (
@@ -108,7 +105,7 @@ export default function NavLinks() {
                 (openSublinks === link.name ? (
                   <ChevronUp className="flex justify-end ml-28" />
                 ) : (
-                  <ChevronDown className="flex justify-end ml-28"/>
+                  <ChevronDown className="flex justify-end ml-28" />
                 ))}
             </summary>
             <ul>
@@ -128,9 +125,9 @@ export default function NavLinks() {
         </div>
       ))}
 
-      {links.map((link) => (
+      {links.map((link, idx) => (
         // write the code to test the role
-        <div className="flex justify-start items-start">
+        <div className="flex justify-start items-start" key={idx}>
           <Link
             className="flex justify-start items-start pt-2 pb-2"
             key={link.href}
