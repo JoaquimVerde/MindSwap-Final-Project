@@ -6,7 +6,6 @@ import { useState } from "react";
 import {
   ChevronDown,
   ChevronUp,
-  UserRound,
   GraduationCap,
   BookCheck,
   BookOpenText,
@@ -60,12 +59,6 @@ export const links: LinkType[] = [
     href: "/dashboard/all-courses-teacher",
     icon: LibraryBig,
     role: ["teacher", "admin"],
-  },
-  {
-    name: "Profile",
-    href: "/dashboard/profile",
-    icon: UserRound,
-    role: ["student", "admin", "teacher"],
   },
 ];
 
