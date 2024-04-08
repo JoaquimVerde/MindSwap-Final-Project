@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import React from "react";
-import { z } from "zod";
+import { number, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -27,8 +27,7 @@ const formSchema = z.object({
     name: z
         .string()
         .min(2, { message: "Firstname must be at least 2 characters." }),
-    edition: z
-        .number(),
+    edition: z.number(),
     syllabus: z.string(),
     program: z.string(),
     schedule: z.string().optional(),
@@ -78,7 +77,6 @@ export function EditCourseForm({
                         <FormField
                             control={form.control}
                             name="name"
-                            defaultValue={course[0]?.name}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Course Name</FormLabel>
@@ -96,12 +94,11 @@ export function EditCourseForm({
                         <FormField
                             control={form.control}
                             name="edition"
-                            defaultValue={course[0]?.edition}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Edition</FormLabel>
                                     <FormControl>
-                                        <Input placeholder={""+course[0]?.edition} {...field}/>
+                                        <Input placeholder={course[0]?.edition.toString()} {...field} />
                                     </FormControl>
 
                                     <FormMessage />
@@ -111,14 +108,15 @@ export function EditCourseForm({
                         <FormField
                             control={form.control}
                             name="teacherId"
-                            defaultValue={course[0]?.teacher.id}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Teacher ID</FormLabel>
                                     <FormControl>
-                                        <Input placeholder={course[0]?.teacher?.firstName + " " + course[0]?.teacher?.lastName}/>
+                                        <Input placeholder={course[0]?.teacher?.firstName + " " + course[0]?.teacher?.lastName} />
                                     </FormControl>
-
+                                    <FormDescription>
+                                        Insert teacher ID.
+                                    </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -126,16 +124,14 @@ export function EditCourseForm({
                         <FormField
                             control={form.control}
                             name="syllabus"
-                            defaultValue={course[0]?.syllabus}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Syllabus</FormLabel>
                                     <FormControl>
                                         <textarea
                                             className="textarea w-full rows-20 h-[100px]"
-                                            placeholder={course[0]?.syllabus}/>
+                                            placeholder={course[0]?.syllabus} />
                                     </FormControl>
-
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -143,7 +139,6 @@ export function EditCourseForm({
                         <FormField
                             control={form.control}
                             name="program"
-                            defaultValue={course[0]?.program}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Program</FormLabel>
@@ -160,7 +155,6 @@ export function EditCourseForm({
                         <FormField
                             control={form.control}
                             name="schedule"
-                            defaultValue={course[0]?.schedule}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
@@ -177,14 +171,13 @@ export function EditCourseForm({
                         <FormField
                             control={form.control}
                             name="price"
-                            defaultValue={course[0]?.price}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
                                         Price (€)
                                     </FormLabel>
                                     <FormControl>
-                                        <Input placeholder={""+course[0].price} />
+                                        <Input placeholder={course[0].price.toString()} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -193,14 +186,13 @@ export function EditCourseForm({
                         <FormField
                             control={form.control}
                             name="duration"
-                            defaultValue={course[0]?.duration}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
                                         Duration (weeks)
                                     </FormLabel>
                                     <FormControl>
-                                        <Input placeholder={""+course[0].duration} />
+                                        <Input placeholder={"" + course[0].duration} />
                                     </FormControl>
 
                                     <FormMessage />
@@ -210,7 +202,6 @@ export function EditCourseForm({
                         <FormField
                             control={form.control}
                             name="location"
-                            defaultValue={course[0]?.location}
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
@@ -224,16 +215,16 @@ export function EditCourseForm({
                                 </FormItem>
                             )}
                         />
-                            <Button>
-                                <Link
-                                    href="/dashboard/all-courses">
-                                    Cancel
-                                </Link>
-                            </Button>
+                        <Button>
+                            <Link
+                                href="/dashboard/all-courses">
+                                Cancel
+                            </Link>
+                        </Button>
 
-                            <Button type="submit" className="ml-[230px]" >
-                                Submit
-                            </Button>                      
+                        <Button type="submit" className="ml-[230px]" >
+                            Submit
+                        </Button>
                     </form>
                 </Form>
             </div>

@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { CircuitBoard, Smile } from "lucide-react";
-import { ApplyCourse } from "@/app/ui/courses/buttons";
+import { ApplyCourse, EditCourse, ViewProjects } from "@/app/ui/courses/buttons";
 import { fetchCourseById } from "@/app/lib/data";
 import { notFound } from "next/navigation";
-import { EditCourse } from "@/app/ui/courses/buttons";
 
 
 export default async function Page({ params }: { params: { id: string }}) {
@@ -73,13 +71,14 @@ export default async function Page({ params }: { params: { id: string }}) {
             </div>
 
             <div className="flex flex-col space-y-5 max-w-fit">
-                <Button>View Syllabus <CircuitBoard className="ml-3" /></Button>
+                <Button>
+                    <ViewProjects id={id} />
+                </Button>
                 <Button>
                     <ApplyCourse id={id}/>
                 </Button>
                 <Button>
                     <EditCourse id={id} />
-
                 </Button>
             </div>
 

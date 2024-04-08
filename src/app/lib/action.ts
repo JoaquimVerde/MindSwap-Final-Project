@@ -28,7 +28,7 @@ export async function updateCourse(course: Course[]) {
         .then((response) => {
             console.log(response);
             if (response.status !== 200) {
-                throw new Error("something went wrong");
+                throw new Error("something went wrong!!!");
             }
             return response.json();
         })
@@ -36,7 +36,7 @@ export async function updateCourse(course: Course[]) {
             console.error("Error ", error);
 
         });
-    console.log(course[0].id)
+    console.log(course[0].price)
     revalidatePath(`/dashboard/all-courses/${course[0].id.replace("#", "%23")}/course`);
     redirect(`/dashboard/all-courses/${course[0].id.replace("#", "%23")}/course`);
 }
