@@ -31,7 +31,8 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
     const fetchData = async () => {
       try {
         const personData = await fetchPerson();
-        setValue("firstName", personData.firstName);
+        setValue("firstName", personData.firstName + " " + personData.lastName);
+        setValue("lastName", personData.lastName);
         setValue("username", personData.username);
         setValue("email", personData.email);
         setValue("password", personData.password);
@@ -61,12 +62,19 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
   const onSubmit = async (data: Person) => {
     console.log(data);
     try {
+      const requestBody = {
+        ...data,
+        role: 'STUDENT', // Back end needs these informations to update information
+        dateOfBirth: '1990-01-01', 
+        cv: 'my first cv', 
+      };
+
       const response = await fetch(`http://localhost:8080/api/v1/persons/PERSON%23a94669c6-33aa-4d38-972f-0f72259c6856`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(requestBody),
       });
       if (!response.ok) {
         throw new Error('Failed to update person');
