@@ -42,19 +42,19 @@ export async function fetchCourseById(id : string): Promise<Course> {
     }
 }
 
-export async function fetchProjectsByCourseId(id : string): Promise<Project> {
+export async function fetchProjectsByCourseId(id : string): Promise<Project[]> {
     noStore();
     try {
-        const response = await fetch(`http://localhost:8080/api/v1/projects/course/${courseId}`);
+        const response = await fetch(`http://localhost:8080/api/v1/projects/course/${id}`);
         if (!response.ok) {
-            throw new Error('Failed to fetch courses');
+            throw new Error('Failed to fetch projects!');
         }
-        const project: Project = await response.json();
-        console.log(project);
+        const projects: Project[] = await response.json();
+        console.log(projects);
 
-        return project;
+        return projects;
     } catch (error) {
-        console.error('Error fetching courses:', error);
+        console.error('Error fetching projects:', error);
         notFound();    
     }
 }
