@@ -37,6 +37,9 @@ export type Person = {
   lastName: string;
   address: string;
   password: string;
+  dateOfBirth: string;
+  role: string;
+  cv?: string;
 };
 
 export type Application = {
