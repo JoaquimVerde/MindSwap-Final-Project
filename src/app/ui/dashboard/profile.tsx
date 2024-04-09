@@ -6,7 +6,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import React from "react";
 import { Camera, Eye, EyeOff } from "lucide-react";
 import { Person } from "@/app/lib/definitions";
-import { fetchPerson } from "@/app/lib/data";
+import { fetchPersonByEmail } from "@/app/lib/data";
 import { useForm } from "react-hook-form";
 
 interface ProfileProps {
@@ -30,7 +30,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const personData = await fetchPerson();
+        const personData = await fetchPersonByEmail();
         setValue("firstName", personData.firstName);
         setValue("lastName", personData.lastName);
         setValue("username", personData.username);
@@ -70,8 +70,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
       };
 
       const response = await fetch(
-        `http://localhost:8080/api/v1/persons/PERSON%2333816dfd-9f6e-4b63-9752-9d608ea63528
-`,
+        `http://localhost:8080/api/v1/persons/PERSON%23608183af-72a3-42d7-bcb3-0f31ca966d2b`,
         {
           method: "PUT",
           headers: {

@@ -135,12 +135,15 @@ export async function fetchAllCourses(): Promise<number> {
 
 }
 
-export async function fetchPerson(): Promise<Person> {
+export async function fetchPersonByEmail(): Promise<Person> {
   noStore();
   try {
+    const email = sessionStorage.getItem('email');
+    if (!email) {
+      throw new Error('Email not found in session storage');
+    }
     const response =
-      await fetch(`http://localhost:8080/api/v1/persons/PERSON%2333816dfd-9f6e-4b63-9752-9d608ea63528
-`);
+      await fetch(`http://localhost:8080/api/v1/persons/email/${email}`);
     if (!response.ok) {
       throw new Error("Failed to fetch person");
     }
