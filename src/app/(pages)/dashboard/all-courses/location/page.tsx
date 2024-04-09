@@ -1,4 +1,4 @@
-/* import Cards from "@/app/ui/courses/cards";
+import Cards from "@/app/ui/courses/cards";
 import LocationCards from "@/app/ui/courses/location-cards";
 import { CardsSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
@@ -19,8 +19,8 @@ import { Suspense } from "react";
      }: {
          searchParams?: {
              page?: string;
-             placeholder: string;
-         };
+            },
+        placeholder: string;
      }
  ) {
 
@@ -37,4 +37,4 @@ import { Suspense } from "react";
              </Suspense>
          </div >
      );
- } */
+ }
