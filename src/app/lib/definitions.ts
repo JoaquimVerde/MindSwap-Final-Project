@@ -10,16 +10,16 @@
 // 1,000,000
 
 export type Course = {
-  id: string;
-  name: string;
-  edition: string;
-  teacher: Teacher;
-  syllabus: string;
-  program: string;
-  schedule: number;
-  price: number;
-  duration: number;
-  location: string;
+    id: string;
+    name: string;
+    edition: number;
+    syllabus: string;
+    program: string;
+    schedule: string;
+    price: number;
+    duration: number;
+    location: string;
+    teacher: Teacher;
 };
 
 export type Teacher = {
@@ -45,4 +45,15 @@ export type Application = {
   aboutYou: string;
   prevKnowledge: boolean;
   prevExperience: boolean;
+};
+
+export type Project = {
+  id: string;
+  courseId: string;
+  studentId: string[];
+  name: string;
+  gitHubRepo: string;
+  syllabus: string;
+  grade: number;
+  active: boolean;
 };

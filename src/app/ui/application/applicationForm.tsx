@@ -83,8 +83,12 @@ const formSchema = z.object({
   //   }),
 });
 
-export function ApplicationForm({ params }: { params: { id: string } }) {
-  const courseIdparam = params.id;
+export function ApplicationForm({
+  id,
+}: {
+  id: string;
+}) {
+  
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -99,7 +103,7 @@ export function ApplicationForm({ params }: { params: { id: string } }) {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submited", values);
 
-    values = { ...values, courseId: courseIdparam };
+    values = { ...values, courseId: id };
 
     const api_req_options = {
       method: "POST",

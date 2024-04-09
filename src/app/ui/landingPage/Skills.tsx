@@ -5,7 +5,7 @@ function Skills() {
   return (
     <div id="skills" className=" text-white mb-16 ">
       <div className="w-full  flex flex-col justify-center items-center text-slate-300 py-16">
-        <div className="w-[65%] flex flex-col">
+        <div className="w-[100%] flex flex-col">
           <div className="flex space-y-2 flex-col text-center mb-14">
             <span className="text-4xl font-bold">
               Some skills you can learn...
@@ -20,7 +20,7 @@ function Skills() {
               React
             </div>
 
-            <div className="bbg-black   shadow-[0_0_10px_blue] m-3 rounded-xl flex space-x-5 p-2 font-bold text-2xl cursor-pointer text-slate-300">
+            <div className="bg-black   shadow-[0_0_10px_blue] m-3 rounded-xl flex space-x-5 p-2 font-bold text-2xl cursor-pointer text-slate-300">
               Tailwind
             </div>
 
