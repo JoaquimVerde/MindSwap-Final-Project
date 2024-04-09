@@ -16,21 +16,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import React from "react";
-import { PhoneInput } from "./phoneNumber";
-import { Upload, Phone, Mail } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
-import { Checkbox } from "@radix-ui/react-checkbox";
-import { stringify } from "querystring";
-import { Courgette } from "next/font/google";
 
-const url = "http://localhost:3000/api/v1/registration"; // TODO add url to env.ts
-
+const url = "http://localhost:3000/api/v1/registration";
 const formSchema = z.object({
   status: z.string(),
   personId: z.string(),
   courseId: z.string(),
-  // phoneNumber: z.string(),
-  //uploadResume: z.string().optional(),
   aboutYou: z.string(),
   prevKnowledge: z.enum(["false", "true"], {
     required_error: "You need to select a notification type.",
@@ -42,7 +34,7 @@ const formSchema = z.object({
 
 export function ApplicationForm({ id }: { id: string }) {
   const courseIdparam = id.replace("%23", "#");
-  const personIdparam = "PERSON#003987b3-6764-40db-95c1-3167fec491b6";
+  const personIdparam = "PERSON#39ca9dfe-0c96-4e5f-bda6-c37a3942289b";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
