@@ -9,9 +9,15 @@ function Redirect() {
   useEffect(() => {
     const verifyUser = async () => {
       const response = await fetch("http://localhost:8080/api/v1/persons/email/" + session?.user?.email);
-      response.status === 200
-        ? router.push("/dashboard")
-        : router.push("/register");
+      const data = await response.json();
+      console.log(data);
+      if (response.status === 200) {
+        sessionStorage.setItem("userId", data.id);
+        sessionStorage.setItem("userRole", data.role);
+        router.push("/dashboard");
+      } else {
+        router.push("/register");
+      }
     };
     verifyUser();
   }, [session]);
