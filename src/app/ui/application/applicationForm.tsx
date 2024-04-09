@@ -84,7 +84,7 @@ const formSchema = z.object({
 });
 
 export function ApplicationForm({
-  id,
+  id
 }: {
   id: string;
 }) {

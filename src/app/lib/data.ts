@@ -71,7 +71,7 @@ export async function fetchProjectsByCourseId(id : string): Promise<Project[]> {
             throw new Error('Failed to fetch projects!');
         }
         const projects: Project[] = await response.json();
-        console.log(projects);
+        //console.log(projects);
 
         return projects;
     } catch (error) {
@@ -89,7 +89,7 @@ export async function fetchPersonById(id: string): Promise<Person> {
             throw new Error('Failed to fetch courses');
         }
         const person: Person = await response.json();
-        console.log(person);
+        //console.log(person);
 
         return person;
     } catch (error) {

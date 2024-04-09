@@ -57,3 +57,16 @@ export type Project = {
   grade: number;
   active: boolean;
 };
+
+export type CourseForm = {
+  id: string;
+  name: string;
+  edition: number;
+  syllabus: string;
+  program: string;
+  schedule: string;
+  price: number;
+  duration: number;
+  location: string;
+  teacher: string;
+};
