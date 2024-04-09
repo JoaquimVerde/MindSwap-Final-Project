@@ -1,4 +1,4 @@
-/* import Cards from "@/app/ui/courses/cards";
+import Cards from "@/app/ui/courses/cards";
 import LocationCards from "@/app/ui/courses/location-cards";
 import { CardsSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
@@ -11,9 +11,11 @@ import { Suspense } from "react";
      title: 'Courses',
    };
 
- export default function AllCoursesInLocation(
+ export default function AllCoursesInLocation() {
+
+    return <div></div>;
     
-     {
+     /* {
          searchParams,
          placeholder,
      }: {
@@ -35,6 +37,5 @@ import { Suspense } from "react";
              <Suspense fallback={<CardsSkeleton />}>
                  <LocationCards currentPage={currentPage} placeholder={placeholder}/>
              </Suspense>
-         </div >
-     );
- } */
+         </div > */
+ }
