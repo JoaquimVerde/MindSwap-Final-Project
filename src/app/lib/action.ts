@@ -5,27 +5,18 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 
-export async function updateCourse(course : CourseForm) {
 
-    console.log(course.name);
+export async function updateCourse(values: any, courseId: string ) {
 
-    fetch(`http://localhost:8080/api/v1/courses/${course?.id.replace("#", "%23")}`, {
+    console.log(courseId);
+
+    fetch(`http://localhost:8080/api/v1/courses/${courseId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
             //"Authorization": sessionStorage.getItem("token"),
         },
-        body: JSON.stringify({
-            name: course?.name,
-            edition: course?.edition,
-            syllabus: course?.syllabus,
-            program: course?.program,
-            schedule: course?.schedule,
-            price: course?.price,
-            duration: course?.duration,
-            location: course?.location,
-            teacherId: course?.teacher,
-        })
+        body: JSON.stringify(values)
     })
         .then((response) => {
             console.log(response);
@@ -38,7 +29,7 @@ export async function updateCourse(course : CourseForm) {
             console.error("Error ", error);
 
         });
-    revalidatePath(`/dashboard/all-courses/${course.id.replace("#", "%23")}/course`);
-    redirect(`/dashboard/all-courses/${course.id.replace("#", "%23")}/course`);
+    revalidatePath(`/dashboard/all-courses/${courseId}/course`);
+    redirect(`/dashboard/all-courses/${courseId}/course`);
 }
 

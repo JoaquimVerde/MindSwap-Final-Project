@@ -16,8 +16,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Course, CourseForm } from "@/app/lib/definitions";
-import { updateCourse } from "@/app/lib/action";
 import Link from "next/link";
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+import { updateCourse } from "@/app/lib/action";
 
 
 
@@ -45,18 +47,6 @@ export function EditCourseForm({
     course: Course;
 }) {
 
-    const updatedCourse: CourseForm = {
-        id: course.id,
-        name: "",
-        edition: 0, 
-        syllabus: "",
-        program: "",
-        schedule: "",
-        price: 0,
-        duration: 0, 
-        location: "",
-        teacher: ""
-    }
 
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -74,9 +64,11 @@ export function EditCourseForm({
 
         },
     });
+
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log("submited", values);
-        updateCourse(updatedCourse);
+        updateCourse(values, course?.id.replace("#","%23"));
+        
     }
 
 
@@ -92,12 +84,7 @@ export function EditCourseForm({
                                 <FormItem>
                                     <FormLabel>Course Name</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            placeholder={course?.name}
-                                            {...field}
-                                            onChange={(e) => {
-                                                updatedCourse.name = e.target.value;
-                                            }}
+                                        <Input placeholder={course?.name} {...field}
                                         />
                                     </FormControl>
                                     <FormDescription>
@@ -143,10 +130,7 @@ export function EditCourseForm({
                                     <FormControl>
                                         <Input
                                             placeholder={course?.teacher?.firstName + " " + course?.teacher?.lastName}
-                                            onChange={(e) => {
-                                                const newValue = e.target.value;
-                                                field.onChange(newValue);
-                                            }} />
+                                           />
                                     </FormControl>
                                     <FormDescription>
                                         Insert teacher ID.
@@ -165,9 +149,7 @@ export function EditCourseForm({
                                         <textarea
                                             className="textarea w-full rows-20 h-[100px]"
                                             placeholder={course?.syllabus}
-                                            onChange={(e) => {
-                                                updatedCourse.program = e.target.value;
-                                            }} />
+                                            />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -183,11 +165,7 @@ export function EditCourseForm({
                                         <textarea
                                             className="textarea w-full rows-20 h-[400px]"
                                             placeholder={course?.program}
-                                            onChange={(e) => {
-                                                const newValue = e.target.value;
-                                                field.onChange(newValue);
-                                                course.program = newValue;
-                                            }} />
+                                           />
                                     </FormControl>
 
                                     <FormMessage />
@@ -204,10 +182,7 @@ export function EditCourseForm({
                                     </FormLabel>
                                     <FormControl>
                                         <Input placeholder={course.schedule}
-                                            onChange={(e) => {
-                                                const newValue = e.target.value;
-                                                field.onChange(newValue);
-                                            }} />
+                                            />
                                     </FormControl>
 
                                     <FormMessage />
@@ -279,10 +254,7 @@ export function EditCourseForm({
                                     </FormLabel>
                                     <FormControl>
                                         <Input placeholder={course.location}
-                                            onChange={(e) => {
-                                                const newValue = e.target.value;
-                                                field.onChange(newValue);
-                                            }} />
+                                            />
                                     </FormControl>
 
                                     <FormMessage />
@@ -304,4 +276,7 @@ export function EditCourseForm({
             </div>
         </main>
     );
+
+
+    
 }
