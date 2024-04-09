@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { fetchAppliations, fetchPersonById } from "@/app/lib/data";
 
-export default async function AllApplcations() {
+export default async function AllApplications() {
   const applications = await fetchAppliations();
 
   return (
