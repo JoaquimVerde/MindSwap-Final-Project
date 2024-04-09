@@ -7,9 +7,9 @@ function SignUp() {
   const { data: session } = useSession();
   const router = useRouter();
 
-  if (session) {
+  /* if (session) {
     router.push("/dashboard");
-  }
+  } */
 
   {
     return session ? null : (

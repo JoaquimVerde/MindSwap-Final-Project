@@ -1,28 +1,24 @@
+"use client"
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { CognitoJwtVerifier } from "aws-jwt-verify";
-
+import { useEffect } from "react";
 function Redirect() {
-    const router = useRouter();
+  const router = useRouter();
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if(status === "loading") return;
+    console.log(session);
     const verifyUser = async () => {
-        const response = await fetch('http://localhost:8080/api/v1/persons/email/' + email);
-        response.status === 200 ? router.push("/dashboard") : router.push("/register");
-    }
-}
-
-// Verifier that expects valid access tokens:
-const verifier = CognitoJwtVerifier.create({
-  userPoolId: "<user_pool_id>",
-  tokenUse: "access",
-  clientId: "<client_id>",
-});
-
-try {
-  const payload = await verifier.verify(
-    "eyJraWQeyJhdF9oYXNoIjoidk..." // the JWT as string
-  );
-  console.log("Token is valid. Payload:", payload);
-} catch {
-  console.log("Token not valid!");
+      const response = await fetch(
+        "http://localhost:8080/api/v1/persons/email/" + session?.user?.email
+      );
+      response.status === 200
+        ? router.push("/dashboard")
+        : router.push("/register");
+    };
+    verifyUser();
+  }, [session, status]);
 }
 
 export default Redirect;

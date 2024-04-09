@@ -1,15 +1,8 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import SessionWrapper from "../../../components/ui/session-wrapper";
 
 function Login() {
   const { data: session } = useSession();
-  const router = useRouter();
-
-  if (session) {
-    router.push("/dashboard");
-  }
 
   {
     return session ? null : (
@@ -24,12 +17,5 @@ function Login() {
     );
   }
 }
-const LoginWithSession = () => {
-  return (
-    <SessionWrapper>
-      <Login />
-    </SessionWrapper>
-  );
-};
 
-export default LoginWithSession;
+export default Login;
