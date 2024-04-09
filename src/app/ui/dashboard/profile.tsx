@@ -36,7 +36,10 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
         setValue("username", personData.username);
         setValue("email", personData.email);
         setValue("password", personData.password);
+        setValue("role", personData.role);
+        setValue("dateOfBirth", personData.dateOfBirth);
         setValue("address", personData.address);
+        setValue("cv", personData.cv);
         // setAvatarImage(personData.avatarImage); Add avatar image??
       } catch (error) {
         console.error("Error fetching person:", error);
