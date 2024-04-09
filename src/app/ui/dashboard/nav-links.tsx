@@ -11,6 +11,7 @@ import {
   BookOpenText,
   LibraryBig,
   Home,
+  UserRound,
 } from "lucide-react";
 
 export const linkDashboard: LinkType = {

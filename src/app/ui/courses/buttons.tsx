@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import Link from 'next/link';
-import { ChevronsRight, Smile, Edit, CircuitBoard } from "lucide-react";
-=======
 import Link from "next/link";
-import { ChevronsRight, Smile } from "lucide-react";
->>>>>>> 074519d (create page get all all apllication page, fetch applications, fetch application by id)
+import { ChevronsRight, Smile, Edit, CircuitBoard } from "lucide-react";
 
 export function GetCourseInfo({ id }: { id: string }) {
   return (
@@ -31,19 +26,25 @@ export function ApplyCourse({ id }: { id: string }) {
 }
 
 export function EditCourse({ id }: { id: string }) {
-    return (
-        <Link className="flex items-center p-0 pt-0"
-            href={`/dashboard/all-courses/${id}/edit`}
-        > Edit Course <Edit className="ml-3" /> 
-        </Link>
-    );
+  return (
+    <Link
+      className="flex items-center p-0 pt-0"
+      href={`/dashboard/all-courses/${id}/edit`}
+    >
+      {" "}
+      Edit Course <Edit className="ml-3" />
+    </Link>
+  );
 }
 
 export function ViewProjects({ id }: { id: string }) {
-    return (
-        <Link className="flex items-center p-0 pt-0"
-            href={`/dashboard/all-courses/${id}/projects`}
-        > View Projects <CircuitBoard className="ml-3" />
-        </Link>
-    );
+  return (
+    <Link
+      className="flex items-center p-0 pt-0"
+      href={`/dashboard/all-courses/${id}/projects`}
+    >
+      {" "}
+      View Projects <CircuitBoard className="ml-3" />
+    </Link>
+  );
 }

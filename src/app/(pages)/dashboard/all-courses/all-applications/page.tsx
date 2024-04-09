@@ -15,7 +15,6 @@ import { fetchAppliations, fetchPersonById } from "@/app/lib/data";
 
 export default async function AllApplcations() {
   const applications = await fetchAppliations();
-  //const person = await fetchPersonById(applications[0].personId);
 
   return (
     <div className="mx-2 my-2">
@@ -27,6 +26,7 @@ export default async function AllApplcations() {
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
+            <TableHead>Course</TableHead>
             <TableHead>Previouse Knowledge</TableHead>
             <TableHead>Previouse Experience </TableHead>
             <TableHead>Status</TableHead>
@@ -35,10 +35,13 @@ export default async function AllApplcations() {
         <TableBody>
           {applications.map((application) => (
             <TableRow key={application.id}>
-              <TableCell className="font-medium">Person name</TableCell>
+              <TableCell className="font-medium">
+                {application.student.firstName} {application.student.lastName}
+              </TableCell>
+              <TableCell>{application.course.name}</TableCell>
               <TableCell>{application.prevKnowledge ? "Yes" : "No"}</TableCell>
               <TableCell>{application.prevExperience ? "Yes" : "No"}</TableCell>
-              <TableCell className="text-right">{application.status}</TableCell>
+              <TableCell>{application.status}</TableCell>
             </TableRow>
           ))}
         </TableBody>
