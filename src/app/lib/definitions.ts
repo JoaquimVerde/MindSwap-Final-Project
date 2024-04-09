@@ -39,7 +39,7 @@ export type Person = {
   password: string;
   dateOfBirth: string;
   role: string;
-  cv?: string;
+  cv: string;
 };
 
 export type Application = {
