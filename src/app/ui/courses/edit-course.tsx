@@ -279,6 +279,4 @@ export function EditCourseForm({
         </main>
     );
 
-
-
 }
