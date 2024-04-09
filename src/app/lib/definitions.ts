@@ -39,7 +39,7 @@ export type Person = {
 
 export type Application = {
   student: Person;
-  courseId: string;
+  course: Course;
   status: string;
   finalGrade: string;
   aboutYou: string;

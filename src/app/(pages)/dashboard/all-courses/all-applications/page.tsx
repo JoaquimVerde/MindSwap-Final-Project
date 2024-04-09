@@ -39,9 +39,9 @@ export default async function AllApplcations() {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Courses</SelectLabel>
-              <SelectItem value="apple">Back-End Developer</SelectItem>
-              <SelectItem value="banana">Manicure</SelectItem>
-              <SelectItem value="blueberry">Pastry</SelectItem>
+              <SelectItem value="be">Back-End Developer</SelectItem>
+              <SelectItem value="fe">Front-End</SelectItem>
+              <SelectItem value="fs">Full-Stack</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
