@@ -1,8 +1,9 @@
 "use client";
 
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "next/link";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,17 +64,18 @@ function Navbar() {
         {/* btn */}
 
         <div className="lg:block hidden py-3">
-        <a href="/login">
-          <button className=" px-4 py-1 border-slate-300 text-slate-300 bg-blue-950 hover:bg-blue-700 transition-all duration-300 rounded-md">
+          <button
+            className=" px-4 py-1 border-slate-300 text-slate-300 bg-blue-950 hover:bg-blue-700 transition-all duration-300 rounded-md"
+            onClick={() => signIn("cognito")}
+          >
             login
           </button>
-        </a>
 
-        <a href="/signUp">
-          <button className=" mx-4 px-1 py-1 border-slate-300 text-slate-300 bg-blue-900 hover:bg-blue-600 transition-all duration-300 rounded-md">
-            Sign Up
-          </button>
-        </a>
+          <a href="/signUp">
+            <button className=" mx-4 px-1 py-1 border-slate-300 text-slate-300 bg-blue-900 hover:bg-blue-600 transition-all duration-300 rounded-md">
+              Sign Up
+            </button>
+          </a>
         </div>
         {/*menu btn for sm devices */}
 

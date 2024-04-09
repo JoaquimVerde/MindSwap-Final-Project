@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import SessionWrapper from "../../../components/ui/session-wrapper";
@@ -6,11 +6,6 @@ import SessionWrapper from "../../../components/ui/session-wrapper";
 function SignUp() {
   const { data: session } = useSession();
   const router = useRouter();
-
-  /* if (session) {
-    router.push("/dashboard");
-  } */
-
   {
     return session ? null : (
       <div className="w-full h-screen flex flex-col justify-center items-center">
@@ -27,12 +22,7 @@ function SignUp() {
     );
   }
 }
-const SignUpWithSession = () => {
-  return (
-    <SessionWrapper>
-      <SignUp />
-    </SessionWrapper>
-  );
-};
 
-export default SignUpWithSession;
+
+export default SignUp;
+ */

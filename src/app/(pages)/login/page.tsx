@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 function Login() {
@@ -19,3 +19,4 @@ function Login() {
 }
 
 export default Login;
+ */
