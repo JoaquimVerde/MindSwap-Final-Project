@@ -1,19 +1,21 @@
-import Link from "next/link";
+"use client";
+import { signIn, signOut, useSession } from "next-auth/react";
 
-export default function Login() {
-	return (
-		<>
-			<p>Login page here w/ a form</p>
-			<Link href={"/dashboard"}>
-				<button>Login</button>
-			</Link>
-		</>
-	);
+function Login() {
+  const { data: session } = useSession();
+
+  {
+    return session ? null : (
+      <div className="w-full h-screen flex flex-col justify-center items-center">
+        <button
+          className="bg-none border-gray-300 border py-2 px-6 rounded-md mb-2"
+          onClick={() => signIn("cognito")}
+        >
+          Cognito
+        </button>
+      </div>
+    );
+  }
 }
 
-// teacher + staff = @mindera.com
-// should candidates that get accepted (becoming students) have a newly created student email?
-
-// if normal login, direct to /dashboard
-// if teacher login, direct to /dashboard/teacher
-// if staff login, direct to /dashboard/staff
+export default Login;
