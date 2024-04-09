@@ -31,7 +31,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
     const fetchData = async () => {
       try {
         const personData = await fetchPerson();
-        setValue("firstName", personData.firstName + " " + personData.lastName);
+        setValue("firstName", personData.firstName);
         setValue("lastName", personData.lastName);
         setValue("username", personData.username);
         setValue("email", personData.email);
@@ -64,24 +64,28 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
     try {
       const requestBody = {
         ...data,
-        role: 'STUDENT', // Back end needs these informations to update information
-        dateOfBirth: '1990-01-01', 
-        cv: 'my first cv', 
+        role: "STUDENT", // Back end needs these informations to update information
+        dateOfBirth: "1990-01-01",
+        cv: "my first cv",
       };
 
-      const response = await fetch(`http://localhost:8080/api/v1/persons/PERSON%23a94669c6-33aa-4d38-972f-0f72259c6856`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
+      const response = await fetch(
+        `http://localhost:8080/api/v1/persons/PERSON%2333816dfd-9f6e-4b63-9752-9d608ea63528
+`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
       if (!response.ok) {
-        throw new Error('Failed to update person');
+        throw new Error("Failed to update person");
       }
-      console.log('Person updated successfully');
+      console.log("Person updated successfully");
     } catch (error) {
-      console.error('Error updating person:', error);
+      console.error("Error updating person:", error);
     }
   };
 
@@ -92,10 +96,17 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <p className="font-bold text-slate-400 mt-4">Name</p>
+            <p className="font-bold text-slate-400 mt-4">First Name</p>
             <input
               type="text"
               {...register("firstName")}
+              className="rounded w-80 h-10 px-2"
+              disabled={isSubmitting}
+            />
+            <p className="font-bold text-slate-400 mt-4">Last Name</p>
+            <input
+              type="text"
+              {...register("lastName")}
               className="rounded w-80 h-10 px-2"
               disabled={isSubmitting}
             />
