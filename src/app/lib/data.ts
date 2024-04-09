@@ -6,45 +6,42 @@ import { Course, Person, Project } from "./definitions";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function fetchAllCourses(): Promise<number> {
-  noStore();
-  try {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const response = await fetch(`http://localhost:8080/api/v1/courses`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch courses");
-    }
-    const courses: Course[] = await response.json();
-    //console.log(courses);
+    noStore();
+    try {
 
-    return courses.length;
-  } catch (error) {
-    console.error("Database error:", error);
-    throw new Error("Failed to fetch all courses.");
-  }
+        const response = await fetch(`http://localhost:8080/api/v1/courses`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch courses');
+        }
+        const courses: Course[] = await response.json();
+        //console.log(courses);
+
+        return courses.length;
+    } catch (error) {
+        console.error('Database error:', error);
+        throw new Error('Failed to fetch all courses.');
 }
 
-export async function fetchCoursesByPage(
-  currentPage: number
-): Promise<Course[]> {
-  noStore();
-  try {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const response = await fetch(
-      `http://localhost:8080/api/v1/courses?page=${currentPage - 1}&limit=4`
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch courses");
+
+export async function fetchCoursesByPage(currentPage: number): Promise<Course[]> {
+    noStore();
+    try {
+        //await new Promise((resolve) => setTimeout(resolve, 3000));
+
+        const response = await fetch(`http://localhost:8080/api/v1/courses?page=${currentPage-1}&limit=4`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch courses');
+        }
+        const courses: Course[] = await response.json();
+        //console.log(courses);
+
+        return courses;
+    } catch (error) {
+        console.error('Database error:', error);
+        throw new Error('Failed to fetch all courses.');
     }
-    const courses: Course[] = await response.json();
-    //console.log(courses);
-
-    return courses;
-  } catch (error) {
-    console.error("Database error:", error);
-    throw new Error("Failed to fetch all courses.");
-  }
 }
 
 export async function fetchCourseById(id: string): Promise<Course> {

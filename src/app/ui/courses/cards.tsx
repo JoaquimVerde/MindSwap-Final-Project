@@ -27,10 +27,7 @@ export default async function Cards(
 
     const courses = await fetchCoursesByPage(currentPage);
 
-
-   
-
-
+    
     if (!courses) {
         NotFound();
     };

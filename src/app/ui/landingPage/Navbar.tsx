@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "next/link";
 
@@ -15,18 +14,17 @@ function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsSticky(true);
-      }
+      const currentScrollPosition = window.scrollY;
+      setIsSticky(currentScrollPosition > 0);
     };
     window.addEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
-      className={` py-4 md:px-8 px-4 bg-black ${
+      className={` py-4 md:px-8 px-4 bg-black z-10 ${
         isSticky ? "sticky top-0 right-0 left-0 bg-black" : ""
-      }`}
+      } `}
     >
       <div className="flex items-center justify-between">
         <div className="font-bold tex-2xl cursor-pointer text-white">

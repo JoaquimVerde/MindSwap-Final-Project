@@ -27,18 +27,17 @@ export default function Home() {
 		</main> 
 	)*/}
  return (
-		<div>
-
-		<main className="w-[100%] h-[100vh]">
+	<>
 		<Navbar/>
+		<main className="w-[100%] h-[100vh]">
 		<HeroSection />
 		<About />
 		<Parallax />
 		<Courses />
 		<Skills />
 		<Footer/>
-	  </main>
-		</div>
+		</main>
+			</>
 	
 )
 	
