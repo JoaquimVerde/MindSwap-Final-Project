@@ -65,21 +65,18 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
   const onSubmit = async (data: Person) => {
     console.log(data);
     try {
-      const requestBody = {
-        ...data,
-        role: "STUDENT", // Back end needs these informations to update information
-        dateOfBirth: "1990-01-01",
-        cv: "my first cv",
-      };
-
+      const userId = sessionStorage.getItem("userId");
+      if (!userId) {
+        throw new Error("User Id not found in session storage");
+      }
       const response = await fetch(
-        `http://localhost:8080/api/v1/persons/PERSON%23608183af-72a3-42d7-bcb3-0f31ca966d2b`,
+        `http://localhost:8080/api/v1/persons/${userId}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(requestBody),
+          body: JSON.stringify(data),
         }
       );
       if (!response.ok) {
@@ -131,7 +128,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
             <p className="font-bold text-slate-400 mt-4">Password</p>
             <div className="relative">
               <input
-                type={showPassword ? "text" : "password"} // Toggle between text and password type
+                type={showPassword ? "text" : "password"}
                 {...register("password")}
                 className="rounded w-80 h-10 px-2"
                 disabled={isSubmitting}
