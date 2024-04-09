@@ -8,7 +8,6 @@ import { redirect } from 'next/navigation';
 
 export async function updateCourse(values: any, courseId: string ) {
 
-    console.log(courseId);
 
     fetch(`http://localhost:8080/api/v1/courses/${courseId}`, {
         method: "PUT",

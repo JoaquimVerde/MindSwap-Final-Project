@@ -32,7 +32,7 @@ const formSchema = z.object({
     edition: z.number(),
     syllabus: z.string(),
     program: z.string(),
-    schedule: z.string().optional(),
+    schedule: z.string(),
     price: z.number(),
     duration: z.number(),
     location: z.string(),
@@ -60,15 +60,15 @@ export function EditCourseForm({
             price: course?.price,
             duration: course?.duration,
             location: course?.location,
-            teacherId: course?.teacher.id,
+            teacherId: course?.teacher?.id,
 
         },
     });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log("submited", values);
-        updateCourse(values, course?.id.replace("#","%23"));
-        
+        updateCourse(values, course?.id.replace("#", "%23"));
+
     }
 
 
@@ -102,8 +102,7 @@ export function EditCourseForm({
                                     <FormLabel>Edition</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder={course?.edition.toString()}
-                                            {...field}
+                                            placeholder={"" + course?.edition} {...field}
                                             onChange={(e) => {
                                                 const parsedValue = parseInt(e.target.value);
                                                 if (!isNaN(parsedValue)) {
@@ -114,27 +113,10 @@ export function EditCourseForm({
                                                     field.onChange('');
                                                 }
                                             }}
+
                                         />
                                     </FormControl>
 
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="teacherId"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Teacher ID</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            placeholder={course?.teacher?.firstName + " " + course?.teacher?.lastName}
-                                           />
-                                    </FormControl>
-                                    <FormDescription>
-                                        Insert teacher ID.
-                                    </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -147,9 +129,10 @@ export function EditCourseForm({
                                     <FormLabel>Syllabus</FormLabel>
                                     <FormControl>
                                         <textarea
-                                            className="textarea w-full rows-20 h-[100px]"
-                                            placeholder={course?.syllabus}
-                                            />
+                                            className="textarea w-full rows-20 h-[150px]"
+                                            placeholder={course?.syllabus} {...field}
+                                        />
+
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -164,8 +147,8 @@ export function EditCourseForm({
                                     <FormControl>
                                         <textarea
                                             className="textarea w-full rows-20 h-[400px]"
-                                            placeholder={course?.program}
-                                           />
+                                            placeholder={course?.program} {...field}
+                                        />
                                     </FormControl>
 
                                     <FormMessage />
@@ -181,8 +164,8 @@ export function EditCourseForm({
                                         Schedule
                                     </FormLabel>
                                     <FormControl>
-                                        <Input placeholder={course.schedule}
-                                            />
+                                        <Input placeholder={course?.schedule} {...field}
+                                        />
                                     </FormControl>
 
                                     <FormMessage />
@@ -199,7 +182,7 @@ export function EditCourseForm({
                                     </FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder={course.price.toString()}
+                                            placeholder={"" + course.price} {...field}
                                             onChange={(e) => {
                                                 const parsedValue = parseInt(e.target.value);
                                                 if (!isNaN(parsedValue)) {
@@ -210,6 +193,7 @@ export function EditCourseForm({
                                                     field.onChange('');
                                                 }
                                             }}
+
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -226,7 +210,7 @@ export function EditCourseForm({
                                     </FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder={"" + course.duration}
+                                            placeholder={"" + course.duration} {...field}
                                             onChange={(e) => {
                                                 const parsedValue = parseInt(e.target.value);
                                                 if (!isNaN(parsedValue)) {
@@ -253,10 +237,28 @@ export function EditCourseForm({
                                         Location
                                     </FormLabel>
                                     <FormControl>
-                                        <Input placeholder={course.location}
-                                            />
+                                        <Input placeholder={course.location} {...field}
+                                        />
                                     </FormControl>
 
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="teacherId"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Teacher ID</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder={course?.teacher?.firstName + " " + course?.teacher?.lastName} {...field}
+                                        />
+                                    </FormControl>
+                                    <FormDescription>
+                                        Insert teacher ID.
+                                    </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -278,5 +280,5 @@ export function EditCourseForm({
     );
 
 
-    
+
 }
