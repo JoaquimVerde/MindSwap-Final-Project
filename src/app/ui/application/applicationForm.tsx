@@ -16,21 +16,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import React from "react";
-import { PhoneInput } from "./phoneNumber";
-import { Upload, Phone, Mail } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
-import { Checkbox } from "@radix-ui/react-checkbox";
-import { stringify } from "querystring";
-import { Courgette } from "next/font/google";
+import { useToast } from "@/components/ui/use-toast";
 
-const url = "http://localhost:3000/api/v1/registration"; // TODO add url to env.ts
-
+const url = "http://localhost:3000/api/v1/registration";
 const formSchema = z.object({
   status: z.string(),
   personId: z.string(),
   courseId: z.string(),
-  // phoneNumber: z.string(),
-  //uploadResume: z.string().optional(),
   aboutYou: z.string(),
   prevKnowledge: z.enum(["false", "true"], {
     required_error: "You need to select a notification type.",
@@ -42,8 +35,9 @@ const formSchema = z.object({
 
 
 export function ApplicationForm({ id }: { id: string }) {
+  const { toast } = useToast();
   const courseIdparam = id.replace("%23", "#");
-  const personIdparam = "PERSON#003987b3-6764-40db-95c1-3167fec491b6";
+  const personIdparam = "PERSON#cf4f5fa7-cd9c-424a-a00c-9308173a6951";
 
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -59,8 +53,6 @@ export function ApplicationForm({ id }: { id: string }) {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("submited", values);
-
     values = { ...values, courseId: courseIdparam };
     values = { ...values, personId: personIdparam };
     values = { ...values, status: "Applied" };
@@ -73,8 +65,27 @@ export function ApplicationForm({ id }: { id: string }) {
       body: JSON.stringify(values),
     };
 
-    const res = fetch(url, api_req_options);
-    console.log(res);
+    fetch(url, api_req_options)
+      .then((response) => {
+        if (response.ok) {
+          toast({
+            title: "Your application was submited successfully",
+          });
+        } else {
+          response.json().then((json) => {
+            toast({
+              variant: "destructive",
+              title: json.message,
+            });
+          });
+        }
+      })
+      .catch((err) => {
+        toast({
+          variant: "destructive",
+          title: "There was an error submitting your application",
+        });
+      });
   }
 
   return (
@@ -163,7 +174,7 @@ export function ApplicationForm({ id }: { id: string }) {
                 render={({ field }) => (
                   <FormItem className="space-y-3">
                     <FormLabel>
-                      Do you have more than one year experience in this field?
+                      Do you have some knowledge of programming?
                     </FormLabel>
                     <FormControl>
                       <RadioGroup
@@ -197,7 +208,7 @@ export function ApplicationForm({ id }: { id: string }) {
                 render={({ field }) => (
                   <FormItem className="space-y-3">
                     <FormLabel>
-                      Do you have more than one year experience in this field 2?
+                      Do you have more than one year experience in this field?
                     </FormLabel>
                     <FormControl>
                       <RadioGroup
@@ -226,57 +237,6 @@ export function ApplicationForm({ id }: { id: string }) {
                   </FormItem>
                 )}
               />
-              {/* <FormField
-                control={form.control}
-                name="itemsCheckBox"
-                render={() => (
-                  <FormItem>
-                    <div className="mb-4">
-                      <FormLabel className="text-base">Langueages:</FormLabel>
-                      <FormDescription>
-                        Select the languages that you already had experience.
-                      </FormDescription>
-                    </div>
-                    {itemsCheckBox.map((item) => (
-                      <FormField
-                        key={item.id}
-                        control={form.control}
-                        name="itemsCheckBox"
-                        render={({ field }) => {
-                          return (
-                            <FormItem
-                              key={item.id}
-                              className="flex flex-col-start items-start space-x-3 space-y-0"
-                            >
-                              <FormControl>
-                                <Checkbox
-                                  checked={field.value?.includes(item.id)}
-                                  onCheckedChange={(checked) => {
-                                    return checked
-                                      ? field.onChange([
-                                          ...field.value,
-                                          item.id,
-                                        ])
-                                      : field.onChange(
-                                          field.value?.filter(
-                                            (value) => value !== item.id
-                                          )
-                                        );
-                                  }}
-                                />
-                              </FormControl>
-                              <FormLabel className="font-normal">
-                                {item.label}
-                              </FormLabel>
-                            </FormItem>
-                          );
-                        }}
-                      />
-                    ))}
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
             </div>
 
             <Button type="submit" className="w-full">

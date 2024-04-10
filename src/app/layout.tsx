@@ -2,6 +2,7 @@ import SessionWrapper from "@/components/ui/session-wrapper";
 import type { Metadata } from "next";
 import "./globals.css";
 import { inter } from "./ui/fonts";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <SessionWrapper>
         <body className={inter.className}>{children}</body>
+         <Toaster />
       </SessionWrapper>
     </html>
   );
