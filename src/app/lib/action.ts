@@ -1,6 +1,5 @@
 'use server';
 
-import { Course, CourseForm } from "./definitions";
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
@@ -8,18 +7,20 @@ import { redirect } from 'next/navigation';
 
 export async function updateCourse(
      values :
-        { name: string,
-        edition: number,
-        syllabus: string,
-        program: string,
-        schedule: string,
-        price: number,
-        duration: number,
-        location: string,
-        teacherId: string }
+        { name?: string,
+        edition?: number,
+        syllabus?: string,
+        program?: string,
+        schedule?: string,
+        price?: number,
+        duration?: number,
+        location?: string,
+        teacherId?: string }
 
     , 
     courseId: string) {
+
+        
 
 
     fetch(`http://localhost:8080/api/v1/courses/${courseId}`, {

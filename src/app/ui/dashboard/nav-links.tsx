@@ -13,7 +13,7 @@ import {
   Home,
   UserRound,
 } from "lucide-react";
-// import { fetchPersonByRole } from "@/app/api/dashboard/route"; 
+import { fetchRole } from "@/app/lib/data"; 
 
 export const linkDashboard: LinkType = {
   name: "Dashboard",
@@ -80,19 +80,18 @@ export default function NavLinks() {
   const [openSublinks, setOpenSublinks] = useState<string | null>(null);
   const [role, setRole] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   async function fetchRole() {
-  //     try {
-  //       const fetchedRole = await fetchPersonByRole();
-  //       setRole(fetchedRole);
-  //     } catch (error) {
-  //       console.error('Failed to fetch role:', error);
-  //       // Handle error
-  //     }
-  //   }
+  useEffect(() => {
+    async function fetchPersonRole() {
+      try {
+        const fetchedRole: string = await fetchRole();
+        setRole(fetchedRole);
+      } catch (error) {
+        console.error('Failed to fetch role:', error);
+      }
+    }
 
-  //   fetchRole();
-  // }, []);
+    fetchPersonRole();
+  }, []);
 
   function filterLinksByRole(links: LinkType[]) {
     if (!role) return [];

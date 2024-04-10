@@ -30,7 +30,7 @@ export default async function LocationCards(
     const courses = await fetchCoursesByLocation(placeholder, currentPage);
 
     //const totalPages = fetchCoursesPages(courses);
-    const totalPages = 5;
+    const totalPages = courses.length / 4;
 
 
     if (!courses) {
