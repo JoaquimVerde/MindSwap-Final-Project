@@ -1,6 +1,4 @@
-import Image from "next/image";
 import React from "react";
-import parallax from "../../public/parallax.jpg";
 
 function Parallax() {
   return (
