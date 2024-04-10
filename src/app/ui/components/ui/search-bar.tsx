@@ -1,3 +1,4 @@
+
 'use client';
 import { fetchCoursesByLocation } from "@/app/lib/data";
 import { Search } from "lucide-react";
