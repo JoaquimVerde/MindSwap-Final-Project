@@ -159,7 +159,7 @@ export async function fetchPersonByRole(): Promise<string> {
       console.error('Database error:', error);
         throw new Error('Failed to fetch person by role.');
     }
-}
+
 
   }
 
