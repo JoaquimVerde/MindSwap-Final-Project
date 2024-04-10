@@ -11,6 +11,7 @@ import {
   BookOpenText,
   LibraryBig,
   Home,
+  UserRound,
 } from "lucide-react";
 import { fetchPersonByRole } from "@/app/api/dashboard/route"; 
 
@@ -60,6 +61,18 @@ export const links: LinkType[] = [
     href: "/dashboard/all-courses-teacher",
     icon: LibraryBig,
     role: ["teacher", "admin"],
+  },
+  {
+    name: "Profile",
+    href: "/dashboard/profile",
+    icon: UserRound,
+    role: ["student", "admin", "teacher"],
+  },
+  {
+    name: "All Applications",
+    href: "/dashboard/all-courses/all-applications",
+    icon: BookCheck,
+    role: ["admin", "teacher"],
   },
 ];
 
