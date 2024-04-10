@@ -117,7 +117,7 @@ export async function fetchAllCourses(): Promise<number> {
       await new Promise((resolve) => setTimeout(resolve, 3000));
 
       const response = await fetch(
-        `http://localhost:8080/api/v1/courses/location/${location}`
+        `http://localhost:8080/api/v1/courses/location/${location}?limit=4&page=${currentPage-1}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch courses");
