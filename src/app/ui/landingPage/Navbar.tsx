@@ -4,6 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import Image from "next/image";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,7 +30,16 @@ function Navbar() {
     >
       <div className="flex items-center justify-between">
         <div className="font-bold tex-2xl cursor-pointer text-white">
-          <Link href="/#home">Logo</Link>
+        <Link href="/#home">
+         
+            <Image
+            src="/images/logo.webp"
+            alt="Logo"
+            width={60} // replace with the actual width of the image
+            height={60} // replace with the actual height of the image
+          />
+          
+        </Link>
         </div>
 
         {/* for lg devices */}

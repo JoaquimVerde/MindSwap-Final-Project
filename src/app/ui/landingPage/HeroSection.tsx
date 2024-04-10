@@ -17,7 +17,7 @@ function HeroSection() {
         <div className="absolute max-w[1240px] w-full h-full mx-auto flex  justify-center items-center  ">
           <div>
             <h1 className=" text-8xl font-serif font-extrabold uppercase py-4 text-slate-400 ">
-              Let`s tech the <span className="text-blue-800">world</span>
+              Let`s <span className="text-blue-800">hack</span> the <span className="text-blue-800">world</span>
             </h1>
             <br />
             <br />
