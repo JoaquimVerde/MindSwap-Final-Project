@@ -91,12 +91,18 @@ export async function fetchCourseById(id: string): Promise<Course> {
 }
 
 
-  export async function fetchPersonById(id: string): Promise<Person> {
+  export async function fetchPersonById(): Promise<Person> {
     noStore();
     try {
+      const id = sessionStorage.getItem('userId');
+      console.log(id);
+    if (!id) {
+      throw new Error('Id not found in session storage');
+    }
+      const encodedId = id.replace(/#/g, "%23");
 
       const response = await fetch(
-        `http://localhost:8080/api/v1/persons/${id}`
+        `http://localhost:8080/api/v1/persons/${encodedId}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch courses");
@@ -145,8 +151,7 @@ export async function fetchPersonByEmail(): Promise<Person> {
     if (!email) {
       throw new Error('Email not found in session storage');
     }
-    const response = 
-    await fetch(
+    const response = await fetch(
       `http://localhost:8080/api/v1/persons/email/${email}`
     );
     if (!response.ok) {
@@ -187,7 +192,7 @@ export async function fetchPersonByRole(): Promise<string> {
   }
 
 
-export async function fetchAppliations(): Promise<Application[]> {
+export async function fetchApplications(): Promise<Application[]> {
   noStore();
   try {
     const response = await fetch(`http://localhost:8080/api/v1/registration`);

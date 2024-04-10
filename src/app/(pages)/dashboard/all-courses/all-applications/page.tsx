@@ -11,7 +11,7 @@ import {
 import { Scroll } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { fetchAppliations, fetchPersonById } from "@/app/lib/data";
+import { fetchApplications, fetchPersonById } from "@/app/lib/data";
 import {
   Select,
   SelectContent,
@@ -24,7 +24,7 @@ import {
 import SearchBar from "@/app/ui/components/ui/search-bar";
 
 export default async function AllApplications() {
-  const applications = await fetchAppliations();
+  const applications = await fetchApplications();
 
   return (
     <div className="mx-2 my-2">
