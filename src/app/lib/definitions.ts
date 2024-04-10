@@ -34,10 +34,12 @@ export type Person = {
   email: string;
   firstName: string;
   lastName: string;
+  role: string;
   address: string;
 };
 
 export type Application = {
+  id: string;
   student: Person;
   course: Course;
   status: string;
@@ -56,4 +58,17 @@ export type Project = {
   syllabus: string;
   grade: number;
   active: boolean;
+};
+
+export type CourseForm = {
+  id: string;
+  name: string;
+  edition: number;
+  syllabus: string;
+  program: string;
+  schedule: string;
+  price: number;
+  duration: number;
+  location: string;
+  teacher: string;
 };

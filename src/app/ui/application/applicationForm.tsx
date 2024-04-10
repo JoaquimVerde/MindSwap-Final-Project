@@ -33,10 +33,12 @@ const formSchema = z.object({
   }),
 });
 
+
 export function ApplicationForm({ id }: { id: string }) {
   const { toast } = useToast();
   const courseIdparam = id.replace("%23", "#");
   const personIdparam = "PERSON#cf4f5fa7-cd9c-424a-a00c-9308173a6951";
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

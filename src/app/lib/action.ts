@@ -1,29 +1,34 @@
 'use server';
 
-import { Course } from "./definitions";
+import { Course, CourseForm } from "./definitions";
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 
-export async function updateCourse(course: Course[]) {
 
-    fetch(`http://localhost:8080/api/v1/courses/${course[0]?.id}`, {
+export async function updateCourse(
+     values :
+        { name: string,
+        edition: number,
+        syllabus: string,
+        program: string,
+        schedule: string,
+        price: number,
+        duration: number,
+        location: string,
+        teacherId: string }
+
+    , 
+    courseId: string) {
+
+
+    fetch(`http://localhost:8080/api/v1/courses/${courseId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
             //"Authorization": sessionStorage.getItem("token"),
         },
-        body: JSON.stringify({
-            title: course[0]?.name,
-            edition: course[0]?.edition,
-            syllabus: course[0]?.syllabus,
-            program: course[0]?.program,
-            schedule: course[0]?.schedule,
-            price: course[0]?.price,
-            duration: course[0]?.duration,
-            location: course[0]?.location,
-            teacherId: course[0]?.teacher?.id,
-        })
+        body: JSON.stringify(values)
     })
         .then((response) => {
             console.log(response);
@@ -36,7 +41,7 @@ export async function updateCourse(course: Course[]) {
             console.error("Error ", error);
 
         });
-    console.log(course[0].price)
-    revalidatePath(`/dashboard/all-courses/${course[0].id.replace("#", "%23")}/course`);
-    redirect(`/dashboard/all-courses/${course[0].id.replace("#", "%23")}/course`);
+    revalidatePath(`/dashboard/all-courses/${courseId}/course`);
+    redirect(`/dashboard/all-courses/${courseId}/course`);
 }
+

@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select";
 import SearchBar from "@/app/ui/components/ui/search-bar";
 
-export default async function AllApplcations() {
+export default async function AllApplications() {
   const applications = await fetchAppliations();
 
   return (
