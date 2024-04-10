@@ -101,7 +101,7 @@ export async function fetchProjectsByCourseId(
       const encodedId = id.replace(/#/g, "%23");
 
       const response = await fetch(
-        `http://localhost:8080/api/v1/persons/${encodedId}`
+        `http://localhost:3000/proxy/api/v1/persons/${encodedId}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch courses");

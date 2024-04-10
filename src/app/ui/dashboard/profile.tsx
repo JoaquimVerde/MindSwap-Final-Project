@@ -66,7 +66,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
       }
       const encodedId = userId.replace(/#/g, "%23");
       const response = await fetch(
-        `http://localhost:8080/api/v1/persons/${encodedId}`,
+        `http://localhost:3000/proxy/api/v1/persons/${encodedId}`,
         {
           method: "PUT",
           headers: {
@@ -125,6 +125,13 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
             <input
               type="text"
               {...register("address")}
+              className="rounded w-80 h-10 px-2"
+              disabled={isSubmitting}
+            />
+            <p className="font-bold text-slate-400 mt-4">CV</p>
+            <input
+              type="text"
+              {...register("cv")}
               className="rounded w-80 h-10 px-2"
               disabled={isSubmitting}
             />
