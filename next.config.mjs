@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  /* reactStrictMode: true,
   async rewrites() {
     return [
       {
@@ -8,7 +8,7 @@ const nextConfig = {
         destination: "http://localhost:8080/api/:path*",
       },
     ];
-  },
+  }, */
 };
 
 export default nextConfig;

@@ -12,6 +12,16 @@ import { Scroll } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { fetchAppliations, fetchPersonById } from "@/app/lib/data";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import SearchBar from "@/app/ui/components/ui/search-bar";
 
 export default async function AllApplications() {
   const applications = await fetchAppliations();
@@ -20,6 +30,23 @@ export default async function AllApplications() {
     <div className="mx-2 my-2">
       <div>
         <h1 className="text-2xl mb-4">All Applications</h1>
+      </div>
+      <div className="mt-5 ml-4 w-[800px] flex space-x-12">
+        <Select>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select a course" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Courses</SelectLabel>
+              <SelectItem value="be">Back-End Developer</SelectItem>
+              <SelectItem value="fe">Front-End</SelectItem>
+              <SelectItem value="fs">Full-Stack</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+
+        <SearchBar placeholder="search by student name" />
       </div>
       <Table>
         <TableCaption>A list of all recent applications.</TableCaption>
