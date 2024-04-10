@@ -19,6 +19,7 @@ export const linkDashboard: LinkType = {
   href: "/dashboard",
   icon: Home,
   role: ["STUDENT", "TEACHER", "ADMIN"],
+  role: ["STUDENT", "TEACHER", "ADMIN"],
 };
 
 export const linksub: LinkTypeSub[] = [
@@ -26,6 +27,7 @@ export const linksub: LinkTypeSub[] = [
     name: "My-Courses",
     href: "/dashboard/my-courses",
     icon: BookOpenText,
+    role: ["STUDENT", "ADMIN"],
     role: ["STUDENT", "ADMIN"],
     sublinks: [
       {
@@ -48,12 +50,13 @@ export const links: LinkType[] = [
     href: "/dashboard/my-courses-teacher",
     icon: BookOpenText,
     role: ["TEACHER", "ADMIN"],
+    role: ["TEACHER", "ADMIN"],
   },
   {
     name: "All Courses",
     href: "/dashboard/all-courses",
     icon: LibraryBig,
-    role: ["STUDENT", "ADMIN"],
+    role: ["STUDENT"],
   },
   {
     name: "All Courses",
@@ -62,9 +65,16 @@ export const links: LinkType[] = [
     role: ["TEACHER", "ADMIN"],
   },
   {
+    name: "Profile",
+    href: "/dashboard/profile",
+    icon: UserRound,
+    role: ["STUDENT", "ADMIN", "TEACHER"],
+  },
+  {
     name: "All Applications",
     href: "/dashboard/all-courses/all-applications",
     icon: BookCheck,
+    role: ["ADMIN", "TEACHER"],
     role: ["ADMIN", "TEACHER"],
   },
 ];
