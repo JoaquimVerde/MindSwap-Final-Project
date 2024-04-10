@@ -6,7 +6,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import React from "react";
 import { Camera, Eye, EyeOff } from "lucide-react";
 import { Person } from "@/app/lib/definitions";
-import { fetchPersonByEmail } from "@/app/lib/data";
+import { fetchPersonByEmail, fetchPersonById } from "@/app/lib/data";
 import { useForm } from "react-hook-form";
 
 interface ProfileProps {
@@ -22,20 +22,15 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
     formState: { isSubmitting },
   } = useForm<Person>({ defaultValues: initialProfileData });
   const [avatarImage, setAvatarImage] = useState("/images/avatar.png");
-  const [showPassword, setShowPassword] = useState(false);
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const personData = await fetchPersonByEmail();
+        const personData = await fetchPersonById();
         setValue("firstName", personData.firstName);
         setValue("lastName", personData.lastName);
         setValue("username", personData.username);
         setValue("email", personData.email);
-        setValue("password", personData.password);
         setValue("role", personData.role);
         setValue("dateOfBirth", personData.dateOfBirth);
         setValue("address", personData.address);
@@ -45,7 +40,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
         console.error("Error fetching person:", error);
       }
     };
-
+    
     fetchData();
   }, []);
 
@@ -69,8 +64,9 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
       if (!userId) {
         throw new Error("User Id not found in session storage");
       }
+      const encodedId = userId.replace(/#/g, "%23");
       const response = await fetch(
-        `http://localhost:8080/api/v1/persons/${userId}`,
+        `http://localhost:8080/api/v1/persons/${encodedId}`,
         {
           method: "PUT",
           headers: {
@@ -125,23 +121,6 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
               className="rounded w-80 h-10 px-2"
               disabled={isSubmitting}
             />
-            <p className="font-bold text-slate-400 mt-4">Password</p>
-            <div className="relative">
-              <input
-                type={showPassword ? "text" : "password"}
-                {...register("password")}
-                className="rounded w-80 h-10 px-2"
-                disabled={isSubmitting}
-              />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="absolute inset-y-0 right-0 px-3 py-1"
-              >
-                {showPassword ? <EyeOff /> : <Eye />}{" "}
-              </button>
-            </div>
-
             <p className="font-bold text-slate-400 mt-4">Address</p>
             <input
               type="text"
