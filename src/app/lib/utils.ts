@@ -11,14 +11,14 @@ import AllCourses from "../(pages)/dashboard/all-courses/page";
 import Course from "../(pages)/dashboard/all-courses/[id]/course/page";
 import AllCoursesTeacher from "../(pages)/dashboard/all-courses-teacher/page";
 import Profile from "../(pages)/dashboard/profile/page";
-import { CustomComponentsArr } from "./types";
+// import { CustomComponentsArr } from "./types";
 
 
 
-export const linksContentPages: CustomComponentsArr = {
+/* export const linksContentPages: CustomComponentsArr = {
 
   content: [MyCourses, MyAppliedCourses, MyEnrolledCourses, MyCoursesTeacher, AllCourses, Course, AllCoursesTeacher, Profile] as React.FC[],
-}
+} */
 
 
 export const generatePagination = (currentPage: number, totalPages: number) => {

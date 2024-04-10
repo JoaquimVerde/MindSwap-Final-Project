@@ -11,7 +11,7 @@ import { Suspense } from "react";
 //     title: 'Courses',
 // };
 
-// export default function AllCoursesInLocation() {
+export default function AllCoursesInLocation() {}
 
 
 

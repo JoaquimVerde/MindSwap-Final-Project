@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import SearchBar from "@/app/ui/components/ui/search-bar";
+// import SearchBar from "@/app/ui/components/ui/search-bar";
 
 export default async function AllApplications() {
   const applications = await fetchApplications();
@@ -46,7 +46,7 @@ export default async function AllApplications() {
           </SelectContent>
         </Select>
 
-        <SearchBar placeholder="search by student name" />
+        {/* <SearchBar placeholder="search by student name" /> */}
       </div>
       <Table>
         <TableCaption>A list of all recent applications.</TableCaption>
