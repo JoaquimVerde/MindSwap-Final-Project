@@ -11,7 +11,6 @@ import {
   BookOpenText,
   LibraryBig,
   Home,
-  UserRound,
 } from "lucide-react";
 import { fetchRole } from "@/app/lib/data"; 
 
@@ -19,7 +18,7 @@ export const linkDashboard: LinkType = {
   name: "Dashboard",
   href: "/dashboard",
   icon: Home,
-  role: ["student", "teacher", "admin"],
+  role: ["STUDENT", "TEACHER", "ADMIN"],
 };
 
 export const linksub: LinkTypeSub[] = [
@@ -27,7 +26,7 @@ export const linksub: LinkTypeSub[] = [
     name: "My-Courses",
     href: "/dashboard/my-courses",
     icon: BookOpenText,
-    role: ["student", "admin"],
+    role: ["STUDENT", "ADMIN"],
     sublinks: [
       {
         name: "My Applied Courses",
@@ -48,31 +47,25 @@ export const links: LinkType[] = [
     name: "My Courses",
     href: "/dashboard/my-courses-teacher",
     icon: BookOpenText,
-    role: ["teacher", "admin"],
+    role: ["TEACHER", "ADMIN"],
   },
   {
     name: "All Courses",
     href: "/dashboard/all-courses",
     icon: LibraryBig,
-    role: ["student", "admin"],
+    role: ["STUDENT", "ADMIN"],
   },
   {
     name: "All Courses",
     href: "/dashboard/all-courses-teacher",
     icon: LibraryBig,
-    role: ["teacher", "admin"],
-  },
-  {
-    name: "Profile",
-    href: "/dashboard/profile",
-    icon: UserRound,
-    role: ["student", "admin", "teacher"],
+    role: ["TEACHER", "ADMIN"],
   },
   {
     name: "All Applications",
     href: "/dashboard/all-courses/all-applications",
     icon: BookCheck,
-    role: ["admin", "teacher"],
+    role: ["ADMIN", "TEACHER"],
   },
 ];
 
