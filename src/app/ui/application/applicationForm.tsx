@@ -19,7 +19,11 @@ import { useToast } from "@/components/ui/use-toast";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import React from "react";
 
+<<<<<<< HEAD
 const url = "http://localhost:3000/proxy/api/v1/registration";
+=======
+const url = "http://localhost:3000/proxy/v1/registration";
+>>>>>>> b546058 (create button in allApllications, create page to upadte application status)
 const formSchema = z.object({
   status: z.string(),
   personId: z.string(),
@@ -36,7 +40,11 @@ const formSchema = z.object({
 export function ApplicationForm({ id }: { id: string }) {
   const { toast } = useToast();
   const courseIdparam = id.replace("%23", "#");
+<<<<<<< HEAD
   const personIdparam = sessionStorage.getItem("userId");
+=======
+  const personIdparam = "PERSON#cf4f5fa7-cd9c-424a-a00c-9308173a6951";
+>>>>>>> b546058 (create button in allApllications, create page to upadte application status)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -95,59 +103,6 @@ export function ApplicationForm({ id }: { id: string }) {
             className="flex flex-col space-y-20 p-20 pt-0"
           >
             <div className="grid w-full max-w-sm items-center gap-3">
-              {/* <FormField
-                control={form.control}
-                name="phoneNumber"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      <p className="flex items-center">
-                        <Phone className="mr-2 h-4 w-4" />
-                        Phone Number
-                      </p>
-                    </FormLabel>
-                    <FormControl>
-                      <PhoneInput
-                        defaultCountry="PT"
-                        defaultProps={{
-                          country: "PT",
-                          enableSearch: true,
-                          enableAreaCodes: true,
-                          enableDropdown: true,
-                          preferredCountries: ["PT"],
-                          onlyCountries: ["PT"],
-                          enableCountryCode: true,
-                          enableFlag: true,
-                        }}
-                        placeholder="enter your phone number"
-                        {...field}
-                      />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
-              {/* <FormField
-                control={form.control}
-                name="uploadResume"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      <p className="flex items-center">
-                        <Upload className="mr-2 h-4 w-4" />
-                        Import Resume
-                      </p>
-                    </FormLabel>
-                    <FormControl>
-                      <Input id="resume" type="file" className="file-input  " />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
-
               <FormField
                 control={form.control}
                 name="aboutYou"

@@ -1,11 +1,9 @@
 // data fetching methods go here
 // e.g. get all courses; get all users
 
-
 import { unstable_noStore as noStore } from "next/cache";
 import { notFound } from "next/navigation";
 import { Course, Person, Project, Application } from "./definitions";
-
 
 export async function fetchAllCourses(): Promise<number> {
   noStore();
@@ -64,13 +62,9 @@ export async function fetchCourseById(id: string): Promise<Course> {
   }
 }
 
-
-export async function fetchProjectsByCourseId(
-  id: string
-): Promise<Project[]> {
+export async function fetchProjectsByCourseId(id: string): Promise<Project[]> {
   noStore();
   try {
-
     const response = await fetch(
       `http://localhost:8080/api/v1/projects/course/${id}`
     );
@@ -81,36 +75,32 @@ export async function fetchProjectsByCourseId(
     console.log(projects);
 
     return projects;
-
   } catch (error) {
     console.error("Error fetching projects:", error);
     notFound();
-
   }
 }
 
-
-  export async function fetchPersonById(): Promise<Person> {
-    noStore();
-    try {
-      const id = sessionStorage.getItem('userId');
-      console.log(id);
+export async function fetchPersonById(): Promise<Person> {
+  noStore();
+  try {
+    const id = sessionStorage.getItem("userId");
+    console.log(id);
     if (!id) {
-      throw new Error('Id not found in session storage');
+      throw new Error("Id not found in session storage");
     }
-      const encodedId = id.replace(/#/g, "%23");
+    const encodedId = id.replace(/#/g, "%23");
 
-      const response = await fetch(
-        `http://localhost:3000/proxy/api/v1/persons/${encodedId}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch courses");
-      }
-      const person: Person = await response.json();
-      console.log(person);
-      return person;
-  }
-  catch (error) {
+    const response = await fetch(
+      `http://localhost:3000/proxy/api/v1/persons/${encodedId}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch courses");
+    }
+    const person: Person = await response.json();
+    console.log(person);
+    return person;
+  } catch (error) {
     console.error("Database error:", error);
     throw new Error("Failed to fetch person.");
   }
@@ -124,9 +114,10 @@ export async function fetchCoursesByLocation(
   try {
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-
     const response = await fetch(
-      `http://localhost:8080/api/v1/courses/location/${location}?limit=4&page=${currentPage - 1}`
+      `http://localhost:8080/api/v1/courses/location/${location}?limit=4&page=${
+        currentPage - 1
+      }`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
@@ -139,15 +130,14 @@ export async function fetchCoursesByLocation(
     console.error("Database error:", error);
     throw new Error("Failed to fetch all courses.");
   }
-
 }
 
 export async function fetchPersonByEmail(): Promise<Person> {
   noStore();
   try {
-    const email = sessionStorage.getItem('email');
+    const email = sessionStorage.getItem("email");
     if (!email) {
-      throw new Error('Email not found in session storage');
+      throw new Error("Email not found in session storage");
     }
 
     const response = await fetch(
@@ -170,30 +160,27 @@ export async function fetchRole(): Promise<string> {
   noStore();
 
   try {
-
-    const role = sessionStorage.getItem('userRole');
+    const role = sessionStorage.getItem("userRole");
 
     if (!role) {
-      throw new Error('Role not found in session storage.');
+      throw new Error("Role not found in session storage.");
     }
 
     return role as string;
-
   } catch (error) {
-    console.error('FetchError:', error);
-    throw new Error('Failed to fetch role.');
+    console.error("FetchError:", error);
+    throw new Error("Failed to fetch role.");
   }
 }
-
 
 export async function fetchApplications(): Promise<Application[]> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:3000/proxy/api/v1/registration`);
+    const response = await fetch(
+      `http://localhost:3000/proxy/api/v1/registration`
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch applications");
-
-
     }
     const applications: Application[] = await response.json();
     console.log(applications);
@@ -225,37 +212,38 @@ export async function fetchApplicationById(id: string): Promise<Application> {
   }
 }
 
-
 export async function fetchProjectById(id: string): Promise<Project> {
   noStore();
   try {
-      const response = await fetch(`http://localhost:8080/api/v1/projects/${id}`);
-      if (!response.ok) {
-          throw new Error('Failed to fetch projects');
-      }
-      const project: Project = await response.json();
-      //console.log(proj);
+    const response = await fetch(`http://localhost:8080/api/v1/projects/${id}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch projects");
+    }
+    const project: Project = await response.json();
+    //console.log(proj);
 
-      return project;
+    return project;
   } catch (error) {
-      console.error('Database error:', error);
-      throw new Error('Failed to fetch project.');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch project.");
   }
 }
 
 export async function fetchProjectByStudentId(id: string): Promise<Project[]> {
-    noStore();
-    try {
-        const response = await fetch(`http://localhost:8080/api/v1/projects/person/${id}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch projects');
-        }
-        const projects: Project [] = await response.json();
-        //console.log(projects);
-
-        return projects;
-    } catch (error) {
-        console.error('Database error:', error);
-        throw new Error('Failed to fetch project.');
+  noStore();
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/projects/person/${id}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch projects");
     }
+    const projects: Project[] = await response.json();
+    //console.log(projects);
+
+    return projects;
+  } catch (error) {
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch project.");
+  }
 }
