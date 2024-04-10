@@ -2,11 +2,6 @@
 // e.g. get all courses; get all users
 
 
-
-import { notFound } from 'next/navigation';
-import { Course, Person, Project } from './definitions';
-import { unstable_noStore as noStore } from 'next/cache';
-
 import { unstable_noStore as noStore } from "next/cache";
 import { notFound } from "next/navigation";
 import { Course, Person, Project, Application } from "./definitions";
@@ -159,8 +154,6 @@ export async function fetchPersonByRole(): Promise<string> {
       console.error('Database error:', error);
         throw new Error('Failed to fetch person by role.');
     }
-
-
   }
 
 
