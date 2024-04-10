@@ -87,6 +87,7 @@ export async function fetchProjectsByCourseId(
     notFound();
 
   }
+}
 
 
   export async function fetchPersonById(): Promise<Person> {
@@ -107,6 +108,11 @@ export async function fetchProjectsByCourseId(
       }
       const person: Person = await response.json();
       console.log(person);
+      return person;
+  }
+  catch (error) {
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch person.");
   }
 }
 
