@@ -10,7 +10,7 @@ function Redirect() {
     if (status === "loading") return; // Still loading, don't do anything yet
     const verifyUser = async () => {
       const response = await fetch(
-        "http://localhost:8080/api/v1/persons/email/" + session?.user?.email
+        "http://localhost:3000/proxy/api/v1/persons/email/" + session?.user?.email
       );
       const data = await response.json();
       console.log(data);

@@ -75,7 +75,7 @@ function Navbar() {
             login
           </button>
 
-          <button
+          {/* <button
             className=" mx-4 px-1 py-1 border-slate-300 text-slate-300 bg-blue-900 hover:bg-blue-600 transition-all duration-300 rounded-md"
             onClick={() =>
               (window.location.href =
@@ -83,7 +83,7 @@ function Navbar() {
             }
           >
             Sign Up
-          </button>
+          </button> */}
         </div>
         {/*menu btn for sm devices */}
 
