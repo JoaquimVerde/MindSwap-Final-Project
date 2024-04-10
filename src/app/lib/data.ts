@@ -138,6 +138,29 @@ export async function fetchCoursesByLocation(
 
 }
 
+export async function fetchPersonByEmail(): Promise<Person> {
+  noStore();
+  try {
+    const email = sessionStorage.getItem('email');
+    if (!email) {
+      throw new Error('Email not found in session storage');
+    }
+    const response = 
+    await fetch(
+      `http://localhost:8080/api/v1/persons/email/${email}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch person");
+    }
+    const person: Person = await response.json();
+    console.log(person);
+
+    return person;
+  } catch (error) {
+    console.error("Error fetching person:", error);
+    notFound();
+  }
+}
 
 export async function fetchPersonByRole(): Promise<string> {
   noStore();
@@ -162,7 +185,6 @@ export async function fetchPersonByRole(): Promise<string> {
         throw new Error('Failed to fetch person by role.');
     }
   }
-}
 
 
 export async function fetchAppliations(): Promise<Application[]> {
@@ -171,6 +193,7 @@ export async function fetchAppliations(): Promise<Application[]> {
     const response = await fetch(`http://localhost:8080/api/v1/registration`);
     if (!response.ok) {
       throw new Error("Failed to fetch applications");
+
 
     }
     const applications: Application[] = await response.json();
@@ -192,6 +215,7 @@ export async function fetchApplicationById(id: string): Promise<Application> {
     if (!response.ok) {
       throw new Error("Failed to fetch application");
     }
+
     const application: Application = await response.json();
     console.log(application);
 
@@ -201,3 +225,4 @@ export async function fetchApplicationById(id: string): Promise<Application> {
     notFound();
   }
 }
+

@@ -30,12 +30,16 @@ export type Teacher = {
 };
 
 export type Person = {
+  username: string;
   id: string;
   email: string;
   firstName: string;
   lastName: string;
   role: string;
   address: string;
+  password: string;
+  dateOfBirth: string;
+  cv: string;
 };
 
 export type Application = {
