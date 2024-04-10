@@ -11,15 +11,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import React from "react";
-import { number, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Course, CourseForm } from "@/app/lib/definitions";
 import Link from "next/link";
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 import { updateCourse } from "@/app/lib/action";
+
 
 
 
@@ -33,7 +32,9 @@ const formSchema = z.object({
     syllabus: z.string(),
     program: z.string(),
     schedule: z.string(),
-    price: z.number(),
+    price: z.string().refine(value => /^(\d+|\d+\.\d{2})$|^(\d+|\d+,\d{2})$/.test(value), {
+        message: "Price must be a valid number with up to two decimal places."
+    }),
     duration: z.number(),
     location: z.string(),
     teacherId: z.string(),
@@ -57,7 +58,7 @@ export function EditCourseForm({
             syllabus: course?.syllabus,
             program: course?.program,
             schedule: course?.schedule,
-            price: course?.price,
+            price: course?.price.toString(),
             duration: course?.duration,
             location: course?.location,
             teacherId: course?.teacher?.id,
@@ -66,9 +67,19 @@ export function EditCourseForm({
     });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
+        const newValues = { 
+            name: values?.name,
+            edition: values?.edition,           
+            syllabus: values?.syllabus,
+            program: values?.program,
+            schedule: values?.schedule,
+            price: parseInt(values?.price),
+            duration: values?.duration,
+            location: values?.location,
+            teacherId: values?.teacherId,
+        }
         console.log("submited", values);
-        updateCourse(values, course?.id.replace("#", "%23"));
-
+        updateCourse(newValues, course?.id.replace("#", "%23"));
     }
 
 
@@ -104,12 +115,10 @@ export function EditCourseForm({
                                         <Input
                                             placeholder={"" + course?.edition} {...field}
                                             onChange={(e) => {
-                                                const parsedValue = parseInt(e.target.value);
+                                                const parsedValue = parseFloat(e.target.value);
                                                 if (!isNaN(parsedValue)) {
-                                                    // If the parsed value is not NaN, update the field value
                                                     field.onChange(parsedValue);
                                                 } else {
-                                                    // If the parsed value is NaN, update the field value to an empty string or handle it accordingly
                                                     field.onChange('');
                                                 }
                                             }}
@@ -183,17 +192,7 @@ export function EditCourseForm({
                                     <FormControl>
                                         <Input
                                             placeholder={"" + course.price} {...field}
-                                            onChange={(e) => {
-                                                const parsedValue = parseInt(e.target.value);
-                                                if (!isNaN(parsedValue)) {
-                                                    // If the parsed value is not NaN, update the field value
-                                                    field.onChange(parsedValue);
-                                                } else {
-                                                    // If the parsed value is NaN, update the field value to an empty string or handle it accordingly
-                                                    field.onChange('');
-                                                }
-                                            }}
-
+                                            
                                         />
                                     </FormControl>
                                     <FormMessage />
