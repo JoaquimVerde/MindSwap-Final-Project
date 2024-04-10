@@ -185,7 +185,7 @@ export async function fetchPersonByRole(): Promise<string> {
         throw new Error('Failed to fetch person by role.');
     }
   }
-}
+
 
 export async function fetchAppliations(): Promise<Application[]> {
   noStore();
@@ -216,8 +216,6 @@ export async function fetchApplicationById(id: string): Promise<Application> {
       throw new Error("Failed to fetch application");
     }
 
-  }
-
     const application: Application = await response.json();
     console.log(application);
 
@@ -227,3 +225,4 @@ export async function fetchApplicationById(id: string): Promise<Application> {
     notFound();
   }
 }
+
