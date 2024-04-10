@@ -120,12 +120,16 @@ export async function fetchCoursesByLocation(
   try {
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const response = await fetch(
-      `http://localhost:8080/api/v1/courses/location/${location}`
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch courses");
-    }
+
+      const response = await fetch(
+        `http://localhost:8080/api/v1/courses/location/${location}?limit=4&page=${currentPage-1}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch courses");
+      }
+      const courses: Course[] = await response.json();
+      //console.log(courses);
+
 
     const courses: Course[] = await response.json();
     //console.log(courses);
