@@ -65,51 +65,51 @@ export async function fetchCourseById(id: string): Promise<Course> {
 }
 
 
-  export async function fetchProjectsByCourseId(
-    id: string
-  ): Promise<Project[]> {
-    noStore();
-    try {
+export async function fetchProjectsByCourseId(
+  id: string
+): Promise<Project[]> {
+  noStore();
+  try {
 
-      const response = await fetch(
-        `http://localhost:8080/api/v1/projects/course/${id}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch projects!");
-      }
-      const projects: Project[] = await response.json();
-      console.log(projects);
-
-      return projects;
-
-    } catch (error) {
-      console.error("Error fetching projects:", error);
-      notFound();
-
+    const response = await fetch(
+      `http://localhost:8080/api/v1/projects/course/${id}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch projects!");
     }
-   
+    const projects: Project[] = await response.json();
+    console.log(projects);
+
+    return projects;
+
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    notFound();
+
+  }
+
 }
 
 
-  export async function fetchPersonById(id: string): Promise<Person> {
-    noStore();
-    try {
+export async function fetchPersonById(id: string): Promise<Person> {
+  noStore();
+  try {
 
-      const response = await fetch(
-        `http://localhost:8080/api/v1/persons/${id}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch courses");
-      }
-      const person: Person = await response.json();
-      console.log(person);
-
-      return person;
-
-    } catch (error) {
-      console.error("Database error:", error);
-      throw new Error("Failed to fetch person.");
+    const response = await fetch(
+      `http://localhost:8080/api/v1/persons/${id}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch courses");
     }
+    const person: Person = await response.json();
+    console.log(person);
+
+    return person;
+
+  } catch (error) {
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch person.");
+  }
 }
 
 export async function fetchCoursesByLocation(
@@ -121,16 +121,12 @@ export async function fetchCoursesByLocation(
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
 
-      const response = await fetch(
-        `http://localhost:8080/api/v1/courses/location/${location}?limit=4&page=${currentPage-1}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch courses");
-      }
-      const courses: Course[] = await response.json();
-      //console.log(courses);
-
-
+    const response = await fetch(
+      `http://localhost:8080/api/v1/courses/location/${location}?limit=4&page=${currentPage - 1}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch courses");
+    }
     const courses: Course[] = await response.json();
     //console.log(courses);
 
@@ -149,10 +145,10 @@ export async function fetchPersonByEmail(): Promise<Person> {
     if (!email) {
       throw new Error('Email not found in session storage');
     }
-    const response = 
-    await fetch(
-      `http://localhost:8080/api/v1/persons/email/${email}`
-    );
+    const response =
+      await fetch(
+        `http://localhost:8080/api/v1/persons/email/${email}`
+      );
     if (!response.ok) {
       throw new Error("Failed to fetch person");
     }
@@ -169,21 +165,21 @@ export async function fetchPersonByEmail(): Promise<Person> {
 export async function fetchRole(): Promise<string> {
   noStore();
 
-    try {
+  try {
 
-      const role = sessionStorage.getItem('userRole');
+    const role = sessionStorage.getItem('userRole');
 
-      if(!role) {
-        throw new Error('Role not found in session storage.');
-      }
-
-      return role; 
-    
-    } catch (error) {
-      console.error('FetchError:', error);
-        throw new Error('Failed to fetch role.');
+    if (!role) {
+      throw new Error('Role not found in session storage.');
     }
+
+    return role;
+
+  } catch (error) {
+    console.error('FetchError:', error);
+    throw new Error('Failed to fetch role.');
   }
+}
 
 
 export async function fetchAppliations(): Promise<Application[]> {
