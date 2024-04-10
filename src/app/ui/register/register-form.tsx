@@ -13,7 +13,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -50,14 +49,14 @@ export default function RegisterForm() {
   const mail = session?.user?.email ? session?.user?.email : "";
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("registrarion successful", values);
+  
     const obj = {
       ...values,
       email: mail,
       cv: "a",
       role: "Student",
     };
-    console.log("obj", obj);
+    
     const response = await fetch("http://localhost:3000/proxy/api/v1/persons", {
       method: "POST",
       headers: {
@@ -71,11 +70,12 @@ export default function RegisterForm() {
     }
 
     const data = await response.json();
-    console.log(data);
+   
     sessionStorage.setItem("userId", data.id);
     sessionStorage.setItem("userRole", data.role);
+
     window.location.href = "/dashboard";
-    console.log("Registration successful:", data);
+   
   }
 
   return (
@@ -156,19 +156,11 @@ export default function RegisterForm() {
               Register
             </Button>
           </form>
-          <AlreadyHaveAnAccountLink />
+
         </Form>
       </div>
     </main>
   );
 }
 
-export function AlreadyHaveAnAccountLink() {
-  return (
-    <Link href="/login">
-      <Button className="mt-4 w-full" variant="link">
-        Already have an account? Log In{" "}
-      </Button>
-    </Link>
-  );
-}
+
