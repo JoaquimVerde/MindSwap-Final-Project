@@ -22,6 +22,8 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
     formState: { isSubmitting },
   } = useForm<Person>({ defaultValues: initialProfileData });
   const [avatarImage, setAvatarImage] = useState("/images/avatar.png");
+  //const { cv } = initialProfileData;
+  const [showCV, setShowCV] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +42,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
         console.error("Error fetching person:", error);
       }
     };
-    
+
     fetchData();
   }, []);
 
@@ -84,76 +86,94 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
     }
   };
 
+  const toggleCVVisibility = () => {
+    setShowCV(!showCV);
+  };
+
   return (
-    <div className="flex flex-row justify-evenly">
-      <div className="flex flex-col justify-start">
-        <h1 className="mb-10 text-slate-400">Profile</h1>
-
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <p className="font-bold text-slate-400 mt-4">First Name</p>
-            <input
-              type="text"
-              {...register("firstName")}
-              className="rounded w-80 h-10 px-2"
-              disabled={isSubmitting}
-            />
-            <p className="font-bold text-slate-400 mt-4">Last Name</p>
-            <input
-              type="text"
-              {...register("lastName")}
-              className="rounded w-80 h-10 px-2"
-              disabled={isSubmitting}
-            />
-
-            <p className="font-bold text-slate-400 mt-4">Email</p>
-            <input
-              type="text"
-              {...register("email")}
-              className="rounded w-80 h-10 px-2"
-              disabled={isSubmitting}
-            />
-
-            <p className="font-bold text-slate-400 mt-4">Username</p>
-            <input
-              type="text"
-              {...register("username")}
-              className="rounded w-80 h-10 px-2"
-              disabled={isSubmitting}
-            />
-            <p className="font-bold text-slate-400 mt-4">Address</p>
-            <input
-              type="text"
-              {...register("address")}
-              className="rounded w-80 h-10 px-2"
-              disabled={isSubmitting}
-            />
-          </div>
-
-          <Button type="submit" className="w-26 ml-5 hover:bg-blue-700 mt-8">
-            {isSubmitting ? "Submitting..." : "Update"}
-          </Button>
-        </form>
-      </div>
-
-      <div className="flex flex-col items-center justify-center">
-        <div className=" flex flex-end mt-20 w-52 h-52 rounded-full overflow-hidden ">
-          <Avatar className="w-full h-full rounded-full bg-gray-300">
-            <AvatarImage src={avatarImage} />
-            <AvatarFallback></AvatarFallback>
-          </Avatar>
+    <div>
+      <div className="flex flex-row justify-evenly">
+        <div className="flex flex-col justify-start">
+          <h1 className="mb-10 text-slate-400">Profile</h1>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <p className="font-bold text-slate-400 mt-4">First Name</p>
+              <input
+                type="text"
+                {...register("firstName")}
+                className="rounded w-80 h-10 px-2"
+                disabled={isSubmitting}
+              />
+              <p className="font-bold text-slate-400 mt-4">Last Name</p>
+              <input
+                type="text"
+                {...register("lastName")}
+                className="rounded w-80 h-10 px-2"
+                disabled={isSubmitting}
+              />
+              <p className="font-bold text-slate-400 mt-4">Email</p>
+              <input
+                type="text"
+                {...register("email")}
+                className="rounded w-80 h-10 px-2"
+                disabled={isSubmitting}
+              />
+              <p className="font-bold text-slate-400 mt-4">Username</p>
+              <input
+                type="text"
+                {...register("username")}
+                className="rounded w-80 h-10 px-2"
+                disabled={isSubmitting}
+              />
+              <p className="font-bold text-slate-400 mt-4">Address</p>
+              <input
+                type="text"
+                {...register("address")}
+                className="rounded w-80 h-10 px-2"
+                disabled={isSubmitting}
+              />
+            </div>
+            <Button type="submit" className="w-26 ml-5 hover:bg-blue-700 mt-8">
+              {isSubmitting ? "Submitting..." : "Update"}
+            </Button>
+          </form>
         </div>
-        <div className="mt-5">
-          <label htmlFor="avatarInput">
-            <Camera className="size-10 cursor-pointer" color="white" />
-            <input
-              id="avatarInput"
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={handleImageUpload}
-            />
-          </label>
+        <div className="flex flex-col items-center justify-center">
+          <div className=" flex flex-end mt-20 w-52 h-52 rounded-full overflow-hidden ">
+            <Avatar className="w-full h-full rounded-full bg-gray-300">
+              <AvatarImage src={avatarImage} />
+              <AvatarFallback></AvatarFallback>
+            </Avatar>
+          </div>
+          <div className="mt-5">
+            <label htmlFor="avatarInput">
+              <Camera className="size-10 cursor-pointer" color="white" />
+              <input
+                id="avatarInput"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleImageUpload}
+              />
+            </label>
+          </div>
+          <div className="m-4">
+            <button className="text-slate-400" onClick={toggleCVVisibility}>
+              {showCV ? "Hide CV" : "Show CV"}
+            </button>
+            {
+              //cv &&
+              showCV && (
+                <iframe
+                  title="CV"
+                  //src={cv}
+                  src="https://www.wallace.edu/wp-content/uploads/2020/03/Sample-PDF-for-Curriculum.pdf"
+                  width="300px"
+                  height="300px"
+                />
+              )
+            }
+          </div>
         </div>
       </div>
     </div>
