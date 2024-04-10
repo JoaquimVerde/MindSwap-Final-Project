@@ -20,6 +20,8 @@ export type Course = {
   duration: number;
   location: string;
   teacher: Teacher;
+  enrolledStudents: Person[];
+  maxStudents: number;
 };
 
 export type Teacher = {

@@ -49,6 +49,14 @@ export default async function Page({ params }: { params: { id: string } }) {
                 {course[0]?.location}
               </td>
             </tr>
+            {/* <tr className="m-0 border-t p-0 even:bg-muted">
+              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+                Location
+              </td>
+              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+                {course[0]?.maxStudents-course[0]?.enrolledStudents.length}
+              </td>
+            </tr> */}
           </tbody>
         </table>
       </div>
