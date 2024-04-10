@@ -69,6 +69,7 @@ export async function fetchAllCourses(): Promise<number> {
   ): Promise<Project[]> {
     noStore();
     try {
+
       const response = await fetch(
         `http://localhost:8080/api/v1/projects/course/${id}`
       );
@@ -79,6 +80,7 @@ export async function fetchAllCourses(): Promise<number> {
       console.log(projects);
 
       return projects;
+
     } catch (error) {
       console.error("Error fetching projects:", error);
       notFound();
@@ -88,6 +90,7 @@ export async function fetchAllCourses(): Promise<number> {
   export async function fetchPersonById(id: string): Promise<Person> {
     noStore();
     try {
+
       const response = await fetch(
         `http://localhost:8080/api/v1/persons/${id}`
       );
@@ -98,6 +101,7 @@ export async function fetchAllCourses(): Promise<number> {
       console.log(person);
 
       return person;
+
     } catch (error) {
       console.error("Database error:", error);
       throw new Error("Failed to fetch person.");
