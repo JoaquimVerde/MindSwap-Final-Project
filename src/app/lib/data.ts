@@ -1,9 +1,11 @@
 // data fetching methods go here
 // e.g. get all courses; get all users
 
+
 import { unstable_noStore as noStore } from "next/cache";
 import { notFound } from "next/navigation";
 import { Course, Person, Project, Application } from "./definitions";
+
 
 export async function fetchAllCourses(): Promise<number> {
   noStore();
@@ -130,7 +132,34 @@ export async function fetchAllCourses(): Promise<number> {
       console.error("Database error:", error);
       throw new Error("Failed to fetch all courses.");
     }
+
+}
+
+
+export async function fetchPersonByRole(): Promise<string> {
+  noStore();
+
+    try {
+
+      //get login info => person id
+      //const personId = fetchPersonById();
+      //filter by role
+      // side bar adjustments depending on the person's role
+
+      const response = await fetch('http://localhost:8080/api/v1/persons/role/:role');
+      if(!response.ok) {
+        throw new Error('Failed to fetch person by role.');
+      }
+
+      const person: Person = await response.json();
+
+      return person.role;
+    } catch (error) {
+      console.error('Database error:', error);
+        throw new Error('Failed to fetch person by role.');
+    }
   }
+
 
   export async function fetchAppliations(): Promise<Application[]> {
     noStore();
