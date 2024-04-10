@@ -124,10 +124,10 @@ export async function fetchCoursesByLocation(
     //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
-      `http://localhost:8080/api/v1/courses/location/${location}?limit=4&page=${currentPage - 1}`
+      `http://localhost:8080/api/v1/courses/location/${location}?limit=4&page=${currentPage-1}`
     );
     if (!response.ok) {
-      throw new Error("Failed to fetch courses");
+      throw new Error("Response not ok - Failed to fetch courses!!!");
     }
     const courses: Course[] = await response.json();
     console.log(courses);
@@ -220,6 +220,23 @@ export async function fetchApplicationById(id: string): Promise<Application> {
   } catch (error) {
     console.error("Error fetching application:", error);
     notFound();
+  }
+}
+
+export async function fetchAllCoursesFromLocation(location : string): Promise<number> {
+  noStore();
+  try {
+    const response = await fetch(`http://localhost:8080/api/v1/courses/location/${location}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch courses");
+    }
+    const courses: Course[] = await response.json();
+    //console.log(courses);
+
+    return courses.length;
+  } catch (error) {
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch all courses.");
   }
 }
 
