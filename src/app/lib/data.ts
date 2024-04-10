@@ -118,8 +118,10 @@ export async function fetchCoursesByLocation(
 ): Promise<Course[]> {
   noStore();
   try {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
+    console.log("fetching...");
+
+    //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
       `http://localhost:8080/api/v1/courses/location/${location}?limit=4&page=${currentPage - 1}`
@@ -128,7 +130,7 @@ export async function fetchCoursesByLocation(
       throw new Error("Failed to fetch courses");
     }
     const courses: Course[] = await response.json();
-    //console.log(courses);
+    console.log(courses);
 
     return courses;
   } catch (error) {

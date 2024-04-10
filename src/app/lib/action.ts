@@ -20,8 +20,6 @@ export async function updateCourse(
     , 
     courseId: string) {
 
-        
-
 
     fetch(`http://localhost:8080/api/v1/courses/${courseId}`, {
         method: "PUT",
@@ -32,7 +30,7 @@ export async function updateCourse(
         body: JSON.stringify(values)
     })
         .then((response) => {
-            console.log(response);
+            //console.log(response);
             if (response.status !== 200) {
                 throw new Error("something went wrong!!!");
             }

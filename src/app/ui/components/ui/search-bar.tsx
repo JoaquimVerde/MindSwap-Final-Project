@@ -5,23 +5,32 @@ import { Search } from "lucide-react";
 import { useSearchParams, usePathname, useRouter, redirect } from "next/navigation";
 import { useDebouncedCallback } from 'use-debounce';
 import LocationCards from "../../courses/location-cards";
+import { revalidatePath } from "next/cache";
 
 
-const SearchBar = ({ placeholder }: { placeholder: string }) => {
+const SearchBar = ({
+    placeholder,
+    currentPage
+}: {
+    placeholder: string,
+    currentPage: number
+}) => {
 
 
     // const searchParams = useSearchParams();
     // const pathName = usePathname();
     // const {replace} = useRouter();
 
+    const router = useRouter();
+
     const handleSearch = useDebouncedCallback((placeholder: string) => {
 
-        return (
+        console.log("handling search...");
 
-            <div>
-                <LocationCards currentPage={2} placeholder={placeholder} />
-            </div>
-        )
+        router.push(`/dashboard/all-courses/${placeholder}/courses`);
+
+        revalidatePath(`/dashboard/all-courses/${placeholder}/courses`);
+        redirect(`/dashboard/all-courses/${placeholder}/courses`);
 
     }, 300);
 
