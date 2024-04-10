@@ -22,6 +22,11 @@ export async function fetchAllCourses(): Promise<number> {
     console.error("Database error:", error);
     throw new Error("Failed to fetch all courses.");
   }
+    return courses.length;
+  } catch (error) {
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch all courses.");
+  }
 }
 
   export async function fetchCoursesByPage(
