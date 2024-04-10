@@ -23,78 +23,36 @@ import { Checkbox } from "@radix-ui/react-checkbox";
 import { stringify } from "querystring";
 import { Courgette } from "next/font/google";
 
-const url = "http://localhost:8080/api/v1/registration"; // TODO add url to env.ts
-
-const itemsCheckBox = [
-  {
-    id: "java",
-    label: "javascript",
-  },
-  {
-    id: "python",
-    label: "python",
-  },
-  {
-    id: "php",
-    label: "php",
-  },
-  {
-    id: "c++",
-    label: "c++",
-  },
-  {
-    id: "c#",
-    label: "c#",
-  },
-  {
-    id: "ruby",
-    label: "ruby",
-  },
-  {
-    id: "go",
-    label: "go",
-  },
-  {
-    id: "typescript",
-    label: "typescript",
-  },
-  {
-    id: "none",
-    label: "none",
-  },
-] as const;
+const url = "http://localhost:3000/api/v1/registration"; // TODO add url to env.ts
 
 const formSchema = z.object({
-  // personId: z.string(),
+  status: z.string(),
+  personId: z.string(),
   courseId: z.string(),
   // phoneNumber: z.string(),
   //uploadResume: z.string().optional(),
-  aboutyou: z.string(),
+  aboutYou: z.string(),
   prevKnowledge: z.enum(["false", "true"], {
     required_error: "You need to select a notification type.",
   }),
   prevExperience: z.enum(["false", "true"], {
     required_error: "You need to select a notification type.",
   }),
-  // itemsCheckBox: z
-  //   .array(z.string())
-  //   .refine((value) => value.some((item) => item), {
-  //     message: "You have to select at least one item.",
-  //   }),
 });
 
-export function ApplicationForm({
-  id
-}: {
-  id: string;
-}) {
-  
+
+export function ApplicationForm({ id }: { id: string }) {
+  const courseIdparam = id.replace("%23", "#");
+  const personIdparam = "PERSON#003987b3-6764-40db-95c1-3167fec491b6";
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      status: "Applied",
       courseId: "1",
-      aboutyou: "",
+      personId: "1",
+      aboutYou: "",
       prevKnowledge: "false",
       prevExperience: "false",
     },
@@ -103,7 +61,9 @@ export function ApplicationForm({
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submited", values);
 
-    values = { ...values, courseId: id };
+    values = { ...values, courseId: courseIdparam };
+    values = { ...values, personId: personIdparam };
+    values = { ...values, status: "Applied" };
 
     const api_req_options = {
       method: "POST",
@@ -115,11 +75,6 @@ export function ApplicationForm({
 
     const res = fetch(url, api_req_options);
     console.log(res);
-
-    //const status = "applied";
-
-    // postApplication({ values });
-    // TODO add api POSt
   }
 
   return (
@@ -186,7 +141,7 @@ export function ApplicationForm({
 
               <FormField
                 control={form.control}
-                name="aboutyou"
+                name="aboutYou"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Something about you</FormLabel>
@@ -214,16 +169,18 @@ export function ApplicationForm({
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex flex-col space-y-1"
+                        className="flex flex-col space-y-1 opacity-100"
                       >
                         <RadioGroupItem
                           value="false"
+                          className="bg-white opacity-100"
                           // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           No
                         </RadioGroupItem>
                         <RadioGroupItem
                           value="true"
+                          className="bg-white opacity-100"
                           // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           Yes
@@ -246,16 +203,19 @@ export function ApplicationForm({
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex flex-col space-y-1"
+                        className="flex flex-col space-y-1 opacity-100"
                       >
                         <RadioGroupItem
                           value="false"
+                          className="bg-white opacity-100"
                           // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           No
                         </RadioGroupItem>
                         <RadioGroupItem
                           value="true"
+                          className="bg-white opacity-100"
+                          //style={{ opacity: 1 }}
                           // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           Yes

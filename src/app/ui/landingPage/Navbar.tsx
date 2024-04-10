@@ -1,9 +1,9 @@
 "use client";
 
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-
-import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "next/link";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,18 +15,17 @@ function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsSticky(true);
-      }
+      const currentScrollPosition = window.scrollY;
+      setIsSticky(currentScrollPosition > 0);
     };
     window.addEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
-      className={` py-4 md:px-8 px-4 bg-black ${
+      className={` py-4 md:px-8 px-4 bg-black z-10 ${
         isSticky ? "sticky top-0 right-0 left-0 bg-black" : ""
-      }`}
+      } `}
     >
       <div className="flex items-center justify-between">
         <div className="font-bold tex-2xl cursor-pointer text-white">
@@ -65,17 +64,18 @@ function Navbar() {
         {/* btn */}
 
         <div className="lg:block hidden py-3">
-        <a href="https://mindswaplogin.auth.eu-central-1.amazoncognito.com/login?client_id=3qn4vfitu65korf49pnrp1pt24&response_type=code&scope=email+openid+profile&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fcognito">
-          <button className=" px-4 py-1 border-slate-300 text-slate-300 bg-blue-950 hover:bg-blue-700 transition-all duration-300 rounded-md">
+          <button
+            className=" px-4 py-1 border-slate-300 text-slate-300 bg-blue-950 hover:bg-blue-700 transition-all duration-300 rounded-md"
+            onClick={() => signIn("cognito")}
+          >
             login
           </button>
-        </a>
 
-        <a href="https://mindswaplogin.auth.eu-central-1.amazoncognito.com/signup?client_id=3qn4vfitu65korf49pnrp1pt24&response_type=code&scope=email+openid+profile&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fcognito">
-          <button className=" mx-4 px-1 py-1 border-slate-300 text-slate-300 bg-blue-900 hover:bg-blue-600 transition-all duration-300 rounded-md">
-            Sign Up
-          </button>
-        </a>
+          
+            <button className=" mx-4 px-1 py-1 border-slate-300 text-slate-300 bg-blue-900 hover:bg-blue-600 transition-all duration-300 rounded-md"
+            onClick={() => window.location.href = "https://mindswaplogin.auth.eu-central-1.amazoncognito.com/signup?client_id=3qn4vfitu65korf49pnrp1pt24&response_type=code&scope=email+openid+profile&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fcognito"}>
+              Sign Up
+            </button>
         </div>
         {/*menu btn for sm devices */}
 

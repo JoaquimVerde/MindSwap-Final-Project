@@ -11,14 +11,12 @@ function HeroSection() {
         <source src="/videos/video.mp4" type="video/mp4" />
       </video>
 
-    
-
       {/* Content */}
 
       <div className="w-full h-screen text-center">
         <div className="absolute max-w[1240px] w-full h-full mx-auto flex  justify-center items-center  ">
           <div>
-            <h1 className=" font-serif font-extrabold uppercase py-4 text-slate-400 ">
+            <h1 className=" text-8xl font-serif font-extrabold uppercase py-4 text-slate-400 ">
               Let`s tech the <span className="text-blue-800">world</span>
             </h1>
             <br />
