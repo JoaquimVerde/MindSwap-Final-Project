@@ -1,6 +1,5 @@
 'use client';
 
-import React, { useEffect } from 'react';
 import NavLinks from '@/app/ui/dashboard/nav-links';
 import {X} from 'lucide-react';
 
@@ -25,7 +24,6 @@ const Sidenav: React.FC<SidenavProps> = ({ isHidden, onHide }) => {
             <X size="54" className="cursor-pointer flex-row" />
           </li>
           <li>
-            {/* do we pass a role prop? */}
             <NavLinks />
           </li>
         </ul>

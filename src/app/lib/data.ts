@@ -177,7 +177,7 @@ export async function fetchRole(): Promise<string> {
       throw new Error('Role not found in session storage.');
     }
 
-    return role;
+    return role as string;
 
   } catch (error) {
     console.error('FetchError:', error);
