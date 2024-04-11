@@ -8,19 +8,29 @@ import Image from "next/image";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSticky, setIsSticky] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [isSticky, setIsSticky] = useState(true);
+
+  const handleScroll = () => {
+    const currentScrollPos = window.scrollY;
+    console.log("Current Scroll Position:", currentScrollPos);
+    setIsMenuOpen(false);
+    setIsSticky(
+      (prevScrollPos > currentScrollPos && currentScrollPos > 0) || currentScrollPos < 1
+    );
+    setPrevScrollPos(currentScrollPos);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPosition = window.scrollY;
-      setIsSticky(currentScrollPosition > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <nav
