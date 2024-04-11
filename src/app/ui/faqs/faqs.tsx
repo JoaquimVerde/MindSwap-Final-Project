@@ -17,59 +17,57 @@ export default function Questions(){
         <div className="em-[2em] max-w-[30em]"> 
             <Accordion type="single" collapsible>
                 <AccordionItem value="item-1">
-                    <AccordionTrigger>What do Mindera courses include?</AccordionTrigger>
+                    <AccordionTrigger>What is Acodemy?</AccordionTrigger>
                     <AccordionContent>
-                        Our courses include access to important informational material, attending classes either in person or remotely with qualified instructors, completing exercises to enhance problem-solving skills, and simulating real work scenarios.
+                    Acodemy is an innovative online learning platform dedicated to teaching coding and software development through interactive courses, real-world projects, and one-on-one mentorship.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
-                    <AccordionTrigger>How can I apply for a course?</AccordionTrigger>
+                    <AccordionTrigger>Who can enroll in Acodemy?</AccordionTrigger>
                     <AccordionContent>
-                        Easy peasy! Just hop onto our website, select a course, click "Apply" and you're on your way to coding glory!
+                    Anyone with an interest in learning to code is welcome to enroll! We cater to all levels, from complete beginners to seasoned programmers looking to expand their skill set.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-3">
-                    <AccordionTrigger>Can I preview course materials before enrolling?</AccordionTrigger>
+                    <AccordionTrigger>What courses does Acodemy offer?</AccordionTrigger>
                     <AccordionContent>
-                        You can search for available courses and read the information provided for each course, and contact us if you have any questions.
+                    Acodemy offers a range of courses in web development, app development, data science, artificial intelligence, and more. We continuously update our course catalog to include the latest programming languages and technologies.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-4">
-                    <AccordionTrigger>Do you offer a certification upon completion of a course?</AccordionTrigger>
+                    <AccordionTrigger>How are the courses structured?</AccordionTrigger>
                     <AccordionContent>
-                        Yes, we do!
+                        Your courses are structured into modules consisting of video lectures, interactive coding sessions, quizzes, and hands-on projects. Each course is designed to be self-paced, allowing you to learn at your convenience.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-5">
-                    <AccordionTrigger>What does the selection process look like?</AccordionTrigger>
+                    <AccordionTrigger>Do I need any prior experience to start learning?</AccordionTrigger>
                     <AccordionContent>
-                        You apply for the course you're interested in, and then we select candidates based on their qualifications and aspirations. 
-                        After this initial selection, we conduct an interview to get to know each other better.
+                    No prior experience is necessary for our beginner courses. They're designed to take you from zero to coding confidently. For more advanced courses, prerequisites will be clearly listed.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-4">
-                    <AccordionTrigger>If I don't get selected, can I apply again in the future?</AccordionTrigger>
+                    <AccordionTrigger>What support will I have access to as a student?</AccordionTrigger>
                     <AccordionContent>
-                        Of course! We believe in second chances, third chances, and infinite chances! Keep coding and keep trying!
+                    You'll have access to our community forums, 24/7 mentor support, and live Q&A sessions to help you overcome any challenges and enhance your learning experience.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-6">
-                    <AccordionTrigger>Can I change or exchange my course?</AccordionTrigger>
+                    <AccordionTrigger>How long does it take to complete a course?</AccordionTrigger>
                     <AccordionContent>
-                        You can't change your course, but you can withdraw if it's not what you expected. 
-                        You won't need to pay the remaining balance if it's a longer course.
+                    Completion time varies depending on the course and your personal pace. On average, our students complete courses in 3 to 6 months.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-7">
-                    <AccordionTrigger>How do I pay for a course?</AccordionTrigger>
+                    <AccordionTrigger>Are there any live classes or events?</AccordionTrigger>
                     <AccordionContent>
-                        Payment options galore! Choose your preferred method and let the learning begin!
+                    Yes, Acodemy hosts live workshops, webinars, and study groups regularly. These events are a great opportunity to interact with instructors and peers.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-8">
-                    <AccordionTrigger>Is there a refund policy if I'm not satisfied?</AccordionTrigger>
+                    <AccordionTrigger>What kind of projects will I work on?</AccordionTrigger>
                     <AccordionContent>
-                        No, we do not offer refunds for paid courses
+                    You'll build real-world projects that can be added to your portfolio. These range from websites and applications to data analysis and machine learning models.
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>
@@ -77,63 +75,57 @@ export default function Questions(){
         <div className="em-[2em] max-w-[30em]">
             <Accordion type="single" collapsible>
                 <AccordionItem value="item-9">
-                    <AccordionTrigger>How do I create or log in to my account?</AccordionTrigger>
+                    <AccordionTrigger>Can I try a course before I commit?</AccordionTrigger>
                     <AccordionContent>
-                        It's as simple as 1, 2, 3! Sign up, log in, and let the coding adventures begin!
+                    Absolutely! We offer a free trial that includes several lessons from different courses, allowing you to get a feel for our teaching style and platform.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-10">
-                    <AccordionTrigger>How do I find a course?</AccordionTrigger>
+                    <AccordionTrigger>What are the system requirements to take a course?</AccordionTrigger>
                     <AccordionContent>
-                        Go to out website, click on courses and navigate for all our courses.
+                    You will need a computer with internet access. Our platform is web-based, so no special software is required. Any additional software needed for a course will be clearly stated.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-11">
-                    <AccordionTrigger>Can I join a course online or in-person, or both?</AccordionTrigger>
+                    <AccordionTrigger>Do you offer any certificates or credentials?</AccordionTrigger>
                     <AccordionContent>
-                        Choose your own adventure! Whether you prefer virtual voyages or in-person escapades, we've got a seat waiting for you! 
+                    Upon successful completion of a course, you will receive a digital certificate that you can add to your LinkedIn profile and share with potential employers.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-12">
-                    <AccordionTrigger>Are these courses suitable for beginners?</AccordionTrigger>
+                    <AccordionTrigger>How much do courses cost?</AccordionTrigger>
                     <AccordionContent>
-                        It depends on the course. 
-                        There are courses specifically designed for beginners, while others require a certain level of prior knowledge.
-                        Please consult the information for each course to get your answer.
+                    We offer various pricing plans, including single-course purchases and subscription models. Prices vary depending on the course complexity and length.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-13">
-                    <AccordionTrigger>Do you offer any payment facility for your courses?</AccordionTrigger>
+                    <AccordionTrigger>Is there a community for Acodemy students?</AccordionTrigger>
                     <AccordionContent>
-                        Unfortunately not. 
-                        Depending on the chosen course, some courses require full payment at the time of enrollment, 
-                        while others offer payment plans spread out over the total course duration.
+                    Yes, we have a vibrant online community where students can collaborate, share resources, and support each other.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-14">
-                    <AccordionTrigger>How long is the course?</AccordionTrigger>
+                    <AccordionTrigger>What if I'm not satisfied with a course?</AccordionTrigger>
                     <AccordionContent>
-                        Our courses have different durations depending on objectives and schedules. 
-                        Please consult the information for each course to get your answer.
+                    We offer a satisfaction guarantee. If you're not happy with a course, contact us within the first 30 days for a full refund.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-15">
-                    <AccordionTrigger>Do you offer job placement assistance?</AccordionTrigger>
+                    <AccordionTrigger>How does Acodemy stay updated with industry trends?</AccordionTrigger>
                     <AccordionContent>
-                        Yes, we provide job placement assistance and career guidance to our students. 
-                        Our career services team offers support with resume building, interview preparation, and networking opportunities.
+                    Our curriculum is designed by industry experts and is continuously updated to reflect the latest trends and best practices in technology.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-16">
-                    <AccordionTrigger>What level of English proficiency is required?</AccordionTrigger>
+                    <AccordionTrigger>Are there any discounts for students or non-profits?</AccordionTrigger>
                     <AccordionContent>
-                        A basic level of English proficiency is recommended to understand course materials and communicate effectively with instructors and peers. However, specific language requirements may vary depending on the course.
+                    Yes, we offer discounts for students and non-profit organizations. Please contact our support team for more information.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-4">
-                    <AccordionTrigger>Do I need my own laptop?</AccordionTrigger>
+                    <AccordionTrigger>How can I sign up for Acodemy?</AccordionTrigger>
                     <AccordionContent>
-                        Yes, you do. You'll need your own laptop to embark on this tech adventure.
+                    Signing up is easy! Visit our website, choose your course, and you can start learning immediately after completing the registration process.
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>

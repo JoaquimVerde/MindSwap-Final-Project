@@ -28,7 +28,7 @@ export const linksub: LinkTypeSub[] = [
     name: "My-Courses",
     href: "/dashboard/my-courses",
     icon: BookOpenText,
-    role: ["STUDENT", "ADMIN"],
+    role: ["STUDENT"],
     sublinks: [
       {
         name: "My Applied Courses",
@@ -49,7 +49,7 @@ export const links: LinkType[] = [
     name: "My Courses",
     href: "/dashboard/my-courses-teacher",
     icon: BookOpenText,
-    role: ["TEACHER", "ADMIN"],
+    role: ["TEACHER"],
   },
   {
     name: "All Courses",
@@ -64,17 +64,17 @@ export const links: LinkType[] = [
     role: ["TEACHER", "ADMIN"],
   },
   {
-    name: "Profile",
-    href: "/dashboard/profile",
-    icon: UserRound,
-    role: ["STUDENT", "ADMIN", "TEACHER"],
-  },
-  {
     name: "All Applications",
     href: "/dashboard/all-courses/all-applications",
     icon: BookCheck,
     role: ["ADMIN", "TEACHER"],
   },
+  {
+    name: "Profile",
+    href: "/dashboard/profile",
+    icon: UserRound,
+    role: ["STUDENT", "ADMIN", "TEACHER"],
+  }
 ];
 
 export default function NavLinks() {

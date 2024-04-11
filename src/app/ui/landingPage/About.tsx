@@ -7,7 +7,7 @@ function About() {
       <div className="w-full md:h-200 p-2 flex flex-col md:flex-row items-center py-16">
         <div className="max-w-[1240px] mx-auto md:w-1/2 md:pr-8 text-slate-300">
           <h2 className="text-slate-300">
-            <span className="text-blue-700">let</span> ACODEMY =
+            <span className="text-blue-700">let</span> acodemy =
             &#40;School&#41; &#61;&#62; &#123;
           </h2>
           <h2 className="text-blue-700">return</h2>
