@@ -12,14 +12,14 @@ function Navbar() {
   const [isSticky, setIsSticky] = useState(true);
 
   const handleScroll = () => {
-    const currentScrollPos = window.scrollY;
-    console.log("Current Scroll Position:", currentScrollPos);
-    setIsMenuOpen(false);
-    setIsSticky(
-      (prevScrollPos > currentScrollPos && currentScrollPos > 0) || currentScrollPos < 1
-    );
-    setPrevScrollPos(currentScrollPos);
-  };
+  const currentScrollPos = window.scrollY;
+  console.log("Current Scroll Position:", currentScrollPos);
+  setIsMenuOpen(false);
+  setIsSticky(
+    (prevScrollPos > currentScrollPos && currentScrollPos > 0) || currentScrollPos < 1
+  );
+  setPrevScrollPos(currentScrollPos);
+};
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
