@@ -56,19 +56,13 @@ export const links: LinkType[] = [
     name: "All Courses",
     href: "/dashboard/all-courses",
     icon: LibraryBig,
-    role: ["STUDENT"],
-  },
-  {
-    name: "All Courses",
-    href: "/dashboard/all-courses-teacher",
-    icon: LibraryBig,
-    role: ["TEACHER", "ADMIN"],
+    role: ["STUDENT", "ADMIN"],
   },
   {
     name: "All Applications",
     href: "/dashboard/all-courses/all-applications",
     icon: BookCheck,
-    role: ["ADMIN", "TEACHER"],
+    role: ["ADMIN"],
   },
   {
     name: "All Staff",
