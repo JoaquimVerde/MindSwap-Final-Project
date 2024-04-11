@@ -292,11 +292,10 @@ export async function fetchProjectByStudentId(id: string): Promise<Project[]> {
   }
 }
 
-export async function fetchAllApplicationsById(): Promise<Application> {
+export async function fetchAllApplicationsById(): Promise<Application[]> {
   noStore();
   try {
     const id = sessionStorage.getItem("userId");
-    console.log(id);
     if (!id) {
       throw new Error("Id not found in session storage");
     }
@@ -309,12 +308,11 @@ export async function fetchAllApplicationsById(): Promise<Application> {
       throw new Error("Failed to fetch all student applications");
     }
 
-    const application: Application = await response.json();
-    console.log(application);
+    const applications: Application[] = await response.json();
 
-    return application;
+    return applications;
   } catch (error) {
-    console.error("Error fetching application:", error);
+    console.error("Error fetching applications:", error);
     notFound();
   }
 }
