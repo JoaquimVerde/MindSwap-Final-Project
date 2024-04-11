@@ -66,7 +66,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
       }
       const encodedId = userId.replace(/#/g, "%23");
       const response = await fetch(
-        `http://localhost:8080/api/v1/persons/${encodedId}`,
+        `http://localhost:3000/proxy/api/v1/persons/${encodedId}`,
         {
           method: "PUT",
           headers: {
@@ -106,12 +106,13 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
               disabled={isSubmitting}
             />
 
-            <p className="font-bold text-slate-400 mt-4">Email</p>
+            <p className="font-bold text-slate-400 mt-4" hidden>Email</p>
             <input
               type="text"
               {...register("email")}
               className="rounded w-80 h-10 px-2"
               disabled={isSubmitting}
+              hidden
             />
 
             <p className="font-bold text-slate-400 mt-4">Username</p>
@@ -128,9 +129,16 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
               className="rounded w-80 h-10 px-2"
               disabled={isSubmitting}
             />
+            <p className="font-bold text-slate-400 mt-4">CV</p>
+            <input
+              type="text"
+              {...register("cv")}
+              className="rounded w-80 h-10 px-2"
+              disabled={isSubmitting}
+            />
           </div>
 
-          <Button type="submit" className="w-26 ml-5 hover:bg-blue-700 mt-8">
+          <Button type="submit" className="w-26 ml-0 hover:bg-blue-700 mt-8">
             {isSubmitting ? "Submitting..." : "Update"}
           </Button>
         </form>

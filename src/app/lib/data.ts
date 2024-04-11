@@ -32,7 +32,7 @@ export async function fetchCoursesByPage(
     //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
-      `http://localhost:8080/api/v1/courses?page=${currentPage - 1}&limit=4`
+      `http://localhost:8080/api/v1/courses?page=${currentPage - 1}&limit=6`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
@@ -101,7 +101,7 @@ export async function fetchProjectsByCourseId(
       const encodedId = id.replace(/#/g, "%23");
 
       const response = await fetch(
-        `http://localhost:8080/api/v1/persons/${encodedId}`
+        `http://localhost:3000/proxy/api/v1/persons/${encodedId}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch courses");
@@ -189,7 +189,7 @@ export async function fetchRole(): Promise<string> {
 export async function fetchApplications(): Promise<Application[]> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/registration`);
+    const response = await fetch(`http://localhost:3000/proxy/api/v1/registration`);
     if (!response.ok) {
       throw new Error("Failed to fetch applications");
 
