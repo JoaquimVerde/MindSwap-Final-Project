@@ -292,3 +292,28 @@ export async function fetchProjectByStudentId(id: string): Promise<Project[]> {
   }
 }
 
+export async function fetchAllApplicationsById(): Promise<Application[]> {
+  noStore();
+  try {
+    const id = sessionStorage.getItem("userId");
+    if (!id) {
+      throw new Error("Id not found in session storage");
+    }
+    const encodedId = id.replace(/#/g, "%23");
+
+    const response = await fetch(
+      `http://localhost:3000/proxy/api/v1/registration/student/${encodedId}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch all student applications");
+    }
+
+    const applications: Application[] = await response.json();
+
+    return applications;
+  } catch (error) {
+    console.error("Error fetching applications:", error);
+    notFound();
+  }
+}
+
