@@ -196,7 +196,7 @@ export async function fetchApplicationById(id: string): Promise<Application> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/registration/${id}`
+      `http://localhost:3000/proxy/api/v1/registration/${id}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch application");

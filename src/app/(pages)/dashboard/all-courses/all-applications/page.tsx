@@ -21,15 +21,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-<<<<<<< HEAD
-//import SearchBar from "@/app/ui/components/ui/search-bar";
-=======
-import SearchBar from "@/app/ui/components/ui/search-bar";
+
 import Link from "next/link";
->>>>>>> b546058 (create button in allApllications, create page to upadte application status)
+// import SearchBar from "@/app/ui/components/ui/search-bar";
 
 export default async function AllApplications() {
   const applications = await fetchApplications();
+  console.log(applications);
 
   return (
     <div className="mx-2 my-2">
@@ -77,7 +75,10 @@ export default async function AllApplications() {
               <TableCell>{application.status}</TableCell>
               <TableCell>
                 <Link
-                  href="/dashboard/all-courses/all-applications/application-update"
+                  href={`/dashboard/all-courses/all-applications/${application.id.replace(
+                    "#",
+                    "%23"
+                  )}/application-update`}
                   id={application.id}
                 >
                   Validate

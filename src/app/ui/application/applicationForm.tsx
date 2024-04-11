@@ -19,11 +19,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import React from "react";
 
-<<<<<<< HEAD
 const url = "http://localhost:3000/proxy/api/v1/registration";
-=======
-const url = "http://localhost:3000/proxy/v1/registration";
->>>>>>> b546058 (create button in allApllications, create page to upadte application status)
 const formSchema = z.object({
   status: z.string(),
   personId: z.string(),
@@ -40,11 +36,7 @@ const formSchema = z.object({
 export function ApplicationForm({ id }: { id: string }) {
   const { toast } = useToast();
   const courseIdparam = id.replace("%23", "#");
-<<<<<<< HEAD
   const personIdparam = sessionStorage.getItem("userId");
-=======
-  const personIdparam = "PERSON#cf4f5fa7-cd9c-424a-a00c-9308173a6951";
->>>>>>> b546058 (create button in allApllications, create page to upadte application status)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
