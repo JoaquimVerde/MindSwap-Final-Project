@@ -34,6 +34,8 @@ export function CardsSkeleton() {
                     <CardSkeleton />
                     <CardSkeleton />
                     <CardSkeleton />
+                    <CardSkeleton />
+                    <CardSkeleton />
                </div>
           </div >
      );

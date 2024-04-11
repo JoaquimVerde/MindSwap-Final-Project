@@ -118,7 +118,7 @@ export async function fetchCoursesByLocation(
     //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/courses/location/${location}?limit=4&page=${currentPage-1}`
+      `http://localhost:3000/proxy/api/v1/courses/location/${location}?page=${currentPage-1}&limit=6`
 
     );
     if (!response.ok) {

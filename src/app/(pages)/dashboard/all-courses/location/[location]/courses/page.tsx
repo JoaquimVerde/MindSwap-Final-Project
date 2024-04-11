@@ -29,7 +29,7 @@ export default async function AllCoursesInLocation(
 
     const currentPage = Number(searchParams?.page) || 1;
     const totalCoursesNumber = await fetchAllCoursesFromLocation(location);
-    const totalPages = Math.ceil(totalCoursesNumber / 4);
+    const totalPages = Math.ceil(totalCoursesNumber / 6);
 
 
 
