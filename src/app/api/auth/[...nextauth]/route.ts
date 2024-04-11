@@ -3,15 +3,14 @@ import NextAuth from "next-auth/next";
 import Cognito from "next-auth/providers/cognito";
 
 const handler = NextAuth({
-    providers: [
-        Cognito({
-          clientId: "3qn4vfitu65korf49pnrp1pt24",
-          clientSecret: "1hv8omvqphcucpn2nc3nt78fkk59n70qg375ef39rbkjr5irki58",
-          issuer: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_X3fg9Dyu0",
-        })
-      ],
-      secret: process.env.NEXT_PUBLIC_SECRET
+  providers: [
+    Cognito({
+      clientId: process.env.COGNITO_CLIENT_ID as string,
+      clientSecret: process.env.COGNITO_CLIENT_SECRET as string,
+      issuer: process.env.COGNITO_ISSUER as string,
+    }),
+  ],
+  secret: process.env.NEXT_PUBLIC_SECRET,
+});
 
-})
-
-export { handler as GET, handler as POST}
+export { handler as GET, handler as POST };
