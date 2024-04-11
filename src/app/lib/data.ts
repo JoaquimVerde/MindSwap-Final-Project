@@ -225,6 +225,23 @@ export async function fetchApplicationById(id: string): Promise<Application> {
   }
 }
 
+export async function getPersonByRole(role: string): Promise<Person[]> {
+  noStore();
+  try {
+    const response = await fetch(`http://localhost:3000/proxy/api/v1/persons/role/${role}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch persons");
+    }
+    const persons: Person[] = await response.json();
+    console.log(persons);
+
+    return persons;
+  } catch (error) {
+    console.error("Error fetching persons:", error);
+    return [];
+  }
+}
+
 
 export async function fetchProjectById(id: string): Promise<Project> {
   noStore();
