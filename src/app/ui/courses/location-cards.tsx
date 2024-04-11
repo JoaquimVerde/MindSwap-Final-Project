@@ -10,7 +10,7 @@ import { Scroll } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { GetCourseInfo } from "@/app/ui/courses/buttons";
-import { fetchCoursesByLocation } from "@/app/lib/data";
+import { fetchAllCourses, fetchCoursesByLocation } from "@/app/lib/data";
 import Pagination from "@/app/ui/courses/pagination";
 import NotFound from "@/app/(pages)/dashboard/all-courses/[id]/course/not-found";
 
@@ -20,9 +20,11 @@ export default async function LocationCards(
     {
         currentPage,
         placeholder,
+      
       }: {
         currentPage: number;
         placeholder: string;
+       
       })
  {
 
