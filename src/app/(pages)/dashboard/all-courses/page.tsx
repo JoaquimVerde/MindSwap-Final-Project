@@ -4,6 +4,7 @@ import { CardsSkeleton, PaginationSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
 import { fetchAllCourses } from "@/app/lib/data";
 import Pagination from "@/app/ui/courses/pagination";
+import SearchBar from "@/app/ui/components/ui/search-bar";
 
 
 // import { Metadata } from "next";
@@ -34,7 +35,9 @@ export default async function AllCourses(
             </div>
 
             <div className="mt-5 ml-4 w-[500px]">
-                {/* <SearchBar placeholder="search by location" /> */}
+
+            <SearchBar placeholder="search by location" currentPage={currentPage} />
+
             </div>
 
             <Suspense fallback={<PaginationSkeleton />}>

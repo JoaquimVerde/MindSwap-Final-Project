@@ -115,7 +115,7 @@ export function EditCourseForm({
                                         <Input
                                             placeholder={"" + course?.edition} {...field}
                                             onChange={(e) => {
-                                                const parsedValue = parseFloat(e.target.value);
+                                                const parsedValue = parseInt(e.target.value);
                                                 if (!isNaN(parsedValue)) {
                                                     field.onChange(parsedValue);
                                                 } else {
@@ -212,11 +212,9 @@ export function EditCourseForm({
                                             placeholder={"" + course.duration} {...field}
                                             onChange={(e) => {
                                                 const parsedValue = parseInt(e.target.value);
-                                                if (!isNaN(parsedValue)) {
-                                                    // If the parsed value is not NaN, update the field value
+                                                if (!isNaN(parsedValue)) {                                         
                                                     field.onChange(parsedValue);
                                                 } else {
-                                                    // If the parsed value is NaN, update the field value to an empty string or handle it accordingly
                                                     field.onChange('');
                                                 }
                                             }}

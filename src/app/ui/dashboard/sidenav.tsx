@@ -14,7 +14,7 @@ const Sidenav: React.FC<SidenavProps> = ({ isHidden, onHide }) => {
   return (
     <div className={`drawer ${isHidden ? 'hidden' : 'lg:drawer-open'}`}>
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-row items-start justify-start ml-5 mt-5">
+      <div className="drawer-content flex flex-row items-start justify-start ml-5 mt-5 ">
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay bg-white"></label>
