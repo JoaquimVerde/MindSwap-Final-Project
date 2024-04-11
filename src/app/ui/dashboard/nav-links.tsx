@@ -9,16 +9,17 @@ import {
   GraduationCap,
   BookCheck,
   BookOpenText,
+  UserRound,
   LibraryBig,
   Home,
 } from "lucide-react";
 import { fetchRole } from "@/app/lib/data"; 
+import { toPascalCase } from "@/app/lib/utils";
 
 export const linkDashboard: LinkType = {
-  name: "Dashboard",
+  name: `${toPascalCase(sessionStorage.userRole)}'s Dashboard`,
   href: "/dashboard",
   icon: Home,
-  role: ["STUDENT", "TEACHER", "ADMIN"],
   role: ["STUDENT", "TEACHER", "ADMIN"],
 };
 
@@ -27,7 +28,6 @@ export const linksub: LinkTypeSub[] = [
     name: "My-Courses",
     href: "/dashboard/my-courses",
     icon: BookOpenText,
-    role: ["STUDENT", "ADMIN"],
     role: ["STUDENT", "ADMIN"],
     sublinks: [
       {
@@ -49,7 +49,6 @@ export const links: LinkType[] = [
     name: "My Courses",
     href: "/dashboard/my-courses-teacher",
     icon: BookOpenText,
-    role: ["TEACHER", "ADMIN"],
     role: ["TEACHER", "ADMIN"],
   },
   {
@@ -74,7 +73,6 @@ export const links: LinkType[] = [
     name: "All Applications",
     href: "/dashboard/all-courses/all-applications",
     icon: BookCheck,
-    role: ["ADMIN", "TEACHER"],
     role: ["ADMIN", "TEACHER"],
   },
 ];
