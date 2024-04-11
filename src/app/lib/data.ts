@@ -122,7 +122,7 @@ export async function fetchCoursesByLocation(
       process.env.API_URL + `/api/v1/courses/location/${location}?limit=4&page=${currentPage - 1}`
     );
     if (!response.ok) {
-      throw new Error("Failed to fetch courses");
+      throw new Error("Response not ok - Failed to fetch courses!!!");
     }
     const courses: Course[] = await response.json();
     console.log(courses);
@@ -212,6 +212,7 @@ export async function fetchApplicationById(id: string): Promise<Application> {
   }
 }
 
+<<<<<<< HEAD
 export async function fetchProjectById(id: string): Promise<Project> {
   noStore();
   try {
@@ -247,3 +248,22 @@ export async function fetchProjectByStudentId(id: string): Promise<Project[]> {
     throw new Error("Failed to fetch project.");
   }
 }
+=======
+export async function fetchAllCoursesFromLocation(location : string): Promise<number> {
+  noStore();
+  try {
+    const response = await fetch(`http://localhost:8080/api/v1/courses/location/${location}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch courses");
+    }
+    const courses: Course[] = await response.json();
+    //console.log(courses);
+
+    return courses.length;
+  } catch (error) {
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch all courses.");
+  }
+}
+
+>>>>>>> a6eeee5 (trying to fix search-bar)
