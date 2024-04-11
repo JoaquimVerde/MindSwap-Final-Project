@@ -30,11 +30,7 @@ export async function fetchCoursesByPage(
     //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
-<<<<<<< HEAD
       process.env.API_URL +`/api/v1/courses?page=${currentPage - 1}&limit=4`
-=======
-      `http://localhost:3000/proxy/api/v1/courses?page=${currentPage - 1}&limit=6`
->>>>>>> 9097d07 (small-fixes)
     );
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
@@ -52,11 +48,7 @@ export async function fetchCoursesByPage(
 export async function fetchCourseById(id: string): Promise<Course> {
   noStore();
   try {
-<<<<<<< HEAD
     const response = await fetch( process.env.API_URL +`/api/v1/courses/${id}`);
-=======
-    const response = await fetch(`http://localhost:3000/proxy/api/v1/courses/${id}`);
->>>>>>> 9097d07 (small-fixes)
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
     }
@@ -127,11 +119,7 @@ export async function fetchCoursesByLocation(
     //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
-<<<<<<< HEAD
       process.env.API_URL + `/api/v1/courses/location/${location}?limit=4&page=${currentPage - 1}`
-=======
-      `http://localhost:3000/proxy/api/v1/courses/location/${location}?limit=4&page=${currentPage-1}`
->>>>>>> 9097d07 (small-fixes)
     );
     if (!response.ok) {
       throw new Error("Response not ok - Failed to fetch courses!!!");
@@ -227,7 +215,7 @@ export async function fetchApplicationById(id: string): Promise<Application> {
 export async function fetchProjectById(id: string): Promise<Project> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/projects/${id}`);
+    const response = await fetch(`http://localhost:3000/proxy/api/v1/projects/${id}`);
     if (!response.ok) {
       throw new Error("Failed to fetch projects");
     }
@@ -241,13 +229,11 @@ export async function fetchProjectById(id: string): Promise<Project> {
   }
 }
 
-
-
 export async function fetchProjectByStudentId(id: string): Promise<Project[]> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/projects/person/${id}`
+      `http://localhost:3000/proxy/api/v1/projects/person/${id}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch projects");
