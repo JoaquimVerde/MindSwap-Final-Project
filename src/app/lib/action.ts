@@ -23,7 +23,7 @@ export async function updateCourse(
         
 
 
-    fetch(`http://localhost:8080/api/v1/courses/${courseId}`, {
+    fetch(process.env.API_URL + `/api/v1/courses/${courseId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

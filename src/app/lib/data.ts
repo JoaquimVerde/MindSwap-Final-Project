@@ -10,7 +10,7 @@ import { Course, Person, Project, Application } from "./definitions";
 export async function fetchAllCourses(): Promise<number> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/courses`);
+    const response = await fetch(process.env.API_URL +`/api/v1/courses`);
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
     }
@@ -32,7 +32,7 @@ export async function fetchCoursesByPage(
     //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
-      `http://localhost:8080/api/v1/courses?page=${currentPage - 1}&limit=4`
+      process.env.API_URL +`/api/v1/courses?page=${currentPage - 1}&limit=4`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
@@ -50,7 +50,7 @@ export async function fetchCoursesByPage(
 export async function fetchCourseById(id: string): Promise<Course> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/courses/${id}`);
+    const response = await fetch( process.env.API_URL +`/api/v1/courses/${id}`);
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
     }
@@ -72,7 +72,7 @@ export async function fetchProjectsByCourseId(
   try {
 
     const response = await fetch(
-      `http://localhost:8080/api/v1/projects/course/${id}`
+      process.env.API_URL + `/api/v1/projects/course/${id}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch projects!");
@@ -101,7 +101,7 @@ export async function fetchProjectsByCourseId(
       const encodedId = id.replace(/#/g, "%23");
 
       const response = await fetch(
-        `http://localhost:8080/api/v1/persons/${encodedId}`
+        process.env.API_URL + `/api/v1/persons/${encodedId}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch courses");
@@ -126,7 +126,7 @@ export async function fetchCoursesByLocation(
 
 
     const response = await fetch(
-      `http://localhost:8080/api/v1/courses/location/${location}?limit=4&page=${currentPage - 1}`
+      process.env.API_URL + `/api/v1/courses/location/${location}?limit=4&page=${currentPage - 1}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
@@ -151,7 +151,7 @@ export async function fetchPersonByEmail(): Promise<Person> {
     }
 
     const response = await fetch(
-      `http://localhost:8080/api/v1/persons/email/${email}`
+      process.env.API_URL +`/api/v1/persons/email/${email}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch person");
@@ -189,7 +189,7 @@ export async function fetchRole(): Promise<string> {
 export async function fetchApplications(): Promise<Application[]> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/registration`);
+    const response = await fetch(process.env.API_URL + `/api/v1/registration`);
     if (!response.ok) {
       throw new Error("Failed to fetch applications");
 
@@ -209,7 +209,7 @@ export async function fetchApplicationById(id: string): Promise<Application> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/registration/${id}`
+      process.env.API_URL + `/api/v1/registration/${id}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch application");

@@ -19,7 +19,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import React from "react";
 
-const url = "http://localhost:3000/api/v1/registration";
+const url = process.env.API_URL + "/api/v1/registration";
 const formSchema = z.object({
   status: z.string(),
   personId: z.string(),

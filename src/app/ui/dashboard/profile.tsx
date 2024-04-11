@@ -66,7 +66,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
       }
       const encodedId = userId.replace(/#/g, "%23");
       const response = await fetch(
-        `http://localhost:8080/api/v1/persons/${encodedId}`,
+        process.env.API_URL + `/api/v1/persons/${encodedId}`,
         {
           method: "PUT",
           headers: {

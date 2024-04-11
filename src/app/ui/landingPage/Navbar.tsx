@@ -74,16 +74,6 @@ function Navbar() {
           >
             login
           </button>
-
-          {/* <button
-            className=" mx-4 px-1 py-1 border-slate-300 text-slate-300 bg-blue-900 hover:bg-blue-600 transition-all duration-300 rounded-md"
-            onClick={() =>
-              (window.location.href =
-                "https://mindswaplogin.auth.eu-central-1.amazoncognito.com/signup?client_id=3qn4vfitu65korf49pnrp1pt24&response_type=code&scope=email+openid+profile&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fcognito")
-            }
-          >
-            Sign Up
-          </button> */}
         </div>
         {/*menu btn for sm devices */}
 

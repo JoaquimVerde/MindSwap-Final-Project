@@ -57,7 +57,7 @@ export default function RegisterForm() {
       role: "Student",
     };
     
-    const response = await fetch("http://localhost:3000/proxy/api/v1/persons", {
+    const response = await fetch(process.env.API_URL + "/api/v1/persons", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
