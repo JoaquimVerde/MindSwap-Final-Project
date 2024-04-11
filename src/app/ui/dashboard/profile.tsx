@@ -40,7 +40,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
         console.error("Error fetching person:", error);
       }
     };
-    
+
     fetchData();
   }, []);
 
@@ -106,13 +106,12 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
               disabled={isSubmitting}
             />
 
-            <p className="font-bold text-slate-400 mt-4" hidden>Email</p>
+            <p className="font-bold text-slate-400 mt-4">Email</p>
             <input
               type="text"
               {...register("email")}
               className="rounded w-80 h-10 px-2"
-              disabled={isSubmitting}
-              hidden
+              disabled={true}
             />
 
             <p className="font-bold text-slate-400 mt-4">Username</p>
