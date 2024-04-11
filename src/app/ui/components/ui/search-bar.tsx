@@ -1,5 +1,4 @@
 
-
 'use client';
 import { Search } from "lucide-react";
 import { useRouter, redirect } from "next/navigation";
@@ -56,3 +55,4 @@ const SearchBar = ({
 
 
 export default SearchBar
+

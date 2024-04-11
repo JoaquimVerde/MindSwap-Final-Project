@@ -1,9 +1,7 @@
 import { ApplicationForm } from "@/app/ui/application/applicationForm";
 
 export default function Application({ params }: { params: { id: string } }) {
-
   const id = params.id;
-  
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-24">

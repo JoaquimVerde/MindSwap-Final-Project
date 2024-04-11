@@ -21,10 +21,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-//import SearchBar from "@/app/ui/components/ui/search-bar";
+
+import Link from "next/link";
+// import SearchBar from "@/app/ui/components/ui/search-bar";
 
 export default async function AllApplications() {
   const applications = await fetchApplications();
+  console.log(applications);
 
   return (
     <div className="mx-2 my-2">
@@ -57,6 +60,7 @@ export default async function AllApplications() {
             <TableHead>Previouse Knowledge</TableHead>
             <TableHead>Previouse Experience </TableHead>
             <TableHead>Status</TableHead>
+            <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -69,6 +73,17 @@ export default async function AllApplications() {
               <TableCell>{application.prevKnowledge ? "Yes" : "No"}</TableCell>
               <TableCell>{application.prevExperience ? "Yes" : "No"}</TableCell>
               <TableCell>{application.status}</TableCell>
+              <TableCell>
+                <Link
+                  href={`/dashboard/all-courses/all-applications/${application.id.replace(
+                    "#",
+                    "%23"
+                  )}/application-update`}
+                  id={application.id}
+                >
+                  Validate
+                </Link>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
