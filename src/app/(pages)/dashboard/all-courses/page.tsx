@@ -24,7 +24,7 @@ export default async function AllCourses(
 
     const currentPage = Number(searchParams?.page) || 1;
     const totalCourses = await fetchAllCourses();
-    const totalPages = Math.ceil(totalCourses/4);
+    const totalPages = Math.ceil(totalCourses/6);
 
 
     return (

@@ -32,7 +32,7 @@ export async function fetchCoursesByPage(
     //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
-      `http://localhost:8080/api/v1/courses?page=${currentPage - 1}&limit=4`
+      `http://localhost:8080/api/v1/courses?page=${currentPage - 1}&limit=6`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
