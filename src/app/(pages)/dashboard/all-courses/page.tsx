@@ -1,4 +1,4 @@
-import SearchBar from "@/app/ui/components/ui/search-bar";
+//import SearchBar from "@/app/ui/components/ui/search-bar";
 import Cards from "@/app/ui/courses/cards";
 import { CardsSkeleton, PaginationSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
@@ -24,7 +24,7 @@ export default async function AllCourses(
 
     const currentPage = Number(searchParams?.page) || 1;
     const totalCourses = await fetchAllCourses();
-    const totalPages = Math.ceil(totalCourses/4);
+    const totalPages = Math.ceil(totalCourses/6);
 
 
     return (
@@ -34,7 +34,9 @@ export default async function AllCourses(
             </div>
 
             <div className="mt-5 ml-4 w-[500px]">
+
                 <SearchBar placeholder="search by location" currentPage={currentPage} />
+
             </div>
 
             <Suspense fallback={<PaginationSkeleton />}>

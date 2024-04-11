@@ -15,11 +15,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import React from "react";
-import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import { useToast } from "@/components/ui/use-toast";
+import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
+import React from "react";
 
-const url = "http://localhost:3000/api/v1/registration";
+const url = "http://localhost:3000/proxy/api/v1/registration";
 const formSchema = z.object({
   status: z.string(),
   personId: z.string(),
@@ -33,12 +33,10 @@ const formSchema = z.object({
   }),
 });
 
-
 export function ApplicationForm({ id }: { id: string }) {
   const { toast } = useToast();
   const courseIdparam = id.replace("%23", "#");
-  const personIdparam = "PERSON#cf4f5fa7-cd9c-424a-a00c-9308173a6951";
-
+  const personIdparam = sessionStorage.getItem("userId");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

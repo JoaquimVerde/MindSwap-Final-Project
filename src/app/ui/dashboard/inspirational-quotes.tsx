@@ -11,7 +11,6 @@ const InspirationalQuotes = () => {
 			const randomIdx = Math.floor(Math.random() * quoteList.length);
 			const quoteText = quoteList[randomIdx].text;
 			const auth = quoteList[randomIdx].author;
-			console.log(auth);
 
 			let finalAuthor : string;
 			
@@ -20,8 +19,6 @@ const InspirationalQuotes = () => {
 			} else {
 				finalAuthor = auth.split(",")[0];
 			}
-
-			console.log(finalAuthor);
 
 			setQuote(quoteText);
 			setAuthor("~ " + finalAuthor);

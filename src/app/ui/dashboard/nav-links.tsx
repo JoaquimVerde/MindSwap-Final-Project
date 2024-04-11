@@ -9,17 +9,19 @@ import {
   GraduationCap,
   BookCheck,
   BookOpenText,
-  LibraryBig,
-  Home,
   UserRound,
+  LibraryBig,
+  PersonStanding,
+  Home,
 } from "lucide-react";
 import { fetchRole } from "@/app/lib/data"; 
+import { toPascalCase } from "@/app/lib/utils";
 
 export const linkDashboard: LinkType = {
-  name: "Dashboard",
+  name: `${toPascalCase(sessionStorage.userRole)}'s Dashboard`,
   href: "/dashboard",
   icon: Home,
-  role: ["student", "teacher", "admin"],
+  role: ["STUDENT", "TEACHER", "ADMIN"],
 };
 
 export const linksub: LinkTypeSub[] = [
@@ -27,7 +29,7 @@ export const linksub: LinkTypeSub[] = [
     name: "My-Courses",
     href: "/dashboard/my-courses",
     icon: BookOpenText,
-    role: ["student", "admin"],
+    role: ["STUDENT"],
     sublinks: [
       {
         name: "My Applied Courses",
@@ -48,32 +50,38 @@ export const links: LinkType[] = [
     name: "My Courses",
     href: "/dashboard/my-courses-teacher",
     icon: BookOpenText,
-    role: ["teacher", "admin"],
+    role: ["TEACHER"],
   },
   {
     name: "All Courses",
     href: "/dashboard/all-courses",
     icon: LibraryBig,
-    role: ["student", "admin"],
+    role: ["STUDENT"],
   },
   {
     name: "All Courses",
     href: "/dashboard/all-courses-teacher",
     icon: LibraryBig,
-    role: ["teacher", "admin"],
-  },
-  {
-    name: "Profile",
-    href: "/dashboard/profile",
-    icon: UserRound,
-    role: ["student", "admin", "teacher"],
+    role: ["TEACHER", "ADMIN"],
   },
   {
     name: "All Applications",
     href: "/dashboard/all-courses/all-applications",
     icon: BookCheck,
-    role: ["admin", "teacher"],
+    role: ["ADMIN", "TEACHER"],
   },
+  {
+    name: "All Staff",
+    href: "/dashboard/all-staff",
+    icon: PersonStanding,
+    role: ["ADMIN"],
+  },
+  {
+    name: "Profile",
+    href: "/dashboard/profile",
+    icon: UserRound,
+    role: ["STUDENT", "ADMIN", "TEACHER"],
+  }
 ];
 
 export default function NavLinks() {

@@ -44,3 +44,24 @@ export async function updateCourse(
     redirect(`/dashboard/all-courses/${courseId}/course`);
 }
 
+export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
+    
+    try {
+        const response = await fetch(`http://localhost:8080/api/v1/projects/grade/${id}`,{
+            method:'PATCH',
+            headers: {
+                'Content-type': 'application/josn',
+            },
+            body: JSON.stringify(newGrade),
+    });
+        if (response.ok) {
+        console.log('Object updated successfully');
+    } else {
+
+        console.error('Failed to update object!', response.statusText);
+    }
+    } catch (error) {
+    console.error('Failed to update object:', error);
+    }
+};
+

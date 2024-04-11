@@ -1,4 +1,5 @@
 
+
 'use client';
 import { Search } from "lucide-react";
 import { useRouter, redirect } from "next/navigation";
@@ -15,9 +16,12 @@ const SearchBar = ({
 }) => {
 
 
-    // const searchParams = useSearchParams();
-    // const pathName = usePathname();
-    // const {replace} = useRouter();
+
+
+//     // const searchParams = useSearchParams();
+//     // const pathName = usePathname();
+//     // const {replace} = useRouter();
+
 
     const router = useRouter();
 
@@ -48,5 +52,7 @@ const SearchBar = ({
         </div>
     )
 };
+
+
 
 export default SearchBar
