@@ -73,7 +73,7 @@ export function EditCourseForm({
             syllabus: values?.syllabus,
             program: values?.program,
             schedule: values?.schedule,
-            price: parseInt(values?.price),
+            price: parseFloat(values?.price),
             duration: values?.duration,
             location: values?.location,
             teacherId: values?.teacherId,
