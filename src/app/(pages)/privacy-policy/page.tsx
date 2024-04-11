@@ -4,9 +4,9 @@ import React from "react";
 const PrivacyPolicy = () => {
   return (
     <>
-      <div>
+      <div className="flex flex-row items-center ">
         <BackButton />
-        <h1 className="text-center p-6">PrivacyPolicy</h1>
+        <h1 className="flex-grow text-center p-6">Privacy Policy</h1>
       </div>
       <p></p>
     </>

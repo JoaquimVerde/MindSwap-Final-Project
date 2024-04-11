@@ -11,7 +11,7 @@ const BackButton = () => {
     router.back();
   };
 
-  return <Button onClick={goBack}>Back</Button>;
+  return <Button onClick={goBack} className="m-4">Back</Button>;
 };
 
 export default BackButton;
