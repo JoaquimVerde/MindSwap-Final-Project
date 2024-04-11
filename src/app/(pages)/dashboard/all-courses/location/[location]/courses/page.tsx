@@ -1,30 +1,36 @@
-//import SearchBar from "@/app/ui/components/ui/search-bar";
-import Cards from "@/app/ui/courses/cards";
-import { CardsSkeleton, PaginationSkeleton } from "@/app/ui/skeletons";
+import LocationCards from "@/app/ui/courses/location-cards";
+import { CardsSkeleton } from "@/app/ui/skeletons";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { Suspense } from "react";
-import { fetchAllCourses } from "@/app/lib/data";
+import { fetchAllCoursesFromLocation } from "@/app/lib/data";
 import Pagination from "@/app/ui/courses/pagination";
+import { PaginationSkeleton } from "@/app/ui/skeletons";
+import SearchBar from "@/app/ui/components/ui/search-bar";
+
+
 
 
 // import { Metadata } from "next";
+// import { fetchCoursesByLocation } from "@/app/lib/data";
 
 // export const metadata: Metadata = {
 //     title: 'Courses',
-//   };
+// };
 
-export default async function AllCourses(
-    {
-        searchParams,
-    }: {
-        searchParams?: {
-            page?: string;
-        };
-    }
+export default async function AllCoursesInLocation(
+    placeholder: Params,
+    searchParams?:
+        { page?: string }
 ) {
 
+    const location = (placeholder.params.location);
+
+    console.log(location);
+
     const currentPage = Number(searchParams?.page) || 1;
-    const totalCourses = await fetchAllCourses();
-    const totalPages = Math.ceil(totalCourses/6);
+    const totalCoursesNumber = await fetchAllCoursesFromLocation(location);
+    const totalPages = Math.ceil(totalCoursesNumber / 4);
+
 
 
     return (
@@ -34,9 +40,7 @@ export default async function AllCourses(
             </div>
 
             <div className="mt-5 ml-4 w-[500px]">
-
                 <SearchBar placeholder="search by location" currentPage={currentPage} />
-
             </div>
 
             <Suspense fallback={<PaginationSkeleton />}>
@@ -44,10 +48,10 @@ export default async function AllCourses(
                     <Pagination totalPages={totalPages} />
                 </div>
             </Suspense>
-            
+
             <Suspense fallback={<CardsSkeleton />}>
-                <Cards currentPage={currentPage} />
+                <LocationCards placeholder={location} currentPage={currentPage} />
             </Suspense>
         </div >
-    );
+    )
 }

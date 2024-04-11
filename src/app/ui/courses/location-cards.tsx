@@ -10,7 +10,7 @@ import { Scroll } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { GetCourseInfo } from "@/app/ui/courses/buttons";
-import { fetchCoursesByLocation } from "@/app/lib/data";
+import { fetchAllCourses, fetchAllCoursesFromLocation, fetchCoursesByLocation } from "@/app/lib/data";
 import Pagination from "@/app/ui/courses/pagination";
 import NotFound from "@/app/(pages)/dashboard/all-courses/[id]/course/not-found";
 
@@ -18,19 +18,18 @@ import NotFound from "@/app/(pages)/dashboard/all-courses/[id]/course/not-found"
 
 export default async function LocationCards(
     {
-        currentPage,
         placeholder,
-      }: {
-        currentPage: number;
+        currentPage,
+    }: {
         placeholder: string;
-      })
- {
+        currentPage: number;
+    }) {
+
+
+
 
 
     const courses = await fetchCoursesByLocation(placeholder, currentPage);
-
-    //const totalPages = fetchCoursesPages(courses);
-    const totalPages = courses.length / 4;
 
 
     if (!courses) {
@@ -41,9 +40,6 @@ export default async function LocationCards(
     return (
 
         <div>
-            <div className="mt-5 ml-4">
-                <Pagination totalPages={totalPages} />
-            </div>
 
             <div className="flex flex-wrap">
                 {courses?.map((course) => (
