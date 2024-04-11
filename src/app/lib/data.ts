@@ -90,7 +90,6 @@ export async function fetchPersonById(): Promise<Person> {
       throw new Error("Id not found in session storage");
     }
     const encodedId = id.replace(/#/g, "%23");
-
       const response = await fetch(
         process.env.API_URL + `/api/v1/persons/${encodedId}`
       );
