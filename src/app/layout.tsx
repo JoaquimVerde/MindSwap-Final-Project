@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <SessionWrapper>
         <body className={inter.className}>{children}</body>
-         <Toaster />
+         
       </SessionWrapper>
     </html>
   );
