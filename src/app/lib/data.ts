@@ -10,7 +10,7 @@ import { Course, Person, Project, Application } from "./definitions";
 export async function fetchAllCourses(): Promise<number> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/courses`);
+    const response = await fetch(`http://localhost:3000/proxy/api/v1/courses`);
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
     }
@@ -32,7 +32,7 @@ export async function fetchCoursesByPage(
     //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
-      `http://localhost:8080/api/v1/courses?page=${currentPage - 1}&limit=6`
+      `http://localhost:3000/proxy/api/v1/courses?page=${currentPage - 1}&limit=6`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
@@ -50,7 +50,7 @@ export async function fetchCoursesByPage(
 export async function fetchCourseById(id: string): Promise<Course> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/courses/${id}`);
+    const response = await fetch(`http://localhost:3000/proxy/api/v1/courses/${id}`);
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
     }
@@ -128,7 +128,7 @@ export async function fetchCoursesByLocation(
     //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
-      `http://localhost:8080/api/v1/courses/location/${location}?limit=4&page=${currentPage-1}`
+      `http://localhost:3000/proxy/api/v1/courses/location/${location}?limit=4&page=${currentPage-1}`
     );
     if (!response.ok) {
       throw new Error("Response not ok - Failed to fetch courses!!!");
