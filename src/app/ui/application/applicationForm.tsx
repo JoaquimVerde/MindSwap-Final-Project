@@ -95,59 +95,6 @@ export function ApplicationForm({ id }: { id: string }) {
             className="flex flex-col space-y-20 p-20 pt-0"
           >
             <div className="grid w-full max-w-sm items-center gap-3">
-              {/* <FormField
-                control={form.control}
-                name="phoneNumber"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      <p className="flex items-center">
-                        <Phone className="mr-2 h-4 w-4" />
-                        Phone Number
-                      </p>
-                    </FormLabel>
-                    <FormControl>
-                      <PhoneInput
-                        defaultCountry="PT"
-                        defaultProps={{
-                          country: "PT",
-                          enableSearch: true,
-                          enableAreaCodes: true,
-                          enableDropdown: true,
-                          preferredCountries: ["PT"],
-                          onlyCountries: ["PT"],
-                          enableCountryCode: true,
-                          enableFlag: true,
-                        }}
-                        placeholder="enter your phone number"
-                        {...field}
-                      />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
-              {/* <FormField
-                control={form.control}
-                name="uploadResume"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      <p className="flex items-center">
-                        <Upload className="mr-2 h-4 w-4" />
-                        Import Resume
-                      </p>
-                    </FormLabel>
-                    <FormControl>
-                      <Input id="resume" type="file" className="file-input  " />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
-
               <FormField
                 control={form.control}
                 name="aboutYou"
