@@ -68,7 +68,7 @@ function Navbar() {
             className=" px-4 py-1 border-slate-300 text-slate-300 bg-blue-950 hover:bg-blue-700 transition-all duration-300 rounded-md"
             onClick={() =>
               signIn("cognito", {
-                callbackUrl: process.env.API_URL + "/api/auth/redirect",
+                callbackUrl: "https://fe-deployment-testing.d63irou4ibhxm.amplifyapp.com/api/auth/redirect",
               })
             }
           >
