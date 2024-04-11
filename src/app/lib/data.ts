@@ -280,3 +280,30 @@ export async function getPersonByRole(role: string): Promise<Person[]> {
     return [];
   }
 }
+export async function fetchAllApplicationsById(): Promise<Application> {
+  noStore();
+  try {
+    const id = sessionStorage.getItem("userId");
+    console.log(id);
+    if (!id) {
+      throw new Error("Id not found in session storage");
+    }
+    const encodedId = id.replace(/#/g, "%23");
+
+    const response = await fetch(
+      `http://localhost:3000/proxy/api/v1/registration/student/${encodedId}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch all student applications");
+    }
+
+    const application: Application = await response.json();
+    console.log(application);
+
+    return application;
+  } catch (error) {
+    console.error("Error fetching application:", error);
+    notFound();
+  }
+}
+
