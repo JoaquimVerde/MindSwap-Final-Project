@@ -66,11 +66,13 @@ function Navbar() {
         <div className="lg:block hidden py-3">
           <button
             className=" px-4 py-1 border-slate-300 text-slate-300 bg-blue-950 hover:bg-blue-700 transition-all duration-300 rounded-md"
-            onClick={() =>
+            onClick={() => {
+              console.log(process.env.COGNITO_ISSUER);
               signIn("cognito", {
-                callbackUrl: "https://fe-deployment-testing.d63irou4ibhxm.amplifyapp.com/api/auth/redirect",
-              })
-            }
+                callbackUrl:
+                  "https://fe-deployment-testing.d63irou4ibhxm.amplifyapp.com/api/auth/redirect",
+              });
+            }}
           >
             login
           </button>
