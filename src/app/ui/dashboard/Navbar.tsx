@@ -1,76 +1,80 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { LogOut } from "lucide-react";
 import Link from "next/link";
-import { CircleUserRound } from "lucide-react";
-import { fetchPersonById } from "@/app/lib/data";
-import { notFound } from "next/navigation";
+import { LogOut, User, CircleUserRound} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import Image from "next/image";
+import { useState } from "react";
+
 
 export default function Navbar() {
-    
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     const [isSticky, setIsSticky] = useState(false);  
 
-
- 
-    
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsSticky(true);
-      }
-    };
-
-
-    window.addEventListener("scroll", handleScroll);
-  }, []);
 
   
   return (
     <nav
-      className={` py-4 md:px-8 px-4 bg-black ${
+      className={` py-3 px-10 bg-black ${
         isSticky ? "sticky top-0 right-0 left-0 bg-black" : ""
       }`}
     >
       <div className="flex items-center justify-between">
         <div className="font-bold tex-2xl cursor-pointer text-white">
-          <Link href="/#home">Logo</Link>
+          <Link href="/#home">
+            <Image
+              src="/images/logo.webp"
+              alt="Logo"
+              width={60} 
+              height={60} 
+            />
+            </Link>
         </div>
-
-
-      
         <div className="flex flex-col items-center justify-between">
-            <div className="flex flex: row items-center justify-between">
-            <CircleUserRound className="size-12 cursor-pointer" color="#ffffff" onClick={toggleMenu} /> 
-            </div>
-            {isMenuOpen && (
-            <div className="flex flex-col  absolute right-8 mt-12 w-48 bg-white border rounded-lg shadow-lg z-50">
-                 <h2 className="px-15 py-5 text-sm text-gray-1000 flex justify-center">First and Last Name</h2>
-
-                <Link
-                  className="px-10 py-3 text-sm text-700 hover:bg-gray-100"
-                  href={"/dashboard/profile"}
-                >
-                  <div className="flex justify-center">My Profile</div>
-                </Link>
-                 <Link
-                  className="flex flex-row justify-center justify-between items-center px-10 py-3 text-sm text-700 hover:bg-gray-100"
-                  href={"/" /* later => "/api/auth/signout" (?) */}
-                  >
-                  <div className="md:block">Sign Out</div>
-                  <LogOut className="w-6" />
-                </Link>
-            </div>
-            )}
+            <div className="flex flex: row items-center justify-between px-5 " >
+            <DropdownMenu >
+              <DropdownMenuTrigger >
+                <CircleUserRound className="size-10 cursor-pointer" color="#ffffff"/>
+              </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 z-1000 relative ml-10" style={{ right: "calc(80% - 10rem)" }}>
+                  <DropdownMenuLabel>  My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem className="cursor-pointer">
+                       <Link
+                          href={"/dashboard/profile"}
+                          className=" flex flex-row items-center cursor-pointer">
+                          <User className="mr-2 h-4 w-4" />
+                          <span>My Profile</span>
+                        </Link>
+                      <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                  <DropdownMenuItem className="cursor-pointer" >
+                      <Link
+                          href={"/" /* later => "/api/auth/signout" (?) */}
+                          className=" flex flex-row items-center cursor-pointer">
+                          <LogOut className="mr-2 h-4 w-4" />
+                        <span>Log out</span>
+                      </Link>
+                    <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                 </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+          </div>
         </div>
       </div>
-
     </nav>
   );
 }
+

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Sidenav from "@/app/ui/dashboard/sidenav";
 import { Menu } from "lucide-react";
+import Navbar from "@/app/ui/dashboard/Navbar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isSidenavOpen, setIsSidenavOpen] = useState(true);
@@ -14,6 +15,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="flex h-screen bg-black">
       {/* Sidebar */}
       <div className={`flex-none md:w-64 ${isSidenavOpen ? "" : "hidden"}`}>
@@ -34,5 +37,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {children}
       </div>
     </div>
+    </>
   );
 }
