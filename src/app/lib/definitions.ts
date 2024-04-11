@@ -55,15 +55,22 @@ export type Application = {
   prevExperience: boolean;
 };
 
+
+export type Student = {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+};
+
 export type Project = {
   id: string;
   courseId: string;
-  studentId: string[];
+  students: Student[];
   name: string;
   gitHubRepo: string;
   syllabus: string;
   grade: number;
-  active: boolean;
 };
 
 export type CourseForm = {
