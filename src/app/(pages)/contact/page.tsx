@@ -45,7 +45,7 @@ const Contact = () => {
         <p>
           Read our {" "}
           <Link 
-            href="https://minderacodeacademy.com/privacy-policy"
+            href="/privacy-policy"
             className="text-blue-600 hover:underline"
           >
             privacy policy
