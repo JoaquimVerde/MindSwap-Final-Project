@@ -5,7 +5,7 @@ import { useEffect } from "react";
 function Redirect() {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const URL = process.env.NEXT_PUBLIC_API_URL + "/api/v1/persons/email/";
+  const URL = "https://fe-deployment-testing.d63irou4ibhxm.amplifyapp.com/proxy/api/v1/persons/email/";
 
   useEffect(() => {
     if (status === "loading") return;
