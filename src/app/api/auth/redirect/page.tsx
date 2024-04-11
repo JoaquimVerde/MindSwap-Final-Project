@@ -5,13 +5,13 @@ import { useEffect } from "react";
 function Redirect() {
   const router = useRouter();
   const { data: session, status } = useSession();
+  const URL = process.env.API_URL + "/api/v1/persons/email/";
 
   useEffect(() => {
-    if (status === "loading") return; // Still loading, don't do anything yet
+    if (status === "loading") return;
+    console.log(process.env.NEXT_PUBLIC_NEXT_SECRET);
     const verifyUser = async () => {
-      const response = await fetch(
-        "http://localhost:3000/proxy/api/v1/persons/email/" + session?.user?.email
-      );
+      const response = await fetch(URL + session?.user?.email);
       const data = await response.json();
       console.log(data);
       if (response.status === 200) {
