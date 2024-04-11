@@ -21,7 +21,7 @@ export async function updateCourse(
     courseId: string) {
 
 
-    fetch(`http://localhost:8080/api/v1/courses/${courseId}`, {
+    fetch(`http://localhost:3000/proxy/api/v1/courses/${courseId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
