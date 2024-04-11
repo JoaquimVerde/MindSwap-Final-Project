@@ -10,7 +10,12 @@ export default function MyAppliedCourses() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const applicationData = await fetchAllApplicationsById();
+        const applicationData = await fetchAllApplicationsById([
+          "APPLIED",
+          "IN_REVIEW",
+          "ACCEPTED",
+          "AUTOMATICALLY_ACCEPTED",
+        ]);
         setApplications(applicationData);
         console.log(applicationData);
       } catch (error) {
