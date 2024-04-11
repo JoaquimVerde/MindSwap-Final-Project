@@ -47,7 +47,7 @@ export async function updateCourse(
 export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
     
     try {
-        const response = await fetch(`http://localhost:8080/api/v1/projects/grade/${id}`,{
+        const response = await fetch(`http://localhost:3000/proxy/api/v1/projects/grade/${id}`,{
             method:'PATCH',
             headers: {
                 'Content-type': 'application/josn',

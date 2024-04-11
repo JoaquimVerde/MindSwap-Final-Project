@@ -26,24 +26,26 @@ export default function Home() {
 			
 		</main> 
 	)*/}
- return (
-	<>
-		
-		<main className="w-[100%] h-[100vh]">
-			<div>
-			<Navbar/>
-				<div><HeroSection />
-		<About />
-		<Parallax />
-		<Courses />
-		<Skills />
-		<Footer/></div>
-			</div>
-		
-		</main>
-			</>
-	
-)
-	
+	return (
+		<>
+
+			<main className="w-[100%] h-[100vh]">
+				<div>
+					<Navbar />
+					<div>
+						<HeroSection />
+						<About />
+						<Parallax />
+						<Courses />
+						<Skills />
+						<Footer />
+					</div>
+				</div>
+
+			</main>
+		</>
+
+	)
+
 }
 

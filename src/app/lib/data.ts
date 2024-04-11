@@ -66,7 +66,7 @@ export async function fetchProjectsByCourseId(id: string): Promise<Project[]> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/projects/course/${id}`
+      `http://localhost:3000/proxy/api/v1/projects/course/${id}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch projects!");
@@ -220,7 +220,7 @@ export async function fetchApplicationById(id: string): Promise<Application> {
 export async function fetchAllCoursesFromLocation(location : string): Promise<number> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/courses/location/${location}`);
+    const response = await fetch(`http://localhost:3000/proxy/api/v1/courses/location/${location}`);
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
     }
@@ -257,7 +257,7 @@ export async function getPersonByRole(role: string): Promise<Person[]> {
 export async function fetchProjectById(id: string): Promise<Project> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/projects/${id}`);
+    const response = await fetch(`http://localhost:3000/proxy/api/v1/projects/${id}`);
     if (!response.ok) {
       throw new Error("Failed to fetch projects");
     }
@@ -277,7 +277,7 @@ export async function fetchProjectByStudentId(id: string): Promise<Project[]> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/projects/person/${id}`
+      `http://localhost:3000/proxy/api/v1/projects/person/${id}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch projects");
