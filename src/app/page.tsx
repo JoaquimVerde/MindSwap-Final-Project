@@ -28,14 +28,18 @@ export default function Home() {
 	)*/}
  return (
 	<>
-		<Navbar/>
+		
 		<main className="w-[100%] h-[100vh]">
-		<HeroSection />
+			<div>
+			<Navbar/>
+				<div><HeroSection />
 		<About />
 		<Parallax />
 		<Courses />
 		<Skills />
-		<Footer/>
+		<Footer/></div>
+			</div>
+		
 		</main>
 			</>
 	
