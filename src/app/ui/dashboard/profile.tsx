@@ -128,6 +128,13 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
               className="rounded w-80 h-10 px-2"
               disabled={isSubmitting}
             />
+            <p className="font-bold text-slate-400 mt-4">CV</p>
+            <input
+              type="text"
+              {...register("cv")}
+              className="rounded w-80 h-10 px-2"
+              disabled={isSubmitting}
+            />
           </div>
 
           <Button type="submit" className="w-26 ml-5 hover:bg-blue-700 mt-8">
