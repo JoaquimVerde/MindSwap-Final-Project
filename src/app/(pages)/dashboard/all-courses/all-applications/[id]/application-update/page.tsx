@@ -4,7 +4,8 @@ import { fetchApplicationById, fetchPersonDataById } from "@/app/lib/data";
 import { notFound } from "next/navigation";
 import { ComboboxPopover } from "@/app/ui/application/popoverStatus";
 import { DialogDemo } from "@/app/ui/application/dialog-grade";
-import { Application, Person } from "../../../../../../lib/definitions";
+import { Application, Person, Status } from "../../../../../../lib/definitions";
+import * as React from "react";
 
 export default function APllicationUpdate({
   params,
@@ -14,6 +15,11 @@ export default function APllicationUpdate({
   const [application, setApplication] = useState({} as Application);
   const [student, setStudent] = useState({} as Person);
   const [grade, setGrade] = useState(0);
+
+  const [open, setOpen] = React.useState(false);
+  const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(
+    null
+  );
 
   useEffect(() => {
     const appId = params.id.replace("#", "%23");
@@ -114,7 +120,12 @@ export default function APllicationUpdate({
                 Status
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                <ComboboxPopover />
+                <ComboboxPopover
+                  open={open}
+                  setOpen={setOpen}
+                  selectedStatus={selectedStatus}
+                  setSelectedStatus={setSelectedStatus}
+                />
               </td>
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
@@ -123,6 +134,7 @@ export default function APllicationUpdate({
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 <DialogDemo grade={grade} setGrade={setGrade} />
+                {grade}
               </td>
             </tr>
           </tbody>
