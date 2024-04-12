@@ -29,7 +29,7 @@ const SearchBar = ({
 
         router.push(`/dashboard/all-courses/location/${placeholder}/courses`);
 
-        revalidatePath(`/dashboard/all-courses/location/${placeholder}/courses`);
+        //revalidatePath(`/dashboard/all-courses/location/${placeholder}/courses`);
         redirect(`/dashboard/all-courses/location/${placeholder}/courses`);
 
     }, 500);
