@@ -13,14 +13,63 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
-import { useState } from "react";
+import { fetchPersonById } from "@/app/lib/data";
+import { Person } from "@/app/lib/definitions";
+import { useForm } from "react-hook-form";
+import { useState, useEffect } from "react";
 
 
+interface ProfileProps {
+  initialProfileData?: Person;
+}
+
+const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { isSubmitting },
+  } = useForm<Person>({ defaultValues: initialProfileData });
+  const [avatarImage, setAvatarImage] = useState("/images/avatar.png");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const personData = await fetchPersonById();
+        setValue("firstName", personData.firstName);
+        setValue("lastName", personData.lastName);
+        setValue("username", personData.username);
+        setValue("email", personData.email);
+        setValue("role", personData.role);
+        setValue("dateOfBirth", personData.dateOfBirth);
+        setValue("address", personData.address);
+        setValue("cv", personData.cv);
+        // setAvatarImage(personData.avatarImage); Add avatar image??
+      } catch (error) {
+        console.error("Error fetching person:", error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  return (
+    <div>
+      {/* Your component's content goes here */}
+    </div>
+  );
+}
+  
 export default function Navbar() {
+  const [personData, setPersonData] = useState<Person | null>(null);
 
     const [isSticky, setIsSticky] = useState(false);  
 
-
+    useEffect(() => {
+      fetchPersonById().then(data => {
+        setPersonData(data);
+      });
+    }, []);
   
   return (
     <nav
@@ -46,7 +95,7 @@ export default function Navbar() {
                 <CircleUserRound className="size-10 cursor-pointer" color="#ffffff"/>
               </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 z-1000 relative ml-10" style={{ right: "calc(80% - 10rem)" }}>
-                  <DropdownMenuLabel>  My Account</DropdownMenuLabel>
+                  <DropdownMenuLabel>  {personData?.firstName}'s Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                   <DropdownMenuGroup>
                     <DropdownMenuItem className="cursor-pointer">
