@@ -5,12 +5,22 @@ import {
   ViewProjects,
 } from "@/app/ui/courses/buttons";
 import { fetchCourseById } from "@/app/lib/data";
-import { notFound } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
 
 export default async function Page({ params }: { params: { id: string } }) {
   
   const id = params.id;
 
+  
+  // const isStudent = () => {
+  //   return role === "student";
+  // }
+
+  const searchParams = useSearchParams();
+
+  const role = String(searchParams.get('role'));
+
+  console.log(role);
   
   const course = await fetchCourseById(id);
   if (!course) {
@@ -84,9 +94,10 @@ export default async function Page({ params }: { params: { id: string } }) {
         <Button>
           <ApplyCourse id={id} />
         </Button>
+        {role === "STUDENT"? null :
         <Button>
           <EditCourse id={id} />
-        </Button>
+        </Button>}
       </div>
     </div>
   );

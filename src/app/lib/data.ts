@@ -47,17 +47,17 @@ export async function fetchCoursesByPage(
   }
 }
 
-export async function fetchCourseById(id: string): Promise<Course|null> {
+export async function fetchCourseById(id: string): Promise<Course> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:3000/proxy/api/v1/courses/${id}`);
-    if (response.status === 404) {
-      return null;
-    }
+    const response = await fetch(
+      `http://localhost:3000/proxy/api/v1/courses/${id}`
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
     }
     const course: Course = await response.json();
+    //console.log(course);
 
     return course;
   } catch (error) {
@@ -162,9 +162,8 @@ export async function fetchPersonByEmail(): Promise<Person> {
   }
 }
 
-export async function fetchRole(): Promise<string> {
-  noStore();
-
+export function fetchRole(): string | null {
+  
   try {
     const role = sessionStorage.getItem("userRole");
 
@@ -172,7 +171,7 @@ export async function fetchRole(): Promise<string> {
       throw new Error("Role not found in session storage.");
     }
 
-    return role as string;
+    return role;
   } catch (error) {
     console.error("FetchError:", error);
     throw new Error("Failed to fetch role.");

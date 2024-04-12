@@ -3,7 +3,6 @@
 import { Search } from "lucide-react";
 import { useRouter, redirect } from "next/navigation";
 import { useDebouncedCallback } from 'use-debounce';
-import { revalidatePath } from "next/cache";
 
 
 const SearchBar = ({

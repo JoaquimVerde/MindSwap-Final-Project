@@ -2,7 +2,7 @@
 import Cards from "@/app/ui/courses/cards";
 import { CardsSkeleton, PaginationSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
-import { fetchAllCourses } from "@/app/lib/data";
+import { fetchAllCourses, fetchPersonById } from "@/app/lib/data";
 import Pagination from "@/app/ui/courses/pagination";
 import SearchBar from "@/app/ui/components/ui/search-bar";
 
@@ -15,13 +15,17 @@ import SearchBar from "@/app/ui/components/ui/search-bar";
 
 export default async function AllCourses(
     {
-        searchParams,
+        searchParams,      
     }: {
         searchParams?: {
             page?: string;
         };
-    }
+    }, role : string | null
 ) {
+
+    console.log(role);
+
+    
 
     const currentPage = Number(searchParams?.page) || 1;
     const totalCourses = await fetchAllCourses();

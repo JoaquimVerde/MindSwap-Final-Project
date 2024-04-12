@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { fetchRole } from "@/app/lib/data"; 
 import { toPascalCase } from "@/app/lib/utils";
+import AllCourses from "@/app/(pages)/dashboard/all-courses/page";
 
 export const linkDashboard: LinkType = {
   name: `${toPascalCase(sessionStorage?.userRole ?? '?')}'s Dashboard`,
@@ -104,7 +105,7 @@ export default function NavLinks() {
     <>
       <div className="flex justify-start items-start">
         <Link className="flex justify-start items-start pt-2 pb-2" key={linkDashboard.href} href={linkDashboard.href}>
-          {linkDashboard.icon && <linkDashboard.icon className="flex justify-start items-start mr-2" />}
+          {linkDashboard.icon && <linkDashboard.icon className="flex justify-start items-start mr-2"/>}
           <p className="hidden md:block">{linkDashboard.name}</p>
         </Link>
       </div>

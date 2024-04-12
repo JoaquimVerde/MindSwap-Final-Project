@@ -60,6 +60,8 @@ export default function Dashboard() {
     });
   }, []);
 
+  const role = sessionStorage.getItem("userRole");
+
   return (
     <main>
       <div className="flex flex-row-reverse justify-between mt-10 gap-3">
