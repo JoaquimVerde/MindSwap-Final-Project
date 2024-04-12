@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <div className="mx-2 my-2">
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-2 max-w-fit">
-        {course?.name}
+        {course.name}
       </h2>
 
       <div className="my-6 w-full overflow-y-auto">
