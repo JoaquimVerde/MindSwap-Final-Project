@@ -74,7 +74,7 @@ export const links: LinkType[] = [
     name: "Profile",
     href: "/dashboard/profile",
     icon: UserRound,
-    role: ["STUDENT", "ADMIN", "TEACHER"],
+    role: [],
   }
 ];
 
