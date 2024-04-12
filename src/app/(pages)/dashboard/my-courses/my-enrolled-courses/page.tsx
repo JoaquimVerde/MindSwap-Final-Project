@@ -3,6 +3,7 @@
 import { fetchAllApplicationsById } from "@/app/lib/data";
 import { Application } from "@/app/lib/definitions";
 import { useEffect, useState } from "react";
+import { toPascalCase } from "@/app/lib/utils";
 
 export default function MyEnrolledCourses() {
   const [applications, setApplications] = useState<Application[]>([]);
@@ -34,7 +35,7 @@ export default function MyEnrolledCourses() {
           </p>
           <p>Course: {application.course.name}</p>
           <p>Edition: {application.course.edition}</p>
-          <p>Status: {application.status}</p>
+          <p>Status: {toPascalCase(application.status)}</p>
           <p>About Student: {application.aboutYou}</p>
         </div>
       ))}
