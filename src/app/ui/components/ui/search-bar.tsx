@@ -8,18 +8,10 @@ import { revalidatePath } from "next/cache";
 
 const SearchBar = ({
     placeholder,
-    currentPage
 }: {
-    placeholder: string,
-    currentPage: number
+    placeholder: string, 
 }) => {
 
-
-
-
-//     // const searchParams = useSearchParams();
-//     // const pathName = usePathname();
-//     // const {replace} = useRouter();
 
 
     const router = useRouter();

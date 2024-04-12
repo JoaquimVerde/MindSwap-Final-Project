@@ -6,9 +6,6 @@ import { fetchAllCoursesFromLocation } from "@/app/lib/data";
 import Pagination from "@/app/ui/courses/pagination";
 import { PaginationSkeleton } from "@/app/ui/skeletons";
 import SearchBar from "@/app/ui/components/ui/search-bar";
-import { useSearchParams } from "next/navigation";
-
-
 
 
 // import { Metadata } from "next";
@@ -33,7 +30,7 @@ export default async function AllCoursesInLocation(
             </div>
 
             <div className="mt-5 ml-4 w-[500px]">
-                <SearchBar placeholder="search by location" currentPage={currentPage} />
+                <SearchBar placeholder="search by location" />
             </div>
 
             <Suspense fallback={<PaginationSkeleton />}>

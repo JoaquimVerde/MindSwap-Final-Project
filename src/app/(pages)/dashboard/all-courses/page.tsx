@@ -36,7 +36,7 @@ export default async function AllCourses(
 
             <div className="mt-5 ml-4 w-[500px]">
 
-            <SearchBar placeholder="search by location" currentPage={currentPage} />
+            <SearchBar placeholder="search by location" />
 
             </div>
 
