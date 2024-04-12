@@ -11,18 +11,18 @@ export default async function Page({ params }: { params: { id: string } }) {
   
   const id = params.id;
 
-  const course = await Promise.all([fetchCourseById(id)]);
-
-  const vacancies = course[0]?.maxStudents-course[0].enrolledStudents;
-
+  
+  const course = await fetchCourseById(id);
   if (!course) {
     notFound();
   }
 
+  const vacancies = course.maxStudents-course.enrolledStudents;
+
   return (
     <div className="mx-2 my-2">
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-2 max-w-fit">
-        {course[0]?.name}
+        {course?.name}
       </h2>
 
       <div className="my-6 w-full overflow-y-auto">
@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 Teacher
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                {course[0]?.teacher?.firstName} {course[0]?.teacher?.lastName}
+                {course.teacher?.firstName} {course.teacher?.lastName}
               </td>
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
@@ -41,7 +41,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 Schedule
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                {course[0]?.schedule}
+                {course.schedule}
               </td>
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
@@ -49,7 +49,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 Location
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                {course[0]?.location}
+                {course.location}
               </td>
             </tr>
             { <tr className="m-0 border-t p-0 even:bg-muted">
@@ -69,7 +69,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           Program
         </h3>
         <div>
-          {course[0]?.program.split("\n").map((line, index) => (
+          {course.program.split("\n").map((line, index) => (
             <p key={index} className="leading-7 [&:not(:first-child)]:mt-6">
               {line}
             </p>

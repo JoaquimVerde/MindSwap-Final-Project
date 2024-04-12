@@ -47,17 +47,17 @@ export async function fetchCoursesByPage(
   }
 }
 
-export async function fetchCourseById(id: string): Promise<Course> {
+export async function fetchCourseById(id: string): Promise<Course|null> {
   noStore();
   try {
-    const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/courses/${id}`
-    );
+    const response = await fetch(`http://localhost:3000/proxy/api/v1/courses/${id}`);
+    if (response.status === 404) {
+      return null;
+    }
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
     }
     const course: Course = await response.json();
-    //console.log(course);
 
     return course;
   } catch (error) {

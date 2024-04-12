@@ -18,7 +18,7 @@ import { fetchRole } from "@/app/lib/data";
 import { toPascalCase } from "@/app/lib/utils";
 
 export const linkDashboard: LinkType = {
-  name: `${toPascalCase(sessionStorage.userRole)}'s Dashboard`,
+  name: `${toPascalCase(sessionStorage?.userRole ?? '?')}'s Dashboard`,
   href: "/dashboard",
   icon: Home,
   role: ["STUDENT", "TEACHER", "ADMIN"],
