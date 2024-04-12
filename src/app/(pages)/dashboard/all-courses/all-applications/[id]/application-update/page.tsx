@@ -6,6 +6,7 @@ import { ComboboxPopover } from "@/app/ui/application/popoverStatus";
 import { DialogDemo } from "@/app/ui/application/dialog-grade";
 import { Application, Person, Status } from "../../../../../../lib/definitions";
 import * as React from "react";
+import { z } from "zod";
 
 export default function APllicationUpdate({
   params,
@@ -21,6 +22,11 @@ export default function APllicationUpdate({
     null
   );
 
+  const formSchema = z.object({
+    status: z.string(),
+    grade: z.string(),
+  });
+
   useEffect(() => {
     const appId = params.id.replace("#", "%23");
     fetchApplicationById(appId).then((app) => {
@@ -32,6 +38,10 @@ export default function APllicationUpdate({
 
   if (!application) {
     notFound();
+  }
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
   }
 
   return (
@@ -136,6 +146,11 @@ export default function APllicationUpdate({
                 <DialogDemo grade={grade} setGrade={setGrade} />
                 {grade}
               </td>
+            </tr>
+            <tr>
+              <button type="submit" className="btn btn-gray w-full mt-4">
+                Update
+              </button>
             </tr>
           </tbody>
         </table>
