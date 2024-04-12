@@ -60,7 +60,7 @@ return (
 );
 }
 
-
+  
 export default function Navbar() {
 
     const [isSticky, setIsSticky] = useState(false);  
@@ -72,7 +72,7 @@ export default function Navbar() {
       });
     }, []);
 
-  
+    
   return (
     <nav
       className={` py-3 px-10 bg-black ${

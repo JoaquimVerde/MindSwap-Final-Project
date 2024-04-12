@@ -23,11 +23,11 @@ import {
 } from "@/components/ui/select";
 
 import Link from "next/link";
+import { ComboboxPopover } from "@/app/ui/application/popoverStatus";
 // import SearchBar from "@/app/ui/components/ui/search-bar";
 
 export default async function AllApplications() {
   const applications = await fetchApplications();
-  console.log(applications);
 
   return (
     <div className="mx-2 my-2">
