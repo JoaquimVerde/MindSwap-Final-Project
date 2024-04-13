@@ -32,7 +32,7 @@ const formSchema = z.object({
     syllabus: z.string(),
     program: z.string(),
     schedule: z.string(),
-    price: z.string().refine(value => /^(\d+|\d+\.\d{2})$|^(\d+|\d+,\d{2})$/.test(value), {
+    price: z.string().refine(value => /^(\d+|\d+\.\d{2})$/.test(value), {
         message: "Price must be a valid number with up to two decimal places."
     }),
     duration: z.number(),

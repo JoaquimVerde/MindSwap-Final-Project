@@ -6,6 +6,7 @@ import { fetchAllCoursesFromLocation } from "@/app/lib/data";
 import Pagination from "@/app/ui/courses/pagination";
 import { PaginationSkeleton } from "@/app/ui/skeletons";
 import SearchBar from "@/app/ui/components/ui/search-bar";
+import { useSearchParams } from "next/navigation";
 
 
 
@@ -19,19 +20,11 @@ import SearchBar from "@/app/ui/components/ui/search-bar";
 
 export default async function AllCoursesInLocation(
     placeholder: Params,
-    searchParams?:
-        { page?: string }
 ) {
-
     const location = (placeholder.params.location);
-
-    console.log(location);
-
-    const currentPage = Number(searchParams?.page) || 1;
+    const currentPage = Number(placeholder?.searchParams?.page) || 1;
     const totalCoursesNumber = await fetchAllCoursesFromLocation(location);
     const totalPages = Math.ceil(totalCoursesNumber / 6);
-
-
 
     return (
         <div className="mx-2 my-2">
