@@ -437,3 +437,42 @@ export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
   console.error('Failed to update grade:', error);
   }
 };
+
+export async function deletePersonById(id: string) {
+  noStore();
+  try {
+    const response = await fetch(
+      `http://localhost:3000/proxy/api/v1/persons/${id.replace("#", "%23")}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to delete a person");
+    }
+  } catch (error) {
+    console.error("Database error:", error);
+    throw new Error("Failed to delete person.");
+  }
+}
+
+export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
+    
+  try {
+      const response = await fetch(`http://localhost:3000/proxy/api/v1/projects/grade/${id}`,{
+          method:'PATCH',
+          headers: {
+              'Content-type': 'application/json',
+          },
+          body: JSON.stringify({grade: newGrade}),
+  });
+      if (response.ok) {
+      console.log('Grade updated successfully');
+  } else {
+
+      console.error('Failed to update grade!', response.statusText);
+  }
+  } catch (error) {
+  console.error('Failed to update grade:', error);
+  }
+};
