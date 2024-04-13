@@ -44,6 +44,7 @@ const InspirationalQuotes = () => {
 			</div>
 			<div className="absolute bottom-4 right-4">
 				<button 
+					id="new-quote"
 					className="text-white font-bold py-2 px-4 rounded bg-green-500 hover:bg-green-600 transition duration-300"
 					onClick={generateQuote}
 				>
