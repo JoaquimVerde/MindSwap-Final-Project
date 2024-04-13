@@ -8,9 +8,9 @@ function Skills() {
       <div className="w-full  flex flex-col justify-center items-center text-slate-300 py-16">
         <div className="w-[100%] flex flex-col">
           <div className="flex space-y-2 flex-col text-center mb-14">
-            <span className="text-4xl font-bold">
+            <h2 className="text-4xl font-bold">
               Some skills you can learn...
-            </span>
+            </h2>
           </div>
           <Marquee autoFill pauseOnClick>
             <div className="bg-black  shadow-[0_0_10px_blue] m-3 rounded-xl flex  p-2 font-bold text-2xl cursor-podinter text-slate-300">
