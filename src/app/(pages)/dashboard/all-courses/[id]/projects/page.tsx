@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/app/ui/c
 import { Github, Pencil, ChevronsRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Project } from "@/app/lib/definitions";
 import Link from 'next/link';
 import {
     Dialog,
@@ -16,33 +17,33 @@ import {
   } from "@/components/ui/dialog";
   import { Input } from "@/components/ui/input";
   import { Label } from "@/components/ui/label";
-  import { useState } from 'react';
+  import { useState, useEffect } from 'react';
 
 
 
 
-export default async function ProjectsByCourse({params} : {params: { id: string}}) {
+  export default function ProjectsByCourse({params} : {params: { id: string}}) {
     const id = params.id;
-    const projects = await fetchProjectsByCourseId(id);
-    // const [newGrade, setNewGrade] = useState<string>('0-20');
-  
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [newGrade, setNewGrade] = useState<number>(0);
 
+    useEffect(() => {
+        const fetchProjects = async () => {
+            const projectsData = await fetchProjectsByCourseId(id);
+            setProjects(projectsData);
+        };
 
-     const handleUpdateGrade = async () => {
-        console.log( "grde");
-    //     try {
-    //         await fetchUpdateProjectGrade(projectId, newGrade);
-    //         const updatedProjects = projects.map(project => {
-    //             if (project.id === projectId) {
-    //                 return { ...project, grade: newGrade };
-    //             }
-    //             return project;
-    //         });
-    //         projects(updatedProjects);
-    //     } catch (error) {
-    //         console.error('Failed to update project grade:', error);
-    //     }
-     };
+        fetchProjects();
+    }, [id]);
+
+    const handleUpdateGrade = async (projectId:string) => {
+        console.log( "grade");
+        try {
+            await fetchUpdateProjectGrade(projectId, newGrade);
+        } catch (error) {
+            console.error('Failed to update project grade:', error);
+        }
+    };
  
 
     return (
@@ -103,14 +104,14 @@ export default async function ProjectsByCourse({params} : {params: { id: string}
                                                     id="grade"
                                                     defaultValue="0-20"
                                                     className="col-span-3"
-                                                    // onChange={(e) => setNewGrade(e.target.value)}
+                                                    onChange={(e) => setNewGrade(parseInt(e.target.value))}
                                                 />
                                             </div>
                                         </div>
                                         <DialogFooter>
-                                        { <Button type="submit" 
-                                         onClick={handleUpdateGrade}
-                                        >Save</Button> }
+                                        <Button type="submit" onClick={() => handleUpdateGrade(project.id.replace("#", "%23"))}>
+                                        Save
+                                        </Button>
                                         </DialogFooter>
                                     </DialogContent>
                                 </Dialog>
