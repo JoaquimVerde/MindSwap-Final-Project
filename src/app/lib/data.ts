@@ -438,3 +438,24 @@ export async function deletePersonById(id: string) {
     throw new Error("Failed to delete person.");
   }
 }
+
+export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
+    
+  try {
+      const response = await fetch(`http://localhost:3000/proxy/api/v1/projects/grade/${id}`,{
+          method:'PATCH',
+          headers: {
+              'Content-type': 'application/json',
+          },
+          body: JSON.stringify({grade: newGrade}),
+  });
+      if (response.ok) {
+      console.log('Grade updated successfully');
+  } else {
+
+      console.error('Failed to update grade!', response.statusText);
+  }
+  } catch (error) {
+  console.error('Failed to update grade:', error);
+  }
+};
