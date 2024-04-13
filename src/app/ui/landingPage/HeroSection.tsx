@@ -3,7 +3,7 @@ function HeroSection() {
     <div id="home" className="relative w-full h-screen">
       {/* Video Background */}
       <video
-        className="absolute inset-0 w-full h-full object-cover opacity-85"
+        className="absolute inset-0 w-full h-full object-cover "
         autoPlay
         muted
         loop
