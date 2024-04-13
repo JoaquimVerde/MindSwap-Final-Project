@@ -3,7 +3,7 @@ import React from "react";
 
 function About() {
   return (
-    <div className="bg-black">
+    <div className="bg-black pt-10">
     <div id="about" className="container mx-auto text-white mb-7.5 bg-black">
       <div className="w-full md:h-200 p-2 flex flex-col md:flex-row items-center py-16">
         <div className="max-w-[1240px] mx-auto md:w-1/2 md:pr-8 text-slate-300">

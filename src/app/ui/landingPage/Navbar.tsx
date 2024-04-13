@@ -85,14 +85,14 @@ function Navbar() {
 
         <div className="lg:block hidden py-3">
           <button
-            className=" px-4 py-1 border-slate-300 text-slate-300 bg-blue-950 hover:bg-blue-700 transition-all duration-300 rounded-md"
+            className=" px-4 py-1 border-slate-300 text-slate-300 bg-secondary hover:bg-blue-700 transition-all duration-300 rounded-md"
             onClick={() =>
               signIn("cognito", {
                 callbackUrl: "http://localhost:3000/api/auth/redirect",
               })
             }
           >
-            login
+            Login
           </button>
 
           {/* <button

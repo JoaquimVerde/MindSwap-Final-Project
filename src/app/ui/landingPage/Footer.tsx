@@ -3,8 +3,8 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="bg-black">
-    <footer className="flex flex-col space-y-10 justify-center m-10">
+    <div className="bg-black pb-8">
+    <footer className="flex flex-col space-y-10 justify-center pt-10">
       <nav className="flex justify-center flex-wrap gap-6 text-gray-500 font-medium">
         <Link className="hover:text-gray-900" href="#home">
           Home
