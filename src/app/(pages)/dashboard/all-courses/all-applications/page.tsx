@@ -57,8 +57,8 @@ export default async function AllApplications() {
           <TableRow>
             <TableHead>Name</TableHead>
             <TableHead>Course</TableHead>
-            <TableHead>Previouse Knowledge</TableHead>
-            <TableHead>Previouse Experience </TableHead>
+            <TableHead>Previous Knowledge</TableHead>
+            <TableHead>Previous Experience </TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
