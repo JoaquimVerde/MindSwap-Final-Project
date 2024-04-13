@@ -16,6 +16,7 @@ import {
   import React, { useState, useEffect } from "react";
   import { Person } from "@/app/lib/definitions";
   import { deletePersonById } from "@/app/lib/data";
+  import { DocumentMinusIcon } from "@heroicons/react/24/outline";
   
   export default function AllStaff() {
     const [allStaff, setAllStaff] = useState<Person[]>([]);
@@ -30,12 +31,15 @@ import {
       fetchStaff();
     }, []);
 
-    async function handleDelete(id: string) {
-      const confirmDelete = window.confirm("Are you sure you want to delete this student?");
-      if (confirmDelete) {
-        await deletePersonById(id);
-        setAllStaff(allStaff.filter(staff => staff.id !== id));
-      }
+    const [personToDelete, setPersonToDelete] = useState<string | null>(null);
+
+    function handleDelete(id: string) {
+      setPersonToDelete(id);
+      setPersonToDelete(id);
+      const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+      if (modal) {
+      modal.showModal();
+  }
     }
   
     return (
@@ -82,6 +86,28 @@ import {
             <TableRow></TableRow>
           </TableFooter>
         </Table>
+        <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Are you sure you want to delete this person?</h3>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn" onClick={() => {
+                if (personToDelete) {
+                  deletePersonById(personToDelete);
+                  setAllStaff(allStaff.filter(person => person.id !== personToDelete));
+                  const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+                  if (modal) {
+                  modal.close();
+                  
+    }
+                  setPersonToDelete(null);
+                }
+              }}>Confirm</button>
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
       </div>
     );
   }

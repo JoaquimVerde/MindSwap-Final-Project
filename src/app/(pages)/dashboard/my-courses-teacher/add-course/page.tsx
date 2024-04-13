@@ -57,7 +57,7 @@ export default function AddCourse() {
     try {
       // Validate the form values
       const validatedValues = formSchema.parse(values);
-      const url = "http://localhost:3000/proxy/api/v1/persons";
+      const url = "http://localhost:3000/proxy/api/v1/courses";
 
       // Add additional fields
 
@@ -73,7 +73,7 @@ export default function AddCourse() {
 
       if (response.ok) {
         toast({
-          title: "Staff was created successfully",
+          title: "Course was created successfully",
         });
       } else {
         const json = await response.json();
@@ -85,7 +85,7 @@ export default function AddCourse() {
     } catch (err) {
       toast({
         variant: "destructive",
-        title: "There was an error creating this staff",
+        title: "There was an error creating this course",
       });
     }
   }

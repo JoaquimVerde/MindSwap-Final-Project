@@ -30,13 +30,15 @@ import {
       fetchStudents();
     }, []);
 
-    async function handleDelete(id: string) {
-        const confirmDelete = window.confirm("Are you sure you want to delete this student?");
-        if (confirmDelete) {
-          await deletePersonById(id);
-          setAllStudents(allStudents.filter(student => student.id !== id));
-        }
-      }
+    const [personToDelete, setPersonToDelete] = useState<string | null>(null);
+    function handleDelete(id: string) {
+      setPersonToDelete(id);
+      setPersonToDelete(id);
+      const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+      if (modal) {
+      modal.showModal();
+  }
+    }
   
     return (
       <div className="mx-2 my-2">
@@ -70,6 +72,27 @@ import {
             <TableRow></TableRow>
           </TableFooter>
         </Table>
+        <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Are you sure you want to delete this person?</h3>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn" onClick={() => {
+                if (personToDelete) {
+                  deletePersonById(personToDelete);
+                  setAllStudents(allStudents.filter(person => person.id !== personToDelete));
+                  const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+                  if (modal) {
+                  modal.close();
+    }
+                  setPersonToDelete(null);
+                }
+              }}>Confirm</button>
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
       </div>
     );
   }

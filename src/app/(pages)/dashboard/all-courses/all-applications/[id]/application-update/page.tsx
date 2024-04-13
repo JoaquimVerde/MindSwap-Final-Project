@@ -1,12 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchApplicationById, fetchPersonDataById } from "@/app/lib/data";
+import { deleteApplicationById, fetchApplicationById, fetchPersonDataById } from "@/app/lib/data";
 import { notFound } from "next/navigation";
 import { ComboboxPopover } from "@/app/ui/application/popoverStatus";
 import { DialogDemo } from "@/app/ui/application/dialog-grade";
 import { Application, Person } from "../../../../../../lib/definitions";
 
-export default function APllicationUpdate({
+
+
+export default function ApplicationUpdate({
   params,
 }: {
   params: { id: string };
@@ -14,6 +16,7 @@ export default function APllicationUpdate({
   const [application, setApplication] = useState({} as Application);
   const [student, setStudent] = useState({} as Person);
   const [grade, setGrade] = useState(0);
+
 
   useEffect(() => {
     const appId = params.id.replace("#", "%23");
@@ -26,6 +29,16 @@ export default function APllicationUpdate({
 
   if (!application) {
     notFound();
+  }
+
+  const [applicationToDelete, setApplicationToDelete] = useState<string | null>(null);
+
+  function handleDelete(id: string) {
+    setApplicationToDelete(id);
+    const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+    if (modal) {
+      modal.showModal();
+    }
   }
 
   return (
@@ -127,6 +140,27 @@ export default function APllicationUpdate({
             </tr>
           </tbody>
         </table>
+        <button onClick={() => handleDelete(application.id)}>Delete</button>
+        <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Are you sure you want to delete this person?</h3>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn" onClick={() => {
+                if (applicationToDelete) {
+                  deleteApplicationById(applicationToDelete);
+                  const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+                  if (modal) {
+                    modal.close();
+                  }
+                  setApplicationToDelete(null);
+                }
+              }}>Confirm</button>
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
       </div>
     </div>
   );
