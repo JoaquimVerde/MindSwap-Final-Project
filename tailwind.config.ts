@@ -7,6 +7,7 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./src/app/globals.css",
   ],
   prefix: "",
   theme: {
@@ -19,9 +20,8 @@ const config = {
     },
     extend: {
       colors: {
-        primary: '#0A3B3A', // dark green
-        accent: '',
-        secondary: ''
+        primary: 'var(--color-primary)',
+        secondary: 'var(--color-secondary)',
       },
       keyframes: {
         "accordion-down": {

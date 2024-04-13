@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #0A3B3A;
+  --color-secondary: #2D7271;
+}
+
+
 .nostyle,
 ul,
 ol,
@@ -27,9 +33,11 @@ html {
 }
 
 @layer base {
+
+
   body {
     /* @apply bg-black tracking-wide; */
-    @apply bg-primary tracking-wide;
+    @apply bg-primary;
   }
   h1 {
     @apply text-4xl sm:text-5xl md:text-6xl;
@@ -43,8 +51,13 @@ html {
     @apply bg-primary;
   }
 
-  Link {
+  .btn {
     @apply bg-primary;
   }
+
+  .allThePurple {
+    @apply bg-primary;
+  }
+
 }
 
