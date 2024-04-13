@@ -14,6 +14,7 @@ function About() {
           <h2 className="tx-secondary">return</h2>
 
           <br />
+          <div className="text-justify text-lg">
           <p>
             At Acodemy, our mission is to empower individuals seeking a
             transformative career path in the dynamic world of software
@@ -34,6 +35,7 @@ function About() {
             Acodemy School of Programming and unlock your full potential in the
             digital landscape.
           </p>
+          </div>
           <h2>&#125;;</h2>
         </div>
 

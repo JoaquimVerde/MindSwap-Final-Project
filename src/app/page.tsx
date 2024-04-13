@@ -35,7 +35,7 @@ export default function Home() {
 					<div>
 						<HeroSection />
 						<About />
-						<Parallax />
+						{/* <Parallax /> */}
 						<Courses />
 						<Skills />
 						<Footer />
