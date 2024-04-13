@@ -87,10 +87,10 @@ export async function fetchProjectsByCourseId(id: string): Promise<Project[]> {
   }
 }
 
-export async function fetchPersonById(): Promise<Person> {
+export async function fetchPersonById(id1: string): Promise<Person> {
   noStore();
   try {
-    const id = sessionStorage.getItem("userId");
+    const id = "PERSON#" + id1;
     console.log(id);
     if (!id) {
       throw new Error("Id not found in session storage");
@@ -140,10 +140,9 @@ export async function fetchCoursesByLocation(
   }
 }
 
-export async function fetchPersonByEmail(): Promise<Person> {
+export async function fetchPersonByEmail(email: string): Promise<Person> {
   noStore();
   try {
-    const email = sessionStorage.getItem("email");
     if (!email) {
       throw new Error("Email not found in session storage");
     }
@@ -168,7 +167,7 @@ export async function fetchRole(): Promise<string> {
   noStore();
 
   try {
-    const role = sessionStorage.getItem("userRole");
+    const role = "STUDENT";
 
     if (!role) {
       throw new Error("Role not found in session storage.");
@@ -299,11 +298,12 @@ export async function fetchProjectByStudentId(id: string): Promise<Project[]> {
 }
 
 export async function fetchAllApplicationsById(
-  statuses: string[]
+  statuses: string[],
+  idCode: string
 ): Promise<Application[]> {
   noStore();
   try {
-    const id = sessionStorage.getItem("userId");
+    const id = "PERSON#" + idCode;
     if (!id) {
       throw new Error("Id not found in session storage");
     }

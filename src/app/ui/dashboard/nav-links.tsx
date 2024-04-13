@@ -15,11 +15,11 @@ import {
   Smile,
   Home,
 } from "lucide-react";
-import { fetchRole } from "@/app/lib/data"; 
 import { toPascalCase } from "@/app/lib/utils";
+import { useSession } from "next-auth/react";
 
 export const linkDashboard: LinkType = {
-  name: `${toPascalCase(sessionStorage?.userRole ?? '?')}'s Dashboard`,
+  name: ``,
   href: "/dashboard",
   icon: Home,
   role: ["STUDENT", "TEACHER", "ADMIN"],
@@ -87,20 +87,15 @@ export const links: LinkType[] = [
 
 export default function NavLinks() {
   const [openSublinks, setOpenSublinks] = useState<string | null>(null);
-  const [role, setRole] = useState<string | null>(null);
+  const [role, setRole] = useState<string>("");
+  const { data: session, status } = useSession();
+  const user: any = session?.user;
 
   useEffect(() => {
-    async function fetchPersonRole() {
-      try {
-        const fetchedRole: string = await fetchRole();
-        setRole(fetchedRole);
-      } catch (error) {
-        console.error('Failed to fetch role:', error);
-      }
-    }
-
-    fetchPersonRole();
-  }, []);
+    if (status === "loading") return;
+    const role = user["cognito:groups"][0];
+    setRole(role);
+  }, [session, status]);
 
   function filterLinksByRole(links: LinkType[]) {
     if (!role) return [];
@@ -112,7 +107,7 @@ export default function NavLinks() {
       <div className="flex justify-start items-start">
         <Link className="flex justify-start items-start pt-2 pb-2" key={linkDashboard.href} href={linkDashboard.href}>
           {linkDashboard.icon && <linkDashboard.icon className="flex justify-start items-start mr-2" />}
-          <p className="hidden md:block">{linkDashboard.name}</p>
+          <p className="hidden md:block">{`${toPascalCase(role)}'s Dashboard`}</p>
         </Link>
       </div>
 

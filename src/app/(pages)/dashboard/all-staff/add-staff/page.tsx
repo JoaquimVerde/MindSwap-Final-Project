@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import React from "react";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,9 +25,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import AWS from "aws-sdk";
+import { useSession } from "next-auth/react";
+
 export default function AddStaff() {
   const { toast } = useToast();
-  const personIdparam = sessionStorage.getItem("userId");
+  const { data: session, status } = useSession();
+  const user: any = session?.user;
+
+  AWS.config.update({
+    region: "eu-central-1",
+    credentials: new AWS.Credentials({
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
+    }),
+  });
+
   const formSchema = z.object({
     email: z.string().email(),
     firstName: z.string().min(1, "Please update your first name"),
@@ -53,12 +67,12 @@ export default function AddStaff() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       // Validate the form values
-      const validatedValues = formSchema.parse(values);
-      const url = "http://localhost:3000/proxy/api/v1/persons";
+      const validatedValues = { ...formSchema.parse(values), id: user.id };
+      const url = "http://localhost:3000/proxy/api/v1/persons"
 
       // Add additional fields
 
-      const api_req_SelectItems = {
+      const api_req_options = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,12 +80,10 @@ export default function AddStaff() {
         body: JSON.stringify(validatedValues),
       };
 
-      const response = await fetch(url, api_req_SelectItems);
+      const response = await fetch(url, api_req_options);
 
       if (response.ok) {
-        toast({
-          title: "Staff was created successfully",
-        });
+        addUserToCognito(validatedValues.email, validatedValues.role);
       } else {
         const json = await response.json();
         toast({
@@ -86,6 +98,50 @@ export default function AddStaff() {
       });
     }
   }
+
+  const addUserToCognito = (email: string, role: string) => {
+    var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
+    cognitoidentityserviceprovider.adminCreateUser(
+      {
+        UserPoolId: process.env.COGNITO_USER_POOL_ID || "",
+        Username: email,
+        DesiredDeliveryMediums: ["EMAIL"],
+        ForceAliasCreation: true,
+        MessageAction: "SUPPRESS",
+        UserAttributes: [
+          {
+            Name: "email",
+            Value: email,
+          },
+          {
+            Name: "email_verified",
+            Value: "true",
+          },
+        ],
+        TemporaryPassword: "TempPassword123!",
+      }, function (err, data) {
+        if (err) console.log(err, err.stack);
+        else console.log(data);
+      }
+    );
+    cognitoidentityserviceprovider.adminAddUserToGroup({
+      UserPoolId: process.env.COGNITO_USER_POOL_ID || "",
+      Username: user.id || "",
+      GroupName: role,
+    }, function (err, data) {
+      if (err) {
+        toast({
+          variant: "destructive",
+          title: "There was an error creating this staff",
+        });
+      } else {
+        toast({
+          title: "Staff was created successfully",
+        });
+      }
+    });
+  }
+
 
   return (
     <div>

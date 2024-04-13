@@ -22,7 +22,7 @@ export async function updateCourse(
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      //"Authorization": sessionStorage.getItem("token"),
+      //"Authorization":
     },
     body: JSON.stringify(values),
   })
