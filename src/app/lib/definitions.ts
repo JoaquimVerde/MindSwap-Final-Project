@@ -75,4 +75,8 @@ export type CourseForm = {
   teacher: string;
 };
 
-
+export type Status = {
+  value: string;
+  label: string;
+  icon: LucideIcon;
+};
