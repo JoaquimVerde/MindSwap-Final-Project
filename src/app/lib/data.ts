@@ -346,8 +346,9 @@ export async function fetchPersonDataById(id: string): Promise<Person> {
   }
 }
 
+
 export async function fetchCoursesByTeacherId(): Promise<Course[]> {
-  try {
+try {
     const id = sessionStorage.getItem("userId");
     if (!id) {
       throw new Error("Id not found in session storage");
@@ -366,3 +367,35 @@ export async function fetchCoursesByTeacherId(): Promise<Course[]> {
     throw error; 
   }
 }
+
+export async function fetchRoleByPersonId(): Promise<string> {
+  try { 
+    const id = sessionStorage.getItem("userId");
+    if (!id) {
+      throw new Error("Id not found in session storage");
+    }
+    const encodedId = id.replace(/#/g, "%23");
+    
+  const response = await fetch(
+      `http://localhost:3000/proxy/api/v1/persons/${encodedId}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch person");
+    }
+
+    const person: Person = await response.json();
+    console.log(person);
+    const role = person.role;
+    console.log(person.role);
+    
+    if (!role) {
+      throw new Error("Role not found in person data");
+    }
+
+    return role;
+  } catch (error) {
+    console.error("Error fetching role:", error);
+    throw new Error("Failed to fetch role.");
+  }
+}
+

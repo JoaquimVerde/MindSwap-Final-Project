@@ -6,6 +6,7 @@ import {
 } from "@/app/ui/courses/buttons";
 import { fetchCourseById } from "@/app/lib/data";
 import { notFound } from "next/navigation";
+import SortByRoleButtons from "@/app/ui/components/ui/sort-by-role-buttons";
 
 export default async function Page({ params }: { params: { id: string } }) {
   
@@ -78,15 +79,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
 
       <div className="flex flex-col space-y-5 max-w-fit">
-        <Button>
-          <ViewProjects id={id} />
-        </Button>
-        <Button>
-          <ApplyCourse id={id} />
-        </Button>
-        <Button>
-          <EditCourse id={id} />
-        </Button>
+        <SortByRoleButtons id={id} />
       </div>
     </div>
   );
