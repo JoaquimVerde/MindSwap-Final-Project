@@ -437,6 +437,7 @@ export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
   }
 };
 
+
 export async function deleteApplicationById(id: string){
   try {
     let encodedId = id.replace("#", "%23");
@@ -449,6 +450,44 @@ export async function deleteApplicationById(id: string){
   } catch (error) {
     console.error("Database error:", error);
     throw new Error("Failed to delete application.");
+  }
+}
+
+export async function fetchUpdateApplicationGrade(id: string, newGrade: number) {
+  try {
+    const response = await fetch(`http://localhost:3000/proxy/api/v1/registration/grade/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ grade: newGrade }),
+    });
+    if (response.ok) {
+      console.log("Grade updated successfully");
+    } else {
+      console.error("Failed to update grade!", response.statusText);
+    }
+  } catch (error) {
+    console.error("Failed to update grade:", error);
+  }
+}
+
+export async function fetchUpdateApplicationStatus(id: string, newStatus: string) {
+  try {
+    const response = await fetch(`http://localhost:3000/proxy/api/v1/registration/status/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ status: newStatus }),
+    });
+    if (response.ok) {
+      console.log("Status updated successfully");
+    } else {
+      console.error("Failed to update status!", response.statusText);
+    }
+  } catch (error) {
+    console.error("Failed to update status:", error);
   }
 }
 
