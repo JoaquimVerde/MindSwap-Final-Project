@@ -12,6 +12,7 @@ import {
   UserRound,
   LibraryBig,
   PersonStanding,
+  Smile,
   Home,
 } from "lucide-react";
 import { fetchRole } from "@/app/lib/data"; 
@@ -68,6 +69,12 @@ export const links: LinkType[] = [
     name: "All Staff",
     href: "/dashboard/all-staff",
     icon: PersonStanding,
+    role: ["ADMIN"],
+  },
+  {
+    name: "All Students",
+    href: "/dashboard/all-students",
+    icon: Smile,
     role: ["ADMIN"],
   },
   {
