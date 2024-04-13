@@ -29,6 +29,7 @@ import { ComboboxPopover } from "@/app/ui/application/popoverStatus";
 export default async function AllApplications() {
   const applications = await fetchApplications();
 
+
   return (
     <div className="mx-2 my-2">
       <div>

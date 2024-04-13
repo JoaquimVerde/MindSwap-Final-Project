@@ -419,3 +419,18 @@ export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
   }
 };
 
+export async function deleteApplicationById(id: string){
+  try {
+    let encodedId = id.replace("#", "%23");
+    const response = await fetch(`http://localhost:3000/proxy/api/v1/registration/${encodedId}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error("Failed to delete application");
+    }
+  } catch (error) {
+    console.error("Database error:", error);
+    throw new Error("Failed to delete application.");
+  }
+}
+

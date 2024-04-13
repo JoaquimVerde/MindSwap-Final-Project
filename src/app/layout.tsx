@@ -1,3 +1,4 @@
+import Head from "next/head";
 import SessionWrapper from "@/components/ui/session-wrapper";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -16,6 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" href="/public/favicon.ico" />
+      </Head>
       <SessionWrapper>
         <body className={inter.className}>
           {children}
