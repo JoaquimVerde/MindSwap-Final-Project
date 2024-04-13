@@ -345,3 +345,24 @@ export async function fetchPersonDataById(id: string): Promise<Person> {
     throw new Error("Failed to fetch person.");
   }
 }
+
+export async function fetchCoursesByTeacherId(): Promise<Course[]> {
+  try {
+    const id = sessionStorage.getItem("userId");
+    if (!id) {
+      throw new Error("Id not found in session storage");
+    }
+    const encodedId = id.replace(/#/g, "%23");
+
+    const response = await fetch(`http://localhost:8080/api/v1/courses/teacher/${encodedId}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch courses by teacher id");
+    }
+
+    const courses: Course[] = await response.json();
+    return courses;
+  } catch (error) {
+    console.error("Error fetching courses by teacher id:", error);
+    throw error; 
+  }
+}
