@@ -28,6 +28,20 @@ const SortByRoleButtons = ({ id }: { id: string }) => {
           <Button>
             <ViewProjects id={id} />
           </Button>
+          <br />
+          <br />
+          <Button>
+            <EditCourse id={id} />
+          </Button>
+        </>
+      )}
+      {userRole === "ADMIN" && (
+        <>
+          <Button>
+            <ViewProjects id={id} />
+          </Button>
+          <br />
+          <br />
           <Button>
             <EditCourse id={id} />
           </Button>
