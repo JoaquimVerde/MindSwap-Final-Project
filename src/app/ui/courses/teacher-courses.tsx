@@ -6,6 +6,8 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './card';
 import { GetCourseInfo } from './buttons';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import cn from 'classnames';
 
 const TeacherCourses = () => {
  const [courses, setCourses] = useState<Course[]>([]);
@@ -24,7 +26,23 @@ const TeacherCourses = () => {
   }, []);
 
   return (
+    <div>
+<Link href="/dashboard/my-courses-teacher/add-course">
+   
+   <Button
+     className={cn("bg-primary text-white")}
+     onClick={() => {
+       console.log("clicked");
+     }}
+   >
+     Create Course
+   </Button>
+
+</Link>
+    
     <div className="flex flex-wrap">
+      
+<br />
       {courses?.map((course) => (
         <div key={course.id} className="w-[380px] mx-4 my-4">
           <Card>
@@ -70,6 +88,7 @@ const TeacherCourses = () => {
           </Card>
         </div>
       ))}
+    </div>
     </div>
   );
 };
