@@ -15,6 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import AWS from "aws-sdk";
 
 const formSchema = z.object({
   firstName: z.string().min(2, {
@@ -46,17 +47,27 @@ export default function RegisterForm() {
   });
 
   const { data: session } = useSession();
-  const mail = session?.user?.email ? session?.user?.email : "";
+  const user: any = session?.user;
+  const mail = user?.email;
+  const userId = user?.id;
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-  
+    AWS.config.update({
+      region: "eu-central-1",
+      credentials: new AWS.Credentials({
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
+      }),
+    });
+    var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
     const obj = {
       ...values,
       email: mail,
       cv: "a",
-      role: "Student",
+      role: "STUDENT",
+      id: userId,
     };
-    
+
     const response = await fetch("http://localhost:3000/proxy/api/v1/persons", {
       method: "POST",
       headers: {
@@ -68,14 +79,17 @@ export default function RegisterForm() {
     if (response.status !== 201) {
       throw new Error("Registration failed");
     }
+    console.log("BEFORE")
+    cognitoidentityserviceprovider.adminAddUserToGroup({
+      UserPoolId: process.env.COGNITO_USER_POOL_ID || "",
+      Username: userId || "",
+      GroupName: "STUDENT",
+    }, function (err, data) {
+      if (err) console.log(err, err.stack);
+      else window.location.href = "/dashboard";
+    });
+    console.log("AFTER")
 
-    const data = await response.json();
-   
-    sessionStorage.setItem("userId", data.id);
-    sessionStorage.setItem("userRole", data.role);
-
-    window.location.href = "/dashboard";
-   
   }
 
   return (

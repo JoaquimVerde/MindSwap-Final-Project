@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import React from "react";
+import { useSession } from "next-auth/react";
 
 const url = "http://localhost:3000/proxy/api/v1/registration";
 const formSchema = z.object({
@@ -35,8 +36,10 @@ const formSchema = z.object({
 
 export function ApplicationForm({ id }: { id: string }) {
   const { toast } = useToast();
+  const { data: session, status } = useSession();
+  const user: any = session?.user;
   const courseIdparam = id.replace("%23", "#");
-  const personIdparam = sessionStorage.getItem("userId") as string;
+  const personIdparam = "PERSON#" + user.id;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -130,14 +133,14 @@ export function ApplicationForm({ id }: { id: string }) {
                         <RadioGroupItem
                           value="false"
                           className="bg-white opacity-100"
-                          // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           No
                         </RadioGroupItem>
                         <RadioGroupItem
                           value="true"
                           className="bg-white opacity-100"
-                          // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           Yes
                         </RadioGroupItem>
@@ -164,15 +167,15 @@ export function ApplicationForm({ id }: { id: string }) {
                         <RadioGroupItem
                           value="false"
                           className="bg-white opacity-100"
-                          // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           No
                         </RadioGroupItem>
                         <RadioGroupItem
                           value="true"
                           className="bg-white opacity-100"
-                          //style={{ opacity: 1 }}
-                          // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        //style={{ opacity: 1 }}
+                        // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
                         >
                           Yes
                         </RadioGroupItem>

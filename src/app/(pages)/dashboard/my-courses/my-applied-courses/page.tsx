@@ -4,19 +4,23 @@ import { fetchAllApplicationsById } from "@/app/lib/data";
 import { Application } from "@/app/lib/definitions";
 import { useEffect, useState } from "react";
 import { toPascalCase } from "@/app/lib/utils";
+import { useSession } from "next-auth/react";
 
 export default function MyAppliedCourses() {
   const [applications, setApplications] = useState<Application[]>([]);
+  const { data: session, status } = useSession();
+  const user: any = session?.user;
 
   useEffect(() => {
     const fetchData = async () => {
+      if (status === "loading") return;
       try {
         const applicationData = await fetchAllApplicationsById([
           "APPLIED",
           "IN_REVIEW",
           "ACCEPTED",
           "AUTOMATICALLY_ACCEPTED",
-        ]);
+        ], user.id);
         setApplications(applicationData);
         console.log(applicationData);
       } catch (error) {
@@ -25,7 +29,7 @@ export default function MyAppliedCourses() {
     };
 
     fetchData();
-  }, []);
+  }, [session, status]);
 
   return (
     <div>

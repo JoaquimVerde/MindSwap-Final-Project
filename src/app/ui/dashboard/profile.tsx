@@ -6,8 +6,9 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import React from "react";
 import { Camera, Eye, EyeOff } from "lucide-react";
 import { Person } from "@/app/lib/definitions";
-import { fetchPersonByEmail, fetchPersonById } from "@/app/lib/data";
+import { fetchPersonById } from "@/app/lib/data";
 import { useForm } from "react-hook-form";
+import { useSession } from "next-auth/react";
 
 interface ProfileProps {
   initialProfileData?: Person;
@@ -22,11 +23,14 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
     formState: { isSubmitting },
   } = useForm<Person>({ defaultValues: initialProfileData });
   const [avatarImage, setAvatarImage] = useState("/images/avatar.png");
+  const { data: session, status } = useSession();
+  const user: any = session?.user;
 
   useEffect(() => {
+    if (status === "loading") return
     const fetchData = async () => {
       try {
-        const personData = await fetchPersonById();
+        const personData = await fetchPersonById(user.id);
         setValue("firstName", personData.firstName);
         setValue("lastName", personData.lastName);
         setValue("username", personData.username);
@@ -42,7 +46,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
     };
 
     fetchData();
-  }, []);
+  }, [session, status]);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target?.files?.[0];
@@ -60,7 +64,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
   const onSubmit = async (data: Person) => {
     console.log(data);
     try {
-      const userId = sessionStorage.getItem("userId");
+      const userId = user?.id;
       if (!userId) {
         throw new Error("User Id not found in session storage");
       }

@@ -22,43 +22,57 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
     formState: { isSubmitting },
   } = useForm<Person>({ defaultValues: initialProfileData });
   const [avatarImage, setAvatarImage] = useState("/images/avatar.png");
+  const { data: session, status } = useSession();
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const personData = await fetchPersonById();
-      setValue("firstName", personData.firstName);
-      setValue("lastName", personData.lastName);
-      setValue("username", personData.username);
-      setValue("email", personData.email);
-      setValue("role", personData.role);
-      setValue("dateOfBirth", personData.dateOfBirth);
-      setValue("address", personData.address);
-      setValue("cv", personData.cv);
-      // setAvatarImage(personData.avatarImage); Add avatar image??
-    } catch (error) {
-      console.error("Error fetching person:", error);
-    }
-  };
+  useEffect(() => {
+    if (status === "loading") return;
+    const user: any = session?.user;
+    const fetchData = async () => {
+      try {
+        const personData = await fetchPersonById(user.id);
+        setValue("firstName", personData.firstName);
+        setValue("lastName", personData.lastName);
+        setValue("username", personData.username);
+        setValue("email", personData.email);
+        setValue("role", personData.role);
+        setValue("dateOfBirth", personData.dateOfBirth);
+        setValue("address", personData.address);
+        setValue("cv", personData.cv);
+        // setAvatarImage(personData.avatarImage); Add avatar image??
+      } catch (error) {
+        console.error("Error fetching person:", error);
+      }
+    };
 
-  fetchData();
-}, []);
+    fetchData();
+  }, [session, status]);
 
-return (
-  <div>
-    {/* Your component's content goes here */}
-  </div>
-);
+  return (
+    <div>
+      {/* Your component's content goes here */}
+    </div>
+  );
 }
+
+import { useSession } from "next-auth/react";
 
 export default function Dashboard() {
   const [personData, setPersonData] = useState<Person | null>(null);
+  const { data: session, status } = useSession();
+  const user: any = session?.user;
 
   useEffect(() => {
-    fetchPersonById().then(data => {
+    if (status == "loading") return;
+    fetchPersonById(user.id).then(data => {
       setPersonData(data);
     });
-  }, []);
+  }, [user, status]);
+
+  if (!personData) {
+    return <div>Loading...</div>;
+  }
+
+  console.log(personData);
 
   return (
     <main>
