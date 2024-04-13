@@ -116,6 +116,16 @@ export default function NavLinks() {
         </Link>
       </div>
 
+      
+
+      {filterLinksByRole(links).map((link, idx) => (
+        <div className="flex justify-start items-start" key={idx}>
+          <Link className="flex justify-start items-start pt-2 pb-2" key={link.href} href={link.href}>
+            {link.icon && <link.icon className="flex justify-start items-start mr-2" />}
+            <p className="hidden md:block">{link.name}</p>
+          </Link>
+        </div>
+      ))}
       {linksub.map((link, idx) => (
         <div className="flex justify-start items-start" key={idx}>
           {filterLinksByRole([link]).length > 0 && (
@@ -143,16 +153,8 @@ export default function NavLinks() {
             </details>
           )}
         </div>
-      ))}
-
-      {filterLinksByRole(links).map((link, idx) => (
-        <div className="flex justify-start items-start" key={idx}>
-          <Link className="flex justify-start items-start pt-2 pb-2" key={link.href} href={link.href}>
-            {link.icon && <link.icon className="flex justify-start items-start mr-2" />}
-            <p className="hidden md:block">{link.name}</p>
-          </Link>
-        </div>
-      ))}
+      )
+      )}
     </>
   );
 }

@@ -4,7 +4,7 @@
 
 :root {
   --color-primary: #0A3B3A;
-  --color-secondary: #2D7271;
+  --color-secondary: #407070;
 }
 
 
@@ -57,6 +57,24 @@ html {
 
   .allThePurple {
     @apply bg-primary;
+  }
+
+  .getLeft {
+    transform: translateY(-80%);
+    margin-left: -55px;
+  }
+
+  .minSize {
+    width: 450px;
+    gap: 40px;
+  }
+
+  .tx-secondary {
+    color: var(--color-secondary);
+  }
+
+  .tx-primary {
+    color: var(--color-primary);
   }
 
 }
