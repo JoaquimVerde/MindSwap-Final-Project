@@ -28,13 +28,23 @@ html {
 
 @layer base {
   body {
-    @apply bg-black tracking-wide;
+    /* @apply bg-black tracking-wide; */
+    @apply bg-primary tracking-wide;
   }
   h1 {
     @apply text-4xl sm:text-5xl md:text-6xl;
+    /* @apply bg-primary text-4xl sm:text-5xl md:text-6xl; */
   }
   h2 {
     @apply text-3xl sm:text-4xl;
+  }
+
+  #new-quote {
+    @apply bg-primary;
+  }
+
+  Link {
+    @apply bg-primary;
   }
 }
 
