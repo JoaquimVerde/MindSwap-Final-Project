@@ -14,16 +14,27 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export function DialogDemo({
+  open,
+  setOpen,
   grade,
   setGrade,
 }: {
+  open: boolean;
+  setOpen: (open: boolean) => void;
   grade: number;
   setGrade: Dispatch<SetStateAction<number>>;
 }) {
+  function handleChange(event: { target: { value: any; min: any; max: any } }) {
+    let { value, min, max } = event.target;
+    value = Math.max(Number(min), Math.min(Number(max), Number(value)));
+
+    setGrade(value);
+  }
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Grade</Button>
+        <Button variant="outline">{grade || "Grade"}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -40,12 +51,16 @@ export function DialogDemo({
               id="grade"
               className="col-span-3"
               value={grade}
-              onChange={(e) => setGrade(Number(e.target.value))}
+              min={0}
+              max={20}
+              onChange={handleChange}
             />
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button type="button" onClick={() => setOpen(false)}>
+            Save changes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

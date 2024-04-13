@@ -47,10 +47,12 @@ export async function fetchCoursesByPage(
   }
 }
 
-export async function fetchCourseById(id: string): Promise<Course|null> {
+export async function fetchCourseById(id: string): Promise<Course | null> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:3000/proxy/api/v1/courses/${id}`);
+    const response = await fetch(
+      `http://localhost:3000/proxy/api/v1/courses/${id}`
+    );
     if (response.status === 404) {
       return null;
     }
@@ -344,16 +346,17 @@ export async function fetchPersonDataById(id: string): Promise<Person> {
   }
 }
 
-
 export async function fetchCoursesByTeacherId(): Promise<Course[]> {
-try {
+  try {
     const id = sessionStorage.getItem("userId");
     if (!id) {
       throw new Error("Id not found in session storage");
     }
     const encodedId = id.replace(/#/g, "%23");
 
-    const response = await fetch(`http://localhost:8080/api/v1/courses/teacher/${encodedId}`);
+    const response = await fetch(
+      `http://localhost:8080/api/v1/courses/teacher/${encodedId}`
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch courses by teacher id");
     }
@@ -362,19 +365,19 @@ try {
     return courses;
   } catch (error) {
     console.error("Error fetching courses by teacher id:", error);
-    throw error; 
+    throw error;
   }
 }
 
 export async function fetchRoleByPersonId(): Promise<string> {
-  try { 
+  try {
     const id = sessionStorage.getItem("userId");
     if (!id) {
       throw new Error("Id not found in session storage");
     }
     const encodedId = id.replace(/#/g, "%23");
-    
-  const response = await fetch(
+
+    const response = await fetch(
       `http://localhost:3000/proxy/api/v1/persons/${encodedId}`
     );
     if (!response.ok) {
@@ -385,7 +388,7 @@ export async function fetchRoleByPersonId(): Promise<string> {
     console.log(person);
     const role = person.role;
     console.log(person.role);
-    
+
     if (!role) {
       throw new Error("Role not found in person data");
     }
@@ -396,7 +399,6 @@ export async function fetchRoleByPersonId(): Promise<string> {
     throw new Error("Failed to fetch role.");
   }
 }
-
 
 export async function deletePersonById(id: string) {
   noStore();
@@ -417,51 +419,17 @@ export async function deletePersonById(id: string) {
 }
 
 export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
-    
   try {
-      const response = await fetch(`http://localhost:3000/proxy/api/v1/projects/grade/${id}`,{
-          method:'PATCH',
-          headers: {
-              'Content-type': 'application/json',
-          },
-          body: JSON.stringify({grade: newGrade}),
-  });
-      if (response.ok) {
-      console.log('Grade updated successfully');
-  } else {
-
-      console.error('Failed to update grade!', response.statusText);
-  }
-  } catch (error) {
-  console.error('Failed to update grade:', error);
-  }
-};
-
-
-export async function deleteApplicationById(id: string){
-  try {
-    let encodedId = id.replace("#", "%23");
-    const response = await fetch(`http://localhost:3000/proxy/api/v1/registration/${encodedId}`, {
-      method: "DELETE",
-    });
-    if (!response.ok) {
-      throw new Error("Failed to delete application");
-    }
-  } catch (error) {
-    console.error("Database error:", error);
-    throw new Error("Failed to delete application.");
-  }
-}
-
-export async function fetchUpdateApplicationGrade(id: string, newGrade: number) {
-  try {
-    const response = await fetch(`http://localhost:3000/proxy/api/v1/registration/grade/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ grade: newGrade }),
-    });
+    const response = await fetch(
+      `http://localhost:3000/proxy/api/v1/projects/grade/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ grade: newGrade }),
+      }
+    );
     if (response.ok) {
       console.log("Grade updated successfully");
     } else {
@@ -472,22 +440,46 @@ export async function fetchUpdateApplicationGrade(id: string, newGrade: number) 
   }
 }
 
-export async function fetchUpdateApplicationStatus(id: string, newStatus: string) {
+export async function deleteApplicationById(id: string) {
   try {
-    const response = await fetch(`http://localhost:3000/proxy/api/v1/registration/status/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ status: newStatus }),
-    });
-    if (response.ok) {
-      console.log("Status updated successfully");
-    } else {
-      console.error("Failed to update status!", response.statusText);
+    let encodedId = id.replace("#", "%23");
+    const response = await fetch(
+      `http://localhost:3000/proxy/api/v1/registration/${encodedId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to delete application");
     }
   } catch (error) {
-    console.error("Failed to update status:", error);
+    console.error("Database error:", error);
+    throw new Error("Failed to delete application.");
   }
 }
 
+export async function fetchUpdateApplicationGrade(
+  id: string,
+  newGrade: number
+): Promise<Response> {
+  return fetch(`http://localhost:3000/proxy/api/v1/registration/grade/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ grade: newGrade }),
+  });
+}
+
+export async function fetchUpdateApplicationStatus(
+  id: string,
+  newStatus: string
+): Promise<Response> {
+  return fetch(`http://localhost:3000/proxy/api/v1/registration/status/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ status: newStatus }),
+  });
+}
