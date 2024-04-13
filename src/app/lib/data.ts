@@ -398,6 +398,24 @@ export async function fetchRoleByPersonId(): Promise<string> {
 }
 
 
+export async function deletePersonById(id: string) {
+  noStore();
+  try {
+    const response = await fetch(
+      `http://localhost:3000/proxy/api/v1/persons/${id.replace("#", "%23")}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to delete a person");
+    }
+  } catch (error) {
+    console.error("Database error:", error);
+    throw new Error("Failed to delete person.");
+  }
+}
+
 export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
     
   try {
