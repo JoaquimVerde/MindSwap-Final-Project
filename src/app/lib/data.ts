@@ -345,7 +345,6 @@ export async function fetchPersonDataById(id: string): Promise<Person> {
 }
 
 
-
 export async function fetchCoursesByTeacherId(): Promise<Course[]> {
 try {
     const id = sessionStorage.getItem("userId");
@@ -399,24 +398,6 @@ export async function fetchRoleByPersonId(): Promise<string> {
 }
 
 
-export async function deletePersonById(id: string) {
-  noStore();
-  try {
-    const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/persons/${id.replace("#", "%23")}`,
-      {
-        method: "DELETE",
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to delete a person");
-    }
-  } catch (error) {
-    console.error("Database error:", error);
-    throw new Error("Failed to delete person.");
-  }
-}
-
 export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
     
   try {
@@ -437,3 +418,21 @@ export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
   console.error('Failed to update grade:', error);
   }
 };
+
+export async function deletePersonById(id: string) {
+  noStore();
+  try {
+    const response = await fetch(
+      `http://localhost:3000/proxy/api/v1/persons/${id.replace("#", "%23")}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to delete a person");
+    }
+  } catch (error) {
+    console.error("Database error:", error);
+    throw new Error("Failed to delete person.");
+  }
+}
