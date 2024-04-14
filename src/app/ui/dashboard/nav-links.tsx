@@ -16,8 +16,7 @@ import {
 } from "lucide-react";
 import { fetchRole } from "@/app/lib/data";
 import { toPascalCase } from "@/app/lib/utils";
-import AllCourses from "@/app/(pages)/dashboard/[role]/all-courses/page";
-import { GetCourseInfo } from "../courses/buttons";
+
 
 
 export const linkDashboard: LinkType = {
