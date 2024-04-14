@@ -1,12 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
-import { deleteApplicationById, fetchApplicationById, fetchPersonDataById } from "@/app/lib/data";
+import { deleteApplicationById, fetchApplicationById, fetchPersonDataById, fetchUpdateApplicationGrade, fetchUpdateApplicationStatus } from "@/app/lib/data";
 import { notFound } from "next/navigation";
 import { ComboboxPopover } from "@/app/ui/application/popoverStatus";
 import { DialogDemo } from "@/app/ui/application/dialog-grade";
-import { Application, Person, Status } from "../../../../../../lib/definitions";
+import { Application, Person } from "../../../../../../lib/definitions";
 import * as React from "react";
 import { z } from "zod";
+import { fetchUpdateProjectGrade } from "@/app/lib/action";
+import { Value } from "@radix-ui/react-select";
+import { LucideIcon } from "lucide-react";
 
 
 
@@ -20,9 +23,7 @@ export default function ApplicationUpdate({
   const [grade, setGrade] = useState(0);
 
   const [open, setOpen] = React.useState(false);
-  const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(
-    null
-  );
+  const [selectedStatus, setSelectedStatus] = useState<string>("");
 
   const formSchema = z.object({
     status: z.string(),
@@ -41,6 +42,14 @@ export default function ApplicationUpdate({
   if (!application) {
     notFound();
   }
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    fetchUpdateApplicationGrade(application.id, grade);
+    fetchUpdateApplicationStatus(application.id, selectedStatus);
+    
+  }
+
+  
 
   const [applicationToDelete, setApplicationToDelete] = useState<string | null>(null);
 
@@ -119,7 +128,7 @@ export default function ApplicationUpdate({
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                Previouse Knowledge
+                Previous Knowledge
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 {application.prevKnowledge ? "Yes" : "No"}
@@ -127,7 +136,7 @@ export default function ApplicationUpdate({
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                Previouse Experience
+                Previous Experience
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 {application?.prevExperience ? "Yes" : "No"}
@@ -151,8 +160,7 @@ export default function ApplicationUpdate({
                 Final Grade
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                <DialogDemo grade={grade} setGrade={setGrade} />
-                {grade}
+                {grade === 0 ? <DialogDemo grade={grade} setGrade={setGrade} /> : grade}
               </td>
             </tr>
             <tr>
@@ -161,8 +169,8 @@ export default function ApplicationUpdate({
               </button>
             </tr>
           </tbody>
+        <button onClick={() => handleDelete(application.id)} className="btn btn-gray w-full mt-4">Delete</button>
         </table>
-        <button onClick={() => handleDelete(application.id)}>Delete</button>
         <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Are you sure you want to delete this person?</h3>
