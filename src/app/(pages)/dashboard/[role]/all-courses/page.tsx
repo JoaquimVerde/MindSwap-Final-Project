@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { fetchAllCourses, fetchPersonById } from "@/app/lib/data";
 import Pagination from "@/app/ui/courses/pagination";
 import SearchBar from "@/app/ui/components/ui/search-bar";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 
 // import { Metadata } from "next";
@@ -13,23 +14,26 @@ import SearchBar from "@/app/ui/components/ui/search-bar";
 //     title: 'Courses',
 //   };
 
-export default async function AllCourses(
+export default async function Page(
     {
-        searchParams,      
+        searchParams,
+        params
     }: {
         searchParams?: {
-            page?: string;
-        };
-    }, role : string | null
+            page?: string},
+        params: {
+            role?: string}
+    },
 ) {
+
+    const role: string | undefined = (params.role);
 
     console.log(role);
 
-    
 
     const currentPage = Number(searchParams?.page) || 1;
     const totalCourses = await fetchAllCourses();
-    const totalPages = Math.ceil(totalCourses/6);
+    const totalPages = Math.ceil(totalCourses / 6);
 
 
     return (
@@ -40,7 +44,7 @@ export default async function AllCourses(
 
             <div className="mt-5 ml-4 w-[500px]">
 
-            <SearchBar placeholder="search by location" />
+                <SearchBar placeholder="search by location" />
 
             </div>
 
@@ -49,9 +53,9 @@ export default async function AllCourses(
                     <Pagination totalPages={totalPages} />
                 </div>
             </Suspense>
-            
+
             <Suspense fallback={<CardsSkeleton />}>
-                <Cards currentPage={currentPage} />
+                <Cards currentPage={currentPage} role={role}/>
             </Suspense>
         </div >
     );

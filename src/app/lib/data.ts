@@ -4,7 +4,7 @@
 import { unstable_noStore as noStore } from "next/cache";
 import { notFound } from "next/navigation";
 import { Course, Person, Project, Application } from "./definitions";
-import NotFound from "../(pages)/dashboard/all-courses/[id]/course/not-found";
+import NotFound from "../(pages)/dashboard/[role]/all-courses/[id]/course/not-found";
 
 export async function fetchAllCourses(): Promise<number> {
   noStore();
@@ -35,8 +35,8 @@ export async function fetchCoursesByPage(
         currentPage - 1
       }&limit=6`
     );
-    if (response.status === 404 ) {
-      NotFound();
+    if (!response.ok) {
+      throw new Error("Failed to fetch courses!");
     }
     const courses: Course[] = await response.json();
     //console.log(courses);
@@ -48,14 +48,14 @@ export async function fetchCoursesByPage(
   }
 }
 
-export async function fetchCourseById(id: string): Promise<Course> {
+export async function fetchCourseById(id: string): Promise<Course | null> {
   noStore();
   try {
     const response = await fetch(
       `http://localhost:3000/proxy/api/v1/courses/${id}`
     );
     if (response.status === 404) {
-      NotFound();
+      return null;
     }
     const course: Course = await response.json();
     //console.log(course);
@@ -114,7 +114,7 @@ export async function fetchPersonById(): Promise<Person> {
 export async function fetchCoursesByLocation(
   location: string,
   currentPage: number
-): Promise<Course[]> {
+): Promise<Course[] | null> {
   noStore();
   try {
     console.log("fetching...");
@@ -127,7 +127,7 @@ export async function fetchCoursesByLocation(
       }&limit=6`
     );
     if (response.status === 404 ) {
-      NotFound();
+      return null;
     }
     const courses: Course[] = await response.json();
     console.log(courses);

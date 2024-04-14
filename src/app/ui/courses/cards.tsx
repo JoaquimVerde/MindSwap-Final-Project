@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { GetCourseInfo } from "@/app/ui/courses/buttons";
 import { fetchCoursesByPage } from "@/app/lib/data";
-import NotFound from "@/app/(pages)/dashboard/all-courses/[id]/course/not-found";
+import NotFound from "@/app/(pages)/dashboard/[role]/all-courses/[id]/course/not-found";
 
 
 
@@ -19,9 +19,11 @@ import NotFound from "@/app/(pages)/dashboard/all-courses/[id]/course/not-found"
 export default async function Cards(
     {   
         currentPage,
+        role
       }: {
         
         currentPage: number;
+        role: string | undefined;
       })
  {
 
@@ -81,9 +83,10 @@ export default async function Cards(
 
                             </CardContent>
                             <CardFooter>
+                                {role === "STUDENT" ? null :(
                                 <Button className="w-full">
-                                    <GetCourseInfo id={course.id.replace("#", "%23")} />
-                                </Button>
+                                    <GetCourseInfo id={course.id.replace("#", "%23")} role={role}/>
+                                </Button>)}
                             </CardFooter>
                         </Card>
                     </div>

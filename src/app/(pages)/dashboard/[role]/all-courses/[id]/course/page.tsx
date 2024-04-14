@@ -7,18 +7,33 @@ import {
 import { fetchCourseById } from "@/app/lib/data";
 import { notFound } from "next/navigation";
 
-export default async function Page({ params }: { params: { id: string } }) {
-  
+export default async function Page(
+  {
+    params,
+    
+  }: {
+    params: {
+      id: string
+      role?: string
+    },
+    
+
+  }) {
+
   const id = params.id;
 
-  
+  const role = params.role;
+
+  console.log(role);
+
+
   const course = await fetchCourseById(id);
 
   if (!course) {
     notFound();
   }
 
-  const vacancies = course.maxStudents-course.enrolledStudents;
+  const vacancies = course.maxStudents - course.enrolledStudents;
 
   return (
     <div className="mx-2 my-2">
@@ -53,14 +68,14 @@ export default async function Page({ params }: { params: { id: string } }) {
                 {course.location}
               </td>
             </tr>
-            { <tr className="m-0 border-t p-0 even:bg-muted">
+            {<tr className="m-0 border-t p-0 even:bg-muted">
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 Vacancies
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 {vacancies}
               </td>
-            </tr> }
+            </tr>}
           </tbody>
         </table>
       </div>
@@ -79,15 +94,17 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
 
       <div className="flex flex-col space-y-5 max-w-fit">
+      {role === "STUDENT" ? null : (
         <Button>
           <ViewProjects id={id} />
-        </Button>
+        </Button>)}
         <Button>
           <ApplyCourse id={id} />
         </Button>
-        <Button>
-          <EditCourse id={id} />
-        </Button>
+        {role === "STUDENT" ? null : (
+          <Button>
+            <EditCourse id={id} />
+          </Button>)}
       </div>
     </div>
   );

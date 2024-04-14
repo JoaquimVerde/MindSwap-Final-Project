@@ -14,9 +14,11 @@ import {
   PersonStanding,
   Home,
 } from "lucide-react";
-import { fetchRole } from "@/app/lib/data"; 
+import { fetchRole } from "@/app/lib/data";
 import { toPascalCase } from "@/app/lib/utils";
-import AllCourses from "@/app/(pages)/dashboard/all-courses/page";
+import AllCourses from "@/app/(pages)/dashboard/[role]/all-courses/page";
+import { GetCourseInfo } from "../courses/buttons";
+import { NavLink } from "../courses/buttons";
 
 export const linkDashboard: LinkType = {
   name: `${toPascalCase(sessionStorage?.userRole ?? '?')}'s Dashboard`,
@@ -24,6 +26,8 @@ export const linkDashboard: LinkType = {
   icon: Home,
   role: ["STUDENT", "TEACHER", "ADMIN"],
 };
+
+const myRole = sessionStorage.getItem("userRole");
 
 export const linksub: LinkTypeSub[] = [
   {
@@ -105,7 +109,7 @@ export default function NavLinks() {
     <>
       <div className="flex justify-start items-start">
         <Link className="flex justify-start items-start pt-2 pb-2" key={linkDashboard.href} href={linkDashboard.href}>
-          {linkDashboard.icon && <linkDashboard.icon className="flex justify-start items-start mr-2"/>}
+          {linkDashboard.icon && <linkDashboard.icon className="flex justify-start items-start mr-2" />}
           <p className="hidden md:block">{linkDashboard.name}</p>
         </Link>
       </div>
@@ -141,12 +145,15 @@ export default function NavLinks() {
 
       {filterLinksByRole(links).map((link, idx) => (
         <div className="flex justify-start items-start" key={idx}>
-          <Link className="flex justify-start items-start pt-2 pb-2" key={link.href} href={link.href}>
+          {/*<Link className="flex justify-start items-start pt-2 pb-2" key={link.href} href={link.href}>
             {link.icon && <link.icon className="flex justify-start items-start mr-2" />}
             <p className="hidden md:block">{link.name}</p>
-          </Link>
+          </Link>*/}
+          <NavLink role={myRole} link={link} />
         </div>
       ))}
+
+
     </>
   );
 }

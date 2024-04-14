@@ -7,8 +7,8 @@ import MyCourses from "../(pages)/dashboard/my-courses/page";
 import MyAppliedCourses from "../(pages)/dashboard/my-courses/my-applied-courses/page";
 import MyEnrolledCourses from "../(pages)/dashboard/my-courses/my-enrolled-courses/page";
 import MyCoursesTeacher from "../(pages)/dashboard/my-courses-teacher/page";
-import AllCourses from "../(pages)/dashboard/all-courses/page";
-import Course from "../(pages)/dashboard/all-courses/[id]/course/page";
+import AllCourses from "../(pages)/dashboard/[role]/all-courses/page";
+import Course from "../(pages)/dashboard/[role]/all-courses/[id]/course/page";
 import AllCoursesTeacher from "../(pages)/dashboard/all-courses-teacher/page";
 import Profile from "../(pages)/dashboard/profile/page";
 

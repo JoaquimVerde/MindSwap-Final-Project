@@ -4,7 +4,7 @@ import { fetchApplicationById, fetchPersonDataById } from "@/app/lib/data";
 import { notFound } from "next/navigation";
 import { ComboboxPopover } from "@/app/ui/application/popoverStatus";
 import { DialogDemo } from "@/app/ui/application/dialog-grade";
-import { Application, Person } from "../../../../../../lib/definitions";
+import { Application, Person } from "../../../../../../../lib/definitions";
 
 export default function APllicationUpdate({
   params,

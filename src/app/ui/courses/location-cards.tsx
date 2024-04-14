@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { GetCourseInfo } from "@/app/ui/courses/buttons";
 import { fetchAllCourses, fetchAllCoursesFromLocation, fetchCoursesByLocation } from "@/app/lib/data";
 import Pagination from "@/app/ui/courses/pagination";
-import NotFound from "@/app/(pages)/dashboard/all-courses/[id]/course/not-found";
+import NotFound from "@/app/(pages)/dashboard/[role]/all-courses/[id]/course/not-found";
 
 
 
@@ -65,7 +65,7 @@ export default async function LocationCards(
                                     </div>
                                 </div>
                                 <div>
-                                    {course?.syllabus.split("\n").map((line, index) => (
+                                    {course.syllabus.split("\n").map((line, index) => (
                                         <div
                                             className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
                                         >
