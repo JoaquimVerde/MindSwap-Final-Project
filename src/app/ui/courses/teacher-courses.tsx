@@ -33,7 +33,6 @@ const TeacherCourses = () => {
         console.error("Failed to fetch teacher's courses:", error);
       }
     };
-
     fetchTeacherCourses();
   }, [session, status]);
 

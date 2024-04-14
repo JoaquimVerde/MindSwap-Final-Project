@@ -30,13 +30,14 @@ export async function updateCourse(
       if (response.status !== 200) {
         throw new Error("something went wrong!!!");
       }
-      return response.json();
+      revalidatePath(`/dashboard/all-courses/${courseId}/course`);
+      redirect(`/dashboard/all-courses/${courseId}/course`);
     })
     .catch((error) => {
       console.error("Error ", error);
+      revalidatePath(`/dashboard/all-courses/${courseId}/course`);
+      redirect(`/dashboard/all-courses/${courseId}/course`);
     });
-  revalidatePath(`/dashboard/all-courses/${courseId}/course`);
-  redirect(`/dashboard/all-courses/${courseId}/course`);
 }
 
 export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
