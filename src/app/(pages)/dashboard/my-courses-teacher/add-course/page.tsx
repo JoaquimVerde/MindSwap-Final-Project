@@ -61,7 +61,7 @@ export default function AddCourse() {
     try {
       // Validate the form values
       const validatedValues = formSchema.parse(values);
-      const url = "http://localhost:3000/proxy/api/v1/courses";
+      const url = `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses`;
 
       // Add additional fields
 

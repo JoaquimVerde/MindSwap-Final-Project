@@ -18,7 +18,7 @@ export async function updateCourse(
 
   courseId: string
 ) {
-  fetch(`http://localhost:3000/proxy/api/v1/courses/${courseId}`, {
+  fetch(`${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/${courseId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export async function updateCourse(
 export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
   try {
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/projects/grade/${id}`,
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/projects/grade/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -66,7 +66,7 @@ export async function updateApplication(
 
   appId: string
 ) {
-  fetch(`http://localhost:3000/proxy/api/v1/registration/${appId}`, {
+  fetch(`${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration/${appId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

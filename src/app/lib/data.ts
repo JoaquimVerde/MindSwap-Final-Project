@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 export async function fetchAllCourses(): Promise<number> {
   noStore();
   try {
-    const response = await fetch(`http://localhost:3000/proxy/api/v1/courses`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses`);
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
     }
@@ -31,7 +31,7 @@ export async function fetchCoursesByPage(
     //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/courses?page=${
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses?page=${
         currentPage - 1
       }&limit=6`
     );
@@ -52,7 +52,7 @@ export async function fetchCourseById(id: string): Promise<Course | null> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/courses/${id}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/${id}`
     );
     if (response.status === 404) {
       return null;
@@ -73,7 +73,7 @@ export async function fetchProjectsByCourseId(id: string): Promise<Project[]> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/projects/course/${id}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/projects/course/${id}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch projects!");
@@ -99,7 +99,7 @@ export async function fetchPersonById(id1: string): Promise<Person> {
     const encodedId = id.replace(/#/g, "%23");
 
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/persons/${encodedId}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/persons/${encodedId}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
@@ -124,7 +124,7 @@ export async function fetchCoursesByLocation(
     //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/courses/location/${location}?page=${
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/location/${location}?page=${
         currentPage - 1
       }&limit=6`
     );
@@ -149,7 +149,7 @@ export async function fetchPersonByEmail(email: string): Promise<Person> {
     }
 
     const response = await fetch(
-      `http://localhost:8080/api/v1/persons/email/${email}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/persons/email/${email}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch person");
@@ -185,7 +185,7 @@ export async function fetchApplications(): Promise<Application[]> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/registration`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch applications");
@@ -204,7 +204,7 @@ export async function fetchApplicationById(id: string): Promise<Application> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/registration/${id}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration/${id}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch application");
@@ -226,7 +226,7 @@ export async function fetchAllCoursesFromLocation(
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/courses/location/${location}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/location/${location}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
@@ -245,7 +245,7 @@ export async function getPersonByRole(role: string): Promise<Person[]> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/persons/role/${role}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/persons/role/${role}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch persons");
@@ -264,7 +264,7 @@ export async function fetchProjectById(id: string): Promise<Project> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/projects/${id}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/projects/${id}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch projects");
@@ -283,7 +283,7 @@ export async function fetchProjectByStudentId(id: string): Promise<Project[]> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/projects/person/${id}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/projects/person/${id}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch projects");
@@ -311,7 +311,7 @@ export async function fetchAllApplicationsById(
     const encodedId = id.replace(/#/g, "%23");
 
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/registration/student/${encodedId}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration/student/${encodedId}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch all student applications");
@@ -333,7 +333,7 @@ export async function fetchPersonDataById(id: string): Promise<Person> {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/persons/${id}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/persons/${id}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch a person");
@@ -358,7 +358,7 @@ export async function fetchCoursesByTeacherId(): Promise<Course[]> {
     const encodedId = id.replace(/#/g, "%23");
 
     const response = await fetch(
-      `http://localhost:8080/api/v1/courses/teacher/${encodedId}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/teacher/${encodedId}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch courses by teacher id");
@@ -383,7 +383,7 @@ export async function fetchRoleByPersonId(): Promise<string> {
     const encodedId = id.replace(/#/g, "%23");
 
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/persons/${encodedId}`
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/persons/${encodedId}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch person");
@@ -408,7 +408,7 @@ export async function fetchRoleByPersonId(): Promise<string> {
 export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
   try {
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/projects/grade/${id}`,
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/projects/grade/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -431,7 +431,7 @@ export async function deleteApplicationById(id: string) {
   try {
     let encodedId = id.replace("#", "%23");
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/registration/${encodedId}`,
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration/${encodedId}`,
       {
         method: "DELETE",
       }
@@ -448,7 +448,7 @@ export async function deletePersonById(id: string) {
   noStore();
   try {
     const response = await fetch(
-      `http://localhost:3000/proxy/api/v1/persons/${id.replace("#", "%23")}`,
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/persons/${id.replace("#", "%23")}`,
       {
         method: "DELETE",
       }
@@ -464,7 +464,7 @@ export async function deletePersonById(id: string) {
 
 export async function fetchUpdateApplicationGrade(id: string, newGrade: number) {
   try {
-    const response = await fetch(`http://localhost:3000/proxy/api/v1/registration/grade/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration/grade/${id}`, {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",
@@ -486,7 +486,7 @@ export async function fetchUpdateApplicationStatus(
   id: string,
   newStatus: string
 ): Promise<Response> {
-  return fetch(`http://localhost:3000/proxy/api/v1/registration/status/${id}`, {
+  return fetch(`${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration/status/${id}`, {
     method: "PUT",
     headers: {
       "Content-type": "application/json",

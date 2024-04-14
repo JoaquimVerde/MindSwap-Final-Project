@@ -11,7 +11,7 @@ function Redirect() {
     console.log(session);
     const verifyUser = async () => {
       const response = await fetch(
-        "http://localhost:3000/proxy/api/v1/persons/email/" +
+        `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/persons/email/` +
         session?.user?.email
       );
       const data = await response.json();

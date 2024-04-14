@@ -20,7 +20,7 @@ import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import React from "react";
 import { useSession } from "next-auth/react";
 
-const url = "http://localhost:3000/proxy/api/v1/registration";
+const url = `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration`;
 const formSchema = z.object({
   status: z.string(),
   personId: z.string(),

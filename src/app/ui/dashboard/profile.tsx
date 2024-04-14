@@ -70,7 +70,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
       }
       const encodedId = userId.replace(/#/g, "%23");
       const response = await fetch(
-        `http://localhost:3000/proxy/api/v1/persons/${encodedId}`,
+        `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/persons/${encodedId}`,
         {
           method: "PUT",
           headers: {

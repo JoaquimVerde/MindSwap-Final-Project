@@ -70,7 +70,7 @@ export default function RegisterForm() {
       id: userId,
     };
 
-    const response = await fetch("http://localhost:3000/proxy/api/v1/persons", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/persons`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
