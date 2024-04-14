@@ -15,14 +15,19 @@ import {
   CardHeader,
   CardTitle,
 } from "./card";
+import { useSession } from "next-auth/react";
 
 const TeacherCourses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
+    if (status === "loading") return;
+    const user: any = session?.user;
+    const id = user ? user.id : "";
     const fetchTeacherCourses = async () => {
       try {
-        const courses = await fetchCoursesByTeacherId();
+        const courses = await fetchCoursesByTeacherId(id);
         setCourses(courses);
       } catch (error) {
         console.error("Failed to fetch teacher's courses:", error);
@@ -30,7 +35,7 @@ const TeacherCourses = () => {
     };
 
     fetchTeacherCourses();
-  }, []);
+  }, [session, status]);
 
   return (
     <div>
