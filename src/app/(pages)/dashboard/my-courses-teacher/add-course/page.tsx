@@ -29,7 +29,7 @@ export default function AddCourse() {
   const { toast } = useToast();
   const { data: session, status } = useSession();
   const user: any = session?.user;
-  
+
   const formSchema = z.object({
     name: z.string(),
     teacherId: z.string(),
@@ -46,7 +46,7 @@ export default function AddCourse() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      teacherId: user ? user.id : "",
+      teacherId: user ? "PERSON#" + user.id : "",
       edition: "",
       syllabus: "",
       program: "",
