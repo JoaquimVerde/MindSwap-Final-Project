@@ -476,22 +476,15 @@ export async function fetchUpdateApplicationGrade(id: string, newGrade: number) 
   }
 }
 
-export async function fetchUpdateApplicationStatus(id: string, newStatus: string) {
-  try {
-    const response = await fetch(`http://localhost:3000/proxy/api/v1/registration/status/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ status: newStatus }),
-    });
-    if (response.ok) {
-      console.log("Status updated successfully");
-    } else {
-      console.error("Failed to update status!", response.statusText);
-    }
-  } catch (error) {
-    console.error("Failed to update status:", error);
-  }
+export async function fetchUpdateApplicationStatus(
+  id: string,
+  newStatus: string
+): Promise<Response> {
+  return fetch(`http://localhost:3000/proxy/api/v1/registration/status/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ status: newStatus }),
+  });
 }
-

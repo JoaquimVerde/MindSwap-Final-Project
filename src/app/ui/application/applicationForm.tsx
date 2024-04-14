@@ -81,7 +81,7 @@ export function ApplicationForm({ id }: { id: string }) {
           });
         }
       })
-      .catch((err) => {
+      .catch(() => {
         toast({
           variant: "destructive",
           title: "There was an error submitting your application",
