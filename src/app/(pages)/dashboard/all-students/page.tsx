@@ -1,21 +1,20 @@
 'use client';
+import { deletePersonById, getPersonByRole } from "@/app/lib/data";
+import { Person } from "@/app/lib/definitions";
+import { Button } from "@/components/ui/button";
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-    TableFooter,
-  } from "@/components/ui/table";
-  import { cn } from "@/lib/utils";
-  import { Button } from "@/components/ui/button";
-  import Link from "next/link";
-  import {getPersonByRole } from "@/app/lib/data";
-  import React, { useState, useEffect } from "react";
-  import { Person } from "@/app/lib/definitions";
-  import { deletePersonById } from "@/app/lib/data";
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
   export default function AllStudents() {
     const [allStudents, setAllStudents] = useState<Person[]>([]);
@@ -31,14 +30,21 @@ import {
     }, []);
 
     const [personToDelete, setPersonToDelete] = useState<string | null>(null);
-    function handleDelete(id: string) {
+    /* function handleDelete(id: string) {
       setPersonToDelete(id);
       setPersonToDelete(id);
       const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
       if (modal) {
       modal.showModal();
-  }
     }
+    } */
+    async function handleDelete(id: string) { 
+        const confirmDelete = window.confirm("Are you sure you want to delete this student?");
+        if (confirmDelete) {
+          await deletePersonById(id);
+          setAllStudents(allStudents.filter(student => student.id !== id));
+        }
+      }
   
     return (
       <div className="mx-2 my-2">

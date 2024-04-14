@@ -33,13 +33,19 @@ import {
 
     const [personToDelete, setPersonToDelete] = useState<string | null>(null);
 
-    function handleDelete(id: string) {
+    /* function handleDelete(id: string) {
       setPersonToDelete(id);
       setPersonToDelete(id);
       const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
       if (modal) {
       modal.showModal();
-  }
+  } */
+    async function handleDelete(id: string) {
+      const confirmDelete = window.confirm("Are you sure you want to delete this student?");
+      if (confirmDelete) {
+        await deletePersonById(id);
+        setAllStaff(allStaff.filter(staff => staff.id !== id));
+      }
     }
   
     return (
