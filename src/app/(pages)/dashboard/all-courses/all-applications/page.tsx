@@ -29,6 +29,7 @@ import { ComboboxPopover } from "@/app/ui/application/popoverStatus";
 export default async function AllApplications() {
   const applications = await fetchApplications();
 
+
   return (
     <div className="mx-2 my-2">
       <div>
@@ -57,8 +58,8 @@ export default async function AllApplications() {
           <TableRow>
             <TableHead>Name</TableHead>
             <TableHead>Course</TableHead>
-            <TableHead>Previouse Knowledge</TableHead>
-            <TableHead>Previouse Experience </TableHead>
+            <TableHead>Previous Knowledge</TableHead>
+            <TableHead>Previous Experience </TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>

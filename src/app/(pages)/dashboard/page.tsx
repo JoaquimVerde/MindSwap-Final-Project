@@ -64,7 +64,7 @@ export default function Dashboard() {
     <main>
       <div className="flex flex-row-reverse justify-between mt-10 gap-3">
         <Calendar />
-        <div className="card w-118 bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl minSize">
           <div className="card-body bg-white rounded-2xl text-base">
             <div className="card-actions justify-end"></div>
             <div className="flex justify-center flex-wrap sm:block">
@@ -73,7 +73,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl minSize">
           <div className="card-body bg-white rounded-2xl text-base">
             <div className="card-actions justify-end"></div>
             <div className="flex justify-center flex-wrap sm:block text-center">

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #0A3B3A;
+  --color-secondary: #407070;
+}
+
+
 .nostyle,
 ul,
 ol,
@@ -27,14 +33,49 @@ html {
 }
 
 @layer base {
+
+
   body {
-    @apply bg-black tracking-wide;
+    /* @apply bg-black tracking-wide; */
+    @apply bg-primary;
   }
   h1 {
     @apply text-4xl sm:text-5xl md:text-6xl;
+    /* @apply bg-primary text-4xl sm:text-5xl md:text-6xl; */
   }
   h2 {
     @apply text-3xl sm:text-4xl;
   }
+
+  #new-quote {
+    @apply bg-primary;
+  }
+
+  .btn {
+    @apply bg-primary;
+  }
+
+  .allThePurple {
+    @apply bg-primary;
+  }
+
+  .getLeft {
+    transform: translateY(-80%);
+    margin-left: -55px;
+  }
+
+  .minSize {
+    width: 450px;
+    gap: 40px;
+  }
+
+  .tx-secondary {
+    color: var(--color-secondary);
+  }
+
+  .tx-primary {
+    color: var(--color-primary);
+  }
+
 }
 

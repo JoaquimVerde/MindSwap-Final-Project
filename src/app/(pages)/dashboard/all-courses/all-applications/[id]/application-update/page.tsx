@@ -1,12 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchApplicationById, fetchPersonDataById } from "@/app/lib/data";
+import { deleteApplicationById, fetchApplicationById, fetchPersonDataById, fetchUpdateApplicationGrade, fetchUpdateApplicationStatus } from "@/app/lib/data";
 import { notFound } from "next/navigation";
 import { ComboboxPopover } from "@/app/ui/application/popoverStatus";
 import { DialogDemo } from "@/app/ui/application/dialog-grade";
 import { Application, Person } from "../../../../../../lib/definitions";
+import * as React from "react";
+import { z } from "zod";
+import { fetchUpdateProjectGrade } from "@/app/lib/action";
+import { Value } from "@radix-ui/react-select";
+import { LucideIcon } from "lucide-react";
 
-export default function APllicationUpdate({
+
+
+export default function ApplicationUpdate({
   params,
 }: {
   params: { id: string };
@@ -14,6 +21,14 @@ export default function APllicationUpdate({
   const [application, setApplication] = useState({} as Application);
   const [student, setStudent] = useState({} as Person);
   const [grade, setGrade] = useState(0);
+
+  const [open, setOpen] = React.useState(false);
+  const [selectedStatus, setSelectedStatus] = useState<string>("");
+
+  const formSchema = z.object({
+    status: z.string(),
+    grade: z.string(),
+  });
 
   useEffect(() => {
     const appId = params.id.replace("#", "%23");
@@ -26,6 +41,24 @@ export default function APllicationUpdate({
 
   if (!application) {
     notFound();
+  }
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    fetchUpdateApplicationGrade(application.id, grade);
+    fetchUpdateApplicationStatus(application.id, selectedStatus);
+    
+  }
+
+  
+
+  const [applicationToDelete, setApplicationToDelete] = useState<string | null>(null);
+
+  function handleDelete(id: string) {
+    setApplicationToDelete(id);
+    const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+    if (modal) {
+      modal.showModal();
+    }
   }
 
   return (
@@ -95,7 +128,7 @@ export default function APllicationUpdate({
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                Previouse Knowledge
+                Previous Knowledge
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 {application.prevKnowledge ? "Yes" : "No"}
@@ -103,7 +136,7 @@ export default function APllicationUpdate({
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                Previouse Experience
+                Previous Experience
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 {application?.prevExperience ? "Yes" : "No"}
@@ -114,7 +147,12 @@ export default function APllicationUpdate({
                 Status
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                <ComboboxPopover />
+                <ComboboxPopover
+                  open={open}
+                  setOpen={setOpen}
+                  selectedStatus={selectedStatus}
+                  setSelectedStatus={setSelectedStatus}
+                />
               </td>
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
@@ -122,11 +160,37 @@ export default function APllicationUpdate({
                 Final Grade
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                <DialogDemo grade={grade} setGrade={setGrade} />
+                {grade === 0 ? <DialogDemo grade={grade} setGrade={setGrade} /> : grade}
               </td>
             </tr>
+            <tr>
+              <button type="submit" className="btn btn-gray w-full mt-4">
+                Update
+              </button>
+            </tr>
           </tbody>
+        <button onClick={() => handleDelete(application.id)} className="btn btn-gray w-full mt-4">Delete</button>
         </table>
+        <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Are you sure you want to delete this person?</h3>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn" onClick={() => {
+                if (applicationToDelete) {
+                  deleteApplicationById(applicationToDelete);
+                  const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+                  if (modal) {
+                    modal.close();
+                  }
+                  setApplicationToDelete(null);
+                }
+              }}>Confirm</button>
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 "use client";
-
+import { Dispatch, SetStateAction } from "react";
 import * as React from "react";
 import {
   ArrowUpCircle,
@@ -29,53 +29,50 @@ import {
 type Status = {
   value: string;
   label: string;
-  icon: LucideIcon;
 };
 
 const statuses: Status[] = [
   {
     value: "applied",
     label: "Applied",
-    icon: HelpCircle,
   },
   {
     value: "in review",
     label: "In Review",
-    icon: Circle,
   },
   {
     value: "accepted",
     label: "Accepted",
-    icon: ArrowUpCircle,
   },
   {
     value: "automatically accepted",
     label: "Automatically Accepted",
-    icon: CheckCircle2,
   },
   {
     value: "enrolled",
     label: "Enrolled",
-    icon: XCircle,
   },
   {
     value: "dropout",
     label: "Dropout",
-    icon: XCircle,
   },
   {
     value: "rejected",
     label: "Rejected",
-    icon: XCircle,
   },
 ];
 
-export function ComboboxPopover() {
-  const [open, setOpen] = React.useState(false);
-  const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(
-    null
-  );
-
+export function ComboboxPopover({
+  open,
+  setOpen,
+  selectedStatus,
+  setSelectedStatus,
+}: {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  selectedStatus: string | null;
+  setSelectedStatus: Dispatch<string>;
+}) {
   return (
     <div className="flex items-center space-x-4">
       <Popover open={open} onOpenChange={setOpen}>
@@ -87,7 +84,7 @@ export function ComboboxPopover() {
           >
             {selectedStatus ? (
               <>
-                <selectedStatus.icon className="mr-2 h-4 w-4 shrink-0" />
+                
                 {selectedStatus.label}
               </>
             ) : (
@@ -104,23 +101,15 @@ export function ComboboxPopover() {
                 {statuses.map((status) => (
                   <CommandItem
                     key={status.value}
-                    value={status.value}
+                    value={status.value.toString()}
                     onSelect={(value) => {
                       setSelectedStatus(
-                        statuses.find((priority) => priority.value === value) ||
-                          null
+                        statuses.find((s) => s.value === value)?.value ?? ""
                       );
                       setOpen(false);
                     }}
                   >
-                    <status.icon
-                      className={cn(
-                        "mr-2 h-4 w-4",
-                        status.value === selectedStatus?.value
-                          ? "opacity-100"
-                          : "opacity-40"
-                      )}
-                    />
+                   
                     <span>{status.label}</span>
                   </CommandItem>
                 ))}

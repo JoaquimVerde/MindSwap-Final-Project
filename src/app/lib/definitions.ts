@@ -1,14 +1,4 @@
-// // data model definitions
-
-// export type User = {
-//      id: string;
-//      name: string;
-//      email: string;
-//      password: string;
-//    };
-
-// 1,000,000
-
+import { LucideIcon } from "lucide-react";
 export type Course = {
   id: string;
   name: string;
@@ -55,7 +45,6 @@ export type Application = {
   prevExperience: boolean;
 };
 
-
 export type Student = {
   id: string;
   email: string;
@@ -85,3 +74,5 @@ export type CourseForm = {
   location: string;
   teacher: string;
 };
+
+
