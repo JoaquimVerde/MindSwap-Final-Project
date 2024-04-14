@@ -89,11 +89,11 @@ export default function NavLinks() {
   const [openSublinks, setOpenSublinks] = useState<string | null>(null);
   const [role, setRole] = useState<string>("");
   const { data: session, status } = useSession();
-  const user: any = session?.user;
-
+  
   useEffect(() => {
     if (status === "loading") return;
-    const role = user["cognito:groups"][0];
+    const user: any = session?.user;
+    const role = user && user["cognito:groups"][0];
     setRole(role);
   }, [session, status]);
 
