@@ -1,6 +1,7 @@
 import { fetchCourseById } from "@/app/lib/data";
 import { EditCourseForm } from "@/app/ui/courses/edit-course";
-import NotFound from "../course/not-found";
+import { notFound } from "next/navigation";
+
 
 
 
@@ -24,7 +25,7 @@ export default async function Page(
 
 
     if (!course) {
-        NotFound();   
+        notFound();   
     };
 
     return (

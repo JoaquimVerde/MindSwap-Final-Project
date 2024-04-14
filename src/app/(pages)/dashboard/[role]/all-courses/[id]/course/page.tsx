@@ -1,9 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  ApplyCourse,
-  EditCourse,
-  ViewProjects,
-} from "@/app/ui/courses/buttons";
+import { ApplyCourse, EditCourse, ViewProjects } from "@/app/ui/courses/buttons";
 import { fetchCourseById } from "@/app/lib/data";
 import { notFound } from "next/navigation";
 

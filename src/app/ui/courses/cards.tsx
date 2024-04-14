@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { GetCourseInfo } from "@/app/ui/courses/buttons";
 import { fetchCoursesByPage } from "@/app/lib/data";
-import NotFound from "@/app/(pages)/dashboard/[role]/all-courses/[id]/course/not-found";
+import NotFound from "@/app/(pages)/dashboard/[role]/all-courses/not-found";
 
 
 

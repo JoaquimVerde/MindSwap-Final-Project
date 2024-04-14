@@ -4,7 +4,7 @@
 import { unstable_noStore as noStore } from "next/cache";
 import { notFound } from "next/navigation";
 import { Course, Person, Project, Application } from "./definitions";
-import NotFound from "../(pages)/dashboard/[role]/all-courses/[id]/course/not-found";
+import NotFound from "../(pages)/dashboard/[role]/all-courses/not-found";
 
 export async function fetchAllCourses(): Promise<number> {
   noStore();
