@@ -46,7 +46,7 @@ export default function AddCourse() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      teacherId: user.id,
+      teacherId: user ? user.id : "",
       edition: "",
       syllabus: "",
       program: "",
