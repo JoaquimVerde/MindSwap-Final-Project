@@ -83,6 +83,7 @@ export function EditCourseForm({
         console.log("submited", values);
         const update = async () => {
             const courseId = course?.id.replace("#", "%23");
+            console.log("courseId", courseId);
             const response = await fetch(
                 `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/${courseId}`,
                 {
@@ -93,6 +94,7 @@ export function EditCourseForm({
                     body: JSON.stringify(values),
                 }
             );
+            console.log("response", response)
             if (response.status === 200) {
                 revalidatePath(`/dashboard/all-courses/${courseId}/course`);
                 redirect(`/dashboard/all-courses/${courseId}/course`);
