@@ -1,11 +1,10 @@
 import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-
 const SocialNetworks = () => {
   return (
-    <section className="mb-8">
-    <h2 className="text-xl font-semibold mb-4">Connect With Us</h2>
+    <section className="mb-8 text-white">
+    <h2 className="text-xl font-semibold mb-4 underline">Connect With Us</h2>
     <ul className="flex space-x-4">
       <li className="mb-2">
         <Link href="https://www.facebook.com/minderasoftwarecraft">
@@ -31,5 +30,4 @@ const SocialNetworks = () => {
   </section>
   )
 }
-
 export default SocialNetworks

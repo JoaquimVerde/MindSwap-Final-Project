@@ -31,7 +31,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Menu
             onClick={toggleSidenav}
             size="24"
-            className="relative my-0 mb-6 getLeft"
+            className="relative my-0 mb-6 getLeft text-white"
           />
         )}
         {children}

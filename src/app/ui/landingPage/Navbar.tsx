@@ -1,10 +1,10 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import Image from "next/image";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,14 +12,15 @@ function Navbar() {
   const [isSticky, setIsSticky] = useState(true);
 
   const handleScroll = () => {
-  const currentScrollPos = window.scrollY;
-  console.log("Current Scroll Position:", currentScrollPos);
-  setIsMenuOpen(false);
-  setIsSticky(
-    (prevScrollPos > currentScrollPos && currentScrollPos > 0) || currentScrollPos < 1
-  );
-  setPrevScrollPos(currentScrollPos);
-};
+    const currentScrollPos = window.scrollY;
+    console.log("Current Scroll Position:", currentScrollPos);
+    setIsMenuOpen(false);
+    setIsSticky(
+      (prevScrollPos > currentScrollPos && currentScrollPos > 0) ||
+        currentScrollPos < 1
+    );
+    setPrevScrollPos(currentScrollPos);
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -40,43 +41,19 @@ function Navbar() {
     >
       <div className="flex items-center justify-between">
         <div className="font-bold tex-2xl cursor-pointer text-white">
-        <Link href="/#home">
-         
-            <Image
-            src="/images/logo.png"
-            alt="Logo"
-            width={60} // replace with the actual width of the image
-            height={60} // replace with the actual height of the image
-          />
-          
-        </Link>
+          <Link href="/#home">
+            <Image src="/images/logo.png" alt="Logo" width={60} height={60} />
+          </Link>
         </div>
 
-        {/* for lg devices */}
-
         <div className="lg:flex items-center gap-3 hidden text-slat-200 ">
-          <Link
-            href="/#home"
-            className=" text-white block hover:text-gray-400 py-2 px-4"
-          >
-            Home
-          </Link>
-          <Link
-            href="/#about"
-            className="text-white block hover:text-gray-400 py-2 px-4"
-          >
+          <Link href="/#about" className="text-white block hover:font-bold">
             About
           </Link>
-          <Link
-            href="/#skills"
-            className="text-white block hover:text-gray-400 py-2 px-4"
-          >
+          <Link href="/#skills" className="text-white block hover:font-bold">
             Skills
           </Link>
-          <Link
-            href="/#courses"
-            className="text-white block hover:text-gray-400 py-2 px-4"
-          >
+          <Link href="/#courses" className="text-white block hover:font-bold">
             Courses
           </Link>
         </div>
@@ -88,14 +65,13 @@ function Navbar() {
             className=" px-4 py-1 border-slate-300 text-slate-300 bg-secondary hover:bg-primary transition-all duration-300 rounded-md"
             onClick={() =>
               signIn("cognito", {
-                callbackUrl: `${process.env.NEXT_PUBLIC_URL}/api/auth/redirect`,
+                callbackUrl: "http://localhost:3000/api/auth/redirect",
               })
             }
           >
             Login
           </button>
         </div>
-        {/*menu btn for sm devices */}
 
         <button
           onClick={toggleMenu}
@@ -110,27 +86,18 @@ function Navbar() {
 
       {isMenuOpen && (
         <div className="mt-4 bg-slate-950 text-slate-300 rounded py-4">
-          <Link
-            href="/#home"
-            className=" text-slate-300 block hover:text-gray-500 py-2 px-4"
-          >
-            Home
-          </Link>
-          <Link
-            href="/#about"
-            className="text-slate-300 block hover:text-gray-500 py-2 px-4"
-          >
+          <Link href="/#about" className="text-slate-300 block hover:font-bold">
             About
           </Link>
           <Link
             href="/#skills"
-            className="text-slate-300 block hover:text-gray-500 py-2 px-4"
+            className="text-slate-300 block hover:font-bold"
           >
             Skills
           </Link>
           <Link
             href="/#courses"
-            className="text-slate-300 block hover:text-gray-500 py-2 px-4"
+            className="text-slate-300 block hover:font-bold"
           >
             Courses
           </Link>

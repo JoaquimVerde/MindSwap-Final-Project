@@ -20,9 +20,9 @@ const config = {
     },
     extend: {
       colors: {
-        primary: '#0A3B3A', // dark green
-        accent: '',
-        secondary: ''
+        primary: "#0A3B3A", // dark green
+        accent: "#7FC6A4",
+        secondary: "#407070",
       },
       keyframes: {
         "accordion-down": {

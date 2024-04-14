@@ -1,17 +1,18 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Home } from "lucide-react";
+import Link from "next/link";
 import React from "react";
-import { useRouter } from "next/navigation";
 
 const BackButton = () => {
-  const router = useRouter();
-
-  const goBack = () => {
-    router.back();
-  };
-
-  return <Button onClick={goBack} className="m-4">Back</Button>;
+  return (
+    <>
+      <Link href={"/#home"}>
+        <Home className="text-white" />
+      </Link>
+    </>
+  );
 };
 
 export default BackButton;

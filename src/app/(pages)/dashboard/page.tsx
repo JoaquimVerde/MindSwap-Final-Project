@@ -1,13 +1,13 @@
 "use client";
 
-import { Calendar } from "@/components/ui/calendar";
-import Time from "@/app/ui/dashboard/time";
-import InspirationalQuotes from "@/app/ui/dashboard/inspirational-quotes";
-import { useEffect, useState } from "react";
 import { fetchPersonById } from "@/app/lib/data";
 import { Person } from "@/app/lib/definitions";
-import { useForm } from "react-hook-form";
+import InspirationalQuotes from "@/app/ui/dashboard/inspirational-quotes";
+import Time from "@/app/ui/dashboard/time";
+import { Calendar } from "@/components/ui/calendar";
 import { fetchData } from "next-auth/client/_utils";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface ProfileProps {
   initialProfileData?: Person;
@@ -47,12 +47,8 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
     fetchData();
   }, [session, status]);
 
-  return (
-    <div>
-      {/* Your component's content goes here */}
-    </div>
-  );
-}
+  return <div>{/* Your component's content goes here */}</div>;
+};
 
 import { useSession } from "next-auth/react";
 
@@ -63,13 +59,13 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (status == "loading") return;
-    fetchPersonById(user.id).then(data => {
+    fetchPersonById(user.id).then((data) => {
       setPersonData(data);
     });
   }, [user, status]);
 
   if (!personData) {
-    return <div>Loading...</div>;
+    return <div className="text-white font-bold text-2xl">Loading...</div>;
   }
 
   console.log(personData);

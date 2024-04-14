@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import Link from "next/link";
 import { LinkType, LinkTypeSub } from "@/app/lib/types";
-import { useState, useEffect } from "react";
+import { toPascalCase } from "@/app/lib/utils";
 import {
+  BookCheck,
+  BookOpenText,
   ChevronDown,
   ChevronUp,
   GraduationCap,
-  BookCheck,
-  BookOpenText,
-  UserRound,
+  Home,
   LibraryBig,
   PersonStanding,
   Smile,
-  Home,
+  UserRound,
 } from "lucide-react";
-import { toPascalCase } from "@/app/lib/utils";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export const linkDashboard: LinkType = {
   name: ``,
@@ -77,23 +77,30 @@ export const links: LinkType[] = [
     icon: Smile,
     role: ["ADMIN"],
   },
-  {
-    name: "Profile",
-    href: "/dashboard/profile",
-    icon: UserRound,
-    role: [],
-  }
 ];
+
+// type LinkName= string;
+
+// type HandleDivColorChange = (linkName: LinkName) => void;
+
+// const handleDivColorChange: HandleDivColorChange = () => {
+
+//   const div = document.querySelector<HTMLDivElement>('.link-div'); // Selecione a div pelo seletor CSS
+//   if (div) {
+//       div.style.backgroundColor = "bg-primary font-bold";
+
+//   }
+// }
 
 export default function NavLinks() {
   const [openSublinks, setOpenSublinks] = useState<string | null>(null);
   const [role, setRole] = useState<string>("");
   const { data: session, status } = useSession();
-  
+  const user: any = session?.user;
+
   useEffect(() => {
     if (status === "loading") return;
-    const user: any = session?.user;
-    const role = user && user["cognito:groups"][0];
+    const role = user["cognito:groups"][0];
     setRole(role);
   }, [session, status]);
 
@@ -102,36 +109,63 @@ export default function NavLinks() {
     return links.filter((link) => link.role.includes(role));
   }
 
+  //const [clickedLink, setClickedLink] = useState<LinkName | null>(null);
+
   return (
     <>
-      <div className="flex justify-start items-start">
-        <Link className="flex justify-start items-start pt-2 pb-2" key={linkDashboard.href} href={linkDashboard.href}>
-          {linkDashboard.icon && <linkDashboard.icon className="flex justify-start items-start mr-2" />}
-          <p className="hidden md:block">{`${toPascalCase(role)}'s Dashboard`}</p>
+      <div className="link-div flex justify-start items-start w-66 hover:bg-secondary">
+        <Link
+          className="flex justify-start items-start pt-2 pb-2"
+          key={linkDashboard.href}
+          href={linkDashboard.href}
+          // onClick={() => {
+          //   setClickedLink(linkDashboard.name);
+          //   handleDivColorChange(linkDashboard.name);
+          // }}
+        >
+          {linkDashboard.icon && (
+            <linkDashboard.icon className="flex justify-start items-start mr-2" />
+          )}
+          <p className="hidden md:block">{`${toPascalCase(
+            role
+          )}'s Dashboard`}</p>
         </Link>
       </div>
 
-      
-
       {filterLinksByRole(links).map((link, idx) => (
-        <div className="flex justify-start items-start" key={idx}>
-          <Link className="flex justify-start items-start pt-2 pb-2" key={link.href} href={link.href}>
-            {link.icon && <link.icon className="flex justify-start items-start mr-2" />}
+        <div
+          className=" link-div flex justify-start items-start w-66 hover:bg-secondary"
+          key={idx}
+        >
+          <Link
+            className="flex justify-start items-start pt-2 pb-2"
+            key={link.href}
+            href={link.href}
+          >
+            {link.icon && (
+              <link.icon className="flex justify-start items-start mr-2" />
+            )}
             <p className="hidden md:block">{link.name}</p>
           </Link>
         </div>
       ))}
       {linksub.map((link, idx) => (
-        <div className="flex justify-start items-start" key={idx}>
+        <div
+          className="link-div flex justify-start items-start w-66 hover:bg-secondary"
+          key={idx}
+        >
           {filterLinksByRole([link]).length > 0 && (
             <details open={openSublinks === link.name} className="pt-2 pb-2">
               <summary className="list-none pl-0 flex justify-between items-center">
-                {link.icon && <link.icon className="flex justify-start items-start mr-2" />} {link.name}{" "}
+                {link.icon && (
+                  <link.icon className="flex justify-start items-start mr-2" />
+                )}{" "}
+                {link.name}{" "}
                 {link.sublinks &&
                   (openSublinks === link.name ? (
-                    <ChevronUp className="flex justify-end ml-28" />
+                    <ChevronUp className="flex justify-end ml-24" />
                   ) : (
-                    <ChevronDown className="flex justify-end ml-28" />
+                    <ChevronDown className="flex justify-end ml-24" />
                   ))}
               </summary>
               <ul>
@@ -139,7 +173,9 @@ export default function NavLinks() {
                   link.sublinks.map((sublink) => (
                     <li key={sublink.href}>
                       <Link href={sublink.href}>
-                        {sublink.icon && <sublink.icon className="flex justify-start items-start mr-2" />}{" "}
+                        {sublink.icon && (
+                          <sublink.icon className="flex justify-start items-start mr-2" />
+                        )}{" "}
                         {sublink.name}
                       </Link>
                     </li>
@@ -148,8 +184,7 @@ export default function NavLinks() {
             </details>
           )}
         </div>
-      )
-      )}
+      ))}
     </>
   );
 }

@@ -9,20 +9,25 @@ const Contact = () => {
       <div className="">
         <section className="mb-8">
           <div className="flex flex-row items-center mb-4">
-            <BackButton />
+            <div className="home-left">
+              <BackButton />
+            </div>
             <h1 className="text-4xl font-bold mb-4 flex-grow text-center">
               Contact Information
             </h1>
           </div>
+          <div className="text-white mt-10">
+          <p className="font-bold underline">ACODEMY</p>
           <p>R. de Gonçalo Cristóvão 347 - s404</p>
           <p>4000-270 Porto</p>
-          <p>education.pt@mindera.com</p>
+          <p>education.pt@acodemy.com</p>
           <Link
             href="https://www.livroreclamacoes.pt/Inicio/"
-            className="italic hover:underline"
+            className="italic tx-accent font-bold hover:underline"
           >
             Livro de Reclamações
           </Link>
+          </div>
         </section>
 
         <section className="mb-8">
@@ -43,19 +48,19 @@ const Contact = () => {
 
       <SocialNetworks />
 
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Contact Hours</h2>
+      <section className="mb-8 text-white">
+        <h2 className="text-xl font-semibold mb-4 underline">Contact Hours</h2>
         <p>Monday - Friday: 9am - 5pm</p>
         <p>Saturday - Sunday: Closed</p>
       </section>
 
       <section>
-        <h2 className="text-xl font-semibold mb-4">Privacy Policy</h2>
-        <p>
+        <h2 className="text-xl font-semibold mb-4 text-white underline">Privacy Policy</h2>
+        <p className="text-white">
           Read our{" "}
           <Link
             href="/privacy-policy"
-            className="text-blue-600 hover:underline"
+            className="tx-accent font-bold hover:underline"
           >
             privacy policy
           </Link>{" "}
