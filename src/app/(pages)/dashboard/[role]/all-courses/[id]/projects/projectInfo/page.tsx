@@ -10,10 +10,10 @@ import {
     TableRow,
   } from "@/components/ui/table"
 
-export default async function Page({ params }: { params: { id: string }}) {
+export default async function Page({ params }: { params: { id: string, role?: string | undefined }}) {
 
     const id = params.id;
-
+    
     const project = await Promise.all([
         (fetchProjectById(id))
     ]);

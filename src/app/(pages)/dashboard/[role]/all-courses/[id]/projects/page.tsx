@@ -1,5 +1,5 @@
 "use client"
-import { fetchProjectsByCourseId, fetchUpdateProjectGrade } from "@/app/lib/data";
+import { fetchProjectsByCourseId } from "@/app/lib/data";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/app/ui/courses/card";
 import { Github, Pencil, ChevronsRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -21,8 +21,18 @@ import {
 
 
 
-export default async function ProjectsByCourse({params} : {params: { id: string}}) {
+export default async function ProjectsByCourse({
+    params
+} : {
+    params: { 
+        id: string, 
+        role: string | undefined
+    }
+}) {
+
     const id = params.id;
+    const role = params.role;
+
     const projects = await fetchProjectsByCourseId(id);
     // const [newGrade, setNewGrade] = useState<string>('0-20');
   
@@ -79,7 +89,7 @@ export default async function ProjectsByCourse({params} : {params: { id: string}
                                 
                                     <CardFooter>
                                         <Button className="w-full flex items-center p-0 pt-0">
-                                            <GetProjectInfo id= {project.id.replace("#", "%23")}/>
+                                            <GetProjectInfo id={project.id.replace("#", "%23")} role={role}/>
                                         </Button>
                                     </CardFooter>
                                 <Dialog>
@@ -122,10 +132,10 @@ export default async function ProjectsByCourse({params} : {params: { id: string}
         </div>
     );
 
-    function GetProjectInfo({id}: {id:string}) {
+    function GetProjectInfo({id, role}: {id:string, role: string | undefined}) {
         return (
             <Link className="flex items-center p-0 pt-0"
-                href={`/dashboard/all-courses/${id}/projects/projectInfo`}
+                href={`/dashboard/${role}/all-courses/${id}/projects/projectInfo`}
             >
                 More Info <ChevronsRight className="ml-2 h-4 w-4" />
             </Link>
