@@ -28,6 +28,26 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
 
   useEffect(() => {
     if (status === "loading") return
+    const fetchFromS3 = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/s3/getProfileImage/${user.id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          //setAvatarImage(data.url);
+        }
+      } catch (error) {
+        console.error("Error fetching avatar image:", error);
+      }
+    }
     const fetchData = async () => {
       try {
         const personData = await fetchPersonById(user.id);
@@ -64,7 +84,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
   const onSubmit = async (data: Person) => {
     console.log(data);
     try {
-      const userId = user?.id;
+      const userId = "PERSON#" + user?.id;
       if (!userId) {
         throw new Error("User Id not found in session storage");
       }
