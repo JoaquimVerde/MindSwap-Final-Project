@@ -65,10 +65,11 @@ export default function Navbar() {
   const user: any = session?.user;
 
   useEffect(() => {
+    if(status === "loading") return;
     fetchPersonById(user.id).then((data) => {
       setPersonData(data);
     });
-  }, []);
+  }, [session, status]);
 
   return (
     <nav

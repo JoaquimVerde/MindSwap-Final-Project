@@ -6,9 +6,9 @@ import { NextAuthOptions } from "next-auth";
 const authOptions: NextAuthOptions = {
   providers: [
     Cognito({
-      clientId: process.env.COGNITO_CLIENT_ID || "",
-      clientSecret: process.env.COGNITO_CLIENT_SECRET || "",
-      issuer: process.env.COGNITO_ISSUER,
+      clientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID || "",
+      clientSecret: process.env.NEXT_PUBLIC_COGNITO_CLIENT_SECRET || "",
+      issuer: process.env.NEXT_PUBLIC_COGNITO_ISSUER,
       authorization: {
         params: {
           scope: "openid",

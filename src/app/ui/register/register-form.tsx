@@ -50,21 +50,23 @@ export default function RegisterForm() {
   const user: any = session?.user;
   const mail = user?.email;
   const userId = user?.id;
+  const role = user["cognito:groups"] ? user["cognito:groups"][0] : "STUDENT";
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     AWS.config.update({
       region: "eu-central-1",
       credentials: new AWS.Credentials({
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
+        accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID || "",
+        secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY || "",
       }),
     });
     var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
+    console.log("role", role)
     const obj = {
       ...values,
       email: mail,
       cv: "a",
-      role: "STUDENT",
+      role: role,
       id: userId,
     };
 
@@ -81,7 +83,7 @@ export default function RegisterForm() {
     }
     console.log("BEFORE")
     cognitoidentityserviceprovider.adminAddUserToGroup({
-      UserPoolId: process.env.COGNITO_USER_POOL_ID || "",
+      UserPoolId: process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID || "",
       Username: userId || "",
       GroupName: "STUDENT",
     }, function (err, data) {

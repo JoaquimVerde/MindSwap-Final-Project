@@ -17,6 +17,7 @@ import React from "react";
 import AWS from "aws-sdk";
 import { useSession } from "next-auth/react";
 
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,15 +31,7 @@ import {
 export default function AddStaff() {
   const { toast } = useToast();
   const { data: session, status } = useSession();
-  const user: any = session?.user;
 
-  AWS.config.update({
-    region: "eu-central-1",
-    credentials: new AWS.Credentials({
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
-    }),
-  });
 
   const formSchema = z.object({
     email: z.string().email(),
@@ -64,32 +57,20 @@ export default function AddStaff() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    AWS.config.update({
+      region: "eu-central-1",
+      credentials: new AWS.Credentials({
+        accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID || "",
+        secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY || "",
+      }),
+    });
     try {
-      // Validate the form values
-      const validatedValues = { ...formSchema.parse(values), id: user.id };
-      const url = "http://localhost:3000/proxy/api/v1/persons"
 
-      // Add additional fields
+      let validatedValues = { ...formSchema.parse(values) };
 
-      const api_req_options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(validatedValues),
-      };
+      addUserToCognito(validatedValues.email, validatedValues.role);
 
-      const response = await fetch(url, api_req_options);
 
-      if (response.ok) {
-        addUserToCognito(validatedValues.email, validatedValues.role);
-      } else {
-        const json = await response.json();
-        toast({
-          variant: "destructive",
-          title: json.message,
-        });
-      }
     } catch (err) {
       toast({
         variant: "destructive",
@@ -99,10 +80,10 @@ export default function AddStaff() {
   }
 
   const addUserToCognito = (email: string, role: string) => {
-    var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
+    const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
     cognitoidentityserviceprovider.adminCreateUser(
       {
-        UserPoolId: process.env.COGNITO_USER_POOL_ID || "",
+        UserPoolId: process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID || "",
         Username: email,
         DesiredDeliveryMediums: ["EMAIL"],
         ForceAliasCreation: true,
@@ -119,13 +100,25 @@ export default function AddStaff() {
         ],
         TemporaryPassword: "TempPassword123!",
       }, function (err, data) {
-        if (err) console.log(err, err.stack);
-        else console.log(data);
+        if (err) {
+          toast({
+            variant: "destructive",
+            title: "There was an error creating this staff",
+          });
+          return "";
+        }
+        else {
+          addRoleToCognito(data?.User?.Username, role)
+        }
       }
     );
+  }
+
+  const addRoleToCognito = (id: string | undefined, role: string) => {
+    const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
     cognitoidentityserviceprovider.adminAddUserToGroup({
-      UserPoolId: process.env.COGNITO_USER_POOL_ID || "",
-      Username: user.id || "",
+      UserPoolId: process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID || "",
+      Username: id || "",
       GroupName: role,
     }, function (err, data) {
       if (err) {
@@ -190,10 +183,10 @@ export default function AddStaff() {
                               value={field.value}
                               onValueChange={(value) => field.onChange(value)}
                             >
-                              <DropdownMenuRadioItem value="Teacher">
+                              <DropdownMenuRadioItem value="TEACHER">
                                 Teacher
                               </DropdownMenuRadioItem>
-                              <DropdownMenuRadioItem value="Admin">
+                              <DropdownMenuRadioItem value="ADMIN">
                                 Admin
                               </DropdownMenuRadioItem>
                             </DropdownMenuRadioGroup>
