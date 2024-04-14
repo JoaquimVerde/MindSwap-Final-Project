@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ChevronsRight, Smile, Edit, CircuitBoard } from "lucide-react";
-import { LinkType } from "@/app/lib/types";
 
 export function GetCourseInfo({ id, role }: { id: string, role: string | undefined }) {
   return (

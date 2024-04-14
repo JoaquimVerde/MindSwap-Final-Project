@@ -10,8 +10,7 @@ import { Scroll } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { GetCourseInfo } from "@/app/ui/courses/buttons";
-import { fetchAllCourses, fetchAllCoursesFromLocation, fetchCoursesByLocation } from "@/app/lib/data";
-import Pagination from "@/app/ui/courses/pagination";
+import { fetchCoursesByLocation } from "@/app/lib/data";
 import NotFound from "@/app/(pages)/dashboard/[role]/all-courses/[id]/course/not-found";
 
 
