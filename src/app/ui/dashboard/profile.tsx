@@ -40,8 +40,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
           }
         );
         if (response.ok) {
-          const data = await response.json();
-          console.log(data);
+          console.log("img", response);
           //setAvatarImage(data.url);
         }
       } catch (error) {
