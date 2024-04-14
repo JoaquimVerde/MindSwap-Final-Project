@@ -17,15 +17,14 @@ import { useSearchParams } from "next/navigation";
 // export const metadata: Metadata = {
 //     title: 'Courses',
 // };
-
-export default async function AllCoursesInLocation(
-    placeholder: Params,
-) {
+async function fetchAllCourses (placeholder: Params,) {
     const location = (placeholder.params.location);
     const currentPage = Number(placeholder?.searchParams?.page) || 1;
     const totalCoursesNumber = await fetchAllCoursesFromLocation(location);
     const totalPages = Math.ceil(totalCoursesNumber / 6);
+}
 
+export default function AllCoursesInLocation(currentPage: number, totalPages: number, location: string) {
     return (
         <div className="mx-2 my-2">
             <div>
