@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { fetchPersonById } from "@/app/lib/data";
 import { Person } from "@/app/lib/definitions";
 import { useForm } from "react-hook-form";
-import { fetchData } from "next-auth/client/_utils";
+
 
 interface ProfileProps {
   initialProfileData?: Person;
@@ -60,7 +60,6 @@ export default function Dashboard() {
     });
   }, []);
 
-  const role = sessionStorage.getItem("userRole");
 
   return (
     <main>
