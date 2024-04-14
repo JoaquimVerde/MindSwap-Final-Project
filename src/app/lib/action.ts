@@ -15,29 +15,39 @@ export async function updateCourse(
     location?: string;
     teacherId?: string;
   },
-
   courseId: string
 ) {
-  fetch(`${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/${courseId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(values),
-  })
-    .then((response) => {
-      //console.log(response);
-      if (response.status !== 200) {
-        throw new Error("something went wrong!!!");
+  const updateRequest = async (values: any, courseId: string) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/${courseId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
       }
-      revalidatePath(`/dashboard/all-courses/${courseId}/course`);
-      redirect(`/dashboard/all-courses/${courseId}/course`);
-    })
-    .catch((error) => {
-      console.error("Error ", error);
-      revalidatePath(`/dashboard/all-courses/${courseId}/course`);
-      redirect(`/dashboard/all-courses/${courseId}/course`);
-    });
+    );
+    if (response.status !== 200) {
+      throw new Error("something went wrong!!!");
+    }
+    revalidatePath(`/dashboard/all-courses/${courseId}/course`);
+    redirect(`/dashboard/all-courses/${courseId}/course`);
+  };
+  updateRequest(values, courseId);
+  // .then((response) => {
+  //   //console.log(response);
+  //   if (response.status !== 200) {
+  //     throw new Error("something went wrong!!!");
+  //   }
+  //   revalidatePath(`/dashboard/all-courses/${courseId}/course`);
+  //   redirect(`/dashboard/all-courses/${courseId}/course`);
+  // })
+  // .catch((error) => {
+  //   console.error("Error ", error);
+  //   revalidatePath(`/dashboard/all-courses/${courseId}/course`);
+  //   redirect(`/dashboard/all-courses/${courseId}/course`);
+  // });
 }
 
 export async function fetchUpdateProjectGrade(id: string, newGrade: number) {
