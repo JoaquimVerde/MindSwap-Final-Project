@@ -1,11 +1,9 @@
-//import SearchBar from "@/app/ui/components/ui/search-bar";
 import Cards from "@/app/ui/courses/cards";
 import { CardsSkeleton, PaginationSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
 import { fetchAllCourses, fetchPersonById } from "@/app/lib/data";
 import Pagination from "@/app/ui/courses/pagination";
 import SearchBar from "@/app/ui/components/ui/search-bar";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 
 // import { Metadata } from "next";
