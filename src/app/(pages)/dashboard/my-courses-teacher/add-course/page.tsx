@@ -23,9 +23,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useSession } from "next-auth/react";
 
 export default function AddCourse() {
   const { toast } = useToast();
+  const { data: session, status } = useSession();
+  const user: any = session?.user;
+  
   const formSchema = z.object({
     name: z.string(),
     teacherId: z.string(),
@@ -42,7 +46,7 @@ export default function AddCourse() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      teacherId: sessionStorage.getItem("userId") as string,
+      teacherId: user.id,
       edition: "",
       syllabus: "",
       program: "",

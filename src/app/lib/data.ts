@@ -4,6 +4,7 @@
 import { unstable_noStore as noStore } from "next/cache";
 import { notFound } from "next/navigation";
 import { Application, Course, Person, Project } from "./definitions";
+import { useSession } from "next-auth/react";
 
 export async function fetchAllCourses(): Promise<number> {
   noStore();
@@ -347,8 +348,10 @@ export async function fetchPersonDataById(id: string): Promise<Person> {
 }
 
 export async function fetchCoursesByTeacherId(): Promise<Course[]> {
+  const { data: session, status } = useSession();
+  const user: any = session?.user;
   try {
-    const id = sessionStorage.getItem("userId");
+    const id = user.id;
     if (!id) {
       throw new Error("Id not found in session storage");
     }
@@ -370,8 +373,10 @@ export async function fetchCoursesByTeacherId(): Promise<Course[]> {
 }
 
 export async function fetchRoleByPersonId(): Promise<string> {
+  const { data: session, status } = useSession();
+  const user: any = session?.user;
   try {
-    const id = sessionStorage.getItem("userId");
+    const id = user.id;
     if (!id) {
       throw new Error("Id not found in session storage");
     }

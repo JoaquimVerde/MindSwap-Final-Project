@@ -22,7 +22,6 @@ export async function updateCourse(
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      //"Authorization": sessionStorage.getItem("token"),
     },
     body: JSON.stringify(values),
   })
@@ -71,7 +70,6 @@ export async function updateApplication(
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      //"Authorization": sessionStorage.getItem("token"),
     },
     body: JSON.stringify(values),
   })
