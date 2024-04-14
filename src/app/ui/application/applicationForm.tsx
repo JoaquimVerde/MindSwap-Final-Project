@@ -33,7 +33,7 @@ const formSchema = z.object({
   }),
 });
 
-export function ApplicationForm({ id }: { id: string }) {
+export function ApplicationForm({ id, role }: { id: string, role: string | undefined }) {
   const { toast } = useToast();
   const courseIdparam = id.replace("%23", "#");
   const personIdparam = sessionStorage.getItem("userId");
