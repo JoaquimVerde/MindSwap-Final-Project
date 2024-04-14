@@ -14,6 +14,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import React from "react";
+import AWS from "aws-sdk";
+import { useSession } from "next-auth/react";
 
 import {
   DropdownMenu,
@@ -24,9 +26,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-import AWS from "aws-sdk";
-import { useSession } from "next-auth/react";
 
 export default function AddStaff() {
   const { toast } = useToast();
