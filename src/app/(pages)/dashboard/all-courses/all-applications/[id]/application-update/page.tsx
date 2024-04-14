@@ -46,42 +46,61 @@ export default function ApplicationUpdate({
   }
 
   function handleSaveApplication() {
-    fetchUpdateApplicationGrade(application.id.replace("#", "%23"), grade)
-      .then((response) => {
-        if (response.ok) {
-          fetchUpdateApplicationStatus(
-            application.id.replace("#", "%23"),
-            selectedStatus
-          ).then((response) => {
-            if (response.ok) {
-              toast({
-                title: "Your application was updated successfully",
-              });
-            } else {
-              response.json().then((json) => {
-                toast({
-                  variant: "destructive",
-                  title: json.message,
-                });
-              });
-            }
-          });
-        } else {
-          response.json().then((json: { message: any; }) => {
-            toast({
-              variant: "destructive",
-              title: json.message,
-            });
-          });
-        }
-      })
-      .catch(() => {
+    const updateGrade = async () => {
+      const response = await fetchUpdateApplicationGrade(application.id.replace("#", "%23"), grade);
+      const response2 = await fetchUpdateApplicationStatus(application.id.replace("#", "%23"), selectedStatus);
+
+      if (response.status === 200 && response2.status === 200) {
+        toast({
+          title: "Your application was updated successfully",
+        });
+      } else {
         toast({
           variant: "destructive",
           title: "There was an error updating your application",
         });
-      });
+      }
+
+    }
+    updateGrade();
   }
+
+  // fetchUpdateApplicationGrade(application.id.replace("#", "%23"), grade)
+  //   .then((response) => {
+  //     if (response.ok) {
+  //       fetchUpdateApplicationStatus(
+  //         application.id.replace("#", "%23"),
+  //         selectedStatus
+  //       ).then((response) => {
+  //         if (response.ok) {
+  //           toast({
+  //             title: "Your application was updated successfully",
+  //           });
+  //         } else {
+  //           response.json().then((json) => {
+  //             toast({
+  //               variant: "destructive",
+  //               title: json.message,
+  //             });
+  //           });
+  //         }
+  //       });
+  //     } else {
+  //       response.json().then((json: { message: any; }) => {
+  //         toast({
+  //           variant: "destructive",
+  //           title: json.message,
+  //         });
+  //       });
+  //     }
+  //   })
+  //   .catch(() => {
+  //     toast({
+  //       variant: "destructive",
+  //       title: "There was an error updating your application",
+  //     });
+  //   });
+
 
   const [applicationToDelete, setApplicationToDelete] = useState<string | null>(
     null
