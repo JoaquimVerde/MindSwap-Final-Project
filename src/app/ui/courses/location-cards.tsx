@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { GetCourseInfo } from "@/app/ui/courses/buttons";
 import { fetchCoursesByLocation } from "@/app/lib/data";
-import NotFound from "@/app/(pages)/dashboard/[role]/all-courses/not-found";
+import { notFound } from "next/navigation";
 
 
 
@@ -34,7 +34,7 @@ export default async function LocationCards(
 
 
     if (!courses) {
-        NotFound();
+        notFound();
     };
 
 
