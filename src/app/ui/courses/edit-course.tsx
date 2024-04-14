@@ -17,7 +17,6 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Course, CourseForm } from "@/app/lib/definitions";
 import Link from "next/link";
-import { updateCourse } from "@/app/lib/action";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -104,7 +103,6 @@ export function EditCourseForm({
             }
         }
         update();
-        // updateCourse(newValues, course?.id.replace("#", "%23"));
     }
 
 
