@@ -50,7 +50,7 @@ export default function RegisterForm() {
   const user: any = session?.user;
   const mail = user?.email;
   const userId = user?.id;
-  const role = user["cognito:groups"] ? user["cognito:groups"][0] : "STUDENT";
+  const role = user && user["cognito:groups"] ? user["cognito:groups"][0] : "STUDENT";
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     AWS.config.update({
