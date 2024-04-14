@@ -346,9 +346,8 @@ export async function fetchPersonDataById(id: string): Promise<Person> {
   }
 }
 
-
 export async function fetchCoursesByTeacherId(): Promise<Course[]> {
-try {
+  try {
     const id = sessionStorage.getItem("userId");
     if (!id) {
       throw new Error("Id not found in session storage");
