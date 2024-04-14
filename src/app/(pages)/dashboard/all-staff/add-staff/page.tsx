@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,11 +13,19 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import React from "react";
 import AWS from "aws-sdk";
 import { useSession } from "next-auth/react";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function AddStaff() {
   const { toast } = useToast();
@@ -153,7 +160,7 @@ export default function AddStaff() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel className="text-gray-400">Email</FormLabel>
                       <FormControl>
                         <Input
                           className="text-input"
@@ -170,19 +177,34 @@ export default function AddStaff() {
                   name="role"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Role</FormLabel>
+                      <FormLabel className="text-gray-400">Role: </FormLabel>
                       <FormControl>
-                        <Input
-                          className="text-input"
-                          placeholder="ADMIN or TEACHER"
-                          {...field}
-                        />
+                        <DropdownMenu>
+                          <DropdownMenuTrigger className="text-gray-400">
+                            {field.value ? `${field.value} ` : "Choose Role "}
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent>
+                            <DropdownMenuLabel>Role:</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuRadioGroup
+                              value={field.value}
+                              onValueChange={(value) => field.onChange(value)}
+                            >
+                              <DropdownMenuRadioItem value="Teacher">
+                                Teacher
+                              </DropdownMenuRadioItem>
+                              <DropdownMenuRadioItem value="Admin">
+                                Admin
+                              </DropdownMenuRadioItem>
+                            </DropdownMenuRadioGroup>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full my">
                   Submit
                 </Button>
               </div>
@@ -191,6 +213,5 @@ export default function AddStaff() {
         </div>
       </main>
     </div>
-
   );
 }
