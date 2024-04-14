@@ -66,6 +66,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
     };
 
     fetchData();
+    fetchFromS3();
   }, [session, status]);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,7 +97,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({ ...data, id: userId }),
         }
       );
       if (!response.ok) {
