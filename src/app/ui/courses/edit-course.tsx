@@ -18,6 +18,8 @@ import { Button } from "@/components/ui/button";
 import { Course, CourseForm } from "@/app/lib/definitions";
 import Link from "next/link";
 import { updateCourse } from "@/app/lib/action";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 
 
@@ -67,9 +69,9 @@ export function EditCourseForm({
     });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        const newValues = { 
+        const newValues = {
             name: values?.name,
-            edition: values?.edition,           
+            edition: values?.edition,
             syllabus: values?.syllabus,
             program: values?.program,
             schedule: values?.schedule,
@@ -79,7 +81,28 @@ export function EditCourseForm({
             teacherId: values?.teacherId,
         }
         console.log("submited", values);
-        updateCourse(newValues, course?.id.replace("#", "%23"));
+        const update = async () => {
+            const courseId = course?.id.replace("#", "%23");
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/${courseId}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(values),
+                }
+            );
+            if (response.status === 200) {
+                revalidatePath(`/dashboard/all-courses/${courseId}/course`);
+                redirect(`/dashboard/all-courses/${courseId}/course`);
+            } else {
+                revalidatePath(`/dashboard/all-courses/${courseId}/course`);
+                redirect(`/dashboard/all-courses/${courseId}/course`);
+            }
+        }
+        update();
+        // updateCourse(newValues, course?.id.replace("#", "%23"));
     }
 
 
@@ -192,7 +215,7 @@ export function EditCourseForm({
                                     <FormControl>
                                         <Input
                                             placeholder={"" + course.price} {...field}
-                                            
+
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -212,7 +235,7 @@ export function EditCourseForm({
                                             placeholder={"" + course.duration} {...field}
                                             onChange={(e) => {
                                                 const parsedValue = parseInt(e.target.value);
-                                                if (!isNaN(parsedValue)) {                                         
+                                                if (!isNaN(parsedValue)) {
                                                     field.onChange(parsedValue);
                                                 } else {
                                                     field.onChange('');

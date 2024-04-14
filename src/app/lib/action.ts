@@ -17,24 +17,24 @@ export async function updateCourse(
   },
   courseId: string
 ) {
-  const updateRequest = async (values: any, courseId: string) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/${courseId}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      }
-    );
-    if (response.status !== 200) {
-      throw new Error("something went wrong!!!");
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/${courseId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
     }
+  );
+  if (response.status === 200) {
     revalidatePath(`/dashboard/all-courses/${courseId}/course`);
     redirect(`/dashboard/all-courses/${courseId}/course`);
-  };
-  updateRequest(values, courseId);
+  } else {
+    revalidatePath(`/dashboard/all-courses/${courseId}/course`);
+    redirect(`/dashboard/all-courses/${courseId}/course`);
+  }
+
   // .then((response) => {
   //   //console.log(response);
   //   if (response.status !== 200) {
