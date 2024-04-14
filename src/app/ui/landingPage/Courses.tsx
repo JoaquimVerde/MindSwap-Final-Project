@@ -23,6 +23,7 @@ function Courses() {
 
   return (
     <>
+    <div className="bg-black">
       <div
         id="courses"
         className=" flex items-center justify-center w-screen py-10"
@@ -50,7 +51,7 @@ function Courses() {
                     Syllabus: {course.syllabus}
                   </p>
                   <Link
-                    className="p-3 uppercase hover:scale-105 ease-in duration-300"
+                    className="p-3 uppercase hover:scale-105 ease-in duration-300 tx-secondary"
                     onClick={(event) => {
                       event.preventDefault();
                       signIn("cognito", {
@@ -65,6 +66,7 @@ function Courses() {
               </div>
             ))}
         </div>
+      </div>
       </div>
     </>
   );

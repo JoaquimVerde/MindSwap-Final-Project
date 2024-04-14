@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
     <Navbar/>
-    <div className="flex h-screen bg-black">
+    <div className="flex h-screen bg-secondary">
       {/* Sidebar */}
       <div className={`flex-none md:w-64 ${isSidenavOpen ? "" : "hidden"}`}>
         {/* Pass onHide as prop */}
@@ -25,13 +25,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
 
       {/* Main Content */}
-      <div className="flex-grow p-6 md:overflow-y-auto md:p-12 z-20 ml-10">
+      <div className="flex-grow p-6 md:overflow-y-auto md:p-12 z-20 ml-10 bg-secondary">
         {/* Toggle button */}
         {isHidden && (
           <Menu
             onClick={toggleSidenav}
             size="24"
-            className="bg-white relative mx-0 my-0 mb-6"
+            className="relative my-0 mb-6 getLeft"
           />
         )}
         {children}

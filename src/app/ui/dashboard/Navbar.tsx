@@ -75,7 +75,7 @@ export default function Navbar() {
     
   return (
     <nav
-      className={` py-3 px-10 bg-black ${
+      className={` py-3 px-10 bg-primary ${
         isSticky ? "sticky top-0 right-0 left-0 bg-black" : ""
       }`}
     >
@@ -83,7 +83,7 @@ export default function Navbar() {
         <div className="font-bold tex-2xl cursor-pointer text-white">
           <Link href="/#home">
             <Image
-              src="/images/logo.webp"
+              src="/images/logo.png"
               alt="Logo"
               width={60} 
               height={60} 

@@ -17,14 +17,14 @@ function HeroSection() {
         <div className="absolute max-w[1240px] w-full h-full mx-auto flex  justify-center items-center  ">
           <div>
             <h1 className=" text-8xl font-serif font-extrabold uppercase py-4 text-slate-400 ">
-              Let`s <span className="text-blue-800">hack</span> the <span className="text-blue-800">world</span>
+              Let`s <span className="tx-secondary">hack</span> the <span className="tx-secondary">world</span>
             </h1>
             <br />
             <br />
             <br />
             <br />
             <p className="text-3xl font-semibold text-slate-400">
-              <span className="text-blue-800">Empowering Futures </span> | One
+              <span className="tx-secondary">Empowering Futures </span> | One
               Line of Code at a Time
             </p>
           </div>

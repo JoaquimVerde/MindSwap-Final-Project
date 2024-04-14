@@ -43,7 +43,7 @@ function Navbar() {
         <Link href="/#home">
          
             <Image
-            src="/images/logo.webp"
+            src="/images/logo.png"
             alt="Logo"
             width={60} // replace with the actual width of the image
             height={60} // replace with the actual height of the image

@@ -3,6 +3,7 @@ import React from "react";
 
 function Skills() {
   return (
+    <div className="bg-black">
     <div id="skills" className=" text-white mb-16 ">
       <div className="w-full  flex flex-col justify-center items-center text-slate-300 py-16">
         <div className="w-[100%] flex flex-col">
@@ -67,6 +68,7 @@ function Skills() {
           </Marquee>
         </div>
       </div>
+    </div>
     </div>
   );
 }

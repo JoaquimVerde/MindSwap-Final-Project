@@ -36,7 +36,7 @@ const TeacherCourses = () => {
     <div>
       <Link href="/dashboard/my-courses-teacher/add-course">
         <Button
-          className={cn("bg-primary text-white")}
+          className={cn("bg-primary text-white ml-4")}
           onClick={() => {
             console.log("clicked");
           }}
