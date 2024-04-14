@@ -35,7 +35,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
           {
             method: "GET",
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "*/*",
             },
           }
         );
