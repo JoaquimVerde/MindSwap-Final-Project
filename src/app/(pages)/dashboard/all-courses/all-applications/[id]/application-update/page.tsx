@@ -42,10 +42,6 @@ export default function ApplicationUpdate({
     notFound();
   }
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
-
   const [applicationToDelete, setApplicationToDelete] = useState<string | null>(null);
 
   function handleDelete(id: string) {
