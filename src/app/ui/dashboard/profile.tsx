@@ -40,8 +40,17 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
           }
         );
         if (response.ok) {
-          console.log("img", response);
-          //setAvatarImage(data.url);
+          const blob = await response.blob();
+          const reader = new FileReader();
+          const url = URL.createObjectURL(blob);
+          console.log("url", url);
+          console.log("blib", blob);
+          reader.onloadend = () => {
+            if (reader.result) {
+              setAvatarImage(reader.result.toString());
+            }
+          };
+          reader.readAsDataURL(blob);
         }
       } catch (error) {
         console.error("Error fetching avatar image:", error);
