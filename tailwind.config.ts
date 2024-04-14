@@ -20,8 +20,9 @@ const config = {
     },
     extend: {
       colors: {
-        primary: 'var(--color-primary)',
-        secondary: 'var(--color-secondary)',
+        primary: '#0A3B3A', // dark green
+        accent: '',
+        secondary: ''
       },
       keyframes: {
         "accordion-down": {

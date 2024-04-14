@@ -37,7 +37,7 @@ html {
 
   body {
     /* @apply bg-black tracking-wide; */
-    @apply bg-primary;
+    @apply bg-primary tracking-wide;
   }
   h1 {
     @apply text-4xl sm:text-5xl md:text-6xl;
