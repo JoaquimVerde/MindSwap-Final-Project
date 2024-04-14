@@ -14,11 +14,11 @@ export function GetCourseInfo({ id, role }: { id: string, role: string | undefin
   );
 }
 
-export function ApplyCourse({ id }: { id: string }) {
+export function ApplyCourse({ id, role }: { id: string, role: string | undefined }) {
   return (
     <Link
       className="flex items-center p-0 pt-0"
-      href={`/dashboard/all-courses/${id}/application`}
+      href={`/dashboard/${role}/all-courses/${id}/application`}
     >
       {" "}
       Apply Now <Smile className="ml-3" />
@@ -38,23 +38,14 @@ export function EditCourse({ id, role }: { id: string, role: string | undefined 
   );
 }
 
-export function ViewProjects({ id }: { id: string }) {
+export function ViewProjects({ id, role }: { id: string, role: string | undefined }) {
   return (
     <Link
       className="flex items-center p-0 pt-0"
-      href={`/dashboard/all-courses/${id}/projects`}
+      href={`/dashboard/${role}/all-courses/${id}/projects`}
     >
       {" "}
       View Projects <CircuitBoard className="ml-3" />
-    </Link>
-  );
-}
-
-export function NavLink({ role, link }: { role: string | null, link: LinkType }) {
-  return (
-    <Link className="flex justify-start items-start pt-2 pb-2" key={link.href} href={`/dashboard/${role}/all-courses`}>
-      {link.icon && <link.icon className="flex justify-start items-start mr-2" />}
-      <p className="hidden md:block">{link.name}</p>
     </Link>
   );
 }

@@ -18,7 +18,9 @@ export async function updateCourse(
         teacherId?: string }
 
     , 
-    courseId: string) {
+    courseId: string | undefined,
+    role: string | undefined
+    ) {
 
 
     fetch(`http://localhost:3000/proxy/api/v1/courses/${courseId}`, {
@@ -40,8 +42,8 @@ export async function updateCourse(
             console.error("Error ", error);
 
         });
-    revalidatePath(`/dashboard/all-courses/${courseId}/course`);
-    redirect(`/dashboard/all-courses/${courseId}/course`);
+    revalidatePath(`/dashboard/${role}/all-courses/${courseId}/course`);
+    redirect(`/dashboard/${role}/all-courses/${courseId}/course`);
 }
 
 export async function fetchUpdateProjectGrade(id: string, newGrade: number) {

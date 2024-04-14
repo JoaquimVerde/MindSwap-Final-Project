@@ -44,7 +44,7 @@ export default async function Page(
 
             <div className="mt-5 ml-4 w-[500px]">
 
-                <SearchBar placeholder="search by location" />
+                <SearchBar placeholder="search by location" role={role} />
 
             </div>
 

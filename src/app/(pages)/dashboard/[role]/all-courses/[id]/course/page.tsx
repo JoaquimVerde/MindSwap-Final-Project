@@ -9,15 +9,12 @@ import { notFound } from "next/navigation";
 
 export default async function Page(
   {
-    params,
-    
+    params,   
   }: {
     params: {
       id: string
       role?: string
     },
-    
-
   }) {
 
   const id = params.id;
@@ -96,14 +93,15 @@ export default async function Page(
       <div className="flex flex-col space-y-5 max-w-fit">
       {role === "STUDENT" ? null : (
         <Button>
-          <ViewProjects id={id} />
+          <ViewProjects id={id} role={role} />
         </Button>)}
+        {role !== "STUDENT" ? null : (
         <Button>
-          <ApplyCourse id={id} />
-        </Button>
+          <ApplyCourse id={id} role={role} />
+        </Button>)}
         {role === "STUDENT" ? null : (
           <Button>
-            <EditCourse id={id} />
+            <EditCourse id={id} role={role} />
           </Button>)}
       </div>
     </div>

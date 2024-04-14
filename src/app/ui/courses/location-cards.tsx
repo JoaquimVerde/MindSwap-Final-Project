@@ -20,9 +20,11 @@ export default async function LocationCards(
     {
         placeholder,
         currentPage,
+        role
     }: {
         placeholder: string;
         currentPage: number;
+        role: string | undefined
     }) {
 
 
@@ -86,7 +88,7 @@ export default async function LocationCards(
                             </CardContent>
                             <CardFooter>
                                 <Button className="w-full">
-                                    <GetCourseInfo id={course.id.replace("#", "%23")} />
+                                    <GetCourseInfo id={course.id.replace("#", "%23")} role={role}/>
                                 </Button>
                             </CardFooter>
                         </Card>

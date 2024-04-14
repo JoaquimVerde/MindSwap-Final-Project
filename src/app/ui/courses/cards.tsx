@@ -83,10 +83,9 @@ export default async function Cards(
 
                             </CardContent>
                             <CardFooter>
-                                {role === "STUDENT" ? null :(
                                 <Button className="w-full">
                                     <GetCourseInfo id={course.id.replace("#", "%23")} role={role}/>
-                                </Button>)}
+                                </Button>
                             </CardFooter>
                         </Card>
                     </div>

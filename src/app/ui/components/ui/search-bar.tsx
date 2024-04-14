@@ -7,8 +7,10 @@ import { useDebouncedCallback } from 'use-debounce';
 
 const SearchBar = ({
     placeholder,
+    role
 }: {
-    placeholder: string, 
+    placeholder: string,
+    role: string | undefined
 }) => {
 
 
@@ -18,10 +20,10 @@ const SearchBar = ({
     const handleSearch = useDebouncedCallback((placeholder: string) => {
 
 
-        router.push(`/dashboard/all-courses/location/${placeholder}/courses`);
+        router.push(`/dashboard/${role}/all-courses/location/${placeholder}/courses`);
 
         //revalidatePath(`/dashboard/all-courses/location/${placeholder}/courses`);
-        redirect(`/dashboard/all-courses/location/${placeholder}/courses`);
+        redirect(`/dashboard/${role}/all-courses/location/${placeholder}/courses`);
 
     }, 500);
 

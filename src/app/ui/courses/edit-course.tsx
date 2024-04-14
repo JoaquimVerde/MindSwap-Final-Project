@@ -44,10 +44,13 @@ const formSchema = z.object({
 
 export function EditCourseForm({
     course,
+    role
 }: {
-    course: Course;
+    course: Course | null;
+    role: string | undefined;  
 }) {
 
+    
 
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -79,7 +82,7 @@ export function EditCourseForm({
             teacherId: values?.teacherId,
         }
         console.log("submited", values);
-        updateCourse(newValues, course?.id.replace("#", "%23"));
+        updateCourse(newValues, course?.id.replace("#", "%23"), role);
     }
 
 
@@ -191,7 +194,7 @@ export function EditCourseForm({
                                     </FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder={"" + course.price} {...field}
+                                            placeholder={"" + course?.price} {...field}
                                             
                                         />
                                     </FormControl>
@@ -209,7 +212,7 @@ export function EditCourseForm({
                                     </FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder={"" + course.duration} {...field}
+                                            placeholder={"" + course?.duration} {...field}
                                             onChange={(e) => {
                                                 const parsedValue = parseInt(e.target.value);
                                                 if (!isNaN(parsedValue)) {                                         
@@ -234,7 +237,7 @@ export function EditCourseForm({
                                         Location
                                     </FormLabel>
                                     <FormControl>
-                                        <Input placeholder={course.location} {...field}
+                                        <Input placeholder={course?.location} {...field}
                                         />
                                     </FormControl>
 
@@ -262,7 +265,7 @@ export function EditCourseForm({
                         />
                         <Button>
                             <Link
-                                href="/dashboard/all-courses">
+                                href={`/dashboard/${role}/all-courses/${course?.id.replace("#", "%23")}/course`}>
                                 Cancel
                             </Link>
                         </Button>

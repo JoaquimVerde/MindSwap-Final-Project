@@ -4,9 +4,17 @@ import NotFound from "../course/not-found";
 
 
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page(
+    { params 
+    }: { 
+        params: {
+             id: string, 
+            role?: string
+        } 
+    }) {
 
-    const id = params.id
+    const id = params.id;
+    const role = params.role;
 
     const [course] = await Promise.all([
         (fetchCourseById(id))
@@ -25,7 +33,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
             <div>Edit Course Page</div>
 
-            <EditCourseForm course={course} />
+            <EditCourseForm course={course} role={role} />
 
         </div>
     );

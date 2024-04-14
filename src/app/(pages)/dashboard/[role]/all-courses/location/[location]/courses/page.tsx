@@ -17,6 +17,7 @@ import SearchBar from "@/app/ui/components/ui/search-bar";
 
 export default async function AllCoursesInLocation(
     placeholder: Params,
+    role: string | undefined
 ) {
     const location : string = (placeholder.params.location);
     const currentPage = Number(placeholder?.searchParams?.page) || 1;
@@ -30,7 +31,7 @@ export default async function AllCoursesInLocation(
             </div>
 
             <div className="mt-5 ml-4 w-[500px]">
-                <SearchBar placeholder="search by location" />
+                <SearchBar placeholder="search by location" role={role} />
             </div>
 
             <Suspense fallback={<PaginationSkeleton />}>
@@ -40,7 +41,7 @@ export default async function AllCoursesInLocation(
             </Suspense>
 
             <Suspense fallback={<CardsSkeleton />}>
-                <LocationCards placeholder={location} currentPage={currentPage} />
+                <LocationCards placeholder={location} currentPage={currentPage} role={role} />
             </Suspense>
         </div >
     )
