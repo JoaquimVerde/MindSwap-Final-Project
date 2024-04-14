@@ -9,7 +9,9 @@ import { useSession } from "next-auth/react";
 export async function fetchAllCourses(): Promise<number> {
   noStore();
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses`);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses`
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch courses");
     }
@@ -124,7 +126,9 @@ export async function fetchCoursesByLocation(
     //await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/location/${location}?page=${
+      `${
+        process.env.NEXT_PUBLIC_URL
+      }/proxy/api/v1/courses/location/${location}?page=${
         currentPage - 1
       }&limit=6`
     );
@@ -347,7 +351,9 @@ export async function fetchPersonDataById(id: string): Promise<Person> {
   }
 }
 
-export async function fetchCoursesByTeacherId(idCode: string): Promise<Course[]> {
+export async function fetchCoursesByTeacherId(
+  idCode: string
+): Promise<Course[]> {
   try {
     const id = "PERSON#" + idCode;
     if (!id) {
@@ -446,7 +452,10 @@ export async function deletePersonById(id: string) {
   noStore();
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/persons/${id.replace("#", "%23")}`,
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/persons/${id.replace(
+        "#",
+        "%23"
+      )}`,
       {
         method: "DELETE",
       }
@@ -460,15 +469,21 @@ export async function deletePersonById(id: string) {
   }
 }
 
-export async function fetchUpdateApplicationGrade(id: string, newGrade: number) {
+export async function fetchUpdateApplicationGrade(
+  id: string,
+  newGrade: number
+) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration/grade/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ grade: newGrade }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration/grade/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ grade: newGrade }),
+      }
+    );
     if (response.ok) {
       console.log("Grade updated successfully");
       return response.json();
@@ -484,11 +499,14 @@ export async function fetchUpdateApplicationStatus(
   id: string,
   newStatus: string
 ): Promise<Response> {
-  return fetch(`${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration/status/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({ status: newStatus }),
-  });
+  return fetch(
+    `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration/status/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ status: newStatus }),
+    }
+  );
 }
