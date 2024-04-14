@@ -468,6 +468,7 @@ export async function fetchUpdateApplicationGrade(id: string, newGrade: number) 
     });
     if (response.ok) {
       console.log("Grade updated successfully");
+      return response.json();
     } else {
       console.error("Failed to update grade!", response.statusText);
     }

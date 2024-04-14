@@ -67,7 +67,7 @@ export default function ApplicationUpdate({
             }
           });
         } else {
-          response.json().then((json) => {
+          response.json().then((json: { message: any; }) => {
             toast({
               variant: "destructive",
               title: json.message,
