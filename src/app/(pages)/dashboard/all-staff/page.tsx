@@ -65,12 +65,12 @@ export default function AllStaff() {
           </Button>
         </Link>
       </div>
-      <Table className="text-white">
-        <TableCaption>A list of all staff members.</TableCaption>
+      <Table>
+        <TableCaption className="text-white">A list of all staff members.</TableCaption>
         <TableHeader>
-          <TableRow className="font-bold">
-            <TableHead>Name</TableHead>
-            <TableHead>Role</TableHead>
+          <TableRow className="text-white">
+            <TableHead className="font-bold">Name</TableHead>
+            <TableHead className="font-bold">Role</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -83,7 +83,7 @@ export default function AllStaff() {
               <TableCell>
                 <button
                   onClick={() => handleDelete(staff.id)}
-                  className="font-bold text-white"
+                  className="font-bold text-white underline hover:font-extrabold ml-10"
                 >
                   Delete
                 </button>

@@ -30,21 +30,21 @@ import React, { useEffect, useState } from "react";
     }, []);
 
     const [personToDelete, setPersonToDelete] = useState<string | null>(null);
-    /* function handleDelete(id: string) {
+    function handleDelete(id: string) {
       setPersonToDelete(id);
       setPersonToDelete(id);
       const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
       if (modal) {
       modal.showModal();
     }
-    } */
-    async function handleDelete(id: string) { 
-        const confirmDelete = window.confirm("Are you sure you want to delete this student?");
-        if (confirmDelete) {
-          await deletePersonById(id);
-          setAllStudents(allStudents.filter(student => student.id !== id));
-        }
-      }
+    } 
+    // async function handleDelete(id: string) { 
+    //     const confirmDelete = window.confirm("Are you sure you want to delete this student?");
+    //     if (confirmDelete) {
+    //       await deletePersonById(id);
+    //       setAllStudents(allStudents.filter(student => student.id !== id));
+    //     }
+    //   }
   
     return (
       <div className="mx-2 my-2">
@@ -54,11 +54,11 @@ import React, { useEffect, useState } from "react";
         <div className="mt-5 ml-4 w-[800px] flex space-x-12">
 </div>
         <Table>
-          <TableCaption>A list of all students.</TableCaption>
+          <TableCaption className="text-white">A list of all students.</TableCaption>
           <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Role</TableHead>
+            <TableRow className="text-white">
+              <TableHead className="font-bold">Name</TableHead>
+              <TableHead className="font-bold">Role</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -69,7 +69,7 @@ import React, { useEffect, useState } from "react";
                 </TableCell>
                 <TableCell>{student.email}</TableCell>
                 <TableCell>
-            <button onClick={() => handleDelete(student.id)}>Delete</button>
+            <button onClick={() => handleDelete(student.id)} className="font-bold text-white underline hover:font-extrabold ml-10">Delete</button>
           </TableCell>
               </TableRow>
             ))}

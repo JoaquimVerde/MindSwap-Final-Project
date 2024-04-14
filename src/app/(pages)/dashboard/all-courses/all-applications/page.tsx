@@ -53,15 +53,15 @@ export default async function AllApplications() {
         {/* <SearchBar placeholder="search by student name" /> */}
       </div>
       <Table>
-        <TableCaption>A list of all recent applications.</TableCaption>
+        <TableCaption className="text-white">A list of all recent applications.</TableCaption>
         <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Course</TableHead>
-            <TableHead>Previous Knowledge</TableHead>
-            <TableHead>Previous Experience </TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Actions</TableHead>
+          <TableRow className="text-white">
+            <TableHead className="font-bold">Name</TableHead>
+            <TableHead className="font-bold">Course</TableHead>
+            <TableHead className="font-bold">Previous Knowledge</TableHead>
+            <TableHead className="font-bold">Previous Experience </TableHead>
+            <TableHead className="font-bold">Status</TableHead>
+            <TableHead className="font-bold">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

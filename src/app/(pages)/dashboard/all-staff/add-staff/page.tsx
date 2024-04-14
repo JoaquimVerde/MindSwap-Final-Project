@@ -153,7 +153,7 @@ export default function AddStaff() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-gray-400">Email</FormLabel>
+                      <FormLabel className="text-white">Email</FormLabel>
                       <FormControl>
                         <Input
                           className="text-input"
@@ -170,7 +170,7 @@ export default function AddStaff() {
                   name="role"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-gray-400">Role: </FormLabel>
+                      <FormLabel className="text-white">Role: </FormLabel>
                       <FormControl>
                         <DropdownMenu>
                           <DropdownMenuTrigger className="text-gray-400">
