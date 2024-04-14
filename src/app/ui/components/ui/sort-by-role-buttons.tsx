@@ -4,22 +4,19 @@ import { fetchRoleByPersonId } from "@/app/lib/data";
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import { ApplyCourse, EditCourse, ViewProjects } from "../../courses/buttons";
+import { useSession } from "next-auth/react";
+import { set } from "date-fns";
 
 const SortByRoleButtons = ({ id }: { id: string }) => {
   const [userRole, setUserRole] = useState("");
+  const { data: session, status } = useSession();
 
   useEffect(() => {
-    const fetchRole = async () => {
-      try {
-        const role = await fetchRoleByPersonId();
-        setUserRole(role);
-      } catch (error) {
-        console.error("Failed to fetch role:", error);
-      }
-    };
-
-    fetchRole();
-  }, []);
+    if (status === "loading") return
+    const user: any = session?.user;
+    const role = user && user["cognito:groups"] ? user["cognito:groups"][0] : "STUDENT";
+    setUserRole(role);
+  }, [session, status]);
 
   return (
     <div>
