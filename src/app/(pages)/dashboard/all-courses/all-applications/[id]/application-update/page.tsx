@@ -1,39 +1,41 @@
 "use client";
 import { useEffect, useState } from "react";
-import { deleteApplicationById, fetchApplicationById, fetchPersonDataById, fetchUpdateApplicationGrade, fetchUpdateApplicationStatus } from "@/app/lib/data";
+import {
+  deleteApplicationById,
+  fetchApplicationById,
+  fetchPersonDataById,
+  fetchUpdateApplicationGrade,
+  fetchUpdateApplicationStatus,
+} from "@/app/lib/data";
 import { notFound } from "next/navigation";
 import { ComboboxPopover } from "@/app/ui/application/popoverStatus";
 import { DialogDemo } from "@/app/ui/application/dialog-grade";
 import { Application, Person } from "../../../../../../lib/definitions";
 import * as React from "react";
-import { z } from "zod";
-import { fetchUpdateProjectGrade } from "@/app/lib/action";
-import { Value } from "@radix-ui/react-select";
-import { LucideIcon } from "lucide-react";
-
-
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 export default function ApplicationUpdate({
   params,
 }: {
   params: { id: string };
 }) {
+  const { toast } = useToast();
+  const router = useRouter();
   const [application, setApplication] = useState({} as Application);
   const [student, setStudent] = useState({} as Person);
   const [grade, setGrade] = useState(0);
 
-  const [open, setOpen] = React.useState(false);
-  const [selectedStatus, setSelectedStatus] = useState<string>("");
-
-  const formSchema = z.object({
-    status: z.string(),
-    grade: z.string(),
-  });
+  const [openDialogStatus, setOpenDialogStatus] = React.useState(false);
+  const [openDialogGrade, setOpenDialogGrade] = React.useState(false);
+  const [selectedStatus, setSelectedStatus] = useState<string>("APPLIED");
 
   useEffect(() => {
     const appId = params.id.replace("#", "%23");
     fetchApplicationById(appId).then((app) => {
       setApplication(app);
+      setGrade(Number(app.finalGrade));
+      setSelectedStatus(app.status);
       const studentId = app?.student?.id.replace("#", "%23");
       fetchPersonDataById(studentId).then((student) => setStudent(student));
     });
@@ -43,19 +45,51 @@ export default function ApplicationUpdate({
     notFound();
   }
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    fetchUpdateApplicationGrade(application.id, grade);
-    fetchUpdateApplicationStatus(application.id, selectedStatus);
-    
+  function handleSaveApplication() {
+    fetchUpdateApplicationGrade(application.id.replace("#", "%23"), grade)
+      .then((response) => {
+        if (response.ok) {
+          fetchUpdateApplicationStatus(
+            application.id.replace("#", "%23"),
+            selectedStatus
+          ).then((response) => {
+            if (response.ok) {
+              toast({
+                title: "Your application was updated successfully",
+              });
+            } else {
+              response.json().then((json) => {
+                toast({
+                  variant: "destructive",
+                  title: json.message,
+                });
+              });
+            }
+          });
+        } else {
+          response.json().then((json) => {
+            toast({
+              variant: "destructive",
+              title: json.message,
+            });
+          });
+        }
+      })
+      .catch(() => {
+        toast({
+          variant: "destructive",
+          title: "There was an error updating your application",
+        });
+      });
   }
 
-  
-
-  const [applicationToDelete, setApplicationToDelete] = useState<string | null>(null);
+  const [applicationToDelete, setApplicationToDelete] = useState<string | null>(
+    null
+  );
 
   function handleDelete(id: string) {
     setApplicationToDelete(id);
-    const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+    const modal = document.getElementById("my_modal_1") as HTMLDialogElement;
     if (modal) {
       modal.showModal();
     }
@@ -148,8 +182,8 @@ export default function ApplicationUpdate({
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 <ComboboxPopover
-                  open={open}
-                  setOpen={setOpen}
+                  open={openDialogStatus}
+                  setOpen={setOpenDialogStatus}
                   selectedStatus={selectedStatus}
                   setSelectedStatus={setSelectedStatus}
                 />
@@ -160,37 +194,68 @@ export default function ApplicationUpdate({
                 Final Grade
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
-                {grade === 0 ? <DialogDemo grade={grade} setGrade={setGrade} /> : grade}
+                <DialogDemo
+                  open={openDialogGrade}
+                  setOpen={setOpenDialogGrade}
+                  grade={grade}
+                  setGrade={setGrade}
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <button
+                  type="submit"
+                  className="btn btn-gray w-full mt-4"
+                  onClick={handleSaveApplication}
+                >
+                  Save Application
+                </button>
               </td>
             </tr>
             <tr>
-              <button type="submit" className="btn btn-gray w-full mt-4">
-                Update
-              </button>
+              <td>
+                <button
+                  onClick={() => handleDelete(application.id)}
+                  className="btn btn-gray w-full mt-4"
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           </tbody>
-        <button onClick={() => handleDelete(application.id)} className="btn btn-gray w-full mt-4">Delete</button>
         </table>
         <dialog id="my_modal_1" className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Are you sure you want to delete this person?</h3>
-          <div className="modal-action">
-            <form method="dialog">
-              <button className="btn" onClick={() => {
-                if (applicationToDelete) {
-                  deleteApplicationById(applicationToDelete);
-                  const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
-                  if (modal) {
-                    modal.close();
-                  }
-                  setApplicationToDelete(null);
-                }
-              }}>Confirm</button>
-              <button className="btn">Close</button>
-            </form>
+          <div className="modal-box">
+            <h3 className="font-bold text-lg">
+              Are you sure you want to delete this person?
+            </h3>
+            <div className="modal-action">
+              <form method="dialog">
+                <button
+                  className="btn"
+                  onClick={() => {
+                    if (applicationToDelete) {
+                      deleteApplicationById(applicationToDelete);
+                      const modal = document.getElementById(
+                        "my_modal_1"
+                      ) as HTMLDialogElement;
+                      if (modal) {
+                        modal.close();
+                      }
+                      setApplicationToDelete(null);
+                      router.push("/dashboard/all-courses/all-applications");
+                    }
+                  }}
+                >
+                  Confirm
+                </button>
+                <button className="btn">Close</button>
+              </form>
+            </div>
           </div>
-        </div>
-      </dialog>
+        </dialog>
       </div>
     </div>
   );
