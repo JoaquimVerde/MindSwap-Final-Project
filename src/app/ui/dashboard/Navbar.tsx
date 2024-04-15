@@ -84,7 +84,7 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="flex flex-col items-center justify-between">
-          <div className="flex flex: row items-center justify-between px-5 z-20">
+          <div className="flex flex: row items-center justify-between px-5">
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <CircleUserRound

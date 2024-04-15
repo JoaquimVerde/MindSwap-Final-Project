@@ -91,4 +91,8 @@ html {
     transform: translateY(60%);
     margin-left: 40px;
   }
+
+  #new-quote {
+    @apply bg-secondary;
+  }
 }

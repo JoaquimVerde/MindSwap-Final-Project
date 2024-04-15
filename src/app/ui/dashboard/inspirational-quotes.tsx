@@ -34,7 +34,7 @@ const InspirationalQuotes = () => {
 	return (
 		<div className="w-96 h-60 p-4 relative">
 			<div>
-				<h1 className="text-center text-2xl font-bold mb-4">
+				<h1 className="text-black text-center text-2xl font-bold mb-4">
 					{quote}
 				</h1>
 				<p className=" text-right text-lg italic text-gray-600">
@@ -45,7 +45,7 @@ const InspirationalQuotes = () => {
 			<div className="absolute bottom-4 right-4">
 				<button 
 					id="new-quote"
-					className="text-white font-bold py-2 px-4 rounded bg-green-500 hover:bg-green-600 transition duration-300"
+					className="text-white font-bold py-2 px-4 rounded transition duration-300"
 					onClick={generateQuote}
 				>
 					Next quote
