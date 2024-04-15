@@ -16,10 +16,12 @@ import SearchBar from "@/app/ui/components/ui/search-bar";
 // };
 
 export default async function AllCoursesInLocation(
-    placeholder: Params,
+    placeholder: string,
     role: string | undefined
 ) {
-    const location : string = (placeholder.params.location);
+
+    console.log(placeholder.params.location);
+    const location : string = (placeholder?.params.location);
     const currentPage = Number(placeholder?.searchParams?.page) || 1;
     const totalCoursesNumber = await fetchAllCoursesFromLocation(location);
     const totalPages = Math.ceil(totalCoursesNumber / 6);

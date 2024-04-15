@@ -87,7 +87,7 @@ export default async function Page(
       </div>
 
       <div className="flex flex-col space-y-5 max-w-fit">
-      {role === "STUDENT" ? null : (
+      {role !== "TEACHER" ? null : (
         <Button>
           <ViewProjects id={id} role={role} />
         </Button>)}
@@ -95,7 +95,7 @@ export default async function Page(
         <Button>
           <ApplyCourse id={id} role={role} />
         </Button>)}
-        {role === "STUDENT" ? null : (
+        {role !== "TEACHER" ? null : (
           <Button>
             <EditCourse id={id} role={role} />
           </Button>)}
