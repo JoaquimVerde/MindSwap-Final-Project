@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #0A3B3A;
+  --color-secondary: #407070;
+  --color-accent: #7FC6A4;
+}
+
+
+.nostyle,
+ul,
+ol,
+li {
+  list-style-type: none !important;
+}
+
+.google-map {
+  padding-bottom: 50%;
+  position: relative;
+}
+
+.google-map iframe {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+
+
+  body {
+    /* @apply bg-black tracking-wide; */
+    @apply bg-primary tracking-wide;
+  }
+  h1 {
+    @apply text-4xl sm:text-5xl md:text-6xl text-white;
+    /* @apply bg-primary text-4xl sm:text-5xl md:text-6xl; */
+  }
+  h2 {
+    @apply text-3xl sm:text-4xl;
+  }
+
+  #new-quote {
+    @apply bg-primary;
+  }
+
+  .btn {
+    @apply bg-primary;
+  }
+
+  .allThePurple {
+    @apply bg-primary;
+  }
+
+  .getLeft {
+    transform: translateY(-80%);
+    margin-left: -55px;
+  }
+
+  .minSize {
+    width: 450px;
+    gap: 40px;
+  }
+
+  .tx-secondary {
+    color: var(--color-secondary);
+  }
+
+  .tx-primary {
+    color: var(--color-primary);
+  }
+
+  .tx-accent {
+    color: var(--color-accent);
+  }
+
+  .home-left {
+    transform: translateY(-25%);
+    margin-left: -70px;
+  }
+  
+  .home-faqs {
+    transform: translateY(60%);
+    margin-left: 40px;
+  }
+
+  #new-quote {
+    @apply bg-secondary;
+  }
+}

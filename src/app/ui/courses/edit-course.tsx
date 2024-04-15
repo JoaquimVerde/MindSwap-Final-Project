@@ -1,0 +1,279 @@
+'use client';
+
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import React from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { Course, CourseForm } from "@/app/lib/definitions";
+import Link from "next/link";
+import { updateCourse } from "@/app/lib/action";
+
+
+
+
+const url = ""; // TODO add url to env.ts
+
+const formSchema = z.object({
+    name: z
+        .string()
+        .min(2, { message: "Firstname must be at least 2 characters." }),
+    edition: z.number(),
+    syllabus: z.string(),
+    program: z.string(),
+    schedule: z.string(),
+    price: z.string().refine(value => /^(\d+|\d+\.\d{2})$/.test(value), {
+        message: "Price must be a valid number with up to two decimal places."
+    }),
+    duration: z.number(),
+    location: z.string(),
+    teacherId: z.string(),
+});
+
+
+
+export function EditCourseForm({
+    course,
+}: {
+    course: Course;
+}) {
+
+
+
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: course?.name,
+            edition: course?.edition,
+            syllabus: course?.syllabus,
+            program: course?.program,
+            schedule: course?.schedule,
+            price: course?.price.toString(),
+            duration: course?.duration,
+            location: course?.location,
+            teacherId: course?.teacher?.id,
+
+        },
+    });
+
+    function onSubmit(values: z.infer<typeof formSchema>) {
+        const newValues = { 
+            name: values?.name,
+            edition: values?.edition,           
+            syllabus: values?.syllabus,
+            program: values?.program,
+            schedule: values?.schedule,
+            price: parseFloat(values?.price),
+            duration: values?.duration,
+            location: values?.location,
+            teacherId: values?.teacherId,
+        }
+        console.log("submited", values);
+        updateCourse(newValues, course?.id.replace("#", "%23"));
+    }
+
+
+    return (
+        <main>
+            <div className="w-[400px] mt-10">
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-white">Course Name</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder={course?.name} {...field}
+                                        />
+                                    </FormControl>
+                                    <FormDescription className="text-accent">
+                                        This is the title of the Course.
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="edition"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-white">Edition</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder={"" + course?.edition} {...field}
+                                            onChange={(e) => {
+                                                const parsedValue = parseInt(e.target.value);
+                                                if (!isNaN(parsedValue)) {
+                                                    field.onChange(parsedValue);
+                                                } else {
+                                                    field.onChange('');
+                                                }
+                                            }}
+
+                                        />
+                                    </FormControl>
+
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="syllabus"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-white">Syllabus</FormLabel>
+                                    <FormControl>
+                                        <textarea
+                                            className="textarea w-full rows-20 h-[150px]"
+                                            placeholder={course?.syllabus} {...field}
+                                        />
+
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="program"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-white">Program</FormLabel>
+                                    <FormControl>
+                                        <textarea
+                                            className="textarea w-full rows-20 h-[400px]"
+                                            placeholder={course?.program} {...field}
+                                        />
+                                    </FormControl>
+
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="schedule"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-white">
+                                        Schedule
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input placeholder={course?.schedule} {...field}
+                                        />
+                                    </FormControl>
+
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="price"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-white">
+                                        Price (€)
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder={"" + course.price} {...field}
+                                            
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="duration"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-white">
+                                        Duration (weeks)
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder={"" + course.duration} {...field}
+                                            onChange={(e) => {
+                                                const parsedValue = parseInt(e.target.value);
+                                                if (!isNaN(parsedValue)) {                                         
+                                                    field.onChange(parsedValue);
+                                                } else {
+                                                    field.onChange('');
+                                                }
+                                            }}
+                                        />
+                                    </FormControl>
+
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="location"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-white">
+                                        Location
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input placeholder={course.location} {...field}
+                                        />
+                                    </FormControl>
+
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="teacherId"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-white">Teacher ID</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder={course?.teacher?.firstName + " " + course?.teacher?.lastName} {...field}
+                                        />
+                                    </FormControl>
+                                    <FormDescription className="text-accent">
+                                        Insert teacher ID.
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <Button className="bg-primary">
+                            <Link
+                                href="/dashboard/all-courses">
+                                Cancel
+                            </Link>
+                        </Button>
+
+                        <Button type="submit" className="bg-primary ml-[230px]" >
+                            Submit
+                        </Button>
+                    </form>
+                </Form>
+            </div>
+        </main>
+    );
+
+}
