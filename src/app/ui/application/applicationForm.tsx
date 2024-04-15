@@ -19,6 +19,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import React from "react";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const url = `${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration`;
 const formSchema = z.object({
@@ -37,9 +38,14 @@ const formSchema = z.object({
 export function ApplicationForm({ id }: { id: string }) {
   const { toast } = useToast();
   const { data: session, status } = useSession();
-  const user: any = session?.user;
+  const [personIdparam, setPersonIdparam] = React.useState("");
   const courseIdparam = id.replace("%23", "#");
-  const personIdparam = "PERSON#" + user.id;
+  
+  useEffect(() => {
+    if (status === "loading") return;
+    const user: any = session?.user;
+    setPersonIdparam("PERSON#" + user.id);
+  }, [session, status]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -103,7 +109,7 @@ export function ApplicationForm({ id }: { id: string }) {
                 name="aboutYou"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Something about you</FormLabel>
+                    <FormLabel className="text-white">Something about you</FormLabel>
                     <FormControl>
                       <Input
                         className="textarea w-full h-40"
@@ -121,7 +127,7 @@ export function ApplicationForm({ id }: { id: string }) {
                 name="prevKnowledge"
                 render={({ field }) => (
                   <FormItem className="space-y-3">
-                    <FormLabel>
+                    <FormLabel className="text-white">
                       Do you have some knowledge of programming?
                     </FormLabel>
                     <FormControl>
@@ -132,15 +138,15 @@ export function ApplicationForm({ id }: { id: string }) {
                       >
                         <RadioGroupItem
                           value="false"
-                          className="bg-white opacity-100"
-                        // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                          className="bg-white opacity-100 hover:bg-gray-300 active:bg-accent focus:outline-none focus:ring focus:ring-primary mb-2"
+                        
                         >
                           No
                         </RadioGroupItem>
                         <RadioGroupItem
                           value="true"
-                          className="bg-white opacity-100"
-                        // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                          className="bg-white opacity-100 hover:bg-gray-300 active:bg-accent focus:outline-none focus:ring focus:ring-primary"
+                
                         >
                           Yes
                         </RadioGroupItem>
@@ -155,7 +161,7 @@ export function ApplicationForm({ id }: { id: string }) {
                 name="prevExperience"
                 render={({ field }) => (
                   <FormItem className="space-y-3">
-                    <FormLabel>
+                    <FormLabel className="text-white">
                       Do you have more than one year experience in this field?
                     </FormLabel>
                     <FormControl>
@@ -166,16 +172,15 @@ export function ApplicationForm({ id }: { id: string }) {
                       >
                         <RadioGroupItem
                           value="false"
-                          className="bg-white opacity-100"
-                        // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                          className="bg-white opacity-100 hover:bg-gray-300 active:bg-accent focus:outline-none focus:ring focus:ring-primary mb-2"
+    
                         >
                           No
                         </RadioGroupItem>
                         <RadioGroupItem
                           value="true"
-                          className="bg-white opacity-100"
-                        //style={{ opacity: 1 }}
-                        // className="w-full p-3 hover:bg-gray-100 dark:hover:bg-gray-800"
+                          className="bg-white opacity-100 hover:bg-gray-300 active:bg-accent focus:outline-none focus:ring focus:ring-primary "
+                        
                         >
                           Yes
                         </RadioGroupItem>
@@ -187,7 +192,7 @@ export function ApplicationForm({ id }: { id: string }) {
               />
             </div>
 
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full bg-primary">
               Submit
             </Button>
           </form>

@@ -463,7 +463,7 @@ export async function deletePersonById(id: string) {
 export async function fetchUpdateApplicationGrade(id: string, newGrade: number) {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/registration/grade/${id}`, {
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-type": "application/json",
       },

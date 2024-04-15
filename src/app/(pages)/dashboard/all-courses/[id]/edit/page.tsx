@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
         <div>
 
-            <div>Edit Course Page</div>
+            <h1>Edit Course Page</h1>
 
             {course ? <EditCourseForm course={course} /> : null}
 

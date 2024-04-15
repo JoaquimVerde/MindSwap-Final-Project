@@ -27,6 +27,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
   useEffect(() => {
     if (status === "loading") return;
     const user: any = session?.user;
+    console.log(user);
     const fetchData = async () => {
       try {
         const personData = await fetchPersonById(user.id);

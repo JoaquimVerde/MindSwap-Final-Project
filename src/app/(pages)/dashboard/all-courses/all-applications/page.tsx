@@ -67,7 +67,7 @@ export default async function AllApplications() {
         <TableBody>
           {applications.map((application) => (
             <TableRow key={application.id}>
-              <TableCell className="font-medium">
+              <TableCell className="font-medium text-white">
                 {application.student.firstName} {application.student.lastName}
               </TableCell>
               <TableCell className="text-white">{application.course.name}</TableCell>
@@ -81,6 +81,7 @@ export default async function AllApplications() {
                     "%23"
                   )}/application-update`}
                   id={application.id}
+                  className="text-primary font-bold underline"
                 >
                   Validate
                 </Link>

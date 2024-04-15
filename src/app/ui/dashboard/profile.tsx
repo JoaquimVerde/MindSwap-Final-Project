@@ -91,18 +91,18 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
   return (
     <div className="flex flex-row justify-evenly">
       <div className="flex flex-col justify-start">
-        <h1 className="mb-10 text-slate-400">Profile</h1>
+        <h1>Profile</h1>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <p className="font-bold text-slate-400 mt-4">First Name</p>
+            <p className="font-bold text-white mt-4">First Name</p>
             <input
               type="text"
               {...register("firstName")}
               className="rounded w-80 h-10 px-2"
               disabled={isSubmitting}
             />
-            <p className="font-bold text-slate-400 mt-4">Last Name</p>
+            <p className="font-bold text-white mt-4">Last Name</p>
             <input
               type="text"
               {...register("lastName")}
@@ -110,7 +110,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
               disabled={isSubmitting}
             />
 
-            <p className="font-bold text-slate-400 mt-4">Email</p>
+            <p className="font-bold text-white mt-4">Email</p>
             <input
               type="text"
               {...register("email")}
@@ -118,21 +118,21 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
               disabled={true}
             />
 
-            <p className="font-bold text-slate-400 mt-4">Username</p>
+            <p className="font-bold text-white mt-4">Username</p>
             <input
               type="text"
               {...register("username")}
               className="rounded w-80 h-10 px-2"
               disabled={isSubmitting}
             />
-            <p className="font-bold text-slate-400 mt-4">Address</p>
+            <p className="font-bold text-white mt-4">Address</p>
             <input
               type="text"
               {...register("address")}
               className="rounded w-80 h-10 px-2"
               disabled={isSubmitting}
             />
-            <p className="font-bold text-slate-400 mt-4">CV</p>
+            <p className="font-bold text-white mt-4">CV</p>
             <input
               type="text"
               {...register("cv")}
@@ -141,7 +141,7 @@ const Profile: React.FC<ProfileProps> = ({ initialProfileData }) => {
             />
           </div>
 
-          <Button type="submit" className="w-26 ml-0 hover:bg-blue-700 mt-8">
+          <Button type="submit" className="w-26 ml-0 bg-primary mt-8 cursor-pointer">
             {isSubmitting ? "Submitting..." : "Update"}
           </Button>
         </form>

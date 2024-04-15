@@ -103,7 +103,7 @@ export default function AllStaff() {
           <div className="modal-action">
             <form method="dialog" className="space-x-2">
               <button
-                className="bg-secondary"
+                className="btn"
                 onClick={() => {
                   if (personToDelete) {
                     deletePersonById(personToDelete);

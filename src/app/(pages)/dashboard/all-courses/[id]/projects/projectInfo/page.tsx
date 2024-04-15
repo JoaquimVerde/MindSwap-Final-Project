@@ -26,16 +26,18 @@ export default async function Page({ params }: { params: { id: string }}) {
 
     return (
         <div>
-            <h2 className= "text-5xl text-center font-bold">
+            <div className="mb-10">
+            <h2 className= "text-5xl text-white font-bold">
                 {project[0]?.name}
             </h2>
-                <Table>
-                    <TableCaption>List of students who participated in the {project[0]?.name} project</TableCaption>
+            </div>
+                <Table className="text-white">
+                    <TableCaption className="text-white">List of students who participated in the {project[0]?.name} project</TableCaption>
                         <TableHeader>
                             <TableRow>
-                                <TableHead className="w-[200px]">First Name</TableHead>
-                                <TableHead>Last Name</TableHead>
-                                <TableHead>Email</TableHead>
+                                <TableHead className="w-[200px] font-bold text-white text-lg">First Name</TableHead>
+                                <TableHead className="w-[200px] font-bold text-white text-lg">Last Name</TableHead>
+                                <TableHead className="w-[200px] font-bold text-white text-lg">Email</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>

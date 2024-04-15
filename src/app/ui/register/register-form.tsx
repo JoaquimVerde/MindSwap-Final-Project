@@ -109,7 +109,7 @@ export default function RegisterForm() {
               name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>First Name</FormLabel>
+                  <FormLabel className="text-white">First Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter your first name" {...field} />
                   </FormControl>
@@ -122,7 +122,7 @@ export default function RegisterForm() {
               name="lastName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Last Name</FormLabel>
+                  <FormLabel className="text-white">Last Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter your last name" {...field} />
                   </FormControl>
@@ -135,11 +135,11 @@ export default function RegisterForm() {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel className="text-white">Username</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter your username" {...field} />
                   </FormControl>
-                  <FormDescription>
+                  <FormDescription className="text-accent">
                     This is your public display name
                   </FormDescription>
                   <FormMessage />
@@ -151,7 +151,7 @@ export default function RegisterForm() {
               name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Address</FormLabel>
+                  <FormLabel className="text-white">Address</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter your address" {...field} />
                   </FormControl>
@@ -164,7 +164,7 @@ export default function RegisterForm() {
               name="dateOfBirth"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Date of Birth</FormLabel>
+                  <FormLabel className="text-white">Date of Birth</FormLabel>
                   <FormControl>
                     <Input type="date" {...field} />
                   </FormControl>
@@ -172,7 +172,7 @@ export default function RegisterForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full bg-secondary">
               Register
             </Button>
           </form>

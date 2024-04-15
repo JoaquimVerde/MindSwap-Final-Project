@@ -1,4 +1,4 @@
-"use client";
+    "use client";
 import { useEffect, useState } from "react";
 import {
   deleteApplicationById,
@@ -46,41 +46,21 @@ export default function ApplicationUpdate({
   }
 
   function handleSaveApplication() {
-    fetchUpdateApplicationGrade(application.id.replace("#", "%23"), grade)
-      .then((response) => {
-        if (response.ok) {
-          fetchUpdateApplicationStatus(
-            application.id.replace("#", "%23"),
-            selectedStatus
-          ).then((response) => {
-            if (response.ok) {
-              toast({
-                title: "Your application was updated successfully",
-              });
-            } else {
-              response.json().then((json) => {
-                toast({
-                  variant: "destructive",
-                  title: json.message,
-                });
-              });
-            }
-          });
-        } else {
-          response.json().then((json: { message: any; }) => {
-            toast({
-              variant: "destructive",
-              title: json.message,
-            });
-          });
-        }
-      })
-      .catch(() => {
+    const updateGrade = async () => {
+      const response = await fetchUpdateApplicationGrade(application.id.replace("#", "%23"), grade);
+      const response2 = await fetchUpdateApplicationStatus(application.id.replace("#", "%23"), selectedStatus);
+      if (response.status === 200 && response2.status === 200) {
+        toast({
+          title: "Your application was updated successfully",
+        });
+      } else {
         toast({
           variant: "destructive",
           title: "There was an error updating your application",
         });
-      });
+      }
+    }
+    updateGrade();
   }
 
   const [applicationToDelete, setApplicationToDelete] = useState<string | null>(
@@ -97,15 +77,15 @@ export default function ApplicationUpdate({
 
   return (
     <div className="mx-2 my-2">
-      <h2 className="croll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-2 max-w-fit">
+      <h2 className="croll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-2 max-w-fit text-white">
         Update Application - {application?.course?.name} -{" "}
         {application?.student?.firstName}
       </h2>
       <div className="my-6 w-full overflow-y-auto">
-        <table className="max-w-fit">
+        <table className="text-white max-w-fit">
           <tbody>
             <tr className="m-0 border-t p-0 even:bg-muted">
-              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+              <td className="bg-primary font-bold border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 Student
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
@@ -114,7 +94,7 @@ export default function ApplicationUpdate({
               </td>
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
-              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+              <td className="bg-primary font-bold border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 Email
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
@@ -122,7 +102,7 @@ export default function ApplicationUpdate({
               </td>
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
-              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+              <td className="bg-primary font-bold border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 Username
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
@@ -130,7 +110,7 @@ export default function ApplicationUpdate({
               </td>
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
-              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+              <td className="bg-primary font-bold border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 Date of Birth
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
@@ -138,7 +118,7 @@ export default function ApplicationUpdate({
               </td>
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
-              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+              <td className="bg-primary font-bold border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 Adress
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
@@ -150,10 +130,10 @@ export default function ApplicationUpdate({
       </div>
 
       <div className="my-6 w-full overflow-y-auto">
-        <table className="max-w-fit">
+        <table className="max-w-fit text-white">
           <tbody>
             <tr className="m-0 border-t p-0 even:bg-muted">
-              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+              <td className="bg-primary font-bold border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 About you
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
@@ -161,7 +141,7 @@ export default function ApplicationUpdate({
               </td>
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
-              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+              <td className="bg-primary font-bold border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 Previous Knowledge
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
@@ -169,7 +149,7 @@ export default function ApplicationUpdate({
               </td>
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
-              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+              <td className="bg-primary font-bold border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 Previous Experience
               </td>
               <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
@@ -177,10 +157,10 @@ export default function ApplicationUpdate({
               </td>
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
-              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+              <td className="bg-primary font-bold border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 Status
               </td>
-              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right text-black">
                 <ComboboxPopover
                   open={openDialogStatus}
                   setOpen={setOpenDialogStatus}
@@ -190,10 +170,10 @@ export default function ApplicationUpdate({
               </td>
             </tr>
             <tr className="m-0 border-t p-0 even:bg-muted">
-              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+              <td className="bg-primary font-bold border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
                 Final Grade
               </td>
-              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+              <td className="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right text-black">
                 <DialogDemo
                   open={openDialogGrade}
                   setOpen={setOpenDialogGrade}
@@ -207,7 +187,7 @@ export default function ApplicationUpdate({
               <td>
                 <button
                   type="submit"
-                  className="btn btn-gray w-full mt-4"
+                  className="btn btn-gray w-full mt-4 bg-primary text-white"
                   onClick={handleSaveApplication}
                 >
                   Save Application
@@ -218,7 +198,7 @@ export default function ApplicationUpdate({
               <td>
                 <button
                   onClick={() => handleDelete(application.id)}
-                  className="btn btn-gray w-full mt-4"
+                  className="btn btn-gray w-full mt-4 bg-primary text-white"
                 >
                   Delete
                 </button>

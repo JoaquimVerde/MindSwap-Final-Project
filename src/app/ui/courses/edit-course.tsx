@@ -85,7 +85,7 @@ export function EditCourseForm({
 
     return (
         <main>
-            <div className="w-[400px] mt-3">
+            <div className="w-[400px] mt-10">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                         <FormField
@@ -93,12 +93,12 @@ export function EditCourseForm({
                             name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Course Name</FormLabel>
+                                    <FormLabel className="text-white">Course Name</FormLabel>
                                     <FormControl>
                                         <Input placeholder={course?.name} {...field}
                                         />
                                     </FormControl>
-                                    <FormDescription>
+                                    <FormDescription className="text-accent">
                                         This is the title of the Course.
                                     </FormDescription>
                                     <FormMessage />
@@ -110,7 +110,7 @@ export function EditCourseForm({
                             name="edition"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Edition</FormLabel>
+                                    <FormLabel className="text-white">Edition</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder={"" + course?.edition} {...field}
@@ -135,7 +135,7 @@ export function EditCourseForm({
                             name="syllabus"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Syllabus</FormLabel>
+                                    <FormLabel className="text-white">Syllabus</FormLabel>
                                     <FormControl>
                                         <textarea
                                             className="textarea w-full rows-20 h-[150px]"
@@ -152,7 +152,7 @@ export function EditCourseForm({
                             name="program"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Program</FormLabel>
+                                    <FormLabel className="text-white">Program</FormLabel>
                                     <FormControl>
                                         <textarea
                                             className="textarea w-full rows-20 h-[400px]"
@@ -169,7 +169,7 @@ export function EditCourseForm({
                             name="schedule"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>
+                                    <FormLabel className="text-white">
                                         Schedule
                                     </FormLabel>
                                     <FormControl>
@@ -186,7 +186,7 @@ export function EditCourseForm({
                             name="price"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>
+                                    <FormLabel className="text-white">
                                         Price (€)
                                     </FormLabel>
                                     <FormControl>
@@ -204,7 +204,7 @@ export function EditCourseForm({
                             name="duration"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>
+                                    <FormLabel className="text-white">
                                         Duration (weeks)
                                     </FormLabel>
                                     <FormControl>
@@ -230,7 +230,7 @@ export function EditCourseForm({
                             name="location"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>
+                                    <FormLabel className="text-white">
                                         Location
                                     </FormLabel>
                                     <FormControl>
@@ -247,27 +247,27 @@ export function EditCourseForm({
                             name="teacherId"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Teacher ID</FormLabel>
+                                    <FormLabel className="text-white">Teacher ID</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder={course?.teacher?.firstName + " " + course?.teacher?.lastName} {...field}
                                         />
                                     </FormControl>
-                                    <FormDescription>
+                                    <FormDescription className="text-accent">
                                         Insert teacher ID.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        <Button>
+                        <Button className="bg-primary">
                             <Link
                                 href="/dashboard/all-courses">
                                 Cancel
                             </Link>
                         </Button>
 
-                        <Button type="submit" className="ml-[230px]" >
+                        <Button type="submit" className="bg-primary ml-[230px]" >
                             Submit
                         </Button>
                     </form>

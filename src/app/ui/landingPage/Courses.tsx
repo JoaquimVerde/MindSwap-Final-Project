@@ -36,7 +36,7 @@ function Courses() {
               courses?.slice(0, 4).map((course) => (
                 <div
                   key={course.id}
-                  className="flex flex-col bg-black hover:scale-105 ease-in duration-300  h-auto w-full shadow-xl shadow-gray-600 rounded-xl p-4 m-2"
+                  className="flex flex-col bg-black hover:scale-105 ease-in duration-300  h-auto w-full shadow-xl shadow-green-900 rounded-xl p-4 m-2"
                 >
                   <Image
                     className="rounded-xl group-hover-opacity-85 "

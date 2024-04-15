@@ -79,19 +79,6 @@ export const links: LinkType[] = [
   },
 ];
 
-// type LinkName= string;
-
-// type HandleDivColorChange = (linkName: LinkName) => void;
-
-// const handleDivColorChange: HandleDivColorChange = () => {
-
-//   const div = document.querySelector<HTMLDivElement>('.link-div'); // Selecione a div pelo seletor CSS
-//   if (div) {
-//       div.style.backgroundColor = "bg-primary font-bold";
-
-//   }
-// }
-
 export default function NavLinks() {
   const [openSublinks, setOpenSublinks] = useState<string | null>(null);
   const [role, setRole] = useState<string>("");
@@ -109,7 +96,6 @@ export default function NavLinks() {
     return links.filter((link) => link.role.includes(role));
   }
 
-  //const [clickedLink, setClickedLink] = useState<LinkName | null>(null);
 
   return (
     <>
@@ -118,10 +104,6 @@ export default function NavLinks() {
           className="flex justify-start items-start pt-2 pb-2"
           key={linkDashboard.href}
           href={linkDashboard.href}
-          // onClick={() => {
-          //   setClickedLink(linkDashboard.name);
-          //   handleDivColorChange(linkDashboard.name);
-          // }}
         >
           {linkDashboard.icon && (
             <linkDashboard.icon className="flex justify-start items-start mr-2" />
