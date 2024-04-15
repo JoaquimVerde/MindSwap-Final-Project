@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Course, CourseForm } from "@/app/lib/definitions";
 import Link from "next/link";
 import { updateCourse } from "@/app/lib/action";
+import { revalidatePath, redirect } from "@/app/lib/util";
 
 
 
@@ -79,6 +80,22 @@ export function EditCourseForm({
             teacherId: values?.teacherId,
         }
         console.log("submited", values);
+        const update = async () => {
+            const courseId = course?.id.replace("#", "%23");
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/proxy/api/v1/courses/${courseId}`, {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(values),
+              });
+              if(response.status === 200) {
+                revalidatePath(`/dashboard/all-courses/${courseId}/course`);
+                redirect(`/dashboard/all-courses/${courseId}/course`);
+              } else{
+                console.error("Error ", error);
+              }
+        }
         updateCourse(newValues, course?.id.replace("#", "%23"));
     }
 
