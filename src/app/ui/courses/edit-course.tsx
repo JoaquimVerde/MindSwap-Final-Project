@@ -18,7 +18,8 @@ import { Button } from "@/components/ui/button";
 import { Course, CourseForm } from "@/app/lib/definitions";
 import Link from "next/link";
 import { updateCourse } from "@/app/lib/action";
-import { revalidatePath, redirect } from "@/app/lib/util";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 
 
@@ -93,7 +94,7 @@ export function EditCourseForm({
                 revalidatePath(`/dashboard/all-courses/${courseId}/course`);
                 redirect(`/dashboard/all-courses/${courseId}/course`);
               } else{
-                console.error("Error ", error);
+                console.error("Error updating");
               }
         }
         updateCourse(newValues, course?.id.replace("#", "%23"));
