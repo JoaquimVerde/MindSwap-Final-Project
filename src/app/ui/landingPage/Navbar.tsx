@@ -65,7 +65,7 @@ function Navbar() {
             className=" px-4 py-1 border-slate-300 text-slate-300 bg-secondary hover:bg-primary transition-all duration-300 rounded-md"
             onClick={() =>
               signIn("cognito", {
-                callbackUrl: "http://localhost:3000/api/auth/redirect",
+                callbackUrl: `${process.env.NEXT_PUBLIC_URL}/api/auth/redirect`,
               })
             }
           >
