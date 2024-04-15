@@ -48,28 +48,28 @@ import React, { useEffect, useState } from "react";
   
     return (
       <div className="mx-2 my-2">
-        <div>
-          <h1 className="text-2xl mb-4">All Students</h1>
+        <div className="mb-20">
+          <h1>All Students</h1>
         </div>
         <div className="mt-5 ml-4 w-[800px] flex space-x-12">
 </div>
         <Table>
           <TableCaption className="text-white">A list of all students.</TableCaption>
           <TableHeader>
-            <TableRow className="text-white">
-              <TableHead className="font-bold">Name</TableHead>
-              <TableHead className="font-bold">Role</TableHead>
+            <TableRow>
+              <TableHead className="font-bold text-white text-lg">Name</TableHead>
+              <TableHead className="font-bold text-white text-lg">Email</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {allStudents.map((student) => (
               <TableRow key={student.id}>
-                <TableCell className="font-medium">
+                <TableCell className="font-medium text-white">
                   {student.firstName} {student.lastName}
                 </TableCell>
-                <TableCell>{student.email}</TableCell>
+                <TableCell className="font-medium text-white">{student.email}</TableCell>
                 <TableCell>
-            <button onClick={() => handleDelete(student.id)} className="font-bold text-white underline hover:font-extrabold ml-10">Delete</button>
+            <Button onClick={() => handleDelete(student.id)} className={cn("bg-primary text-white hover:bg-primary/90")}>Delete</Button>
           </TableCell>
               </TableRow>
             ))}
@@ -82,7 +82,7 @@ import React, { useEffect, useState } from "react";
         <div className="modal-box">
           <h3 className="font-bold text-lg">Are you sure you want to delete this person?</h3>
           <div className="modal-action">
-            <form method="dialog">
+            <form method="dialog" className="space-x-2">
               <button className="btn" onClick={() => {
                 if (personToDelete) {
                   deletePersonById(personToDelete);

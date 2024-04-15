@@ -173,7 +173,7 @@ export default function AddStaff() {
                       <FormLabel className="text-white">Role: </FormLabel>
                       <FormControl>
                         <DropdownMenu>
-                          <DropdownMenuTrigger className="text-gray-400">
+                          <DropdownMenuTrigger className="text-slate-300">
                             {field.value ? `${field.value} ` : "Choose Role "}
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
@@ -197,7 +197,7 @@ export default function AddStaff() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full my">
+                <Button type="submit" className="bg-primary w-full my">
                   Submit
                 </Button>
               </div>

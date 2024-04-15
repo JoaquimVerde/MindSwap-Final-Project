@@ -50,10 +50,10 @@ export default function AllStaff() {
 
   return (
     <div className="mx-2 my-2 ">
-      <div>
-        <h1 className="text-2xl mb-4">All Staff</h1>
+      <div className="mb-10">
+        <h1>All Staff</h1>
       </div>
-      <div className="mt-5 ml-4 w-[800px] flex space-x-12">
+      <div className="mt-5-w-[800px] flex justify-end space-x-12">
         <Link href="/dashboard/all-staff/add-staff">
           <Button
             className={cn("bg-primary text-white hover:bg-primary/90")}
@@ -68,25 +68,25 @@ export default function AllStaff() {
       <Table>
         <TableCaption className="text-white">A list of all staff members.</TableCaption>
         <TableHeader>
-          <TableRow className="text-white">
-            <TableHead className="font-bold">Name</TableHead>
-            <TableHead className="font-bold">Role</TableHead>
+          <TableRow >
+            <TableHead className="font-bold text-white text-lg">Name</TableHead>
+            <TableHead className="font-bold text-white text-lg">Role</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {allStaff.map((staff) => (
             <TableRow key={staff.id} className="font-medium">
-              <TableCell>
+              <TableCell className="text-white">
                 {staff.firstName} {staff.lastName}
               </TableCell>
-              <TableCell>{staff.role}</TableCell>
+              <TableCell className="text-white">{staff.role}</TableCell>
               <TableCell>
-                <button
+                <Button
                   onClick={() => handleDelete(staff.id)}
-                  className="font-bold text-white underline hover:font-extrabold ml-10"
+                  className={cn("bg-primary text-white hover:bg-primary/90")}
                 >
                   Delete
-                </button>
+                </Button>
               </TableCell>
             </TableRow>
           ))}
@@ -101,9 +101,9 @@ export default function AllStaff() {
             Are you sure you want to delete this person?
           </h3>
           <div className="modal-action">
-            <form method="dialog">
+            <form method="dialog" className="space-x-2">
               <button
-                className="btn"
+                className="bg-secondary"
                 onClick={() => {
                   if (personToDelete) {
                     deletePersonById(personToDelete);
