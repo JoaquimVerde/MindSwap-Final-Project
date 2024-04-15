@@ -32,10 +32,10 @@ export default async function AllApplications() {
 
   return (
     <div className="mx-2 my-2">
-      <div>
-        <h1 className="text-2xl mb-4">All Applications</h1>
+      <div className="mb-10">
+        <h1>All Applications</h1>
       </div>
-      <div className="mt-5 ml-4 w-[800px] flex space-x-12">
+      <div className="mt-5-w-[800px] flex justify-end space-x-12 mb-4">
         <Select>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select a course" />
@@ -55,13 +55,13 @@ export default async function AllApplications() {
       <Table>
         <TableCaption className="text-white">A list of all recent applications.</TableCaption>
         <TableHeader>
-          <TableRow className="text-white">
-            <TableHead className="font-bold">Name</TableHead>
-            <TableHead className="font-bold">Course</TableHead>
-            <TableHead className="font-bold">Previous Knowledge</TableHead>
-            <TableHead className="font-bold">Previous Experience </TableHead>
-            <TableHead className="font-bold">Status</TableHead>
-            <TableHead className="font-bold">Actions</TableHead>
+          <TableRow>
+            <TableHead className="font-bold text-white text-lg">Name</TableHead>
+            <TableHead className="font-bold text-white text-lg">Course</TableHead>
+            <TableHead className="font-bold text-white text-lg">Previous Knowledge</TableHead>
+            <TableHead className="font-bold text-white text-lg">Previous Experience </TableHead>
+            <TableHead className="font-bold text-white text-lg">Status</TableHead>
+            <TableHead className="font-bold text-white text-lg">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -70,10 +70,10 @@ export default async function AllApplications() {
               <TableCell className="font-medium">
                 {application.student.firstName} {application.student.lastName}
               </TableCell>
-              <TableCell>{application.course.name}</TableCell>
-              <TableCell>{application.prevKnowledge ? "Yes" : "No"}</TableCell>
-              <TableCell>{application.prevExperience ? "Yes" : "No"}</TableCell>
-              <TableCell>{application.status}</TableCell>
+              <TableCell className="text-white">{application.course.name}</TableCell>
+              <TableCell className="text-white">{application.prevKnowledge ? "Yes" : "No"}</TableCell>
+              <TableCell className="text-white">{application.prevExperience ? "Yes" : "No"}</TableCell>
+              <TableCell className="text-white">{application.status}</TableCell>
               <TableCell>
                 <Link
                   href={`/dashboard/all-courses/all-applications/${application.id.replace(

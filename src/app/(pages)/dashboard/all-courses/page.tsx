@@ -31,10 +31,10 @@ export default async function AllCourses(
     return (
         <div className="mx-2 my-2">
             <div>
-                <h1 className='text-2xl mb-4'>All Courses</h1>
+                <h1>All Courses</h1>
             </div>
 
-            <div className="mt-5 ml-4 w-[500px]">
+            <div className="mt-10 ml-4 w-[500px]">
 
             <SearchBar placeholder="search by location" currentPage={currentPage} />
 
