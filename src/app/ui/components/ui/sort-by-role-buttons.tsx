@@ -22,7 +22,7 @@ const SortByRoleButtons = ({ id }: { id: string }) => {
     <div>
       {userRole === "TEACHER" && (
         <>
-          <Button>
+          <Button className="bg-primary">
             <ViewProjects id={id} />
           </Button>
           <br />
@@ -34,19 +34,19 @@ const SortByRoleButtons = ({ id }: { id: string }) => {
       )}
       {userRole === "ADMIN" && (
         <>
-          <Button>
+          <Button className="bg-primary">
             <ViewProjects id={id} />
           </Button>
           <br />
           <br />
-          <Button>
+          <Button className="bg-primary">
             <EditCourse id={id} />
           </Button>
         </>
       )}
       {userRole === "STUDENT" && (
         <>
-          <Button>
+          <Button className="bg-primary">
             <ApplyCourse id={id} />
           </Button>
         </>
